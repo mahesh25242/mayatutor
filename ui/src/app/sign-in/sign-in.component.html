@@ -1,0 +1,38 @@
+<form class="form-signin" [formGroup]="signInFrm"  (ngSubmit)="signIn()">
+<app-modal>
+  <div header>Login</div>
+  <div  body>
+
+      <div class="form-group row">
+          <label for="mobile" class="col-sm-2 col-form-label">Mobile</label>
+          <div class="col-sm-10">
+              <input type="text" class="form-control" id="mobile"
+              autofocus autocomplete="mobile"
+              required autofocus placeholder="Mobile"
+              formControlName="mobile"
+              />
+          </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="password" class="col-sm-2 col-form-label">Password</label>
+        <div class="col-sm-10">
+            <input type="password" class="form-control" id="password"
+            autofocus autocomplete="password"
+            required autofocus placeholder="password"
+            formControlName="password"
+            />
+        </div>
+    </div>
+
+
+
+  </div>
+  <div  footer>
+      <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
+      <button type="submit" class="btn btn-primary" ngbAutofocus >
+          Save
+      </button>
+  </div>
+</app-modal>
+</form>
