@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+
 import { UserService } from '../services';
+
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
@@ -20,6 +22,9 @@ export class SignInComponent implements OnInit {
       mobile: ['', []],
       password:['', []]
     });
+
+
+
   }
 
   signIn(){
@@ -34,4 +39,15 @@ export class SignInComponent implements OnInit {
     this.userService.signIn(postData).subscribe();
     console.log(postData)
   }
+
+  signInWithGoogle(): void {
+      this.userService.GoogleAuth()
+  }
+
+  signInWithFB(): void {
+    this.userService.FBAuth();
+  }
+
+
+
 }
