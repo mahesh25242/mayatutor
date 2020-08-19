@@ -15,8 +15,25 @@ export class UserService {
   GoogleAuth() {
     return this.AuthLogin(new auth.GoogleAuthProvider());
   }
+
   FBAuth() {
     return this.AuthLogin(new auth.FacebookAuthProvider());
+  }
+  signInWithPhone(){
+
+    var applicationVerifier = new auth.RecaptchaVerifier(
+      'recaptcha-container', { 'size': 'invisible'});
+        var provider = new auth.PhoneAuthProvider();
+        provider.verifyPhoneNumber('+919995453566', applicationVerifier)
+      .then(function(verificationId) {
+        var verificationCode = window.prompt('Please enter the verification ' +
+            'code that was sent to your mobile device.');
+        return auth.PhoneAuthProvider.credential(verificationId,
+            verificationCode);
+      })
+      .then(function(phoneCredential) {
+        return auth().signInWithCredential(phoneCredential);
+      });
   }
   // Auth logic to run auth providers
   AuthLogin(provider) {
@@ -26,6 +43,8 @@ export class UserService {
     }).catch((error) => {
         console.log(error)
     })
+
+
   }
 
 

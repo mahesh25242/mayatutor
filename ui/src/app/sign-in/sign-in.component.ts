@@ -48,6 +48,8 @@ export class SignInComponent implements OnInit {
     this.userService.FBAuth();
   }
 
-
+  signInWithPhone():void{
+    this.userService.signInWithPhone();
+  }
 
 }
