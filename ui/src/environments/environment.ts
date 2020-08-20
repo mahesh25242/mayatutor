@@ -6,6 +6,7 @@ export const environment = {
   production: false,
   tinyMceApi: 'n6mryrdzt1pclqabsvpbvw6mtym3kj9gpwjguof89d2sv52q',
   baseUrl: 'http://localhost/mayatutor/api/public/v1',
+  recaptchaKey: '6Ld2McEZAAAAABDjGwyJ63pD3ETCQkWCiZqEH39C'
 };
 
 /*

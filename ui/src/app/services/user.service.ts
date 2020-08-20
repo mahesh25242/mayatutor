@@ -19,6 +19,8 @@ export class UserService {
   FBAuth() {
     return this.AuthLogin(new auth.FacebookAuthProvider());
   }
+
+
   signInWithPhone(){
 
     var applicationVerifier = new auth.RecaptchaVerifier(
@@ -47,11 +49,15 @@ export class UserService {
 
   }
 
-
+  signUp(user: any= null){
+    return this.http.post<any>('/signUp',user);
+  }
 
   signIn(user: any=null){
     return this.http.post<any>('/oauth/token',user);
   }
+
+
   refreshToken(){
 
     let token = localStorage.getItem('token');

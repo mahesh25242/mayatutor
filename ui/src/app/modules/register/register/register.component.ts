@@ -1,10 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CountryService, StateService, CityService } from '../../../services';
-import { Observable, Subscription } from 'rxjs';
+import { CountryService, StateService, CityService, UserService } from '../../../services';
+import { Observable, Subscription, from } from 'rxjs';
 import { Country, State, City} from '../../../interfaces';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { map } from 'rxjs/operators';
+import { ReCaptchaV3Service } from 'ngx-captcha';
+import { environment } from '../../../../environments/environment';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -19,12 +22,15 @@ export class RegisterComponent implements OnInit, OnDestroy {
   countrySubscription: Subscription;
   stateSubscription: Subscription;
   regTypeSubscription: Subscription;
+  signUpSubscription: Subscription;
 
   constructor(private route:ActivatedRoute,
     private countryService: CountryService,
     private stateService: StateService,
     private cityService: CityService,
-    private formBuilder: FormBuilder,) { }
+    private formBuilder: FormBuilder,
+    private userService: UserService,
+    private reCaptchaV3Service: ReCaptchaV3Service) { }
 
   get f() { return this.registerFrm.controls; }
   ngOnInit(): void {
@@ -58,6 +64,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
     });
   }
 
+
+
   saveUser(){
     const postData = {
       fname: this.f.fname.value,
@@ -71,9 +79,19 @@ export class RegisterComponent implements OnInit, OnDestroy {
       pin: this.f.pin.value,
       password: this.f.password.value,
       cpassword: this.f.cpassword.value,
+      recaptcha: '',
     }
+    this.reCaptchaV3Service.execute(environment.recaptchaKey, 'SignUp', (token) => {
+      postData.recaptcha = token;
+      this.signUpSubscription = this.userService.signUp(postData).subscribe(res=>{
+        console.log(res)
+      });
+    }, {
+        useGlobalDomain: false
+    });
 
-    console.log(postData)
+
+
   }
 
   ngOnDestroy(){
@@ -85,6 +103,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
     }
     if(this.regTypeSubscription){
       this.regTypeSubscription.unsubscribe();
+    }
+    if(this.signUpSubscription){
+      this.signUpSubscription.unsubscribe();
     }
   }
 

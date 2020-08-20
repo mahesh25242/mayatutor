@@ -12,7 +12,7 @@ class CitiesTableSeeder extends Seeder
     public function run()
     {
         //
- DB::table('cities')->delete();
+ DB::table('cities')->truncate();
 $cities = array(
 array('name' => "Bombuflat",'state_id' => 1),
 array('name' => "Garacharma",'state_id' => 1),

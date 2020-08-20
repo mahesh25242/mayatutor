@@ -29,6 +29,7 @@
     "bootstrap": "^4.5.0",
     "file-saver": "^2.0.2",
     "firebase": "^7.18.0",
+    "ngx-captcha": "^8.0.1",
     "notiflix": "^2.4.0",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",

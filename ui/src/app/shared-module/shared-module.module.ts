@@ -4,6 +4,7 @@ import { SafeHtmlPipe } from '../pipes/safe-html.pipe';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxCaptchaModule } from 'ngx-captcha';
 
 
 import { ModalComponent } from './components/modal/modal.component';
@@ -18,6 +19,7 @@ import { ModalComponent } from './components/modal/modal.component';
     FontAwesomeModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxCaptchaModule
   ],
   exports:[
     NgSelectModule,
@@ -26,6 +28,7 @@ import { ModalComponent } from './components/modal/modal.component';
     FontAwesomeModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxCaptchaModule
   ]
 })
 export class SharedModuleModule { }

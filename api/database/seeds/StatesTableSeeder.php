@@ -12,7 +12,7 @@ class StatesTableSeeder extends Seeder
 public function run()
 {
 //
-	DB::table('states')->delete();
+	DB::table('states')->truncate();
 	$states = array(
 		array('name' => "Andaman and Nicobar Islands",'country_id' => 101),
 		array('name' => "Andhra Pradesh",'country_id' => 101),

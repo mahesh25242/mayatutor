@@ -6,14 +6,24 @@
     <a href="javascript:{}" (click)="signInWithGoogle()">Login with Google</a>
     <!-- <a  (click)="signInWithPhone()">sent otp</a> -->
     <div id="recaptcha-container"></div>
+      <div class="text-danger" *ngIf="invalidlogin">Invalid mobile / password</div>
       <div class="form-group row">
           <label for="mobile" class="col-sm-2 col-form-label">Mobile</label>
           <div class="col-sm-10">
-              <input type="text" class="form-control" id="mobile"
+
+              <input type="text" class="form-control"
+              [ngClass]="{'is-invalid': f.mobile.invalid && ((f.mobile.dirty || f.mobile.touched))}" id="mobile"
               autofocus autocomplete="mobile"
               required autofocus placeholder="Mobile"
               formControlName="mobile"
               />
+              <ng-container *ngIf="f.mobile.invalid && (f.mobile.dirty || f.mobile.touched)">
+                <div *ngIf="f.mobile.errors.required" class="invalid-feedback">
+                  Name is required.
+                </div>
+              </ng-container>
+
+
           </div>
       </div>
 
@@ -21,10 +31,17 @@
         <label for="password" class="col-sm-2 col-form-label">Password</label>
         <div class="col-sm-10">
             <input type="password" class="form-control" id="password"
-            autofocus autocomplete="password"
+            [ngClass]="{'is-invalid': f.password.invalid && ((f.password.dirty || f.password.touched))}" id="mobile"
+            autocomplete="password"
             required autofocus placeholder="password"
             formControlName="password"
             />
+            <ng-container *ngIf="f.password.invalid && (f.password.dirty || f.password.touched)">
+              <div *ngIf="f.password.errors.required" class="invalid-feedback">
+                Password is required.
+              </div>
+            </ng-container>
+
         </div>
     </div>
 
@@ -33,7 +50,7 @@
   </div>
   <div  footer>
       <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
-      <button type="submit" class="btn btn-primary" ngbAutofocus >
+      <button type="submit" class="btn btn-primary" ngbAutofocus [disabled]="signInFrm.invalid">
           Save
       </button>
   </div>

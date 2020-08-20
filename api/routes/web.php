@@ -27,7 +27,8 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
     $router->get('states','StateController@states');
     $router->get('cities','CityController@cities');
 
-    $router->post('signIn','UsersController@login');
+    $router->get('signIn','UsersController@signIn');
+    $router->post('signUp','UsersController@signUp');
 
     $router->group(['middleware' => 'auth'], function () use ($router) {
 
