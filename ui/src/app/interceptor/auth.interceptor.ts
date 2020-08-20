@@ -25,8 +25,8 @@ export class AuthInterceptor implements HttpInterceptor {
     let  authReq = request;
 
     let token = localStorage.getItem('token');
-
     if (token) {
+      token = JSON.parse(token);
       request = this.addToken(request, token);
     }
 
@@ -91,11 +91,11 @@ export class AuthInterceptor implements HttpInterceptor {
     }
   }
 
-  private addToken(request: HttpRequest<any>, token: string) {
+  private addToken(request: HttpRequest<any>, token: any) {
     if(request.url.includes(environment.baseUrl)){
       return request.clone({
         setHeaders: {
-          'Authorization': `Bearer ${token}`
+          'Authorization': `${token.token_type} ${token.access_token}`
         }
       });
     } else{
