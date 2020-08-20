@@ -21,8 +21,8 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $fillable = [
-        'fname', 'mname', 'lname','email',  'password', 'phone', 'address', 'country',
-        'state', 'city', 'pin', 'status', 'created_by', 'updated_by', 'deleted_by'
+        'fname', 'mname', 'lname','email',  'password', 'phone', 'address', 'country_id',
+        'state_id', 'city_id', 'pin', 'status', 'created_by', 'updated_by', 'deleted_by'
     ];
 
     /**
@@ -50,6 +50,21 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     public function userRole()
     {
         return $this->hasMany('App\UserRole');
+    }
+
+    public function country()
+    {
+        return $this->belongsTo('App\Country');
+    }
+
+    public function state()
+    {
+        return $this->belongsTo('App\State');
+    }
+
+    public function city()
+    {
+        return $this->belongsTo('App\City');
     }
 
 }

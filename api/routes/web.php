@@ -19,9 +19,14 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->get('/{sitemap}','SiteMapController@index');
+//$router->get('/{sitemap}','SiteMapController@index');
 
 $router->group(['prefix' => 'v1'], function () use ($router) {
+
+    $router->get('countries','CountryController@countries');
+    $router->get('states','StateController@states');
+    $router->get('cities','CityController@cities');
+
     $router->post('signIn','UsersController@login');
 
     $router->group(['middleware' => 'auth'], function () use ($router) {

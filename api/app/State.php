@@ -8,11 +8,11 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Lumen\Auth\Authorizable;
 use Laravel\Passport\HasApiTokens;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class UserRole extends Model implements AuthenticatableContract, AuthorizableContract
+
+class State extends Model implements AuthenticatableContract, AuthorizableContract
 {
-    use HasApiTokens, Authenticatable, Authorizable, SoftDeletes;
+    use HasApiTokens, Authenticatable, Authorizable;
 
 
     /**
@@ -21,17 +21,23 @@ class UserRole extends Model implements AuthenticatableContract, AuthorizableCon
      * @var array
      */
     protected $fillable = [
-        'user_id', 'role_id', 'created_by', 'updated_by', 'deleted_by'
+        'name', 'country_id'
     ];
+
+
 
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->hasMany('App\User');
     }
 
-    public function role()
+    public function city()
     {
-        return $this->belongsTo('App\User');
+        return $this->hasMany('App\City');
     }
 
+    public function country()
+    {
+        return $this->belongsTo('App\Country');
+    }
 }

@@ -23,9 +23,9 @@ class CreateUsersTable extends Migration
             $table->string('password')->nullable();
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
-            $table->string('country')->nullable();
-            $table->string('state')->nullable();
-            $table->string('city')->nullable();
+            $table->string('country_id')->nullable();
+            $table->string('state_id')->nullable();
+            $table->string('city_id')->nullable();
             $table->string('pin')->nullable();
             $table->bigInteger('created_by')->default(0);
             $table->bigInteger('updated_by')->default(0);
