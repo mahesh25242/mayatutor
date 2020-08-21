@@ -5,6 +5,10 @@ import { UserService } from '../lib/services';
 import { Subscription, Observable } from 'rxjs';
 import { User } from '../lib/interfaces';
 
+import * as _ from 'lodash';
+import { map } from 'rxjs/operators';
+
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -19,7 +23,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loggedUser$ = this.userService.getloggedUser;
-    this.loggedSubScrioption = this.userService.authUser().subscribe();
+    this.loggedSubScrioption = this.userService.authUser().subscribe(res=>{
+      _.find(res.role, (rl) => console.log(rl)); //check loaddash is working
+    });
   }
 
   signIn(){
