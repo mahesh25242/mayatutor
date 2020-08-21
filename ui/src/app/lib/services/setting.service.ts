@@ -7,4 +7,6 @@ import { BehaviorSubject } from 'rxjs';
 export class SettingService {
   isMaintanance$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   constructor() { }
+
+
 }

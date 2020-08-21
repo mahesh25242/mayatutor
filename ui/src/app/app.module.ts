@@ -6,7 +6,7 @@ import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 
-import { httpInterceptorProviders } from './interceptor'
+import { httpInterceptorProviders } from './lib/interceptor'
 import {  SharedModuleModule } from './shared-module/shared-module.module';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -15,6 +15,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { SignInComponent } from './sign-in/sign-in.component';
+import { HomeComponent } from './home/home.component';
+import { AboutUsComponent } from './about-us/about-us.component';
+import { HowItWorksComponent } from './how-it-works/how-it-works.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
 
 var config = {
   apiKey: "AIzaSyBbf4J9nchYp2WSNePGZcRoYOUCYdCUiI0",
@@ -32,7 +36,11 @@ var config = {
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    SignInComponent
+    SignInComponent,
+    HomeComponent,
+    AboutUsComponent,
+    HowItWorksComponent,
+    ContactUsComponent
   ],
   imports: [
     BrowserModule,

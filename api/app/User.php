@@ -68,4 +68,15 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return $this->belongsTo('App\City');
     }
 
+    public function role()
+    {
+        return $this->hasManyThrough(
+            'App\Role',
+            'App\UserRole',
+            'user_id', // Foreign key on users table...
+            'id', // Foreign key on posts table...
+            'id', // Local key on countries table...
+            'role_id' // Local key on users table...
+        );
+    }
 }

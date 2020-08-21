@@ -8,7 +8,7 @@ import {
   HttpErrorResponse
 } from '@angular/common/http';
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
-import { environment } from  '../../environments/environment';
+import { environment } from  '../../../environments/environment';
 import { catchError, switchMap, filter, take } from 'rxjs/operators';
 import { UserService, SettingService } from '../services';
 import Notiflix from "notiflix";
@@ -41,7 +41,7 @@ export class AuthInterceptor implements HttpInterceptor {
         console.log("error", error);
         if (error instanceof HttpErrorResponse && error.status === 401 ) {
           console.log(request)
-          if(!request.url.includes("/refreshToken")){
+          if(!request.url.includes("oauth/token")){
             return this.handle401Error(request, next);
           }
 

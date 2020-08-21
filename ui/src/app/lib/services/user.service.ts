@@ -1,24 +1,20 @@
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
-import { of, BehaviorSubject } from 'rxjs';
+import { map, shareReplay, catchError } from 'rxjs/operators';
+import { of, BehaviorSubject, Observable, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { auth } from 'firebase/app';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { User } from '../interfaces';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  private loggedUser: BehaviorSubject<User> = new BehaviorSubject<User>({});
+    private loggedUser: BehaviorSubject<User> = new BehaviorSubject<User>({});
 
   constructor(private http: HttpClient,public afAuth: AngularFireAuth) { }
 
-  get isLoggedIn() {
-    return this.loggedIn.asObservable();
-  }
 
   get getloggedUser() {
     return this.loggedUser.asObservable();
@@ -68,7 +64,6 @@ export class UserService {
   signIn(user: any=null){
     return this.http.post<any>('/oauth/token',user).pipe(map(res=>{
       this.setLogin(res);
-      this.loggedIn.next(true);
       return res;
     }));
   }
@@ -98,6 +93,22 @@ export class UserService {
 
   setLogin(loginResponse){
     localStorage.setItem('token', JSON.stringify(loginResponse));
+  }
+
+
+  authUser():Observable<User>{
+
+    return this.http.get<User>('/authUser').pipe(map((x:User)=>{
+      this.loggedUser.next(x);
+      return x;
+    }),
+    shareReplay({ bufferSize: 1, refCount: true }),
+    catchError((err)=>{
+     // console.log(x.status)
+      this.loggedUser.next(null);
+      return throwError(err);
+    })
+    )
   }
 
 

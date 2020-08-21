@@ -3,6 +3,7 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Rout
 import { Observable, of } from 'rxjs';
 import { take, map, catchError } from 'rxjs/operators';
 import { UserService } from '../services';
+import { User } from 'firebase';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,23 +12,17 @@ export class NegateAuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-
-      return this.userService.isAuthinticated().pipe(
+      return this.userService.authUser().pipe(
         take(1),
-        map((isLoggedIn: boolean) => {
+        map((user: User) => {
 
-          if (isLoggedIn) {
+          if (user) {
             this.router.navigate(['/home']);
             return false;
           }
           return true;
         }),
         catchError((err: Response) => {
-
-          // navigate to login page
-         // this.router.navigate(['/']);
-           // handle the error by throwing statusText into the console
-          //return throwError(false);
           return of(true);
        })
       );

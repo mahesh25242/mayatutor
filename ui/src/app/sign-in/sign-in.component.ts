@@ -4,8 +4,9 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ReCaptchaV3Service } from 'ngx-captcha';
 import { environment } from '../../environments/environment';
 
-import { UserService } from '../services';
+import { UserService } from '../lib/services';
 import { Subscription } from 'rxjs';
+import Notiflix from "notiflix";
 
 @Component({
   selector: 'app-sign-in',
@@ -38,6 +39,7 @@ export class SignInComponent implements OnInit, OnDestroy {
     this.userService.refreshToken().subscribe();
   }
   signIn(){
+    Notiflix.Loading.Pulse(`please wait`);
     this.invalidlogin = false;
     const postData = {
       "grant_type": "password",
@@ -51,8 +53,9 @@ export class SignInComponent implements OnInit, OnDestroy {
 
     this.signInSubscription = this.userService.signIn(postData).subscribe(res=>{
       console.log(res)
+      Notiflix.Loading.Remove();
     }, error=>{
-
+      Notiflix.Loading.Remove();
         this.invalidlogin = true;
         this.f.password.setValue(null);
 

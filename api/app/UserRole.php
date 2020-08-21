@@ -31,7 +31,8 @@ class UserRole extends Model implements AuthenticatableContract, AuthorizableCon
 
     public function role()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\Role');
     }
+
 
 }

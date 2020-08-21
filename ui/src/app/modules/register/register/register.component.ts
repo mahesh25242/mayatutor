@@ -1,12 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CountryService, StateService, CityService, UserService } from '../../../services';
+import { CountryService, StateService, CityService, UserService } from '../../../lib/services';
 import { Observable, Subscription, from } from 'rxjs';
-import { Country, State, City} from '../../../interfaces';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { Country, State, City} from '../../../lib/interfaces';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { map } from 'rxjs/operators';
 import { ReCaptchaV3Service } from 'ngx-captcha';
 import { environment } from '../../../../environments/environment';
+import Notiflix from "notiflix";
 
 @Component({
   selector: 'app-register',
@@ -36,17 +37,17 @@ export class RegisterComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
     this.registerFrm = this.formBuilder.group({
-      fname: [null, []],
-      lname:[null, []],
-      email: [null, []],
-      phone: [null, []],
-      address: [null, []],
-      password: [null, []],
-      cpassword: [null, []],
-      country_id: [null, []],
-      state_id: [null, []],
-      city_id: [null, []],
-      pin: [null, []],
+      fname: [null, [ Validators.required]],
+      lname:[null, [Validators.required]],
+      email: [null, [Validators.required]],
+      phone: [null, [Validators.required]],
+      address: [null, [Validators.required]],
+      password: [null, [Validators.required]],
+      password_confirmation: [null, [Validators.required]],
+      country_id: [null, [Validators.required]],
+      state_id: [null, [Validators.required]],
+      city_id: [null, [Validators.required]],
+      pin: [null, [Validators.required]],
       type: [null, []]
     });
 
@@ -67,6 +68,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
 
   saveUser(){
+    Notiflix.Loading.Pulse(`${(this.f.fname.value) ? this.f.fname.value : ''} please wait`);
     const postData = {
       fname: this.f.fname.value,
       lname: this.f.lname.value,
@@ -78,13 +80,26 @@ export class RegisterComponent implements OnInit, OnDestroy {
       city_id: this.f.city_id.value,
       pin: this.f.pin.value,
       password: this.f.password.value,
-      cpassword: this.f.cpassword.value,
+      password_confirmation: this.f.password_confirmation.value,
       recaptcha: '',
+      type: this.f.type.value
     }
     this.reCaptchaV3Service.execute(environment.recaptchaKey, 'SignUp', (token) => {
       postData.recaptcha = token;
       this.signUpSubscription = this.userService.signUp(postData).subscribe(res=>{
-        console.log(res)
+        Notiflix.Loading.Remove();
+        this.registerFrm.reset();
+        Notiflix.Notify.Success(`successfully registered as ${this.f.type.value}`);
+      }, error=>{
+        Notiflix.Loading.Remove();
+        for(let result in this.registerFrm.controls){
+          if(error.error.errors[result]){
+            this.registerFrm.controls[result].setErrors({ error: error.error.errors[result] });
+          }else{
+            this.registerFrm.controls[result].setErrors(null);
+          }
+        }
+
       });
     }, {
         useGlobalDomain: false
