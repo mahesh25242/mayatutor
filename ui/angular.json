@@ -22,7 +22,8 @@
               "@firebase/app",
               "firebase/app",
               "@firebase/auth",
-              "notiflix"
+              "notiflix",
+              "lodash"
             ],
             "outputPath": "dist/mayaTutor",
             "index": "src/index.html",

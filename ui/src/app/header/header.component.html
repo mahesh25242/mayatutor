@@ -1,5 +1,19 @@
 <a routerLink="/" >Home</a>
-<a (click)="signIn()" href="javascript:{}">Login</a>
-<a routerLink="student/register">student Register</a>
-<a routerLink="teacher/register">student Register</a>
+<ng-container *ngIf="!(loggedUser$ | async) as loggedUser">
+    <a (click)="signIn()" href="javascript:{}" >Login</a>
+    <a routerLink="student/register" >student Register</a>
+    <a routerLink="teacher/register" >student Register</a>
+</ng-container>
+<ng-container *ngIf="(loggedUser$ | async) as loggedUser">
+
+  <a [routerLink]="loggedUser?.role_url+'/my-profile'" >My Profile</a>
+
+  <div ngbDropdown class="d-inline-block">
+    <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{loggedUser.fname}}</button>
+    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+      <button ngbDropdownItem  (click)="signOut()">Sign Out</button>
+    </div>
+  </div>
+</ng-container>
+
 <p>header works!</p>

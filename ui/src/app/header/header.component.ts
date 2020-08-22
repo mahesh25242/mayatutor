@@ -6,7 +6,7 @@ import { Subscription, Observable } from 'rxjs';
 import { User } from '../lib/interfaces';
 
 import * as _ from 'lodash';
-import { map } from 'rxjs/operators';
+import { map, mergeMap } from 'rxjs/operators';
 
 
 @Component({
@@ -33,6 +33,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
     //activeModal.componentInstance.isEdit = false;
   }
 
+  signOut(){
+      this.userService.signOut().pipe(mergeMap(res=>{
+        //localStorage.removeItem('token');
+        return this.userService.authUser();
+      })).subscribe(res=>{
+
+      });
+  }
   ngOnDestroy(){
     if(this.loggedSubScrioption){
       this.loggedSubScrioption.unsubscribe();

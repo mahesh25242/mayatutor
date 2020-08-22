@@ -90,5 +90,18 @@ class UsersController extends Controller
         return response($user);
     }
 
+    public function signOut(Request $request){
+        $request->user()->token()->revoke();
+
+    // Revoke all of the token's refresh tokens
+    // => Set public.oauth_refresh_tokens.revoked to TRUE (t)
+        $refreshTokenRepository = app('Laravel\Passport\RefreshTokenRepository');
+        $refreshTokenRepository->revokeRefreshTokensByAccessTokenId($request->user()->token()->id);
+
+        return response([
+            'message' => 'successfully logged!', 'status' => true
+        ]);
+    }
+
 
 }

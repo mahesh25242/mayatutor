@@ -7,6 +7,7 @@ import { environment } from '../../environments/environment';
 import { UserService } from '../lib/services';
 import { Subscription } from 'rxjs';
 import Notiflix from "notiflix";
+import { mergeMap, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-sign-in',
@@ -51,8 +52,13 @@ export class SignInComponent implements OnInit, OnDestroy {
       "recaptcha": null
     };
 
-    this.signInSubscription = this.userService.signIn(postData).subscribe(res=>{
-      console.log(res)
+    this.signInSubscription = this.userService.signIn(postData).pipe(mergeMap(res=>{
+
+      return this.userService.authUser().pipe(map(user=>{
+        return res;
+      }));
+    })).subscribe(res=>{
+      this.modal.dismiss('cancel click')
       Notiflix.Loading.Remove();
     }, error=>{
       Notiflix.Loading.Remove();

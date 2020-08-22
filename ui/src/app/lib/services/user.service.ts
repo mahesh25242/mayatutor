@@ -6,12 +6,13 @@ import { auth } from 'firebase/app';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { User } from '../interfaces';
 import { environment } from '../../../environments/environment';
+import * as _ from 'lodash';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-    private loggedUser: BehaviorSubject<User> = new BehaviorSubject<User>({});
+    private loggedUser: BehaviorSubject<User> = new BehaviorSubject<User>(null);
 
   constructor(private http: HttpClient,public afAuth: AngularFireAuth) { }
 
@@ -95,10 +96,26 @@ export class UserService {
     localStorage.setItem('token', JSON.stringify(loginResponse));
   }
 
+  signOut(){
+    return this.http.get<User>('/signOut');
+  }
+
 
   authUser():Observable<User>{
 
     return this.http.get<User>('/authUser').pipe(map((x:User)=>{
+
+      switch(_.head(x.role)?.name){
+        case 'Teacher':
+          x.role_url = 'teacher';
+        break;
+        case 'Student':
+          x.role_url = 'student';
+        break;
+        case 'Admin':
+          x.role_url = 'admin';
+        break;
+      }
       this.loggedUser.next(x);
       return x;
     }),

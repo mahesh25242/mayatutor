@@ -24,5 +24,6 @@ export interface User {
   created_at?: string,
   updated_at?: string,
   created_by?: number,
-  updated_by?: number
+  updated_by?: number,
+  role_url?: string
 }
