@@ -1,12 +1,28 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { AboutUsComponent } from './about-us/about-us.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
+import { HowItWorksComponent } from './how-it-works/how-it-works.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent
+  },
+  {
+    path: 'about-us',
+    component: ContactUsComponent
+  },
+  {
+    path: 'how-it-works',
+    component: HowItWorksComponent
+  },
+  {
+    path: 'contact-us',
+    component: AboutUsComponent
   },
   {
     path: 'student',
@@ -16,6 +32,7 @@ const routes: Routes = [
     path: 'teacher',
     loadChildren: () => import('./modules/teacher/teacher.module').then(m => m.TeacherModule)
   },
+  { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({

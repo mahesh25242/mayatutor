@@ -19,6 +19,7 @@ import { HomeComponent } from './home/home.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { HowItWorksComponent } from './how-it-works/how-it-works.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 var config = {
   apiKey: "AIzaSyBbf4J9nchYp2WSNePGZcRoYOUCYdCUiI0",
@@ -40,7 +41,8 @@ var config = {
     HomeComponent,
     AboutUsComponent,
     HowItWorksComponent,
-    ContactUsComponent
+    ContactUsComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

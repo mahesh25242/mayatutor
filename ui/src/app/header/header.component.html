@@ -1,4 +1,8 @@
 <a routerLink="/" >Home</a>
+<a routerLink="/about-us" >About Us</a>
+<a routerLink="/contact-us" >Contact Us</a>
+<a routerLink="/how-it-works" >How It Works</a>
+
 <ng-container *ngIf="!(loggedUser$ | async) as loggedUser">
     <a (click)="signIn()" href="javascript:{}" >Login</a>
     <a routerLink="student/register" >student Register</a>
