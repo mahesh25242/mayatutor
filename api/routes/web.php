@@ -29,6 +29,8 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
 
     $router->post('signUp','UsersController@signUp');
 
+    $router->post('sentContact','ContactUsController@sentContact');
+
     $router->group(['middleware' => 'auth'], function () use ($router) {
         $router->get('authUser','UsersController@authUser');
         $router->get('signOut','UsersController@signOut');

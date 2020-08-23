@@ -14,7 +14,7 @@ const routes: Routes = [
   },
   {
     path: 'about-us',
-    component: ContactUsComponent
+    component: AboutUsComponent
   },
   {
     path: 'how-it-works',
@@ -22,7 +22,7 @@ const routes: Routes = [
   },
   {
     path: 'contact-us',
-    component: AboutUsComponent
+    component: ContactUsComponent
   },
   {
     path: 'student',

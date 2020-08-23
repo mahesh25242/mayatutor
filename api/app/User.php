@@ -23,7 +23,8 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      */
     protected $fillable = [
         'fname', 'mname', 'lname','email',  'password', 'phone', 'address', 'country_id',
-        'state_id', 'city_id', 'pin', 'status', 'created_by', 'updated_by', 'deleted_by'
+        'state_id', 'city_id', 'pin', 'status', 'created_by', 'updated_by', 'deleted_by',
+        'avatar'
     ];
 
     /**
