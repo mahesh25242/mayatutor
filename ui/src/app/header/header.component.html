@@ -4,6 +4,7 @@
     <a routerLink="student/register" >student Register</a>
     <a routerLink="teacher/register" >student Register</a>
 </ng-container>
+
 <ng-container *ngIf="(loggedUser$ | async) as loggedUser">
 
   <a [routerLink]="loggedUser?.role_url+'/my-profile'" >My Profile</a>

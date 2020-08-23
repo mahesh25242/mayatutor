@@ -9,7 +9,7 @@ const routes: Routes = [
     component: RegisterComponent,
     canActivate: [NegateAuthGuard],
     data:{
-      type: 'student'
+      type: 'teacher'
     }
   }
 ];

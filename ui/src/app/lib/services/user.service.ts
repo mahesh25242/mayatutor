@@ -122,6 +122,7 @@ export class UserService {
     shareReplay({ bufferSize: 1, refCount: true }),
     catchError((err)=>{
      // console.log(x.status)
+     localStorage.removeItem('token');
       this.loggedUser.next(null);
       return throwError(err);
     })

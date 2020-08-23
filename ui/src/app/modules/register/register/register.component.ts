@@ -61,6 +61,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     });
 
     this.regTypeSubscription = this.route.data.subscribe(res=>{
+      console.log(res)
       this.f.type.setValue(res.type);
     });
   }

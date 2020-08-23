@@ -38,7 +38,7 @@ export class AuthInterceptor implements HttpInterceptor {
     // }
     return next.handle(request).pipe(
       catchError(error => {
-        console.log("error", error);
+
         if (error instanceof HttpErrorResponse && error.status === 401 ) {
           console.log(request)
           if(!request.url.includes("oauth/token")){
@@ -64,12 +64,12 @@ export class AuthInterceptor implements HttpInterceptor {
       this.refreshTokenSubject.next(null);
 
       return this.userService.refreshToken().pipe(
-        switchMap((token: {token: string}) => {
-
+        switchMap((token: any) => {
+          console.log(token)
           this.isRefreshing = false;
           if(token.token){
-            this.refreshTokenSubject.next(token.token);
-            return next.handle(this.addToken(request, token.token));
+            this.refreshTokenSubject.next(token);
+            return next.handle(this.addToken(request, token));
           }else{
             this.isRefreshing = false;
             return next.handle(request);
@@ -77,16 +77,18 @@ export class AuthInterceptor implements HttpInterceptor {
 
 
         }), catchError(er=> {
-
-          return next.handle(request);
+          this.isRefreshing = false;
+          return throwError(er);
+          //return next.handle(request);
         }));
 
     } else {
+
       return this.refreshTokenSubject.pipe(
         filter(token => token != null),
         take(1),
-        switchMap(jwt => {
-          return next.handle(this.addToken(request, jwt));
+        switchMap(token => {
+          return next.handle(this.addToken(request, token));
         }));
     }
   }
