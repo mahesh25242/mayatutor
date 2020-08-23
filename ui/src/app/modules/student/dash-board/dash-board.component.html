@@ -1,0 +1,16 @@
+<div class="card" *ngIf="(user$ | async) as user">
+  <div class="card-body">
+    <img src="..." alt="..." class="img-thumbnail">
+    {{ user.fname }} {{ user.lname }}
+    <address>
+      {{ user.address }}
+    </address>
+    {{ user.country.name }}
+    {{ user.state.name }}
+    {{ user.city.name }} - {{ user.pin }}
+
+    <div>Mobile: {{ user.phone }}</div>
+    <div>Email: {{ user.email }}</div>
+    <a href="javascript:{}">Edit</a>
+  </div>
+</div>

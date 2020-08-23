@@ -1,17 +1,21 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { RegisterComponent } from '../register/register/register.component';
-import { NegateAuthGuard } from '../../lib/guard';
+import { DashBoardComponent } from './dash-board/dash-board.component';
+import { AuthGuard } from '../../lib/guard';
 
 
 const routes: Routes = [
   {
     path: 'register',
-    component: RegisterComponent,
-    canActivate: [NegateAuthGuard],
+    loadChildren: () => import('../commonPages/common-pages.module').then(m => m.CommonPagesModule),
     data:{
       type: 'student'
     }
+  },
+  {
+    path: 'home',
+    component: DashBoardComponent,
+    canActivate: [AuthGuard],
   }
 ];
 

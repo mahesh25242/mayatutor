@@ -29,6 +29,16 @@ class ContactUsController extends Controller
             return response(['message' => 'Validation errors', 'errors' =>  $validator->errors(), 'status' => false], 422);
         }
 
+        $contact = new \App\Contact;
+        $contact->name = $request->input("name", '');
+        $contact->email = $request->input("email", '');
+        $contact->phone = $request->input("phone", '');
+        $contact->comment = $request->input("comment", '');
+        if(Auth::id()){
+            $contact->created_by = Auth::id();
+        }
+
+        $contact->save();
         return response(['message' => sprintf("Hey %s! thank you for contacting us!", $request->input("name", "")), 'status' => true]);
     }
 

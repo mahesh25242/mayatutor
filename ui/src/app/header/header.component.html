@@ -1,24 +1,49 @@
-<a routerLink="/" >Home</a>
-<a routerLink="/about-us" >About Us</a>
-<a routerLink="/contact-us" >Contact Us</a>
-<a routerLink="/how-it-works" >How It Works</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-<ng-container *ngIf="!(loggedUser$ | async) as loggedUser">
-    <a (click)="signIn()" href="javascript:{}" >Login</a>
-    <a routerLink="student/register" >student Register</a>
-    <a routerLink="teacher/register" >student Register</a>
-</ng-container>
-
-<ng-container *ngIf="(loggedUser$ | async) as loggedUser">
-
-  <a [routerLink]="loggedUser?.role_url+'/my-profile'" >My Profile</a>
-
-  <div ngbDropdown class="d-inline-block">
-    <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{loggedUser.fname}}</button>
-    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-      <button ngbDropdownItem  (click)="signOut()">Sign Out</button>
-    </div>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
+          true}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/about-us" routerLinkActive="active">About Us</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/contact-us" routerLinkActive="active">Contact Us</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/how-it-works" routerLinkActive="active">How It Works</a>
+      </li>
+      <ng-container *ngIf="!(loggedUser$ | async) as loggedUser">
+        <li class="nav-item">
+          <a class="nav-link" (click)="signIn()" href="javascript:{}" >Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="student/register" >student Register</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="teacher/register" >Teacher Register</a>
+        </li>
+      </ng-container>
+      <ng-container *ngIf="(loggedUser$ | async) as loggedUser">
+        <li class="nav-item">
+          <a [routerLink]="loggedUser?.role_url+'/home'" class="nav-link">My Home</a>
+        </li>
+        <li class="nav-item">
+          <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{loggedUser.fname}}</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+              <button ngbDropdownItem  (click)="signOut()">Sign Out</button>
+            </div>
+          </div>
+        </li>
+      </ng-container>
+    </ul>
   </div>
-</ng-container>
+</nav>
 
-<p>header works!</p>
