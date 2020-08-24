@@ -10,6 +10,7 @@ use Laravel\Lumen\Auth\Authorizable;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Hash;
+use Cache;
 
 class User extends Model implements AuthenticatableContract, AuthorizableContract
 {
@@ -26,7 +27,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'state_id', 'city_id', 'pin', 'status', 'created_by', 'updated_by', 'deleted_by',
         'avatar'
     ];
-
+    protected $appends = array('is_online');
     /**
      * The attributes excluded from the model's JSON form.
      *
@@ -35,6 +36,12 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $hidden = [
         'password',
     ];
+
+    public function getisOnlineAttribute()
+    {
+        return Cache::has('user-is-online-' . $this->id);
+    }
+
 
     public function findForPassport($username)
     {
@@ -68,6 +75,9 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     {
         return $this->belongsTo('App\City');
     }
+
+
+
 
     public function role()
     {
