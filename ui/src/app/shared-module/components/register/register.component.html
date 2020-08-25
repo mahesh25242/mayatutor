@@ -2,7 +2,7 @@
   <h3>{{ f.type.value}} Registration</h3>
   <div class="form-group">
     <label for="fname">First Name</label>
-    <input type="email" class="form-control" id="fname"
+    <input type="text" class="form-control" id="fname"
     [ngClass]="{'is-invalid': (f.fname.errors && f.fname.errors.error) }"
      placeholder="First Name" formControlName="fname" >
       <div *ngIf="f.fname.errors && f.fname.errors.error" class="invalid-feedback">
