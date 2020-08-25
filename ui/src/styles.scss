@@ -3,3 +3,18 @@
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
 @import "~@ng-select/ng-select/themes/default.theme.css";
+
+
+.d-grid {
+    display: grid;
+    .span2 {
+        grid-column: 1 / span 2;
+    }
+    &.grd-col-3 {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+   &.grd-col-2{
+    grid-template-columns: 1fr 1fr;
+   }
+  }
+  

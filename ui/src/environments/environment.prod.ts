@@ -3,5 +3,5 @@ export const environment = {
   tinyMceApi: 'n6mryrdzt1pclqabsvpbvw6mtym3kj9gpwjguof89d2sv52q',
   baseUrl: 'https://mayatutor/api/public',
   recaptchaKey: '6Ld2McEZAAAAABDjGwyJ63pD3ETCQkWCiZqEH39C',
-  lumenSecret: 'qNiBaJgNqCAmDflrKjc4sFXoSqczSIBaO8olqCYm'
+  lumenSecret: 'gGns8qiSpmPTBhfWJfZfle2pQqFJB439zbgrHdqw'
 };
