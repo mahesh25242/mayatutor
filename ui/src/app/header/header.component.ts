@@ -7,6 +7,7 @@ import { User } from '../lib/interfaces';
 
 import * as _ from 'lodash';
 import { map, mergeMap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -19,7 +20,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   loggedUser$: Observable<User>;
 
   constructor(private _modalService: NgbModal,
-    private userService: UserService) { }
+    private userService: UserService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.loggedUser$ = this.userService.getloggedUser;
@@ -35,10 +37,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   signOut(){
       this.userService.signOut().pipe(mergeMap(res=>{
-        //localStorage.removeItem('token');
+        localStorage.removeItem('token');
         return this.userService.authUser();
       })).subscribe(res=>{
 
+      }, err=>{
+        this.router.navigate(['/']);
       });
   }
   ngOnDestroy(){

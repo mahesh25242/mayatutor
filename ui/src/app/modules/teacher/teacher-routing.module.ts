@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { RegisterComponent } from 'src/app/shared-module/components/register/register.component';
 
 const routes: Routes = [
   {
     path: 'register',
-    loadChildren: () => import('../commonPages/common-pages.module').then(m => m.CommonPagesModule),
+    component: RegisterComponent,
     data:{
       type: 'teacher'
     }

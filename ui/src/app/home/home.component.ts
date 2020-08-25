@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {faUserGraduate,faUser,faClock,faStar,faStarHalfAlt,faSearch } from '@fortawesome/free-solid-svg-icons';
+import { UserService } from '../lib/services';
+import { Observable } from 'rxjs';
+import { User } from '../lib/interfaces';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -13,9 +16,11 @@ export class HomeComponent implements OnInit {
   faStarHalfAlt = faStarHalfAlt;
   faSearch = faSearch;
 
-  constructor() { }
+  loggedUser$: Observable<User>;
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+    this.loggedUser$ = this.userService.getloggedUser;
   }
 
 }

@@ -1,0 +1,12 @@
+.d-grid {
+  display: grid;
+  .span2 {
+      grid-column: 1 / span 2;
+  }
+  &.grd-col-3 {
+      grid-template-columns: 1fr 1fr 1fr;
+  }
+ &.grd-col-2{
+  grid-template-columns: 1fr 1fr;
+ }
+}
