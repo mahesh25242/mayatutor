@@ -4,7 +4,7 @@
     <label for="fname">First Name</label>
     <input type="email" class="form-control" id="fname"
     [ngClass]="{'is-invalid': (f.fname.errors && f.fname.errors.error) }"
-     placeholder="First Name" formControlName="fname">
+     placeholder="First Name" formControlName="fname" >
       <div *ngIf="f.fname.errors && f.fname.errors.error" class="invalid-feedback">
         {{f.fname.errors.error}}
       </div>

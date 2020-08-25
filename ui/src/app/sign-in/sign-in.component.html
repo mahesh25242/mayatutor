@@ -14,8 +14,8 @@
 
               <input type="text" class="form-control"
               [ngClass]="{'is-invalid': f.mobile.invalid && ((f.mobile.dirty || f.mobile.touched))}" id="mobile"
-              autofocus autocomplete="mobile"
-              required autofocus placeholder="Mobile"
+              ngbAutofocus autocomplete="mobile"
+              required  placeholder="Mobile"
               formControlName="mobile"
               />
               <ng-container *ngIf="f.mobile.invalid && (f.mobile.dirty || f.mobile.touched)">
@@ -34,7 +34,7 @@
             <input type="password" class="form-control" id="password"
             [ngClass]="{'is-invalid': f.password.invalid && ((f.password.dirty || f.password.touched))}" id="mobile"
             autocomplete="password"
-            required autofocus placeholder="password"
+            required  placeholder="password"
             formControlName="password"
             />
             <ng-container *ngIf="f.password.invalid && (f.password.dirty || f.password.touched)">
@@ -51,7 +51,7 @@
   </div>
   <div  footer>
       <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
-      <button type="submit" class="btn btn-primary" ngbAutofocus [disabled]="signInFrm.invalid">
+      <button type="submit" class="btn btn-primary"  [disabled]="signInFrm.invalid">
           Save
       </button>
   </div>
