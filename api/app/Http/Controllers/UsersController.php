@@ -103,5 +103,25 @@ class UsersController extends Controller
         ]);
     }
 
+    public function setUserLogin(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'action' => ['required', 'string'],
+        ]);
+
+
+        if($validator->fails()){
+            return response(['message' => 'Validation errors', 'errors' =>  $validator->errors(), 'status' => false], 422);
+        }
+
+
+        $userLogin = new \App\UserLogin;
+        $userLogin->user_id = Auth::id();
+        $userLogin->name = $request->input("action");
+        $userLogin->save();
+        return response([
+            'message' => 'successfully saved!', 'status' => true
+        ]);
+    }
 
 }

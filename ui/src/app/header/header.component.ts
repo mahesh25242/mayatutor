@@ -17,6 +17,7 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   loggedSubScrioption: Subscription;
+  signOutSubscription: Subscription;
   loggedUser$: Observable<User>;
 
   constructor(private _modalService: NgbModal,
@@ -36,18 +37,26 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   signOut(){
-      this.userService.signOut().pipe(mergeMap(res=>{
+    this.signOutSubscription = this.userService.setUserLogin({action:'SignOut'}).pipe(mergeMap(sRes=>{
+      return this.userService.signOut().pipe(mergeMap(res=>{
         localStorage.removeItem('token');
         return this.userService.authUser();
-      })).subscribe(res=>{
+      }))
+    })).subscribe(res=>{
 
-      }, err=>{
-        this.router.navigate(['/']);
-      });
+    }, err=>{
+      this.router.navigate(['/']);
+    });
+
   }
+
   ngOnDestroy(){
     if(this.loggedSubScrioption){
       this.loggedSubScrioption.unsubscribe();
+    }
+
+    if(this.signOutSubscription){
+      this.signOutSubscription.unsubscribe();
     }
   }
 }

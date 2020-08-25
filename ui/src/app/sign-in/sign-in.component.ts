@@ -56,8 +56,10 @@ export class SignInComponent implements OnInit, OnDestroy {
 
     this.signInSubscription = this.userService.signIn(postData).pipe(mergeMap(res=>{
 
-      return this.userService.authUser().pipe(map(user=>{
-        return user;
+      return this.userService.authUser().pipe(mergeMap(user=>{
+        return this.userService.setUserLogin({action:'SignIn'}).pipe(map(sRes=>{
+          return user
+        }))
       }));
     })).subscribe(res=>{
 

@@ -96,6 +96,10 @@ export class UserService {
     localStorage.setItem('token', JSON.stringify(loginResponse));
   }
 
+  setUserLogin(postData:any= null){
+    return this.http.post('/setUserLogin', postData);
+  }
+
   signOut(){
     return this.http.get<User>('/signOut');
   }
