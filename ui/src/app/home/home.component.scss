@@ -1,3 +1,4 @@
+@import '../../variables';
 .home-banner {
     background-color: #ddd;
     min-height: 250px;
@@ -5,7 +6,7 @@
 }
 .search-container {
     text-align:center;
-    background-color: #578AF7;
+    background-color:$primaryColor;
     color:#fff;
     .input-group-text {
         padding: 0.165rem 0.3rem;
@@ -13,4 +14,14 @@
 }
 .register-sec {
     text-align: center;
-}
+    .card-body {
+        h1 {
+            font-size:$fontsize-2;
+        }
+    }
+    .card-footer {
+        h2 {
+            font-size: $fontsize-1;
+        }
+    }
+} 
