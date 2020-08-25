@@ -8,6 +8,7 @@ import { UserService } from '../lib/services';
 import { Subscription } from 'rxjs';
 import Notiflix from "notiflix";
 import { mergeMap, map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-in',
@@ -22,7 +23,8 @@ export class SignInComponent implements OnInit, OnDestroy {
   constructor(private formBuilder: FormBuilder,
     public modal: NgbActiveModal,
     private userService: UserService,
-    private reCaptchaV3Service: ReCaptchaV3Service) { }
+    private reCaptchaV3Service: ReCaptchaV3Service,
+    private router: Router) { }
 
   get f() { return this.signInFrm.controls; }
 
@@ -55,11 +57,13 @@ export class SignInComponent implements OnInit, OnDestroy {
     this.signInSubscription = this.userService.signIn(postData).pipe(mergeMap(res=>{
 
       return this.userService.authUser().pipe(map(user=>{
-        return res;
+        return user;
       }));
     })).subscribe(res=>{
+
       this.modal.dismiss('cancel click')
       Notiflix.Loading.Remove();
+      this.router.navigate([`/${res.role_url}/home`]);
     }, error=>{
       Notiflix.Loading.Remove();
         this.invalidlogin = true;
