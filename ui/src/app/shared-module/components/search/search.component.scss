@@ -1,0 +1,9 @@
+@import '../../../../variables';
+.search-container {
+  text-align:center;
+  background-color:$primaryColor;
+  color:#fff;
+  .input-group-text {
+      padding: 0.165rem 0.3rem;
+  }
+}
