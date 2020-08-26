@@ -141,4 +141,6 @@ export class UserService {
     return this.http.post('/updateAvatar', postData);
   }
 
+
+
 }

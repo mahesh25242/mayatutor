@@ -1,0 +1,31 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>
+        <input type="checkbox" name=""/>
+      </th>
+      <th>
+        Subject
+      </th>
+      <th>
+        Option
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngIf="(mails$ | async) as mails">
+      <tr *ngFor="let mail of mails">
+        <td>
+          <input type="checkbox" name=""/>
+        </td>
+        <td>
+          <a href="javascript:{}" [innerHTML]="mail.subject" [routerLink]="'read/'+mail.id"></a>
+        </td>
+        <td>
+
+        </td>
+      </tr>
+    </ng-container>
+
+  </tbody>
+</table>

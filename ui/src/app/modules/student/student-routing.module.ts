@@ -24,6 +24,11 @@ const routes: Routes = [
     path: 'edit-profile',
     component: EditProfileComponent,
     canActivate: [AuthGuard],
+  },
+  {
+    path: 'mail',
+    loadChildren: () => import('../mail/mail.module').then(m => m.MailModule),
+    canActivate: [AuthGuard],
   }
 ];
 

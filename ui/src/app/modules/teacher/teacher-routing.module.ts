@@ -17,6 +17,11 @@ const routes: Routes = [
     path: 'home',
     component: DashBoardComponent,
     canActivate: [AuthGuard],
+  },
+  {
+    path: 'mail',
+    loadChildren: () => import('../mail/mail.module').then(m => m.MailModule),
+    canActivate: [AuthGuard],
   }
 ];
 

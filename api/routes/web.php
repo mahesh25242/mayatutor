@@ -42,6 +42,13 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
         $router->group(['prefix' => 'student'], function () use ($router) {
             $router->post('updateProfile','UsersController@updateProfile');
         });
+
+        $router->group(['prefix' => 'mail'], function () use ($router) {
+            $router->post('inbox','MailController@inbox');
+            $router->post('send','MailController@send');
+            $router->post('sentItem','MailController@sentItem');
+            $router->post('readMail','MailController@readMail');
+        });
     });
 });
 
