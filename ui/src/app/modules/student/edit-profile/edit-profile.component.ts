@@ -98,7 +98,7 @@ export class EditProfileComponent implements OnInit, OnDestroy {
       Notiflix.Notify.Success(`Successfully changed avathar `);
       Notiflix.Block.Remove(`.avatar-img`);
     }, error=>{
-      Notiflix.Notify.Success(`Sorry image can't be uploaded `);
+      Notiflix.Notify.Failure(`Sorry image can't be uploaded `);
       Notiflix.Block.Remove(`.avatar-img`);
     });
   }

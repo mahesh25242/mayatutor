@@ -191,9 +191,14 @@ class UsersController extends Controller
             $user = \App\User::find(Auth::id());
             $user->avatar = $avatharName;
             $user->save();
+            return response([
+                'message' => 'successfully updated!', 'status' => $status
+            ]);
+        }else{
+            return response([
+                'message' => 'sorry file not uploaded!', 'status' => $status
+            ], 421);
         }
-        return response([
-            'message' => 'successfully updated!', 'status' => $status
-        ]);
+
     }
 }
