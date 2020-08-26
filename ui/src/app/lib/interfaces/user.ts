@@ -3,6 +3,13 @@ import { Country } from './country';
 import { State } from './state';
 import { Role } from './role';
 
+export interface UserLogin {
+  id?: number,
+  name?: string,
+  created_at?: string,
+  updated_at?: string,
+}
+
 export interface User {
   id?: number,
   fname?: string,
@@ -25,5 +32,7 @@ export interface User {
   updated_at?: string,
   created_by?: number,
   updated_by?: number,
-  role_url?: string
+  role_url?: string,
+  last_login?:UserLogin,
+  avatar?: string
 }

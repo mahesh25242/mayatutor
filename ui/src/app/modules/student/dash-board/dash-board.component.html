@@ -1,6 +1,6 @@
 <div class="card" *ngIf="(user$ | async) as user">
   <div class="card-body">
-    <img src="..." alt="..." class="img-thumbnail">
+    <img [src]="user.avatar" class="avatar-img img-thumbnail" />
     {{ user.fname }} {{ user.lname }}
     <address>
       {{ user.address }}

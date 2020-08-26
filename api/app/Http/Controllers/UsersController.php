@@ -8,6 +8,8 @@ use Validator;
 use Illuminate\Support\Facades\Auth;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Cookie;
+use Image;
+use Illuminate\Support\Facades\Storage;
 
 class UsersController extends Controller
 {
@@ -86,7 +88,7 @@ class UsersController extends Controller
     }
 
     public function authUser(Request $request){
-        $user = \App\User::with(["country", "state", "city", "role"])->find(Auth::id());
+        $user = \App\User::with(["country", "state", "city", "role", "lastLogin"])->find(Auth::id());
         return response($user);
     }
 
@@ -124,4 +126,74 @@ class UsersController extends Controller
         ]);
     }
 
+    public function updateProfile(Request $request){
+
+
+        $validationField = [
+            'fname' => ['required'],
+            'lname' => ['required'],
+            'country_id' => ['required'],
+            'state_id' => ['required'],
+            'city_id' => ['required'],
+            'pin' => ['required'],
+            'email' => ['required', 'email'],
+            'address' => ['string'],
+        ];
+
+
+        if($request->input("isChanegPassword", false)){
+            $validationField["password"] = ['required', 'string','min:6',  'max:255', 'confirmed'];
+            $validationField["password_confirmation"] = [ 'required', 'string',  'max:255'];
+        }
+        $validator = Validator::make($request->all(), $validationField,[],[
+            'fname' => 'First name',
+            'lname' => 'Last name',
+            'password_confirmation' => "Confirm Password"
+        ]);
+
+
+        if($validator->fails()){
+            return response(['message' => 'Validation errors', 'errors' =>  $validator->errors(), 'status' => false], 422);
+        }
+
+
+        $user = \App\User::find(Auth::id());
+        $user->fname = $request->input("fname", '');
+        $user->lname = $request->input("lname",'');
+        $user->email = $request->input("email",'');
+        $user->address = $request->input("address",'');
+        $user->pin = $request->input("pin",'');
+        $user->country_id = $request->input("country_id.id",0);
+        $user->state_id = $request->input("state_id.id",0);
+        $user->city_id = $request->input("city_id.id",0);
+        $user->updated_by = Auth::id();
+
+        if($request->input("isChanegPassword", false)){
+            $user->password = Hash::make($request->input("password",null));
+        }
+        $user->save();
+        return response([
+            'message' => 'successfully saved!', 'status' => true
+        ]);
+    }
+
+    public function updateAvatar(Request $request){
+        $status = false;
+        if ($request->hasFile('avatharImg')) {
+            $status = true;
+            $avatharName = sprintf("%s.%s",time(), $request->file('avatharImg')->extension());
+            $destinationPath = "assets/avatar";
+            $request->file('avatharImg')->move($destinationPath, $avatharName);
+
+
+            $img = Image::make($destinationPath.'/'.$avatharName)->resize(126, 139);
+            $img->save($destinationPath.'/'.$avatharName, 60);
+            $user = \App\User::find(Auth::id());
+            $user->avatar = $avatharName;
+            $user->save();
+        }
+        return response([
+            'message' => 'successfully updated!', 'status' => $status
+        ]);
+    }
 }

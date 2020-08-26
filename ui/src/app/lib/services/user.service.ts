@@ -133,5 +133,12 @@ export class UserService {
     )
   }
 
+  updateProfile(postData:any= null){
+    return this.http.post('/student/updateProfile', postData);
+  }
+
+  updateAvatar(postData:any= null){
+    return this.http.post('/updateAvatar', postData);
+  }
 
 }

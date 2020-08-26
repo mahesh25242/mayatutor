@@ -27,7 +27,7 @@ class UserLogin extends Model implements AuthenticatableContract, AuthorizableCo
 
     public function user()
     {
-        return $this->hasMany('App\User');
+        return $this->belongsTo('App\User');
     }
 
 

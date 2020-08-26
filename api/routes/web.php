@@ -31,10 +31,17 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
 
     $router->post('sentContact','ContactUsController@sentContact');
 
+
     $router->group(['middleware' => 'auth'], function () use ($router) {
+        $router->post('updateAvatar','UsersController@updateAvatar');
+
         $router->get('authUser','UsersController@authUser');
         $router->post('setUserLogin','UsersController@setUserLogin');
         $router->get('signOut','UsersController@signOut');
+
+        $router->group(['prefix' => 'student'], function () use ($router) {
+            $router->post('updateProfile','UsersController@updateProfile');
+        });
     });
 });
 

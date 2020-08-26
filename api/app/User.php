@@ -37,6 +37,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'password',
     ];
 
+    public function getAvatarAttribute($avatar)
+    {
+        return (($avatar) ? url().'/assets/avatar/'.$avatar : 'assets/tumb.png');
+    }
+
     public function getisOnlineAttribute()
     {
         return Cache::has('user-is-online-' . $this->id);
@@ -76,9 +81,6 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return $this->belongsTo('App\City');
     }
 
-
-
-
     public function role()
     {
         return $this->hasManyThrough(
@@ -89,5 +91,15 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
             'id', // Local key on countries table...
             'role_id' // Local key on users table...
         );
+    }
+
+    public function userLogin()
+    {
+        return $this->hasMany('App\UserLogin');
+    }
+
+    public function lastLogin()
+    {
+        return $this->hasOne('App\UserLogin', 'user_id')->where("name", "SignIn")->orderBy("id", "DESC")->skip(1)->take(1);
     }
 }
