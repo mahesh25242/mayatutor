@@ -3,7 +3,7 @@ import { User } from "../../../lib/interfaces";
 
 export interface MsgThreadMessageParticipant {
   id?: number,
-  thread_id?: number,
+  msg_thread_id?: number,
   user_id?: number,
   last_read?: string,
   created_at?: string,

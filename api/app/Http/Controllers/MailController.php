@@ -41,35 +41,48 @@ class MailController extends Controller
     }
 
     public function send(Request $request){
-        $validator = Validator::make($request->all(), [
-            'subject' => ['required', 'string'],
-            'user' => ['required'],
+
+        $validationField = [
             'message' => ['required', 'string'],
-        ]);
+        ];
+        if(!$request->input("msg_thread_id", null)){
+            $validationField["subject"] = ['required', 'string'];
+            $validationField["user"] = ['required'];
+        }
+        $validator = Validator::make($request->all(),  $validationField);
 
 
         if($validator->fails()){
             return response(['message' => 'Validation errors', 'errors' =>  $validator->errors(), 'status' => false], 422);
         }
 
-        $msgThread = new \App\MsgThread;
-        $msgThread->subject = $request->input("subject", "");
-        $msgThread->save();
+        if($request->input("msg_thread_id", null)){
+            $msgThreadMessage = new \App\MsgThreadMessage;
+            $msgThreadMessage->msg_thread_id = $request->input("msg_thread_id", null);
+            $msgThreadMessage->user_id = Auth::id();
+            $msgThreadMessage->body = $request->input("message", '');
+            $msgThreadMessage->save();
+        }else{
+            $msgThread = new \App\MsgThread;
+            $msgThread->subject = $request->input("subject", "");
+            $msgThread->save();
 
-        $msgThreadMessage = new \App\MsgThreadMessage;
-        $msgThreadMessage->msg_thread_id = $msgThread->id;
-        $msgThreadMessage->user_id = Auth::id();
-        $msgThreadMessage->body = $request->input("message", '');
-        $msgThreadMessage->save();
+            $msgThreadMessage = new \App\MsgThreadMessage;
+            $msgThreadMessage->msg_thread_id = $msgThread->id;
+            $msgThreadMessage->user_id = Auth::id();
+            $msgThreadMessage->body = $request->input("message", '');
+            $msgThreadMessage->save();
 
 
-        $msgThreadMessageParticipant = new \App\MsgThreadMessageParticipant;
-        $msgThreadMessageParticipant->msg_thread_id = $msgThread->id;
-        $msgThreadMessageParticipant->user_id = Auth::id();
-        $msgThreadMessageParticipant->save();
+            $msgThreadMessageParticipant = new \App\MsgThreadMessageParticipant;
+            $msgThreadMessageParticipant->msg_thread_id = $msgThread->id;
+            $msgThreadMessageParticipant->user_id = Auth::id();
+            $msgThreadMessageParticipant->save();
 
-        if ($request->input("user", null)) {
-            $msgThread->addParticipant($request->input("user", null));
+            if ($request->input("user", null)) {
+                $msgThread->addParticipant($request->input("user", null));
+            }
+
         }
 
         //$request->input("user", 0)

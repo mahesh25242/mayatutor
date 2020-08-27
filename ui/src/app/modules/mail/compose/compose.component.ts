@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MailService } from '../services/mail.service';
 import Notiflix from "notiflix";
@@ -10,6 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./compose.component.scss']
 })
 export class ComposeComponent implements OnInit {
+  @Input() reply:boolean;
   composeFrm:FormGroup;
   constructor(private formBuilder: FormBuilder,
     private mailService: MailService,

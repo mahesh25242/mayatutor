@@ -1,1 +1,15 @@
-{{ mail$ | async | json}}
+
+<a routerLink="../../" class="btn btn-primary">Back</a>
+
+<div *ngIf="(mail$ | async) as mail">
+  <a href="javascript:{}" class="btn btn-primary" (click)="replayMsg(mail)" *ngIf="(mailTp$ | async)?.type == 'inbox'">Reply</a>
+  <h4 [innerHTML]="mail.subject"></h4>
+
+  <div *ngFor="let item of mail.messages" >
+    <small>{{item.created_at | date:'medium'}}</small>
+    <img [src]="item.user.avatar" class="img-thumbnail" loading="lazy">
+    <span>{{item.user.fname}} {{ item.user.lname}}</span>
+    <p [innerHTML]="item.body"></p>
+  </div>
+</div>
+

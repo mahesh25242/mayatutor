@@ -1,0 +1,9 @@
+<app-modal>
+  <div header>Replay to {{ mail.subject}}</div>
+  <div  body>
+    <app-compose [reply]="true"></app-compose>
+  </div>
+  <div footer>
+    <button class="btn btn-primary" (click)="replyMail()">Send</button>
+  </div>
+</app-modal>

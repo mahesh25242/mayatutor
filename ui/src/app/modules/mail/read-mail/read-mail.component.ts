@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { MsgThread } from '../interfaces';
 import { Observable } from 'rxjs';
 import { MailService } from '../services/mail.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Data } from '@angular/router';
 import { mergeMap } from 'rxjs/operators';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ReplyMailComponent } from '../reply-mail/reply-mail.component';
 
 @Component({
   selector: 'app-read-mail',
@@ -11,13 +13,21 @@ import { mergeMap } from 'rxjs/operators';
   styleUrls: ['./read-mail.component.scss']
 })
 export class ReadMailComponent implements OnInit {
-
+  mailTp$: Observable<Data>;
   mail$: Observable<MsgThread>;
   constructor(private mailService: MailService,
-    private route:ActivatedRoute) { }
+    private route:ActivatedRoute,
+    private _modalService: NgbModal) { }
+
+    replayMsg(mail){
+      const activeModal = this._modalService.open(ReplyMailComponent, {
+        size: 'lg'
+      });
+      activeModal.componentInstance.mail = mail;
+    }
 
   ngOnInit(): void {
-
+    this.mailTp$ = this.route.data;
     this.mail$ = this.route.params.pipe(mergeMap(parm=>{
       return this.mailService.readMail({id: parm.id});
     }));

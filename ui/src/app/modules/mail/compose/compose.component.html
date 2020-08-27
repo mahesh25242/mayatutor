@@ -1,5 +1,5 @@
 <form [formGroup]="composeFrm" (ngSubmit)="sentMessage()">
-  <div class="form-group">
+  <div class="form-group" *ngIf="!reply">
     <label for="to">To</label>
     <input type="text" class="form-control" id="to"
     [ngClass]="{'is-invalid': (f.user.errors && f.user.errors.error) }"
@@ -8,7 +8,7 @@
       {{f.user.errors.error}}
     </div>
   </div>
-  <div class="form-group">
+  <div class="form-group" *ngIf="!reply">
     <label for="subject">Subject</label>
     <input type="text" class="form-control" id="subject"
     [ngClass]="{'is-invalid': (f.subject.errors && f.subject.errors.error) }"
@@ -26,5 +26,5 @@
       {{f.message.errors.error}}
     </div>
   </div>
-  <button type="submit" class="btn btn-primary">Sent</button>
+  <button type="submit" class="btn btn-primary" *ngIf="!reply">Sent</button>
 </form>
