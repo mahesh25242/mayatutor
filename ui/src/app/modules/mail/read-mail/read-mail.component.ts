@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MsgThread } from '../interfaces';
+import { Thread } from '../interfaces';
 import { Observable } from 'rxjs';
 import { MailService } from '../services/mail.service';
 import { ActivatedRoute, Data } from '@angular/router';
@@ -14,7 +14,7 @@ import { ReplyMailComponent } from '../reply-mail/reply-mail.component';
 })
 export class ReadMailComponent implements OnInit {
   mailTp$: Observable<Data>;
-  mail$: Observable<MsgThread>;
+  mail$: Observable<Thread>;
   constructor(private mailService: MailService,
     private route:ActivatedRoute,
     private _modalService: NgbModal) { }
@@ -28,9 +28,8 @@ export class ReadMailComponent implements OnInit {
 
   ngOnInit(): void {
     this.mailTp$ = this.route.data;
-    this.mail$ = this.route.params.pipe(mergeMap(parm=>{
-      return this.mailService.readMail({id: parm.id});
-    }));
+    this.mail$ = this.mailService.mail;
+
   }
 
 }

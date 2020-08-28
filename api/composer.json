@@ -11,8 +11,10 @@
         "google/recaptcha": "^1.2",
         "illuminate/mail": "^7.25",
         "intervention/image": "^2.5",
+        "irazasyed/larasupport": "^1.0",
         "laravel/lumen-framework": "^7.0",
-        "league/flysystem": "^1.1"
+        "league/flysystem": "^1.1",
+        "lexxyungcarter/chatmessenger": "^1.3"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.9.1",

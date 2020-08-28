@@ -26,14 +26,21 @@
             </div>
           </td>
           <td>
-            <a href="javascript:{}" [innerHTML]="getControls(mail).subject.value" [routerLink]="'read/'+getControls(mail).id.value"></a>
+            <a href="javascript:{}" [innerHTML]="getControls(mail).subject.value" [ngClass]="{'font-weight-bold' : getControls(mail).participants_count.value}" [routerLink]="'read/'+getControls(mail).id.value"></a>
+            <span *ngIf="getControls(mail).messages_count.value && getControls(mail).messages_count.value > 1">
+              ( {{ (getControls(mail).messages_count.value - 1) }} )
+            </span>
           </td>
           <td>
 
           </td>
         </tr>
       </ng-container>
-
+      <tr *ngIf="!(mails$ | async)?.length">
+        <td colspan="3" class="alert alert-warning">
+          No mail found!
+        </td>
+      </tr>
     </tbody>
   </table>
 </form>

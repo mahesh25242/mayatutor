@@ -43,12 +43,16 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
             $router->post('updateProfile','UsersController@updateProfile');
         });
 
-        $router->group(['prefix' => 'mail'], function () use ($router) {
-            $router->post('inbox','MailController@inbox');
-            $router->post('send','MailController@send');
-            $router->post('sentItem','MailController@sentItem');
-            $router->post('readMail','MailController@readMail');
+
+        $router->group(['prefix' => 'messages'], function () use ($router) {
+            $router->get('/', 'MessagesController@index');
+            $router->get('/unread', 'MessagesController@unread'); // ajax + Pusher
+            $router->post('/', 'MessagesController@store');
+            $router->get('{id}', 'MessagesController@show');
+            $router->post('update', 'MessagesController@update');
+            $router->get('{id}/read', 'MessagesController@read'); // ajax + Pusher
         });
+
     });
 });
 

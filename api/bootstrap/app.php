@@ -123,6 +123,10 @@ $app->register(Intervention\Image\ImageServiceProvider::class);
 $app->register(Illuminate\Mail\MailServiceProvider::class);
 $app->register(\Barryvdh\DomPDF\ServiceProvider::class);
 
+$app->register(Irazasyed\Larasupport\Providers\ArtisanServiceProvider::class);
+
+$app->register(Lexx\ChatMessenger\ChatMessengerServiceProvider::class);
+
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes

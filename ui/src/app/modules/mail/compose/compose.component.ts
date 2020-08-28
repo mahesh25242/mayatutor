@@ -20,14 +20,14 @@ export class ComposeComponent implements OnInit {
   sentMessage(){
     Notiflix.Loading.Pulse(`Sending...`);
     const postData ={
-      user: this.f.user.value,
+      recipients: this.f.recipients.value,
       subject: this.f.subject.value,
       message: this.f.message.value,
     }
     this.mailService.send(postData).subscribe(res=>{
       Notiflix.Loading.Remove();
       Notiflix.Notify.Success(`successfully sent message`);
-      this.router.navigate(['../'], {relativeTo: this.route});
+      this.router.navigate(['../inbox'], {relativeTo: this.route});
     }, error=>{
       Notiflix.Loading.Remove();
       for(let result in this.composeFrm.controls){
@@ -44,7 +44,7 @@ export class ComposeComponent implements OnInit {
 
   ngOnInit(): void {
     this.composeFrm = this.formBuilder.group({
-      user: [null, [ Validators.required]],
+      recipients: [null, [ Validators.required]],
       subject: [null, [ Validators.required]],
       message: [null, [ Validators.required]],
     });

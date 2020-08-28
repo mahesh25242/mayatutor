@@ -1,14 +1,14 @@
-import { MsgThread } from "./msg-thread";
+import { Thread } from "./thread";
 import { User } from "../../../lib/interfaces";
 
-export interface MsgThreadMessage {
+export interface ThreadMessage {
  id?: number,
- msg_thread_id?: number,
+ thread_id?: number,
  user_id?: number,
  body?: string,
  created_at?: string,
  updated_at?: string,
  deleted_at?: string,
- thread?: MsgThread,
+ thread?: Thread,
  user?: User
 }

@@ -2,10 +2,10 @@
   <div class="form-group" *ngIf="!reply">
     <label for="to">To</label>
     <input type="text" class="form-control" id="to"
-    [ngClass]="{'is-invalid': (f.user.errors && f.user.errors.error) }"
-    formControlName="user">
-    <div *ngIf="f.user.errors && f.user.errors.error" class="invalid-feedback">
-      {{f.user.errors.error}}
+    [ngClass]="{'is-invalid': (f.recipients.errors && f.recipients.errors.error) }"
+    formControlName="recipients" >
+    <div *ngIf="f.recipients.errors && f.recipients.errors.error" class="invalid-feedback">
+      {{f.recipients.errors.error}}
     </div>
   </div>
   <div class="form-group" *ngIf="!reply">

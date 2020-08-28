@@ -11,10 +11,12 @@ use Laravel\Passport\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Hash;
 use Cache;
+use Lexx\ChatMessenger\Traits\Messagable;
+
 
 class User extends Model implements AuthenticatableContract, AuthorizableContract
 {
-    use HasApiTokens, Authenticatable, Authorizable, SoftDeletes;
+    use HasApiTokens, Authenticatable, Authorizable, SoftDeletes, Messagable;
 
 
     /**
@@ -101,5 +103,10 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     public function lastLogin()
     {
         return $this->hasOne('App\UserLogin', 'user_id')->where("name", "SignIn")->orderBy("id", "DESC")->skip(1)->take(1);
+    }
+
+    public function msgMainThread()
+    {
+        return $this->hasMany('App\MsgThread');
     }
 }

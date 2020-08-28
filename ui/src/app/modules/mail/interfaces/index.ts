@@ -1,3 +1,3 @@
-export * from './msg-thread';
-export * from './msg-thread-message';
-export * from './msg-thread-message-participant';
+export * from './thread';
+export * from './thread-message';
+export * from './thread-message-participant';

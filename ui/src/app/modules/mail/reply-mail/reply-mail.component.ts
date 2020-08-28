@@ -1,9 +1,11 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import Notiflix from "notiflix";
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { MsgThread } from '../interfaces';
+import { Thread } from '../interfaces';
 import { ComposeComponent } from '../compose/compose.component';
 import { MailService } from '../services/mail.service';
+import { mergeMap, map } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-reply-mail',
@@ -13,7 +15,7 @@ import { MailService } from '../services/mail.service';
 export class ReplyMailComponent implements OnInit {
   @ViewChild(ComposeComponent ) composeComponent: ComposeComponent ;
 
-  @Input() mail: MsgThread;
+  @Input() mail: Thread;
   constructor(private mailService: MailService,
     public modal: NgbActiveModal) { }
 
@@ -21,10 +23,14 @@ export class ReplyMailComponent implements OnInit {
   replyMail(){
     Notiflix.Loading.Pulse(`Sending...`);
     const postData ={
-      msg_thread_id: this.mail.id,
+      id: this.mail.id,
       message: this.composeComponent.f.message.value,
     }
-    this.mailService.send(postData).subscribe(res=>{
+    this.mailService.reply(postData).pipe(mergeMap(res=>{
+      return this.mailService.readMail(this.mail.id).pipe(map(mail=>{
+        return res;
+      }));
+    })).subscribe(res=>{
       Notiflix.Loading.Remove();
       Notiflix.Notify.Success(`successfully sent message`);
       this.modal.close();

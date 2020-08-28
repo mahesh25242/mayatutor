@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MsgThreadMessageParticipant } from '../interfaces';
+import { Thread } from '../interfaces';
 import { Observable } from 'rxjs';
 import { MailService } from '../services/mail.service';
 
@@ -10,7 +10,7 @@ import { MailService } from '../services/mail.service';
 })
 export class SentItemComponent implements OnInit {
 
-  mails$: Observable<MsgThreadMessageParticipant[]>;
+  mails$: Observable<Thread[]>;
   constructor(private mailService: MailService) { }
 
   ngOnInit(): void {

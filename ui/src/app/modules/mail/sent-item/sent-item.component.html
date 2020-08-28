@@ -2,13 +2,7 @@
   <thead>
     <tr>
       <th>
-        <input type="checkbox" name=""/>
-      </th>
-      <th>
         Subject
-      </th>
-      <th>
-        Option
       </th>
     </tr>
   </thead>
@@ -16,16 +10,14 @@
     <ng-container *ngIf="(mails$ | async) as mails">
       <tr *ngFor="let mail of mails">
         <td>
-          <input type="checkbox" name=""/>
-        </td>
-        <td>
-          <a href="javascript:{}" [innerHTML]="mail.thread.subject" [routerLink]="'read/'+mail.id"></a>
-        </td>
-        <td>
-
+          <a href="javascript:{}" [innerHTML]="mail.subject" [routerLink]="'read/'+mail.id"></a>
         </td>
       </tr>
     </ng-container>
-
+    <tr *ngIf="!(mails$ | async)?.length">
+      <td colspan="3" class="alert alert-warning">
+        No mail found!
+      </td>
+    </tr>
   </tbody>
 </table>

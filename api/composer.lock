@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a4c8370ea6ad428dd1b18f7d66d48d63",
+    "content-hash": "d1cbaca2fa14764a20e67a1397ee1a71",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -2215,6 +2215,59 @@
             "time": "2019-11-02T09:15:47+00:00"
         },
         {
+            "name": "irazasyed/larasupport",
+            "version": "v1.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/irazasyed/larasupport.git",
+                "reference": "6532d924f288f001522792ad88edbeb7b4f08f2d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/irazasyed/larasupport/zipball/6532d924f288f001522792ad88edbeb7b4f08f2d",
+                "reference": "6532d924f288f001522792ad88edbeb7b4f08f2d",
+                "shasum": ""
+            },
+            "require": {
+                "league/flysystem": "~1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Irazasyed\\Larasupport\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Syed Irfaq R.",
+                    "email": "syed+gh@lukonet.com",
+                    "homepage": "https://lukonet.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Adds Support to use Laravel Packages in Lumen.",
+            "keywords": [
+                "laravel",
+                "laravel lumen support",
+                "laravel packages",
+                "lumen packages",
+                "lumen support"
+            ],
+            "time": "2017-09-19T20:16:14+00:00"
+        },
+        {
             "name": "laminas/laminas-diactoros",
             "version": "2.3.1",
             "source": {
@@ -2894,6 +2947,68 @@
                 "server"
             ],
             "time": "2020-07-01T11:33:50+00:00"
+        },
+        {
+            "name": "lexxyungcarter/chatmessenger",
+            "version": "1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lexxyungcarter/laravel-5-messenger.git",
+                "reference": "a55053090b601c3584ad0b6d6dc20a490f30e490"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lexxyungcarter/laravel-5-messenger/zipball/a55053090b601c3584ad0b6d6dc20a490f30e490",
+                "reference": "a55053090b601c3584ad0b6d6dc20a490f30e490",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/config": "^5.5|^6.0|^7.0",
+                "illuminate/database": "^5.5|^6.0|^7.0",
+                "illuminate/support": "^5.5|^6.0|^7.0",
+                "php": "^7.1.3"
+            },
+            "require-dev": {
+                "adamwathan/faktory": "0.3.*",
+                "friendsofphp/php-cs-fixer": "^2.5",
+                "orchestra/testbench": "^3.0|^4.0",
+                "phpunit/phpunit": "^7.0|^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Lexx\\ChatMessenger\\ChatMessengerServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Lexx\\ChatMessenger\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Lexx YungCarter",
+                    "email": "lexxyungcarter@gmail.com",
+                    "homepage": "https://github.com/lexxyungcarter",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Simple one-to-one/group chat messaging tool for Laravel 5 & 6 & 7 with Pusher Integration",
+            "keywords": [
+                "Messenger",
+                "chat",
+                "laravel",
+                "messaging",
+                "pusher",
+                "user messaging"
+            ],
+            "time": "2020-03-12T14:44:16+00:00"
         },
         {
             "name": "monolog/monolog",

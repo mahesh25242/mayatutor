@@ -1,10 +1,11 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use Lexx\ChatMessenger\Models\Models;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
-class CreateMsgThreadMessagesTable extends Migration
+class CreateMessagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +14,12 @@ class CreateMsgThreadMessagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('msg_thread_messages', function (Blueprint $table) {
-            $table->id();
-            $table->integer('msg_thread_id')->unsigned();
+        Schema::create(Models::table('messages'), function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('thread_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->text('body');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -30,6 +30,6 @@ class CreateMsgThreadMessagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('msg_thread_messages');
+        Schema::dropIfExists(Models::table('messages'));
     }
 }

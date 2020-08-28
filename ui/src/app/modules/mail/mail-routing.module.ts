@@ -6,6 +6,8 @@ import { SentItemComponent } from './sent-item/sent-item.component';
 import { ComposeComponent } from './compose/compose.component';
 import { ReadMailComponent } from './read-mail/read-mail.component';
 import { MailComponent } from './mail/mail.component';
+import { InboxResolver } from './inbox/inbox-resolver';
+import { ReadMailResolver } from './read-mail/read-mail-resolver';
 
 
 const routes: Routes = [
@@ -14,8 +16,11 @@ const routes: Routes = [
     component: MailComponent,
     children:[
       {
-        path: '',
+        path: 'inbox',
         component: InboxComponent,
+        resolve:{
+          mails: InboxResolver
+        }
       },
       {
         path: 'sent-item',
@@ -26,8 +31,11 @@ const routes: Routes = [
         component: ComposeComponent,
       },
       {
-        path: 'read/:id',
+        path: 'inbox/read/:id',
         component: ReadMailComponent,
+        resolve:{
+          mail: ReadMailResolver
+        },
         data:{
           type:'inbox'
         }
