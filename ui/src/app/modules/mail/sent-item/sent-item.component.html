@@ -11,6 +11,9 @@
       <tr *ngFor="let mail of mails">
         <td>
           <a href="javascript:{}" [innerHTML]="mail.subject" [routerLink]="'read/'+mail.id"></a>
+          <span *ngIf="mail.messages_count && mail.messages_count > 1">
+            ( {{ (mail.messages_count - 1) }} )
+          </span>
         </td>
       </tr>
     </ng-container>

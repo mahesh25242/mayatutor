@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {faUser,faClock,faStar,faStarHalfAlt } from '@fortawesome/free-solid-svg-icons';
+import {faUser,faClock } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-teacher-block',
@@ -9,8 +9,8 @@ import {faUser,faClock,faStar,faStarHalfAlt } from '@fortawesome/free-solid-svg-
 export class TeacherBlockComponent implements OnInit {
   faUser = faUser;
   faClock = faClock;
-  faStar = faStar;
-  faStarHalfAlt = faStarHalfAlt;
+    currentRate = 3;
+
   constructor() { }
 
   ngOnInit(): void {

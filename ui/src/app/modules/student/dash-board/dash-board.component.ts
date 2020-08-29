@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/lib/services';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/lib/interfaces';
-import {faStar,faStarHalfAlt } from '@fortawesome/free-solid-svg-icons';
+import {faEdit } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-dash-board',
@@ -10,9 +10,10 @@ import {faStar,faStarHalfAlt } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./dash-board.component.scss']
 })
 export class DashBoardComponent implements OnInit {
-  faStar = faStar;
-  faStarHalfAlt = faStarHalfAlt;
+  faEdit = faEdit;
   user$: Observable<User>;
+  currentRate = 2.3;
+
   constructor(private userSerivce: UserService) { }
 
   ngOnInit(): void {

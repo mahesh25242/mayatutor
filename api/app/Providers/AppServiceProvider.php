@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Dusterio\LumenPassport\LumenPassport;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,6 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+//        LumenPassport::allowMultipleTokens();
+
     }
 }

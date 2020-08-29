@@ -4,6 +4,10 @@
 <div *ngIf="(mail$ | async) as mail">
   <a href="javascript:{}" class="btn btn-primary" (click)="replayMsg(mail)" *ngIf="(mailTp$ | async)?.type == 'inbox'">Reply</a>
   <h4 [innerHTML]="mail.subject"></h4>
+  <ng-container *ngFor="let participant of mail.participants">
+    <span class="badge badge-secondary" *ngIf="mail.creator.id != participant.user.id">{{participant.user.fname }}</span>
+  </ng-container>
+
 
   <div *ngFor="let item of mail.messages" >
     <small>{{item.created_at | date:'medium'}}</small>

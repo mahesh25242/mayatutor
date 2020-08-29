@@ -2,12 +2,12 @@
   <table class="table">
     <thead>
       <tr>
-        <th>
+        <!-- <th>
           <div class="custom-control custom-checkbox">
             <input type="checkbox" class="custom-control-input" id="selected">
             <label class="custom-control-label" for="selected">&nbsp;</label>
           </div>
-        </th>
+        </th> -->
         <th>
           Subject
         </th>
@@ -19,20 +19,21 @@
     <tbody formArrayName="mailArr">
       <ng-container *ngIf="(mails$ | async) as mails">
         <tr *ngFor="let mail of mailArr.controls; let i=index; let last = last" [formGroupName]="i">
-          <td>
+          <!-- <td>
             <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input" [id]="'checkbox'+getControls(mail).id.value" formControlName="selected">
               <label class="custom-control-label" [for]="'checkbox'+getControls(mail).id.value">&nbsp;</label>
             </div>
-          </td>
+          </td> -->
           <td>
-            <a href="javascript:{}" [innerHTML]="getControls(mail).subject.value" [ngClass]="{'font-weight-bold' : getControls(mail).participants_count.value}" [routerLink]="'read/'+getControls(mail).id.value"></a>
+            <a href="javascript:{}" [innerHTML]="getControls(mail).subject.value"
+            [ngClass]="{'font-weight-bold' : getControls(mail).unread_count.value}" [routerLink]="'read/'+getControls(mail).id.value"></a>
             <span *ngIf="getControls(mail).messages_count.value && getControls(mail).messages_count.value > 1">
               ( {{ (getControls(mail).messages_count.value - 1) }} )
             </span>
           </td>
           <td>
-
+            <a href="javascript:{}" (click)="deleteMail(getControls(mail))">Delete</a>
           </td>
         </tr>
       </ng-container>

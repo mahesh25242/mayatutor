@@ -18,13 +18,12 @@
   </div>
   <div class="card-footer">
     <div class="d-grid grd-col-2">
-      <div class="text-left pt-1">
-        <fa-icon class="mr-2" [icon]="faStar"></fa-icon>
-        <fa-icon class="mr-2" [icon]="faStar"></fa-icon>
-        <fa-icon class="mr-2" [icon]="faStar"></fa-icon>
-        <fa-icon class="mr-2" [icon]="faStar"></fa-icon>
-        <fa-icon class="mr-2" [icon]="faStarHalfAlt"></fa-icon>
-      </div>
+
+      <ngb-rating [(rate)]="currentRate"  [readonly]="true" [max]="5">
+        <ng-template let-fill="fill" let-index="index">
+          <span class="star" [class.filled]="fill === 100" >&#9733;</span>
+        </ng-template>
+      </ngb-rating>
       <div>
         <button class="btn btn-primary float-right">
           Contact

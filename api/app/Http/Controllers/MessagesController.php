@@ -29,8 +29,12 @@ class MessagesController extends Controller
         // $threads = Thread::getAllLatest()->get();
 
         // All threads that user is participating in
-        $threads = Thread::forUser(Auth::id())->withCount(["messages", "participants" => function($q){
-            $q->where("user_id", Auth::id())->whereNull("last_read");
+        $threads = Thread::forUser(Auth::id())->withCount(["messages", "messages as unread_count" => function($q){
+            $q->join("participants" , "participants.thread_id", "=", "messages.thread_id")
+            ->where("participants.user_id", Auth::id())
+            ->whereNull("participants.deleted_at")
+            ->whereRaw(" ( ".\DB::getTablePrefix()."messages.updated_at > ".\DB::getTablePrefix()."participants.last_read
+            OR ".\DB::getTablePrefix()."participants.last_read IS NULL) ");
         }])->latest('updated_at')->get();
 
         // All threads that user is participating in, with new messages
@@ -39,6 +43,22 @@ class MessagesController extends Controller
         return response($threads);
     }
 
+    public function sentItem(Request $request){
+        $threads = Thread::forUser(Auth::id())->withCount(["messages", "messages as unread_count" => function($q){
+            $q->join("participants" , "participants.thread_id", "=", "messages.thread_id")
+            ->where("participants.user_id", Auth::id())
+            ->whereNull("participants.deleted_at")
+            ->whereRaw(" ( ".\DB::getTablePrefix()."messages.updated_at > ".\DB::getTablePrefix()."participants.last_read
+            OR ".\DB::getTablePrefix()."participants.last_read IS NULL) ");
+        }])->whereHas("messages", function($q){
+            $q->where("user_id", Auth::id());
+        })->latest('updated_at')->get();
+
+        // All threads that user is participating in, with new messages
+        // $threads = Thread::forUserWithNewMessages(Auth::id())->latest('updated_at')->get();
+
+        return response($threads);
+    }
     /**
      * Shows a message thread.
      *
@@ -48,7 +68,7 @@ class MessagesController extends Controller
     public function show($id)
     {
         try {
-            $thread = Thread::with(["messages.user"])->findOrFail($id);
+            $thread = Thread::with(["messages.user", "participants.user"])->findOrFail($id);
         } catch (ModelNotFoundException $e) {
 
             return response(['message' => 'no message found',  'status' => false], 422);
@@ -62,6 +82,8 @@ class MessagesController extends Controller
         $users = User::whereNotIn('id', $thread->participantsUserIds($userId))->get();
 
         $thread->markAsRead($userId);
+
+        $thread->creator = $thread->creator();
         return response($thread);
         //return view('messenger.show', compact('thread', 'users'));
     }
@@ -155,6 +177,7 @@ class MessagesController extends Controller
         $participant->last_read = new Carbon;
         $participant->save();
 
+        $thread->activateAllParticipants();
         // Recipients
         if ($request->has('recipients')) {
             // add code logic here to check if a thread has max participants set
@@ -238,5 +261,11 @@ class MessagesController extends Controller
         $count = Auth::user()->unreadMessagesCount();
 
         return ['msg_count' => $count];
+    }
+
+    public function removeParticipant(Request $request){
+        $thread = Thread::find($request->input("id", 0));
+        $thread->removeParticipant(Auth::id());
+        return response([ 'message' => 'successfully remove participant!', 'status' => true]);
     }
 }

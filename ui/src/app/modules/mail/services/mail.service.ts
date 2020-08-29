@@ -62,4 +62,12 @@ export class MailService {
       }
     }))
   }
+
+  removeParticipant(postData: any = null){
+    return this.http.post(`/messages/removeParticipant`, postData).pipe(mergeMap(res=>{
+      return this.inbox().pipe(map(mails=>{
+        return res;
+      }));
+    }));
+  }
 }

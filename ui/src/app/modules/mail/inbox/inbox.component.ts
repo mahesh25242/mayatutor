@@ -1,16 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MailService } from '../services/mail.service';
 import { Thread } from '../interfaces/index';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
 import { map } from 'rxjs/operators';
+import Notiflix from "notiflix";
+
 @Component({
   selector: 'app-inbox',
   templateUrl: './inbox.component.html',
   styleUrls: ['./inbox.component.scss']
 })
-export class InboxComponent implements OnInit {
+export class InboxComponent implements OnInit, OnDestroy {
   inboxFrm: FormGroup;
+  deleteSubscr: Subscription;
   mails$: Observable<Thread[]>;
   constructor(private mailService: MailService,
     private formBuilder: FormBuilder) { }
@@ -40,7 +43,7 @@ export class InboxComponent implements OnInit {
             updated_at: x.updated_at,
             subject: x.subject,
             messages_count: x.messages_count,
-            participants_count: x.participants_count,
+            unread_count: x.unread_count,
             selected: new FormControl(false)
           }));
 
@@ -50,4 +53,17 @@ export class InboxComponent implements OnInit {
     }));
   }
 
+  deleteMail(mail){
+    Notiflix.Confirm.Show('Delete?', "Are you sure you want to delete?", 'Yes', 'No', () => {
+      this.deleteSubscr = this.mailService.removeParticipant({id: mail.id.value}).subscribe();
+    }, () => {
+
+    } )
+  }
+
+  ngOnDestroy(){
+    if(this.deleteSubscr){
+      this.deleteSubscr.unsubscribe();
+    }
+  }
 }

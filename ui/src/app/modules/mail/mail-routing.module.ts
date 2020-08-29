@@ -43,6 +43,9 @@ const routes: Routes = [
       {
         path: 'sent-item/read/:id',
         component: ReadMailComponent,
+        resolve:{
+          mail: ReadMailResolver
+        },
         data:{
           type:'sent'
         }

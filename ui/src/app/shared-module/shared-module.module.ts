@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {  RouterModule } from '@angular/router';
 import { NgxCaptchaModule } from 'ngx-captcha';
 import Notiflix from "notiflix";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -31,6 +32,7 @@ Notiflix.Loading.Init({ svgColor:"#204486", });
   ],
   imports: [
     CommonModule,
+    NgbModule,
     NgSelectModule,
     RouterModule,
     FontAwesomeModule,
@@ -40,6 +42,7 @@ Notiflix.Loading.Init({ svgColor:"#204486", });
   ],
   exports:[
     NgSelectModule,
+    NgbModule,
     SafeHtmlPipe,
     ModalComponent,
     FontAwesomeModule,

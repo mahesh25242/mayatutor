@@ -82,7 +82,7 @@ export class UserService {
         'client_secret' : environment.lumenSecret,
         'scope' : '',
       }
-      return this.http.post<any>('/oauth/token',postData).pipe(map(res=>{
+      return this.http.post<any>('/oauth/token/refresh',postData).pipe(map(res=>{
         this.setLogin(res);
         return res;
       }))

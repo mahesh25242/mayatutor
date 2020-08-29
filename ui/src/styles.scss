@@ -4,6 +4,16 @@
 @import '~bootstrap/scss/bootstrap';
 @import "~@ng-select/ng-select/themes/default.theme.css";
 @import 'variables';
+
+.star {
+  font-size: 1.5rem;
+  color: #b0c4de;
+}
+.filled {
+  color: #1e90ff;
+}
+
+
 .d-grid {
     display: grid;
     row-gap: 15px;
@@ -18,7 +28,7 @@
     grid-template-columns: 1fr 1fr;
    }
   }
-  
+
   body {
       font-family: $fontFmily;
       color:$text-color;

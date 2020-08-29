@@ -51,6 +51,8 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
             $router->get('{id}', 'MessagesController@show');
             $router->post('update', 'MessagesController@update');
             $router->get('{id}/read', 'MessagesController@read'); // ajax + Pusher
+            $router->post('removeParticipant', 'MessagesController@removeParticipant'); // ajax + Pusher
+            $router->post('sentItem', 'MessagesController@sentItem'); // ajax + Pusher
         });
 
     });
