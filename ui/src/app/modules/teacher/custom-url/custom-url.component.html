@@ -1,0 +1,19 @@
+<section class="search-container">
+  <div class="container pt-3 pb-3">
+    <div class="input-group mb-2 mr-sm-2">
+     <a [href]="custmUrl" target="_blank">{{custmUrl}}</a>
+     Share website to
+     <share-button button="facebook" [size]="-1"
+      [icon]="faFacebook" [url]="custmUrl"
+      [title]="'as'"
+      [description]="'as'"
+      [image]="'as'"
+      [tags]="'asasas '" ></share-button>
+     <share-button button="linkedin" [icon]="faLinkedin" [url]="custmUrl"></share-button>
+     <share-button button="whatsapp" [icon]="faWhatsapp" [url]="custmUrl"></share-button>
+     <share-button button="telegram" [icon]="faTelegram" [url]="custmUrl"></share-button>
+     <share-button button="copy" [icon]="faCopy" [url]="custmUrl"></share-button>
+
+    </div>
+  </div>
+</section>
