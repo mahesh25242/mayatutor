@@ -33,7 +33,7 @@
             </span>
           </td>
           <td>
-            <a href="javascript:{}" (click)="deleteMail(getControls(mail))">Delete</a>
+            <span [ngClass]="'del-'+getControls(mail).id.value"><a href="javascript:{}" (click)="deleteMail(getControls(mail))" class="btn btn btn-sm btn-outline-danger" ><fa-icon [icon]="faTrash"></fa-icon> Delete</a></span>
           </td>
         </tr>
       </ng-container>

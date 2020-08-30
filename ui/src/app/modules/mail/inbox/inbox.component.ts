@@ -5,6 +5,7 @@ import { Observable, Subscription } from 'rxjs';
 import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
 import { map } from 'rxjs/operators';
 import Notiflix from "notiflix";
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-inbox',
@@ -12,6 +13,7 @@ import Notiflix from "notiflix";
   styleUrls: ['./inbox.component.scss']
 })
 export class InboxComponent implements OnInit, OnDestroy {
+  faTrash = faTrash;
   inboxFrm: FormGroup;
   deleteSubscr: Subscription;
   mails$: Observable<Thread[]>;
@@ -54,10 +56,16 @@ export class InboxComponent implements OnInit, OnDestroy {
   }
 
   deleteMail(mail){
+    Notiflix.Block.Merge({svgSize:'20px',});
+    Notiflix.Block.Pulse(`.del-${mail.id.value}`);
     Notiflix.Confirm.Show('Delete?', "Are you sure you want to delete?", 'Yes', 'No', () => {
-      this.deleteSubscr = this.mailService.removeParticipant({id: mail.id.value}).subscribe();
+      this.deleteSubscr = this.mailService.removeParticipant({id: mail.id.value}).subscribe(res=>{
+        Notiflix.Block.Remove(`.del-${mail.id.value}`);
+      }, err=>{
+        Notiflix.Block.Remove(`.del-${mail.id.value}`);
+      });
     }, () => {
-
+      Notiflix.Block.Remove(`.del-${mail.id.value}`);
     } )
   }
 

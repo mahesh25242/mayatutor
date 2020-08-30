@@ -32,7 +32,7 @@
       </ng-container>
       <ng-container *ngIf="(loggedUser$ | async) as loggedUser">
         <li class="nav-item">
-          <a [routerLink]="loggedUser?.role_url+'/home'" class="nav-link">My Home</a>
+          <a [routerLink]="loggedUser?.role_url" class="nav-link">My Home</a>
         </li>
         <li class="nav-item">
           <div ngbDropdown class="d-inline-block">

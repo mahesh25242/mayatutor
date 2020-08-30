@@ -151,6 +151,16 @@ class MessagesController extends Controller
      */
     public function update(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'id' => ['required'],
+            'message' => ['required'],
+        ]);
+
+
+        if($validator->fails()){
+            return response(['message' => 'Validation errors', 'errors' =>  $validator->errors(), 'status' => false], 422);
+        }
+
         try {
             $thread = Thread::findOrFail($request->input("id", 0));
         } catch (ModelNotFoundException $e) {

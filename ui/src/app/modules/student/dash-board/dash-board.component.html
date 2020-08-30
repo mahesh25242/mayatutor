@@ -1,4 +1,3 @@
-<app-search></app-search>
 <div class="card" *ngIf="(user$ | async) as user">
   <div class="card-body">
     <img [src]="user.avatar" class="avatar-img img-thumbnail" />
@@ -12,7 +11,7 @@
 
     <div>Mobile: {{ user.phone }}</div>
     <div>Email: {{ user.email }}</div>
-    <a href="javascript:{}" routerLink="../edit-profile" class="btn btn-outline-primary"><fa-icon [icon]="faEdit" ></fa-icon> Edit</a>
+    <a href="javascript:{}" routerLink="edit-profile" class="btn btn-outline-primary"><fa-icon [icon]="faEdit" ></fa-icon> Edit</a>
   </div>
 
   <ngb-rating [(rate)]="currentRate"  [readonly]="true" [max]="5">

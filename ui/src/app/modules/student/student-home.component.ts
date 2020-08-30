@@ -5,17 +5,17 @@ import { User } from 'src/app/lib/interfaces';
 import {faEdit } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: 'app-dash-board',
-  templateUrl: './dash-board.component.html',
-  styleUrls: ['./dash-board.component.scss']
+  selector: 'app-student-home',
+  templateUrl: './student-home.component.html',
+  styleUrls: ['./student-home.component.scss']
 })
-export class DashBoardComponent implements OnInit {
-  faEdit = faEdit;
-  user$: Observable<User>;
+export class StudentHomeComponent implements OnInit {
+
+
   constructor(private userSerivce: UserService) { }
 
   ngOnInit(): void {
-    this.user$ = this.userSerivce.getloggedUser;
+
   }
 
 }
