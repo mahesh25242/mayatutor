@@ -27,7 +27,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loggedUser$ = this.userService.getloggedUser;
     this.loggedSubScrioption = this.userService.authUser().subscribe(res=>{
-      _.find(res.role, (rl) => console.log(rl)); //check loaddash is working
+      //_.find(res.role, (rl) => console.log(rl)); //check loaddash is working
     });
   }
 

@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Hash;
 use Cache;
 use Lexx\ChatMessenger\Traits\Messagable;
-
+use Illuminate\Support\Str;
 
 class User extends Model implements AuthenticatableContract, AuthorizableContract
 {
@@ -27,7 +27,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $fillable = [
         'fname', 'mname', 'lname','email',  'password', 'phone', 'address', 'country_id',
         'state_id', 'city_id', 'pin', 'status', 'created_by', 'updated_by', 'deleted_by',
-        'avatar'
+        'avatar', 'url'
     ];
     protected $appends = array('is_online');
     /**
@@ -38,6 +38,29 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $hidden = [
         'password',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $firstName = strtolower($model->fname);
+            $lastName = strtolower($model->lname);
+            $url = Str::slug($firstName.$lastName);
+            $i = 0;
+            while(User::whereUrl($url)->exists())
+            {
+                $i++;
+                $url = Str::slug($firstName[0] . $lastName . Str::random(4));
+            }
+
+            $model->url = $url;
+
+        });
+    }
+
+
+
 
     public function getAvatarAttribute($avatar)
     {

@@ -45,8 +45,18 @@ export class EditProfileComponent implements OnInit, OnDestroy {
       state_id: [null, [Validators.required]],
       city_id: [null, [Validators.required]],
       pin: [null, [Validators.required]],
-      isChanegPassword: [false, []]
+      isChanegPassword: [false, []],
+      payment: this.formBuilder.group({
+        account_name:[null, []],
+        account_number:[null, []],
+        ifsc_code:[null, []],
+        bank_name:[null, []],
+        qr_code1:[null, []],
+        qr_code2:[null, []],
+      })
     });
+
+    console.log(this.editProfileFrm)
 
     this.countries$ = this.countryService.countries();
     this.countrySubscription = this.f.country_id.valueChanges.subscribe(res=>{

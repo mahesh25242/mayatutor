@@ -34,5 +34,6 @@ export interface User {
   updated_by?: number,
   role_url?: string,
   last_login?:UserLogin,
-  avatar?: string
+  avatar?: string,
+  url?: string
 }

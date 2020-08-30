@@ -1,0 +1,44 @@
+<div [formGroup]="paymentFormGroup">
+  <h3>Payment Method</h3>
+  <div class="form-group">
+    <label for="account_name">Account Name</label>
+    <input type="text" class="form-control" id="account_name"
+    [ngClass]="{'is-invalid': (f.account_name.errors && f.account_name.errors.error) }"
+     placeholder="Account Name" formControlName="account_name" >
+      <div *ngIf="f.account_name.errors && f.account_name.errors.error" class="invalid-feedback">
+        {{f.account_name.errors.error}}
+      </div>
+  </div>
+
+  <div class="form-group">
+    <label for="account_number">Account Number</label>
+    <input type="text" class="form-control" id="account_number"
+    [ngClass]="{'is-invalid': (f.account_number.errors && f.account_number.errors.error) }"
+     placeholder="Account Number" formControlName="account_number" >
+      <div *ngIf="f.account_number.errors && f.account_number.errors.error" class="invalid-feedback">
+        {{f.account_number.errors.error}}
+      </div>
+  </div>
+
+
+  <div class="form-group">
+    <label for="ifsc_code">IFSC Code</label>
+    <input type="text" class="form-control" id="ifsc_code"
+    [ngClass]="{'is-invalid': (f.ifsc_code.errors && f.ifsc_code.errors.error) }"
+     placeholder="IFSC Code" formControlName="ifsc_code" >
+      <div *ngIf="f.ifsc_code.errors && f.ifsc_code.errors.error" class="invalid-feedback">
+        {{f.ifsc_code.errors.error}}
+      </div>
+  </div>
+
+  <div class="form-group">
+    <label for="bank_name">Bank Name</label>
+    <input type="text" class="form-control" id="bank_name"
+    [ngClass]="{'is-invalid': (f.bank_name.errors && f.bank_name.errors.error) }"
+     placeholder="Bank Name" formControlName="bank_name" >
+      <div *ngIf="f.bank_name.errors && f.bank_name.errors.error" class="invalid-feedback">
+        {{f.bank_name.errors.error}}
+      </div>
+  </div>
+
+</div>

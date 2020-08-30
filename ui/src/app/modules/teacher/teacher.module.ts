@@ -10,13 +10,15 @@ import { TeacherHomeComponent } from './teacher-home.component';
 import { DashBoardComponent } from './dash-board/dash-board.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import {CustomUrlComponent} from './custom-url/custom-url.component';
+import { PaymentMethodComponent } from './edit-profile/payment-method/payment-method.component';
 
 @NgModule({
   declarations: [
     TeacherHomeComponent,
     DashBoardComponent,
     EditProfileComponent,
-    CustomUrlComponent
+    CustomUrlComponent,
+    PaymentMethodComponent
   ],
   imports: [
     CommonModule,

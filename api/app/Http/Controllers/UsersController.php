@@ -11,12 +11,14 @@ use Illuminate\Support\Facades\Cookie;
 use Image;
 use Illuminate\Support\Facades\Storage;
 
+
 class UsersController extends Controller
 {
 
 
     public function signUp(Request $request)
     {
+
 
         $return  = null;
         $recaptcha = new \ReCaptcha\ReCaptcha(env("RECAPTCHA_SECRET"));

@@ -1,6 +1,7 @@
 
 <app-custom-url></app-custom-url>
 <form [formGroup]="editProfileFrm" *ngIf="(loggedUser$ | async) as loggedUser" (ngSubmit)="updateProfile()">
+  <!-- common profile secion -->
   <img [src]="loggedUser.avatar" class="avatar-img img-thumbnail" />
   <button type="button" (click)="fileInput.click()" class="btn btn-primary avatar-up-btn">
     <span>Change Photo</span>
@@ -104,6 +105,12 @@
           {{f.city_id.errors.error}}
         </div>
   </div>
+  <!-- common profile secion ends -->
+
+  <app-payment-method formGroupName="payment"></app-payment-method>
+
+
+  <!-- Password chaing portion starts -->
   <div class="custom-control custom-checkbox">
     <input type="checkbox" class="custom-control-input" id="changePass" formControlName="isChanegPassword">
     <label class="custom-control-label" for="changePass">Change Password</label>
@@ -130,7 +137,7 @@
       </div>
     </div>
   </div>
-
+<!-- Password chaing portion ends -->
 
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
