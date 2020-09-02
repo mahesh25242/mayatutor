@@ -10,6 +10,7 @@ import { TeacherHomeComponent } from './teacher-home.component';
 import { DashBoardComponent } from './dash-board/dash-board.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import {CustomUrlComponent} from './custom-url/custom-url.component';
+import { ChangeBannerComponent } from './change-banner/change-banner.component';
 import { PaymentMethodComponent } from './edit-profile/payment-method/payment-method.component';
 import { TeacherInfoComponent } from './edit-profile/teacher-info/teacher-info.component';
 
@@ -18,6 +19,7 @@ import { TeacherInfoComponent } from './edit-profile/teacher-info/teacher-info.c
     TeacherHomeComponent,
     DashBoardComponent,
     EditProfileComponent,
+    ChangeBannerComponent,
     CustomUrlComponent,
     PaymentMethodComponent,
     TeacherInfoComponent
