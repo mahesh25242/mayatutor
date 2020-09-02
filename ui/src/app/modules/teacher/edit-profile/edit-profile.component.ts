@@ -87,33 +87,36 @@ export class EditProfileComponent implements OnInit, OnDestroy {
     })
 
     this.loggedUser$ = this.userService.getloggedUser.pipe(map(res=>{
-      this.editProfileFrm.patchValue({
-        fname: res.fname,
-        lname: res.lname,
-        phone: res.phone,
-        email: res.email,
-        address: res.address,
-        country_id: res.country,
-        state_id: res.state,
-        city_id: res.city,
-        pin: res.pin,
-        payment: {
-          account_name: res.teacher_payment_info?.account_name,
-          account_number: res.teacher_payment_info?.account_number,
-          ifsc_code: res.teacher_payment_info?.ifsc_code,
-          bank_name: res.teacher_payment_info?.bank_name,
-          qr_code1: res.teacher_payment_info?.qr_code1,
-          qr_code2: res.teacher_payment_info?.qr_code2
-        },
-        info:{
-          subject: res.teacher_payment_info?.account_name,
-          expieriance: res.teacher_info?.experiance,
-          time: res.teacher_info?.time,
-          education: res.teacher_info?.education,
-          fees: res.teacher_info?.fees,
-          other: res.teacher_info?.other
-        }
-      });
+      if(res){
+        this.editProfileFrm.patchValue({
+          fname: res.fname,
+          lname: res.lname,
+          phone: res.phone,
+          email: res.email,
+          address: res.address,
+          country_id: res.country,
+          state_id: res.state,
+          city_id: res.city,
+          pin: res.pin,
+          payment: {
+            account_name: res.teacher_payment_info?.account_name,
+            account_number: res.teacher_payment_info?.account_number,
+            ifsc_code: res.teacher_payment_info?.ifsc_code,
+            bank_name: res.teacher_payment_info?.bank_name,
+            qr_code1: res.teacher_payment_info?.qr_code1,
+            qr_code2: res.teacher_payment_info?.qr_code2
+          },
+          info:{
+            subject: res.subject,
+            expieriance: res.teacher_info?.experiance,
+            time: res.teacher_info?.time,
+            education: res.teacher_info?.education,
+            fees: res.teacher_info?.fees,
+            other: res.teacher_info?.other
+          }
+        });
+      }
+
       return res;
     }));
 

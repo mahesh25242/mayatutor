@@ -174,7 +174,7 @@ class UsersController extends Controller
 
 
         if($user->userRole()->where("role_id", 2)->exists()){
-            $this->updateTeacherMyProfile($request, $user);
+           return $this->updateTeacherMyProfile($request, $user);
         }
 
 
@@ -212,6 +212,7 @@ class UsersController extends Controller
         }else{
             $education_id = $request->input("info.education.id", 0);
         }
+
         \App\TeacherInfo::updateOrCreate(
             [
                 'user_id' => $user->id
@@ -225,6 +226,39 @@ class UsersController extends Controller
                 'user_id' => $user->id
             ]
         );
+
+        if($request->input("info.subject", null)){
+            $subjectArr = $request->input("info.subject", null);
+            $subIds = collect($subjectArr);
+            $pluckIds = $subIds->pluck("id");
+            \App\TeacherSubject::where("user_id", $user->id)
+            ->whereNotIn("subject_id", $pluckIds)->delete();
+
+            if(is_array($subjectArr) && !empty($subjectArr)){
+                foreach($subjectArr as $sub){
+                    if(!isset($sub["id"])){
+                        $subject = new \App\Subject;
+                        $subject->name = (isset($sub["name"])) ? $sub["name"] : '';
+                        $subject->save();
+                        $sub["id"] = $subject->id;
+                    }
+
+                    \App\TeacherSubject::updateOrCreate(
+                        [
+                            'user_id' => $user->id,
+                            'subject_id' => $sub["id"],
+                        ],
+                        [
+                            'user_id' => $user->id,
+                            'subject_id' => $sub["id"],
+                        ]
+                    );
+
+
+
+                }
+            }
+        }
 
     }
 

@@ -8,7 +8,6 @@
            bindLabel="name"
            formControlName="subject">
     </ng-select>
-  {{ f.subject.value | json}}
       <div *ngIf="f.subject.errors && f.subject.errors.error" class="invalid-feedback">
         {{f.subject.errors.error}}
       </div>
