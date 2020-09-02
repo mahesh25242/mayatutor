@@ -132,4 +132,9 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     {
         return $this->hasMany('App\MsgThread');
     }
+
+    public function teacherPaymentInfo()
+    {
+        return $this->hasOne('App\TeacherPaymentInfo');
+    }
 }

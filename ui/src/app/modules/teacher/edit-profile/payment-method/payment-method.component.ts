@@ -22,4 +22,8 @@ export class PaymentMethodComponent implements OnInit {
      this.paymentFormGroup = this.controlContainer.control as FormGroup;
   }
 
+  onFileInput(files: FileList, field){
+    field.setValue(files.item(0));
+  }
+
 }

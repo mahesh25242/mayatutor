@@ -2,6 +2,7 @@ import { City } from './city';
 import { Country } from './country';
 import { State } from './state';
 import { Role } from './role';
+import { TeacherPaymentInfo } from './teacherPaymentInfo';
 
 export interface UserLogin {
   id?: number,
@@ -35,5 +36,6 @@ export interface User {
   role_url?: string,
   last_login?:UserLogin,
   avatar?: string,
-  url?: string
+  url?: string,
+  teacher_payment_info?: TeacherPaymentInfo
 }

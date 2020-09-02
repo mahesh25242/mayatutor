@@ -70,6 +70,7 @@ class UsersController extends Controller
                         "role_id" => 2,
                     ]
                 );
+
             break;
             default:
                 $user->userRole()->updateOrCreate(
@@ -90,7 +91,7 @@ class UsersController extends Controller
     }
 
     public function authUser(Request $request){
-        $user = \App\User::with(["country", "state", "city", "role", "lastLogin"])->find(Auth::id());
+        $user = \App\User::with(["country", "state", "city", "role", "lastLogin", "teacherPaymentInfo"])->find(Auth::id());
         return response($user);
     }
 
@@ -170,6 +171,12 @@ class UsersController extends Controller
         $user->city_id = $request->input("city_id.id",0);
         $user->updated_by = Auth::id();
 
+
+        if($user->userRole()->where("role_id", 2)->exists()){
+            $this->updateTeacherMyProfile($request, $user);
+        }
+
+
         if($request->input("isChanegPassword", false)){
             $user->password = Hash::make($request->input("password",null));
         }
@@ -178,6 +185,30 @@ class UsersController extends Controller
             'message' => 'successfully saved!', 'status' => true
         ]);
     }
+
+    private function updateTeacherMyProfile(Request $request, $user){
+        if(!$user->teacherPaymentInfo()->exists()){
+            $user->teacherPaymentInfo()->save(new \App\TeacherPaymentInfo([
+                'account_name' => $request->input("payment.account_name", ''),
+                'account_number' => $request->input("payment.account_number", ''),
+                'ifsc_code' => $request->input("payment.ifsc_code", ''),
+                'bank_name' => $request->input("payment.bank_name", ''),
+                'qr_code1' => $request->input("payment.qr_code1", ''),
+                'qr_code2' => $request->input("payment.qr_code2", '')
+            ]));
+        }else{
+
+            $user->teacherPaymentInfo()->update([
+                'account_name' => $request->input("payment.account_name", ''),
+                'account_number' => $request->input("payment.account_number", ''),
+                'ifsc_code' => $request->input("payment.ifsc_code", ''),
+                'bank_name' => $request->input("payment.bank_name", ''),
+                'qr_code1' => $request->input("payment.qr_code1", ''),
+                'qr_code2' => $request->input("payment.qr_code2", '')
+            ]);
+        }
+    }
+
 
     public function updateAvatar(Request $request){
         $status = false;

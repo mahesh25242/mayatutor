@@ -41,4 +41,17 @@
       </div>
   </div>
 
+
+  <img [src]="f.qr_code1.value" class="avatar-img img-thumbnail" />
+  <button type="button" (click)="fileInput.click()" class="btn btn-primary avatar-up-btn">
+    <span>Change QR Code</span>
+    <input #fileInput type="file" (change)="onFileInput($event.target.files, f.qr_code1)" accept="image/*" style="display:none;" />
+  </button>
+
+  <img [src]="f.qr_code2.value" class="avatar-img img-thumbnail" />
+  <button type="button" (click)="fileInput.click()" class="btn btn-primary avatar-up-btn">
+    <span>Change QR Code</span>
+    <input #fileInput type="file" (change)="onFileInput($event.target.files, f.qr_code2)" accept="image/*" style="display:none;" />
+  </button>
+
 </div>

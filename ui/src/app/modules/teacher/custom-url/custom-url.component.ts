@@ -24,7 +24,6 @@ export class CustomUrlComponent implements OnInit {
 
   ngOnInit(): void {
     this.user$ = this.userSerivce.getloggedUser.pipe(map(res=>{
-      console.log(res)
       this.custmUrl  = `${environment.siteAddress}/${res.url}`;
       return res;
     }));

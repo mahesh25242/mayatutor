@@ -56,7 +56,7 @@ export class EditProfileComponent implements OnInit, OnDestroy {
       })
     });
 
-    console.log(this.editProfileFrm)
+
 
     this.countries$ = this.countryService.countries();
     this.countrySubscription = this.f.country_id.valueChanges.subscribe(res=>{
@@ -89,9 +89,18 @@ export class EditProfileComponent implements OnInit, OnDestroy {
         state_id: res.state,
         city_id: res.city,
         pin: res.pin,
+        payment: {
+          account_name: res.teacher_payment_info.account_name,
+          account_number: res.teacher_payment_info.account_number,
+          ifsc_code: res.teacher_payment_info.ifsc_code,
+          bank_name: res.teacher_payment_info.bank_name,
+          qr_code1: res.teacher_payment_info.qr_code1,
+          qr_code2: res.teacher_payment_info.qr_code2
+        }
       });
       return res;
     }));
+
   }
 
   onFileInput(files: FileList){
@@ -114,6 +123,8 @@ export class EditProfileComponent implements OnInit, OnDestroy {
   }
   updateProfile(){
     Notiflix.Loading.Pulse(`${(this.f.fname.value) ? this.f.fname.value : ''} please wait`);
+
+
     const postData = {
       fname: this.f.fname.value,
       lname: this.f.lname.value,
@@ -125,7 +136,8 @@ export class EditProfileComponent implements OnInit, OnDestroy {
       state_id: this.f.state_id.value,
       city_id: this.f.city_id.value,
       pin: this.f.pin.value,
-      isChanegPassword:false
+      isChanegPassword:false,
+      payment: this.f.payment.value
     }
     if(this.f.isChanegPassword.value){
       postData.password = this.f.password.value;
