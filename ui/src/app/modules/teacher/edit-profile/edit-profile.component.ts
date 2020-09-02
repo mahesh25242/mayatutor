@@ -53,6 +53,14 @@ export class EditProfileComponent implements OnInit, OnDestroy {
         bank_name:[null, []],
         qr_code1:[null, []],
         qr_code2:[null, []],
+      }),
+      info: this.formBuilder.group({
+        subject:[null, []],
+        expieriance:[null, []],
+        time:[null, []],
+        education:[null, []],
+        fees:[null, []],
+        other:[null, []]
       })
     });
 
@@ -90,12 +98,20 @@ export class EditProfileComponent implements OnInit, OnDestroy {
         city_id: res.city,
         pin: res.pin,
         payment: {
-          account_name: res.teacher_payment_info.account_name,
-          account_number: res.teacher_payment_info.account_number,
-          ifsc_code: res.teacher_payment_info.ifsc_code,
-          bank_name: res.teacher_payment_info.bank_name,
-          qr_code1: res.teacher_payment_info.qr_code1,
-          qr_code2: res.teacher_payment_info.qr_code2
+          account_name: res.teacher_payment_info?.account_name,
+          account_number: res.teacher_payment_info?.account_number,
+          ifsc_code: res.teacher_payment_info?.ifsc_code,
+          bank_name: res.teacher_payment_info?.bank_name,
+          qr_code1: res.teacher_payment_info?.qr_code1,
+          qr_code2: res.teacher_payment_info?.qr_code2
+        },
+        info:{
+          subject: res.teacher_payment_info?.account_name,
+          expieriance: res.teacher_info?.experiance,
+          time: res.teacher_info?.time,
+          education: res.teacher_info?.education,
+          fees: res.teacher_info?.fees,
+          other: res.teacher_info?.other
         }
       });
       return res;
@@ -137,7 +153,8 @@ export class EditProfileComponent implements OnInit, OnDestroy {
       city_id: this.f.city_id.value,
       pin: this.f.pin.value,
       isChanegPassword:false,
-      payment: this.f.payment.value
+      payment: this.f.payment.value,
+      info: this.f.info.value
     }
     if(this.f.isChanegPassword.value){
       postData.password = this.f.password.value;

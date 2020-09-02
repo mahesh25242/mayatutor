@@ -137,4 +137,27 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     {
         return $this->hasOne('App\TeacherPaymentInfo');
     }
+
+    public function teacherSubject()
+    {
+        return $this->hasMany('App\TeacherSubject');
+    }
+
+    public function teacherInfo()
+    {
+        return $this->hasOne('App\TeacherInfo');
+    }
+
+    public function subject()
+    {
+        return $this->hasManyThrough(
+            'App\Subject',
+            'App\TeacherSubject',
+            'user_id', // Foreign key on users table...
+            'id', // Foreign key on posts table...
+            'id', // Local key on countries table...
+            'subject_id' // Local key on users table...
+        );
+    }
+
 }

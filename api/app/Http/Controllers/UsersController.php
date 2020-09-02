@@ -91,7 +91,8 @@ class UsersController extends Controller
     }
 
     public function authUser(Request $request){
-        $user = \App\User::with(["country", "state", "city", "role", "lastLogin", "teacherPaymentInfo"])->find(Auth::id());
+        $user = \App\User::with(["country", "state", "city", "role", "lastLogin",
+        "teacherPaymentInfo", "subject", "teacherInfo.education"])->find(Auth::id());
         return response($user);
     }
 
@@ -187,26 +188,44 @@ class UsersController extends Controller
     }
 
     private function updateTeacherMyProfile(Request $request, $user){
-        if(!$user->teacherPaymentInfo()->exists()){
-            $user->teacherPaymentInfo()->save(new \App\TeacherPaymentInfo([
-                'account_name' => $request->input("payment.account_name", ''),
-                'account_number' => $request->input("payment.account_number", ''),
-                'ifsc_code' => $request->input("payment.ifsc_code", ''),
-                'bank_name' => $request->input("payment.bank_name", ''),
-                'qr_code1' => $request->input("payment.qr_code1", ''),
-                'qr_code2' => $request->input("payment.qr_code2", '')
-            ]));
-        }else{
 
-            $user->teacherPaymentInfo()->update([
+        \App\TeacherPaymentInfo::updateOrCreate(
+            [
+                'user_id' => $user->id
+            ],
+            [
                 'account_name' => $request->input("payment.account_name", ''),
                 'account_number' => $request->input("payment.account_number", ''),
                 'ifsc_code' => $request->input("payment.ifsc_code", ''),
                 'bank_name' => $request->input("payment.bank_name", ''),
                 'qr_code1' => $request->input("payment.qr_code1", ''),
-                'qr_code2' => $request->input("payment.qr_code2", '')
-            ]);
+                'qr_code2' => $request->input("payment.qr_code2", ''),
+                'user_id' => $user->id
+            ]
+        );
+        $education_id = 0;
+        if(!$request->input("info.education.id", 0) && $request->input("info.education.name", null)){
+            $education = new \App\Education;
+            $education->name = $request->input("info.education.name", '');
+            $education->save();
+            $education_id = $education->id;
+        }else{
+            $education_id = $request->input("info.education.id", 0);
         }
+        \App\TeacherInfo::updateOrCreate(
+            [
+                'user_id' => $user->id
+            ],
+            [
+                'experiance' => $request->input("info.expieriance", ''),
+                'time' => $request->input("info.time", ''),
+                'fees' => $request->input("info.fees", ''),
+                'education_id' =>  $education_id,
+                'other' => $request->input("info.other", ''),
+                'user_id' => $user->id
+            ]
+        );
+
     }
 
 

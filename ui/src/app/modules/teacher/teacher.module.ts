@@ -11,6 +11,7 @@ import { DashBoardComponent } from './dash-board/dash-board.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import {CustomUrlComponent} from './custom-url/custom-url.component';
 import { PaymentMethodComponent } from './edit-profile/payment-method/payment-method.component';
+import { TeacherInfoComponent } from './edit-profile/teacher-info/teacher-info.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { PaymentMethodComponent } from './edit-profile/payment-method/payment-me
     DashBoardComponent,
     EditProfileComponent,
     CustomUrlComponent,
-    PaymentMethodComponent
+    PaymentMethodComponent,
+    TeacherInfoComponent
   ],
   imports: [
     CommonModule,

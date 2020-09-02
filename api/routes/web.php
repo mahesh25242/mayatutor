@@ -43,6 +43,14 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
             $router->post('updateProfile','UsersController@updateProfile');
         });
 
+        $router->group(['prefix' => 'education'], function () use ($router) {
+            $router->get('getAllEducation','EducationController@getAllEducation');
+        });
+
+        $router->group(['prefix' => 'subject'], function () use ($router) {
+            $router->get('getAllSubjects','SubjectController@getAllSubjects');
+        });
+
 
         $router->group(['prefix' => 'messages'], function () use ($router) {
             $router->get('/', 'MessagesController@index');
@@ -54,6 +62,8 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
             $router->post('removeParticipant', 'MessagesController@removeParticipant'); // ajax + Pusher
             $router->post('sentItem', 'MessagesController@sentItem'); // ajax + Pusher
         });
+
+
 
     });
 });

@@ -4,3 +4,5 @@ export * from './country.service';
 export * from './state.service';
 export * from './city.service';
 export * from './general.service';
+export * from './education.service';
+export * from './subject.service';

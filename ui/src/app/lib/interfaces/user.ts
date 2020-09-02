@@ -3,6 +3,8 @@ import { Country } from './country';
 import { State } from './state';
 import { Role } from './role';
 import { TeacherPaymentInfo } from './teacherPaymentInfo';
+import { Subject } from './subject';
+import { TeacherInfo } from './teacherInfo';
 
 export interface UserLogin {
   id?: number,
@@ -37,5 +39,7 @@ export interface User {
   last_login?:UserLogin,
   avatar?: string,
   url?: string,
-  teacher_payment_info?: TeacherPaymentInfo
+  teacher_payment_info?: TeacherPaymentInfo,
+  subject?: Subject[],
+  teacher_info?: TeacherInfo,
 }

@@ -4,3 +4,7 @@ export * from './state';
 export * from './city';
 export * from './role';
 export * from './teacherPaymentInfo';
+export * from './education';
+export * from './subject';
+export * from './teacherInfo';
+export * from './teacherSubject';

@@ -1,0 +1,73 @@
+<div [formGroup]="teacherInfoFormGroup">
+  <div class="form-group">
+    <label for="subject">Subject</label>
+    <ng-select [items]="(subjects$ | async)"
+           [addTag]="addTagFn"
+           [hideSelected]="true"
+           multiple="true"
+           bindLabel="name"
+           formControlName="subject">
+    </ng-select>
+  {{ f.subject.value | json}}
+      <div *ngIf="f.subject.errors && f.subject.errors.error" class="invalid-feedback">
+        {{f.subject.errors.error}}
+      </div>
+  </div>
+
+  <div class="form-group">
+    <label for="expieriance">Expieriance</label>
+    <input type="text" class="form-control" id="expieriance"
+    [ngClass]="{'is-invalid': (f.expieriance.errors && f.expieriance.errors.error) }"
+     placeholder="Expieriance" formControlName="expieriance" >
+      <div *ngIf="f.expieriance.errors && f.expieriance.errors.error" class="invalid-feedback">
+        {{f.expieriance.errors.error}}
+      </div>
+  </div>
+
+  <div class="form-group">
+    <label for="subject">Education</label>
+    <ng-select [items]="(educations$ | async)"
+           [addTag]="addTagFn"
+           [hideSelected]="true"
+           bindLabel="name"
+           formControlName="education">
+    </ng-select>
+
+      <div *ngIf="f.education.errors && f.education.errors.error" class="invalid-feedback">
+        {{f.education.errors.error}}
+      </div>
+  </div>
+
+
+  <div class="form-group">
+    <label for="time">Time</label>
+    <input type="text" class="form-control" id="time"
+    [ngClass]="{'is-invalid': (f.time.errors && f.time.errors.error) }"
+     placeholder="Time" formControlName="time" >
+      <div *ngIf="f.time.errors && f.time.errors.error" class="invalid-feedback">
+        {{f.time.errors.error}}
+      </div>
+  </div>
+
+  <div class="form-group">
+    <label for="fees">Fees</label>
+    <input type="text" class="form-control" id="fees"
+    [ngClass]="{'is-invalid': (f.fees.errors && f.fees.errors.error) }"
+     placeholder="Fees" formControlName="fees" >
+      <div *ngIf="f.fees.errors && f.fees.errors.error" class="invalid-feedback">
+        {{f.fees.errors.error}}
+      </div>
+  </div>
+
+  <div class="form-group">
+    <label for="other">Other</label>
+    <textarea  class="form-control" id="other"
+    [ngClass]="{'is-invalid': (f.other.errors && f.other.errors.error) }"
+     placeholder="Other" formControlName="other" ></textarea>
+      <div *ngIf="f.other.errors && f.other.errors.error" class="invalid-feedback">
+        {{f.other.errors.error}}
+      </div>
+  </div>
+
+
+</div>
