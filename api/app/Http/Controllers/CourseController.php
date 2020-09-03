@@ -29,5 +29,8 @@ class CourseController extends Controller
         if($validator->fails()){
             return response(['message' => 'Validation errors', 'errors' =>  $validator->errors(), 'status' => false], 422);
         }
+
+
+
     }
 }

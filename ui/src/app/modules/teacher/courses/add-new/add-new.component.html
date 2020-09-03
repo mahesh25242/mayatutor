@@ -12,7 +12,7 @@
 
         <div class="form-group">
           <label for="price">Price</label>
-          <input type="text" class="form-control" id="price"
+          <input type="number" class="form-control" id="price"
           placeholder="Price" formControlName="price">
         </div>
 
@@ -34,10 +34,12 @@
         </div>
 
         <div class="form-group">
-          <label for="live_class">Have a Live Class</label>
-          <input type="checkbox" class="form-control" id="live_class" formControlName="live_class">
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="live_class" formControlName="live_class">
+            <label class="custom-control-label" for="live_class">Check this custom checkbox</label>
+          </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" *ngIf="f.live_class.value">
           <label for="live_class_url">Live Video URL</label>
           <input type="text" class="form-control" id="live_class_url" placeholder="Live Video URL"
           formControlName="live_class_url">
