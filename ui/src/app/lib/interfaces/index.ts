@@ -8,3 +8,4 @@ export * from './education';
 export * from './subject';
 export * from './teacherInfo';
 export * from './teacherSubject';
+export * from './course';

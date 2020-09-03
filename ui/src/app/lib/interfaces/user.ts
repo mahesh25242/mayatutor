@@ -42,5 +42,5 @@ export interface User {
   teacher_payment_info?: TeacherPaymentInfo,
   subject?: Subject[],
   teacher_info?: TeacherInfo,
-  teacher_banner: TeacherBannerImg
+  teacher_banner?: TeacherBannerImg
 }

@@ -153,6 +153,12 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return $this->hasOne('App\TeacherBanner');
     }
 
+
+    public function course()
+    {
+        return $this->hasMany('App\Course');
+    }
+
     public function subject()
     {
         return $this->hasManyThrough(

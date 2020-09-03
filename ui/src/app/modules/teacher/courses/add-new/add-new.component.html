@@ -1,0 +1,62 @@
+<form (ngSubmit)="createCourse()" [formGroup]="createCourseFrm">
+  <app-modal>
+    <div header>Create a Course </div>
+
+    <div  body>
+        <div class="form-group">
+          <label for="name">Course Name</label>
+          <input type="text" class="form-control" id="name" aria-describedby="courseNameHelp"
+          placeholder="Course Name" formControlName="name">
+          <small id="courseNameHelp" class="form-text text-muted">make sure spelling correct</small>
+        </div>
+
+        <div class="form-group">
+          <label for="price">Price</label>
+          <input type="text" class="form-control" id="price"
+          placeholder="Price" formControlName="price">
+        </div>
+
+        <div class="form-group">
+          <label for="demo_video_url">Course Demo Video URL</label>
+          <input type="text" class="form-control" id="demo_video_url"
+          placeholder="Course Demo Video URL" formControlName="demo_video_url">
+        </div>
+
+        <div class="form-group">
+          <label for="image">Upload Image</label>
+          <input type="file" class="form-control" id="image">
+        </div>
+
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea class="form-control" id="description" placeholder="Description"
+           formControlName="description"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="live_class">Have a Live Class</label>
+          <input type="checkbox" class="form-control" id="live_class" formControlName="live_class">
+        </div>
+        <div class="form-group">
+          <label for="live_class_url">Live Video URL</label>
+          <input type="text" class="form-control" id="live_class_url" placeholder="Live Video URL"
+          formControlName="live_class_url">
+        </div>
+
+        <div class="form-group">
+          <label for="news">Live Video News Update</label>
+          <textarea type="text" class="form-control" id="news" placeholder="Live Video News Update"
+          formControlName="news"></textarea>
+        </div>
+
+
+    </div>
+    <div footer>
+      <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
+      <button type="submit" class="btn btn-primary"  >
+          Save
+      </button>
+    </div>
+
+  </app-modal>
+</form>

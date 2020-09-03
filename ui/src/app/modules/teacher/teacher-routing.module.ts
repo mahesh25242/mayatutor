@@ -5,6 +5,8 @@ import { TeacherHomeComponent } from './teacher-home.component';
 import { DashBoardComponent } from './dash-board/dash-board.component';
 import { AuthGuard, NegateAuthGuard } from 'src/app/lib/guard';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { CoursesComponent } from './courses/courses.component';
+import { CoursesResolver } from './courses/courses-resolver';
 
 const routes: Routes = [
   {
@@ -21,6 +23,14 @@ const routes: Routes = [
         component: EditProfileComponent,
       },
     ]
+  },
+  {
+    path: 'courses',
+    component: CoursesComponent,
+    canActivate: [AuthGuard],
+    resolve:{
+      course: CoursesResolver
+    }
   },
   {
     path: 'register',

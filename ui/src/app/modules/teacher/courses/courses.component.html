@@ -1,0 +1,42 @@
+<h3>Courses</h3>
+<form class="form-inline">
+  <div class="form-group mb-2">
+    <input type="text" class="form-control" id="search-course" value="" placeholder="Search">
+  </div>
+  <button type="submit" class="btn btn-primary mb-2">Search</button>
+</form>
+<button class="btn btn-primary" (click)="addNew()">Add New</button>
+<table class="table">
+  <thead>
+    <tr>
+      <th>
+        No.
+      </th>
+      <th>
+        Course Name
+      </th>
+      <th>
+        Add Modules
+      </th>
+      <th>
+        Fees
+      </th>
+      <th>
+        Edit
+      </th>
+      <th>
+        Delete
+      </th>
+    </tr>
+  </thead>
+  <tbody *ngIf="(courses$ | async) as courses">
+    <tr *ngIf="courses.length">
+      <td></td>
+    </tr>
+    <tr *ngIf="!courses.length">
+      <td colspan="6">
+        <div class="alert alert-warning">No course found</div>
+      </td>
+    </tr>
+  </tbody>
+</table>

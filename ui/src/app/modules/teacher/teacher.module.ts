@@ -13,6 +13,9 @@ import {CustomUrlComponent} from './custom-url/custom-url.component';
 import { ChangeBannerComponent } from './change-banner/change-banner.component';
 import { PaymentMethodComponent } from './edit-profile/payment-method/payment-method.component';
 import { TeacherInfoComponent } from './edit-profile/teacher-info/teacher-info.component';
+import { CoursesComponent } from './courses/courses.component';
+import { CoursesResolver } from './courses/courses-resolver';
+import { AddNewComponent } from './courses/add-new/add-new.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,9 @@ import { TeacherInfoComponent } from './edit-profile/teacher-info/teacher-info.c
     ChangeBannerComponent,
     CustomUrlComponent,
     PaymentMethodComponent,
-    TeacherInfoComponent
+    TeacherInfoComponent,
+    CoursesComponent,
+    AddNewComponent
   ],
   imports: [
     CommonModule,
@@ -30,6 +35,9 @@ import { TeacherInfoComponent } from './edit-profile/teacher-info/teacher-info.c
     TeacherRoutingModule,
     ShareButtonsModule,
     ShareIconsModule
+  ],
+  providers:[
+    CoursesResolver
   ]
 })
 export class TeacherModule { }

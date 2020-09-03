@@ -47,6 +47,11 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
             $router->post('changeBanner','TeacherController@changeBanner');
         });
 
+        $router->group(['prefix' => 'course'], function () use ($router) {
+            $router->post('listCourses','CourseController@listCourses');
+            $router->post('createCourse','CourseController@createCourse');
+        });
+
         $router->group(['prefix' => 'education'], function () use ($router) {
             $router->get('getAllEducation','EducationController@getAllEducation');
         });

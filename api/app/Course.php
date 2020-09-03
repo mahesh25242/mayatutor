@@ -6,14 +6,13 @@ use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Lumen\Auth\Authorizable;
 use Laravel\Passport\HasApiTokens;
 
-class Rating extends Model implements AuthenticatableContract, AuthorizableContract
+class Course extends Model implements AuthenticatableContract, AuthorizableContract
 {
+    use HasApiTokens, Authenticatable, Authorizable;
 
-    use HasApiTokens, Authenticatable, Authorizable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -21,7 +20,8 @@ class Rating extends Model implements AuthenticatableContract, AuthorizableContr
      * @var array
      */
     protected $fillable = [
-        'rate', 'user_id', 'created_by', 'updated_by', 'deleted_by'
+        'user_id', 'name', 'price', 'demo_video_url', 'image', 'description',
+        'status', 'live_class', 'live_class_url', 'news'
     ];
 
 
@@ -29,10 +29,5 @@ class Rating extends Model implements AuthenticatableContract, AuthorizableContr
     public function user()
     {
         return $this->belongTo('App\User');
-    }
-
-    public function createdBy()
-    {
-        return $this->belongTo('App\User', 'created_by');
     }
 }
