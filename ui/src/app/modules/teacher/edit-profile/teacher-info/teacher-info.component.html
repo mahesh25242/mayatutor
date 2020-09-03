@@ -40,9 +40,9 @@
 
   <div class="form-group">
     <label for="time">Time</label>
-    <input type="text" class="form-control" id="time"
-    [ngClass]="{'is-invalid': (f.time.errors && f.time.errors.error) }"
-     placeholder="Time" formControlName="time" >
+    <ng-select [items]="['Full Time', 'Part Time']"
+        formControlName="time">
+    </ng-select>
       <div *ngIf="f.time.errors && f.time.errors.error" class="invalid-feedback">
         {{f.time.errors.error}}
       </div>
