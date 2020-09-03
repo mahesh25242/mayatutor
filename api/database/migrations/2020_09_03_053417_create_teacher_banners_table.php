@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTeacherSubjectsTable extends Migration
+class CreateTeacherBannersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateTeacherSubjectsTable extends Migration
      */
     public function up()
     {
-        Schema::create('teacher_subjects', function (Blueprint $table) {
+        Schema::create('teacher_banners', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id')->default(0);
-            $table->bigInteger('subject_id')->nullable();
+            $table->string('title')->nullable();
+            $table->string('img')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -29,6 +30,6 @@ class CreateTeacherSubjectsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('teacher_subjects');
+        Schema::dropIfExists('teacher_banners');
     }
 }

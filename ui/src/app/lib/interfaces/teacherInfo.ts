@@ -12,3 +12,11 @@ export interface TeacherInfo {
   education?: Education,
   user?: User
 }
+
+export interface TeacherBannerImg {
+  id?: number,
+  user_id?: number,
+  title?: string,
+  img?: string,
+  user?: User
+}

@@ -6,3 +6,4 @@ export * from './city.service';
 export * from './general.service';
 export * from './education.service';
 export * from './subject.service';
+export * from './teacher.service';

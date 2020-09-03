@@ -43,6 +43,10 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
             $router->post('updateProfile','UsersController@updateProfile');
         });
 
+        $router->group(['prefix' => 'teacher'], function () use ($router) {
+            $router->post('changeBanner','TeacherController@changeBanner');
+        });
+
         $router->group(['prefix' => 'education'], function () use ($router) {
             $router->get('getAllEducation','EducationController@getAllEducation');
         });

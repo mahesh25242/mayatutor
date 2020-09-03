@@ -20,10 +20,10 @@ export class CustomUrlComponent implements OnInit {
   faCopy =faCopy;
   user$: Observable<User>;
   custmUrl: string;
-  constructor(private userSerivce: UserService) { }
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    this.user$ = this.userSerivce.getloggedUser.pipe(map(res=>{
+    this.user$ = this.userService.getloggedUser.pipe(map(res=>{
       this.custmUrl  = `${environment.siteAddress}/${res.url}`;
       return res;
     }));
