@@ -10,6 +10,5 @@ export class CoursesResolver implements Resolve<any> {
 
   resolve(route: ActivatedRouteSnapshot): Observable<any> {
     return this.teacherService.listCourses();
-
   }
 }

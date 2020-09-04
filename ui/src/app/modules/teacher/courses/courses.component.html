@@ -1,7 +1,8 @@
 <h3>Courses</h3>
-<form class="form-inline">
+<form class="form-inline" [formGroup]="searchFrm" (ngSubmit)="searchCourse()">
   <div class="form-group mb-2">
-    <input type="text" class="form-control" id="search-course" value="" placeholder="Search">
+    <input type="text" class="form-control" id="search-course" value=""
+    placeholder="Search" formControlName="q">
   </div>
   <button type="submit" class="btn btn-primary mb-2">Search</button>
 </form>
@@ -22,17 +23,39 @@
         Fees
       </th>
       <th>
-        Edit
-      </th>
-      <th>
-        Delete
+        Options
       </th>
     </tr>
   </thead>
   <tbody *ngIf="(courses$ | async) as courses">
-    <tr *ngIf="courses.length">
-      <td></td>
-    </tr>
+    <ng-container *ngIf="courses.length">
+      <tr *ngFor="let course of courses;let i=index; let last = last">
+        <td>
+          {{i+1}}
+        </td>
+        <td>
+          {{course.name}}
+        </td>
+        <td>
+          <a href="javascript:{}" class="btn btn-primary btn-sm" placement="top" ngbTooltip="Add or Manage modules to this course">Add Modules</a>
+        </td>
+        <td>
+          {{course.price}}
+        </td>
+        <td>
+          <a href="javascript:{}" class="btn btn-primary btn-sm" (click)="addNew(course)" placement="top" ngbTooltip="click here for edit this course">
+            <fa-icon [icon]="faEdit"></fa-icon>
+          </a>
+          <span  [ngClass]="'del-'+course.id">
+            <a href="javascript:{}" class="btn btn-danger btn-sm ml-1"
+            (click)="deleteCourse(course)"
+            placement="top" ngbTooltip="click here for delete this course">
+              <fa-icon [icon]="faTrash"></fa-icon>
+            </a>
+          </span>
+        </td>
+      </tr>
+    </ng-container>
     <tr *ngIf="!courses.length">
       <td colspan="6">
         <div class="alert alert-warning">No course found</div>

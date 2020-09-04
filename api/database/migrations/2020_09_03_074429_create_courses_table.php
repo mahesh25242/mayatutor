@@ -25,6 +25,7 @@ class CreateCoursesTable extends Migration
             $table->boolean('live_class')->default(1);
             $table->string('live_class_url')->nullable();
             $table->text('news')->nullable();
+            $table->integer('sortorder')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

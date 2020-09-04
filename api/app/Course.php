@@ -21,7 +21,7 @@ class Course extends Model implements AuthenticatableContract, AuthorizableContr
      */
     protected $fillable = [
         'user_id', 'name', 'price', 'demo_video_url', 'image', 'description',
-        'status', 'live_class', 'live_class_url', 'news'
+        'status', 'live_class', 'live_class_url', 'news', 'sortorder'
     ];
 
 

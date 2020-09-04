@@ -1,54 +1,90 @@
 <form (ngSubmit)="createCourse()" [formGroup]="createCourseFrm">
   <app-modal>
-    <div header>Create a Course </div>
+    <div header>
+      {{ (course) ? 'Edit Course - '+course.name : 'Create a Course' }}
+    </div>
 
     <div  body>
         <div class="form-group">
           <label for="name">Course Name</label>
           <input type="text" class="form-control" id="name" aria-describedby="courseNameHelp"
-          placeholder="Course Name" formControlName="name">
+          placeholder="Course Name" formControlName="name"
+          [ngClass]="{'is-invalid': (f.name.errors && f.name.errors.error) }" ngbAutofocus>
+          <div *ngIf="f.name.errors && f.name.errors.error" class="invalid-feedback">
+            {{f.name.errors.error}}
+          </div>
           <small id="courseNameHelp" class="form-text text-muted">make sure spelling correct</small>
         </div>
 
         <div class="form-group">
           <label for="price">Price</label>
           <input type="number" class="form-control" id="price"
-          placeholder="Price" formControlName="price">
+          placeholder="Price" formControlName="price"
+          [ngClass]="{'is-invalid': (f.price.errors && f.price.errors.error) }">
+          <div *ngIf="f.price.errors && f.price.errors.error" class="invalid-feedback">
+            {{f.price.errors.error}}
+          </div>
         </div>
 
         <div class="form-group">
           <label for="demo_video_url">Course Demo Video URL</label>
           <input type="text" class="form-control" id="demo_video_url"
-          placeholder="Course Demo Video URL" formControlName="demo_video_url">
+          placeholder="Course Demo Video URL" formControlName="demo_video_url"
+          [ngClass]="{'is-invalid': (f.demo_video_url.errors && f.demo_video_url.errors.error) }">
+          <div *ngIf="f.demo_video_url.errors && f.demo_video_url.errors.error" class="invalid-feedback">
+            {{f.demo_video_url.errors.error}}
+          </div>
         </div>
 
         <div class="form-group">
           <label for="image">Upload Image</label>
-          <input type="file" class="form-control" id="image">
+          <input type="file" class="form-control" id="image"
+            (change)="onFileInput($event.target.files)" accept="image/*"
+            [ngClass]="{'is-invalid': (f.image.errors && f.image.errors.error) }">
+            <div *ngIf="f.image.errors && f.image.errors.error" class="invalid-feedback">
+              {{f.image.errors.error}}
+            </div>
         </div>
 
         <div class="form-group">
           <label for="description">Description</label>
           <textarea class="form-control" id="description" placeholder="Description"
-           formControlName="description"></textarea>
+           formControlName="description"
+           [ngClass]="{'is-invalid': (f.description.errors && f.description.errors.error) }"></textarea>
+           <div *ngIf="f.description.errors && f.description.errors.error" class="invalid-feedback">
+            {{f.description.errors.error}}
+          </div>
         </div>
 
         <div class="form-group">
           <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="live_class" formControlName="live_class">
+            <input type="checkbox" class="custom-control-input" id="live_class"
+            formControlName="live_class"
+            [ngClass]="{'is-invalid': (f.live_class.errors && f.live_class.errors.error) }">
             <label class="custom-control-label" for="live_class">Check this custom checkbox</label>
+          </div>
+          <div *ngIf="f.live_class.errors && f.live_class.errors.error" class="invalid-feedback">
+            {{f.live_class.errors.error}}
           </div>
         </div>
         <div class="form-group" *ngIf="f.live_class.value">
           <label for="live_class_url">Live Video URL</label>
-          <input type="text" class="form-control" id="live_class_url" placeholder="Live Video URL"
-          formControlName="live_class_url">
+          <input type="text" class="form-control" id="live_class_url"
+           placeholder="Live Video URL"
+          formControlName="live_class_url"
+          [ngClass]="{'is-invalid': (f.live_class_url.errors && f.live_class_url.errors.error) }">
+          <div *ngIf="f.live_class_url.errors && f.live_class_url.errors.error" class="invalid-feedback">
+            {{f.live_class_url.errors.error}}
+          </div>
         </div>
 
         <div class="form-group">
           <label for="news">Live Video News Update</label>
           <textarea type="text" class="form-control" id="news" placeholder="Live Video News Update"
-          formControlName="news"></textarea>
+          formControlName="news" [ngClass]="{'is-invalid': (f.news.errors && f.news.errors.error) }"></textarea>
+          <div *ngIf="f.news.errors && f.news.errors.error" class="invalid-feedback">
+            {{f.news.errors.error}}
+          </div>
         </div>
 
 
