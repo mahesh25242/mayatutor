@@ -9,6 +9,8 @@ import { NgxCaptchaModule } from 'ngx-captcha';
 import Notiflix from "notiflix";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+
+
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 
@@ -29,7 +31,7 @@ Notiflix.Block.Init({ svgColor:"#204486", });
     LoginComponent,
     RegisterComponent,
     TeacherBlockComponent,
-    SearchComponent
+    SearchComponent,
   ],
   imports: [
     CommonModule,
@@ -39,7 +41,7 @@ Notiflix.Block.Init({ svgColor:"#204486", });
     FontAwesomeModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxCaptchaModule
+    NgxCaptchaModule,
   ],
   exports:[
     NgSelectModule,
@@ -53,7 +55,7 @@ Notiflix.Block.Init({ svgColor:"#204486", });
     LoginComponent,
     RegisterComponent,
     TeacherBlockComponent,
-    SearchComponent
+    SearchComponent,
   ]
 })
 export class SharedModuleModule { }

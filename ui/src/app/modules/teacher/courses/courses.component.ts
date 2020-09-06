@@ -31,6 +31,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
       size:'lg'
     });
     activeModal.componentInstance.course = course;
+    activeModal.componentInstance.searchFrm = this.searchFrm;
   }
 
   deleteCourse(course:Course){
@@ -38,7 +39,11 @@ export class CoursesComponent implements OnInit, OnDestroy {
     Notiflix.Block.Dots(`.del-${course.id}`);
     Notiflix.Confirm.Show('Delete', `Do you want to delete ${course.name} ?`, 'Yes', 'No', () => {
       this.deleteCouseSuScr = this.teacherService.deleteCourse(course).pipe(mergeMap(res=>{
-          return this.teacherService.listCourses();
+        const postData ={
+          q: this.searchFrm.controls.q.value
+        }
+
+          return this.teacherService.listCourses(postData);
         })).subscribe(res=>{
           Notiflix.Block.Remove(`.del-${course.id}`);
           Notiflix.Notify.Success(`Successfully deleted ${course.name}`);
@@ -52,8 +57,19 @@ export class CoursesComponent implements OnInit, OnDestroy {
 
 
   searchCourse(){
+    Notiflix.Block.Dots(`app-courses table`);
+    const postData = {
+      q: this.searchFrm.controls.q.value
+    }
+
+    this.teacherService.listCourses(postData).subscribe(res=>{
+      Notiflix.Block.Remove(`app-courses table`);
+    }, error=>{
+      Notiflix.Block.Remove(`app-courses table`);
+    })
 
   }
+
   ngOnInit(): void {
     this.courses$ = this.teacherService.courses;
 

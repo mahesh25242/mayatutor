@@ -48,9 +48,16 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
         });
 
         $router->group(['prefix' => 'course'], function () use ($router) {
-            $router->post('listCourses','CourseController@listCourses');
+            $router->post('courses','CourseController@listCourses');
             $router->post('createCourse','CourseController@createCourse');
             $router->post('deleteCourse','CourseController@deleteCourse');
+            $router->get('{courseId}','CourseController@course');
+
+            $router->group(['prefix' => '{courseId}/module'], function () use ($router) {
+                $router->post('modules','CourseModuleController@listModules');
+                $router->post('createModule','CourseModuleController@createCourseModule');
+                $router->post('deleteModule','CourseModuleController@deleteCourseModule');
+            });
         });
 
         $router->group(['prefix' => 'education'], function () use ($router) {

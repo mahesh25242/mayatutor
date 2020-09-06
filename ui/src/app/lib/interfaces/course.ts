@@ -14,3 +14,16 @@ export interface Course {
   news?: string,
   user?: User
 }
+
+
+export interface CourseModule {
+  id?: number,
+  course_id?: number,
+  name?: string,
+  pdf?: number,
+  video_url?: string,
+  status?: number,
+  live_class?: number,
+  sortorder?: number,
+  course: Course
+}

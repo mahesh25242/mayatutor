@@ -37,7 +37,7 @@
           {{course.name}}
         </td>
         <td>
-          <a href="javascript:{}" class="btn btn-primary btn-sm" placement="top" ngbTooltip="Add or Manage modules to this course">Add Modules</a>
+          <a [routerLink]="course.id+'/modules'" class="btn btn-primary btn-sm" placement="top" ngbTooltip="Add or Manage modules to this course">Add Modules</a>
         </td>
         <td>
           {{course.price}}

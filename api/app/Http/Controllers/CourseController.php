@@ -85,6 +85,11 @@ class CourseController extends Controller
 
     }
 
+    public function course($courseId = 0){
+        $course = \App\Course::find($courseId);
+        return response($course);
+    }
+
     public function deleteCourse(Request $request){
         $courses = \App\Course::find($request->input("id", 0))->delete();
         return response([

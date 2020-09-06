@@ -5,6 +5,8 @@ import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 
 
 import { SharedModuleModule } from '../../shared-module/shared-module.module';
+import { PlayerModuleModule } from '../../shared-module/player-module.module';
+
 import { TeacherRoutingModule } from './teacher-routing.module';
 import { TeacherHomeComponent } from './teacher-home.component';
 import { DashBoardComponent } from './dash-board/dash-board.component';
@@ -16,6 +18,10 @@ import { TeacherInfoComponent } from './edit-profile/teacher-info/teacher-info.c
 import { CoursesComponent } from './courses/courses.component';
 import { CoursesResolver } from './courses/courses-resolver';
 import { AddNewComponent } from './courses/add-new/add-new.component';
+import { ModulesComponent } from './courses/modules/modules.component';
+import { ModulesResolver } from './courses/modules/modules-resolver';
+import { AddModuleComponent } from './courses/modules/add-module/add-module.component';
+import { VideoPreviewComponent } from './courses/modules/add-module/video-preview/video-preview.component';
 
 @NgModule({
   declarations: [
@@ -27,17 +33,22 @@ import { AddNewComponent } from './courses/add-new/add-new.component';
     PaymentMethodComponent,
     TeacherInfoComponent,
     CoursesComponent,
-    AddNewComponent
+    AddNewComponent,
+    ModulesComponent,
+    AddModuleComponent,
+    VideoPreviewComponent
   ],
   imports: [
     CommonModule,
     SharedModuleModule,
     TeacherRoutingModule,
     ShareButtonsModule,
-    ShareIconsModule
+    ShareIconsModule,
+    PlayerModuleModule
   ],
   providers:[
-    CoursesResolver
+    CoursesResolver,
+    ModulesResolver
   ]
 })
 export class TeacherModule { }

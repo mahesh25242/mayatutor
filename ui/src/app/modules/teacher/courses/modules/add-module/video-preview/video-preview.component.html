@@ -1,0 +1,10 @@
+<app-modal [noFooter]="true">
+  <div header>Video Preview  <small>{{title}}</small></div>
+  <div body>
+    <app-player [videoSources]="video"></app-player>
+  </div>
+  <div footer>
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
+  </div>
+</app-modal>
+

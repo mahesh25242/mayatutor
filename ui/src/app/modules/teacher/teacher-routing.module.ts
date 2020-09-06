@@ -7,6 +7,8 @@ import { AuthGuard, NegateAuthGuard } from 'src/app/lib/guard';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { CoursesComponent } from './courses/courses.component';
 import { CoursesResolver } from './courses/courses-resolver';
+import { ModulesComponent } from './courses/modules/modules.component';
+import { ModulesResolver } from './courses/modules/modules-resolver';
 
 const routes: Routes = [
   {
@@ -30,6 +32,14 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     resolve:{
       course: CoursesResolver
+    }
+  },
+  {
+    path: 'courses/:courseId/modules',
+    component: ModulesComponent,
+    canActivate: [AuthGuard],
+    resolve:{
+      course: ModulesResolver
     }
   },
   {

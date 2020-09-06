@@ -13,6 +13,7 @@ import { Course } from 'src/app/lib/interfaces';
 })
 export class AddNewComponent implements OnInit {
   @Input() course: Course;
+  searchFrm: FormGroup;
   createCourseFrm: FormGroup;
   constructor(public modal: NgbActiveModal,
     private teacherService: TeacherService,
@@ -21,6 +22,7 @@ export class AddNewComponent implements OnInit {
   get f() { return this.createCourseFrm.controls; }
 
   ngOnInit(): void {
+
     this.createCourseFrm = this.formbuilder.group({
       name: [null, [ Validators.required]],
       price: [null, [ Validators.required]],
@@ -66,8 +68,12 @@ export class AddNewComponent implements OnInit {
 
     Notiflix.Block.Pulse('app-add-new');
     this.teacherService.createCourse(formData).pipe(mergeMap(res=>{
+      const postData ={
+        q: this.searchFrm.controls.q.value
+      }
 
-      return this.teacherService.listCourses().pipe(map(courses=>{
+
+      return this.teacherService.listCourses(postData).pipe(map(courses=>{
         return res;
       }))
     })).subscribe(res=>{

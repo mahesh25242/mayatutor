@@ -33,8 +33,10 @@
     "firebase": "^7.18.0",
     "lodash": "^4.17.20",
     "ngx-captcha": "^8.0.1",
+    "ngx-plyr": "^4.0.0",
     "ngx-sharebuttons": "^8.0.1",
     "notiflix": "^2.4.0",
+    "plyr": "^3.6.2",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
