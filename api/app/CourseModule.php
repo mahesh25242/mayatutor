@@ -24,6 +24,12 @@ class CourseModule extends Model implements AuthenticatableContract, Authorizabl
          'sort_order', 'status'
     ];
 
+    public function getPdfAttribute($pdf)
+    {
+        return (($pdf) ? url().'/assets/course/'.$pdf : '');
+    }
+
+
     public function course()
     {
         return $this->belongsTo('App\Course');

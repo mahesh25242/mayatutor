@@ -12,7 +12,8 @@ export interface Course {
   live_class?: number,
   live_class_url?: string,
   news?: string,
-  user?: User
+  user?: User,
+  course_module_count?: number
 }
 
 
@@ -24,6 +25,6 @@ export interface CourseModule {
   video_url?: string,
   status?: number,
   live_class?: number,
-  sortorder?: number,
+  sort_order?: number,
   course: Course
 }

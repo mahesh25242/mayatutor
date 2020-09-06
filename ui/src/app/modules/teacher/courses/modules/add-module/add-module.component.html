@@ -21,17 +21,18 @@
   </div>
 
   <div class="form-group">
-    <label for="video_link">Video Link</label>
-    <input type="url" class="form-control" id="video_link" aria-describedby="videoLinkHelp"
-    placeholder="Video Link" formControlName="video_link"
-    [ngClass]="{'is-invalid': (f.video_link.errors && f.video_link.errors.error) }">
-    <a href="javascript:{}" class="btn btn-primary" *ngIf="f.video_link.value" (click)="previewVideo()">Preview</a>
-    <div *ngIf="f.video_link.errors && f.video_link.errors.error" class="invalid-feedback">
-      {{f.video_link.errors.error}}
+    <label for="video_url">Video Link</label>
+    <input type="url" class="form-control" id="video_url" aria-describedby="videoLinkHelp"
+    placeholder="Video Link" formControlName="video_url"
+    [ngClass]="{'is-invalid': (f.video_url.errors && f.video_url.errors.error) }">
+    <a href="javascript:{}" class="btn btn-primary" *ngIf="f.video_url.value" (click)="previewVideo()">Preview</a>
+    <div *ngIf="f.video_url.errors && f.video_url.errors.error" class="invalid-feedback">
+      {{f.video_url.errors.error}}
     </div>
     <small id="videoLinkHelp" class="form-text text-muted">put youtube / vimeo link</small>
   </div>
 
   <button class="btn btn-primary" type="submit">Save</button>
+  <button class="btn btn-primary" type="button" (click)="cancelEdit()" *ngIf="f.id.value">Cancel</button>
 
 </form>

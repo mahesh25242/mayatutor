@@ -1,4 +1,4 @@
-<app-add-module [course]="course$ | async"></app-add-module>
+<app-add-module [course]="course$ | async" [module]="courseModule" (resetEdit)="editModule($event)"></app-add-module>
 
 
 
@@ -23,4 +23,40 @@
       </th>
     </tr>
   </thead>
+  <tbody *ngIf="(courseModules$ | async) as courseModules">
+    <ng-container *ngIf="courseModules">
+      <tr *ngFor="let courseModule of courseModules; let i=index;">
+        <td>
+          {{ courseModule.sort_order }}
+        </td>
+        <td>
+          {{ courseModule.name}}
+        </td>
+        <td>
+          <a [href]="courseModule.pdf" *ngIf="courseModule.pdf" target="_blank">PDF</a>
+        </td>
+        <td>
+          <a href="javascript:{}" *ngIf="courseModule.video_url" (click)="playVideo(courseModule)">Play</a>
+        </td>
+        <td>
+          <a href="javascript:{}" class="btn btn-primary btn-sm"
+           placement="top" ngbTooltip="click here for edit this module" (click)="editModule(courseModule)">
+            <fa-icon [icon]="faEdit"></fa-icon>
+          </a>
+          <span  [ngClass]="'del-'+courseModule.id">
+            <a href="javascript:{}" class="btn btn-danger btn-sm ml-1"
+            (click)="deleteCourseModule(courseModule)"
+            placement="top" ngbTooltip="click here for delete this module">
+              <fa-icon [icon]="faTrash"></fa-icon>
+            </a>
+          </span>
+        </td>
+      </tr>
+    </ng-container>
+    <tr *ngIf="!courseModules || !courseModules.length">
+      <td colspan="5">
+        <div class="alert alert-warning">No module found</div>
+      </td>
+    </tr>
+  </tbody>
 </table>

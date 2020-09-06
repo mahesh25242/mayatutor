@@ -9,7 +9,7 @@ import { map, mergeMap } from 'rxjs/operators';
 })
 export class TeacherService {
   private courses$: BehaviorSubject<Course[]> = new BehaviorSubject<Course[]>(null);
-  private courseModule$: BehaviorSubject<CourseModule[]> = new BehaviorSubject<CourseModule[]>(null);
+  private courseModules$: BehaviorSubject<CourseModule[]> = new BehaviorSubject<CourseModule[]>(null);
 
 
   constructor(private http: HttpClient) { }
@@ -18,8 +18,8 @@ export class TeacherService {
     return this.courses$.asObservable();
   }
 
-  get courseModule(){
-    return this.courseModule$.asObservable();
+  get courseModules(){
+    return this.courseModules$.asObservable();
   }
   changeBanner(postData: any = null){
     return this.http.post('/teacher/changeBanner', postData);
@@ -47,7 +47,7 @@ export class TeacherService {
 
   listModules(courseId:number=0,postData: any = null):Observable<CourseModule[]>{
     return this.http.post<CourseModule[]>(`/course/${courseId}/module/modules`, postData).pipe(map(res=>{
-      this.courseModule$.next(res);
+      this.courseModules$.next(res);
       return res;
     }));
   }

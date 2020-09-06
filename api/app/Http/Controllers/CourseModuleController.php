@@ -29,7 +29,7 @@ class CourseModuleController extends Controller
             'course_id' => ['required', 'integer'],
             'name' => ['required', 'string'],
             'video_link' => ['string'],
-            'pdf' => ['string'],
+            'pdf' => ['mimes:pdf'],
         ]);
 
 
@@ -50,13 +50,15 @@ class CourseModuleController extends Controller
         $createUpdateArr = [
             "course_id" => $request->input("course_id", 0),
             "name" => $request->input("name", ""),
-            "video_link" => $request->input("video_link", ''),
-            "status" => 0,
-            "sortorder" => 0
+            "video_url" => $request->input("video_url", ''),
+            "status" => 0
         ];
 
         if($modulePdf){
             $createUpdateArr["pdf"] = $modulePdf;
+        }
+        if(!$request->input("id", null)){
+            $createUpdateArr["sort_order"] = ( \App\CourseModule::max('sort_order') + 1);
         }
 
         $course = \App\Course::find($request->input("course_id"));

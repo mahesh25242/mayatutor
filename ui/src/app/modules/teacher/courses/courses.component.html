@@ -37,7 +37,8 @@
           {{course.name}}
         </td>
         <td>
-          <a [routerLink]="course.id+'/modules'" class="btn btn-primary btn-sm" placement="top" ngbTooltip="Add or Manage modules to this course">Add Modules</a>
+          <a [routerLink]="course.id+'/modules'" class="btn btn-primary btn-sm" placement="top"
+           ngbTooltip="Add or Manage modules to this course">Add Modules <span *ngIf="course.course_module_count">( {{course.course_module_count}} )</span></a>
         </td>
         <td>
           {{course.price}}
