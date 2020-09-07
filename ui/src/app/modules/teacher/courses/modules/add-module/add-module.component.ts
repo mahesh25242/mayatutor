@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, EventEmitter, Output, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { VideoPreviewComponent } from './video-preview/video-preview.component';
@@ -18,13 +18,16 @@ export class AddModuleComponent implements OnInit, OnChanges {
   @Input() module: CourseModule;
   @Output() resetEdit = new EventEmitter<boolean>();
 
+  @ViewChild('pdfBrowse')
+myInputVariable: ElementRef;
+
   constructor(private formBuilder: FormBuilder,
     private _modalService: NgbModal,
     private teacherService: TeacherService) { }
 
   get f(){ return this.addModuleFrm.controls;}
 
-  onFileInput(files: FileList){
+  onFileInput(files: FileList=null){
     this.f.pdf.setValue(files.item(0));
   }
 
@@ -102,6 +105,8 @@ export class AddModuleComponent implements OnInit, OnChanges {
       pdf: this.module?.pdf,
       video_url: this.module?.video_url
     });
+    this.myInputVariable.nativeElement.value = "";
+
   }
 
 

@@ -12,7 +12,7 @@
 
   <div class="form-group">
     <label for="pdf">PDF</label>
-    <input type="file" class="form-control" id="pdf"
+    <input #pdfBrowse type="file" class="form-control" id="pdf"
       (change)="onFileInput($event.target.files)" accept="application/pdf"
       [ngClass]="{'is-invalid': (f.pdf.errors && f.pdf.errors.error) }">
       <div *ngIf="f.pdf.errors && f.pdf.errors.error" class="invalid-feedback">
