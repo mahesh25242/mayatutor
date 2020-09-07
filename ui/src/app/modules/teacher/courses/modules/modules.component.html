@@ -23,11 +23,18 @@
       </th>
     </tr>
   </thead>
-  <tbody *ngIf="(courseModules$ | async) as courseModules">
+  <tbody *ngIf="(courseModules$ | async) as courseModules" cdkDropList (cdkDropListDropped)="drop($event, courseModules)"
+  [cdkDropListData]="courseModules"  [cdkDropListDisabled]="(courseModules.length<2)">
     <ng-container *ngIf="courseModules">
-      <tr *ngFor="let courseModule of courseModules; let i=index;">
+      <tr *ngFor="let courseModule of courseModules; let i=index;" (cdkDragStarted)="dragStarted($event, courseModule)"
+      (cdkDragEnded)="dragEnded($event)"
+      cdkDragLockAxis="y" cdkDrag
+      [cdkDragData]="courseModule"
+      [cdkDragDisabled]="isDragging && isDragging !== courseModule.id"
+      >
         <td>
-          {{ courseModule.sort_order }}
+          <img class="drag-icon dragable" src="assets/drag-icon.svg" *ngIf="!isDragging || isDragging === courseModule.id">
+          {{ setSortOrder(courseModule, i) }}
         </td>
         <td>
           {{ courseModule.name}}
@@ -39,7 +46,18 @@
           <a href="javascript:{}" *ngIf="courseModule.video_url" (click)="playVideo(courseModule)">Play</a>
         </td>
         <td>
-          <a href="javascript:{}" class="btn btn-primary btn-sm"
+          <ng-container *ngIf="isDragging && isDragging === courseModule.id">
+            <a href="javascript:{}" class="btn btn-outline-warning btn-sm"
+              placement="top" ngbTooltip="clik here to cancel the move" (click)="resetDrag()">
+              <fa-icon [icon]="faWindowClose"></fa-icon>
+            </a>
+            <a href="javascript:{}" class="btn btn-outline-primary btn-sm ml-1"
+              placement="top" ngbTooltip="clik here to fix it" (click)="saveSortOrder(courseModules)">
+              <fa-icon [icon]="faCheck"></fa-icon>
+            </a>
+          </ng-container>
+          <ng-container *ngIf="!isDragging || isDragging !== courseModule.id">
+            <a href="javascript:{}" class="btn btn-primary btn-sm"
            placement="top" ngbTooltip="click here for edit this module" (click)="editModule(courseModule)">
             <fa-icon [icon]="faEdit"></fa-icon>
           </a>
@@ -50,6 +68,7 @@
               <fa-icon [icon]="faTrash"></fa-icon>
             </a>
           </span>
+          </ng-container>
         </td>
       </tr>
     </ng-container>

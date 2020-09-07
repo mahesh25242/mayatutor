@@ -60,6 +60,10 @@ export class TeacherService {
     return this.http.post(`/course/${courseId}/module/deleteModule`, postData);
   }
 
+  orderCourseModule(courseId:number=0, postData: any = null){
+    return this.http.post(`/course/${courseId}/module/orderCourseModule`, postData);
+  }
+
 
 
 }

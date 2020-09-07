@@ -21,15 +21,15 @@ class CourseModuleController extends Controller
         if($q){
             $courseModules = $courseModules->where("name", "LIKE", "%{$q}%");
         }
-        return response($courseModules->get());
+        return response($courseModules->orderBy("sort_order", "ASC")->get());
     }
 
     public function createCourseModule(Request $request, $courseId=0){
         $validator = Validator::make($request->all(), [
             'course_id' => ['required', 'integer'],
             'name' => ['required', 'string'],
-            'video_link' => ['string'],
-            'pdf' => ['mimes:pdf'],
+            'video_url' => ['required_without:pdf', 'string'],
+            'pdf' => ['required_without:video_url', 'mimes:pdf'],
         ]);
 
 
@@ -92,5 +92,21 @@ class CourseModuleController extends Controller
             'message' => 'successfully delete!', 'status' => 1
         ]);
 
+    }
+
+    public function orderCourseModule(Request $request, $courseId=0){
+        $modules = $request->all();
+        if(is_array($modules) && !empty($modules)){
+            foreach($modules as $module){
+                $cousreModule = \App\CourseModule::where("id", $module["id"])->where("course_id", $courseId)->get()->first();
+                if($cousreModule){
+                    $cousreModule->sort_order = $module["sort_order"];
+                    $cousreModule->save();
+                }
+            }
+        }
+        return response([
+            'message' => 'successfully reordered!', 'status' => 1
+        ]);
     }
 }

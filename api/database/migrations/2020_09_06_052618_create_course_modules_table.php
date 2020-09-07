@@ -19,7 +19,7 @@ class CreateCourseModulesTable extends Migration
             $table->string('name')->nullable();
             $table->string('pdf')->nullable();
             $table->string('video_url')->nullable();
-            $table->string('sort_order')->nullable();
+            $table->integer('sort_order')->nullable();
             $table->string('status')->nullable();
             $table->timestamps();
             $table->softDeletes();

@@ -57,6 +57,7 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
                 $router->post('modules','CourseModuleController@listModules');
                 $router->post('createModule','CourseModuleController@createCourseModule');
                 $router->post('deleteModule','CourseModuleController@deleteCourseModule');
+                $router->post('orderCourseModule','CourseModuleController@orderCourseModule');
             });
         });
 

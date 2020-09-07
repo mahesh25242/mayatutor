@@ -96,7 +96,7 @@ export class AddModuleComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(){
-    this.addModuleFrm.patchValue({
+    this.addModuleFrm?.patchValue({
       id: this.module?.id,
       name: this.module?.name,
       pdf: this.module?.pdf,

@@ -9,7 +9,7 @@ import { NgxCaptchaModule } from 'ngx-captcha';
 import Notiflix from "notiflix";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -42,6 +42,7 @@ Notiflix.Block.Init({ svgColor:"#204486", });
     FormsModule,
     ReactiveFormsModule,
     NgxCaptchaModule,
+    DragDropModule
   ],
   exports:[
     NgSelectModule,
@@ -56,6 +57,7 @@ Notiflix.Block.Init({ svgColor:"#204486", });
     RegisterComponent,
     TeacherBlockComponent,
     SearchComponent,
+    DragDropModule
   ]
 })
 export class SharedModuleModule { }
