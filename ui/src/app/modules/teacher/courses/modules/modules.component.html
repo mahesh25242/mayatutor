@@ -40,10 +40,14 @@
           {{ courseModule.name}}
         </td>
         <td>
-          <a [href]="courseModule.pdf" *ngIf="courseModule.pdf" target="_blank">PDF</a>
+          <a [href]="courseModule.pdf" *ngIf="courseModule.pdf" target="_blank">
+            <fa-icon [icon]="faFilePdf"></fa-icon>
+          </a>
         </td>
         <td>
-          <a href="javascript:{}" *ngIf="courseModule.video_url" (click)="playVideo(courseModule)">Play</a>
+          <a href="javascript:{}" *ngIf="courseModule.video_url" (click)="playVideo(courseModule)">
+            <fa-icon [icon]="faPlay"></fa-icon>
+          </a>
         </td>
         <td>
           <ng-container *ngIf="isDragging && isDragging === courseModule.id">

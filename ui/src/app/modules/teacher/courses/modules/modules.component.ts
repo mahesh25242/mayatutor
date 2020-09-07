@@ -4,7 +4,7 @@ import { Course, CourseModule } from 'src/app/lib/interfaces';
 import { Observable, Subscription } from 'rxjs';
 import { TeacherService } from 'src/app/lib/services';
 import { mergeMap } from 'rxjs/operators';
-import { faEdit, faTrash, faCheck, faWindowClose } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrash, faCheck, faWindowClose, faPlay, faFilePdf } from '@fortawesome/free-solid-svg-icons';
 import Notiflix from "notiflix";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { VideoPreviewComponent } from './add-module/video-preview/video-preview.component';
@@ -20,6 +20,8 @@ export class ModulesComponent implements OnInit, OnDestroy {
   faTrash = faTrash;
   faCheck = faCheck;
   faWindowClose = faWindowClose;
+  faPlay =faPlay;
+  faFilePdf = faFilePdf;
 
   isDragging:number = null;
   courseModule: CourseModule=null;
