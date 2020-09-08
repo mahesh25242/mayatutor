@@ -58,7 +58,9 @@ class CourseModuleController extends Controller
             $createUpdateArr["pdf"] = $modulePdf;
         }
         if(!$request->input("id", null)){
-            $createUpdateArr["sort_order"] = ( \App\CourseModule::max('sort_order') + 1);
+            $createUpdateArr["sort_order"] = ( \App\CourseModule::where("course_id", $courseId)->max('sort_order') + 1);
+            if(!$createUpdateArr["sort_order"])
+                $createUpdateArr["sort_order"] = 1;
         }
 
         $course = \App\Course::find($request->input("course_id"));

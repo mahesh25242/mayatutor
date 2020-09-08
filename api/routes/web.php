@@ -45,6 +45,7 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
 
         $router->group(['prefix' => 'teacher'], function () use ($router) {
             $router->post('changeBanner','TeacherController@changeBanner');
+            $router->get('topRatedTeacher','TeacherController@topRatedTeacher');
         });
 
         $router->group(['prefix' => 'course'], function () use ($router) {

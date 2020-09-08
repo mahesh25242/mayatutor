@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Course, CourseModule } from 'src/app/lib/interfaces';
 import { Observable, Subscription } from 'rxjs';
-import { TeacherService } from 'src/app/lib/services';
+import { CourseService } from 'src/app/lib/services';
 import { mergeMap } from 'rxjs/operators';
 import { faEdit, faTrash, faCheck, faWindowClose, faPlay, faFilePdf } from '@fortawesome/free-solid-svg-icons';
 import Notiflix from "notiflix";
@@ -33,7 +33,7 @@ export class ModulesComponent implements OnInit, OnDestroy {
   dragResetSubscription: Subscription;
 
   constructor(private route:ActivatedRoute,
-    private teacherService: TeacherService,
+    private courseService: CourseService,
     private _modalService: NgbModal) { }
 
   playVideo(module:CourseModule){
@@ -74,7 +74,7 @@ export class ModulesComponent implements OnInit, OnDestroy {
   resetDrag(){
     Notiflix.Block.Dots(`app-modules table`);
     this.dragResetSubscription = this.route.params.pipe(mergeMap(res=>{
-      return this.teacherService.listModules(res.courseId);
+      return this.courseService.listModules(res.courseId);
     })).subscribe(res=>{
       this.isDragging = null;
       Notiflix.Block.Remove(`app-modules table`);
@@ -87,8 +87,8 @@ export class ModulesComponent implements OnInit, OnDestroy {
   saveSortOrder(courseModule: CourseModule){
     Notiflix.Block.Dots(`app-modules table`);
     this.reOrderSubscription = this.route.params.pipe(mergeMap(parm=>{
-      return this.teacherService.orderCourseModule(parm.courseId, courseModule).pipe(mergeMap(res=>{
-        return this.teacherService.listModules(parm.courseId);
+      return this.courseService.orderCourseModule(parm.courseId, courseModule).pipe(mergeMap(res=>{
+        return this.courseService.listModules(parm.courseId);
       }))
     })).subscribe(res=>{
       this.isDragging = null;
@@ -110,8 +110,8 @@ export class ModulesComponent implements OnInit, OnDestroy {
     Notiflix.Confirm.Show('Delete', `Do you want to delete ${module.name} ?`, 'Yes', 'No', () => {
       this.deleteCouseModuleSuScr =
       this.route.params.pipe(mergeMap(res=>{
-        return this.teacherService.deleteModule(res.courseId, module).pipe(mergeMap(delRes=>{
-          return this.teacherService.listModules(res.courseId);
+        return this.courseService.deleteModule(res.courseId, module).pipe(mergeMap(delRes=>{
+          return this.courseService.listModules(res.courseId);
         }))
       })).subscribe(res=>{
           Notiflix.Block.Remove(`.del-${module.id}`);
@@ -126,10 +126,10 @@ export class ModulesComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.course$ = this.route.params.pipe(mergeMap(res=>{
-      return this.teacherService.course(res.courseId);
+      return this.courseService.course(res.courseId);
     }));
 
-    this.courseModules$ = this.teacherService.courseModules;
+    this.courseModules$ = this.courseService.courseModules;
   }
 
   ngOnDestroy(){

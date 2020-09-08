@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { TeacherService } from 'src/app/lib/services';
+import {  CourseService } from 'src/app/lib/services';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import Notiflix from "notiflix";
 import { mergeMap, map } from 'rxjs/operators';
@@ -16,7 +16,7 @@ export class AddNewComponent implements OnInit {
   searchFrm: FormGroup;
   createCourseFrm: FormGroup;
   constructor(public modal: NgbActiveModal,
-    private teacherService: TeacherService,
+    private courseService: CourseService,
     private formbuilder: FormBuilder) { }
 
   get f() { return this.createCourseFrm.controls; }
@@ -67,13 +67,13 @@ export class AddNewComponent implements OnInit {
     formData.append('news', `${ (this.f.news.value) ? this.f.news.value : '' }`);
 
     Notiflix.Block.Pulse('app-add-new');
-    this.teacherService.createCourse(formData).pipe(mergeMap(res=>{
+    this.courseService.createCourse(formData).pipe(mergeMap(res=>{
       const postData ={
         q: this.searchFrm.controls.q.value
       }
 
 
-      return this.teacherService.listCourses(postData).pipe(map(courses=>{
+      return this.courseService.listCourses(postData).pipe(map(courses=>{
         return res;
       }))
     })).subscribe(res=>{

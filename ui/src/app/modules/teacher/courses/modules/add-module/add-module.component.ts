@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { VideoPreviewComponent } from './video-preview/video-preview.component';
 import { mergeMap, map } from 'rxjs/operators';
-import { TeacherService } from 'src/app/lib/services';
+import { CourseService } from 'src/app/lib/services';
 import { Course, CourseModule } from 'src/app/lib/interfaces';
 import Notiflix from "notiflix";
 
@@ -23,7 +23,7 @@ myInputVariable: ElementRef;
 
   constructor(private formBuilder: FormBuilder,
     private _modalService: NgbModal,
-    private teacherService: TeacherService) { }
+    private courseService: CourseService) { }
 
   get f(){ return this.addModuleFrm.controls;}
 
@@ -58,8 +58,8 @@ myInputVariable: ElementRef;
 
     formData.append('video_url', `${(this.f.video_url.value) ? this.f.video_url.value : ''}`);
 
-    this.teacherService.createModule(this.course.id, formData).pipe(mergeMap(res=>{
-      return this.teacherService.listModules(this.course.id).pipe(map(modules=>{
+    this.courseService.createModule(this.course.id, formData).pipe(mergeMap(res=>{
+      return this.courseService.listModules(this.course.id).pipe(map(modules=>{
         return res;
       }))
     })).subscribe(res=>{
@@ -105,7 +105,8 @@ myInputVariable: ElementRef;
       pdf: this.module?.pdf,
       video_url: this.module?.video_url
     });
-    this.myInputVariable.nativeElement.value = "";
+    if(this.myInputVariable && this.myInputVariable.nativeElement)
+      this.myInputVariable.nativeElement.value = "";
 
   }
 

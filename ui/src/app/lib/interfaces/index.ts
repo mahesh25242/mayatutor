@@ -9,3 +9,4 @@ export * from './subject';
 export * from './teacherInfo';
 export * from './teacherSubject';
 export * from './course';
+export * from './rating';

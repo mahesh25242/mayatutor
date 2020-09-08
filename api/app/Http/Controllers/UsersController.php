@@ -174,7 +174,7 @@ class UsersController extends Controller
 
 
         if($user->userRole()->where("role_id", 2)->exists()){
-           return $this->updateTeacherMyProfile($request, $user);
+           $this->updateTeacherMyProfile($request, $user);
         }
 
 

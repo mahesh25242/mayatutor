@@ -2,16 +2,16 @@
   <div class="card-body">
     <div class="row">
       <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
-        <img src="assets/tumb.png" alt="avathar">
+        <img [src]="teacher.avatar" alt="avathar">
       </div>
       <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12">
-        <h5 class="text-left">Joan W. Smith</h5>
+        <h5 class="text-left">{{ teacher.fname }} {{ teacher.lname }}</h5>
         <div class="d-grid grd-col-2 text-left">
           <div>Tutor</div>
-          <div>Sub: Dance</div>
+          <div>Sub: <span *ngFor="let subject of teacher.subject; let last = last">{{ subject.name }} <i *ngIf="!last">, </i> </span></div>
           <div><fa-icon class="mr-2" [icon]="faUser"></fa-icon>233</div>
-          <div><fa-icon class="mr-2" [icon]="faClock"></fa-icon>Fill Time</div>
-          <div class="span2">Location: Perumbavoor</div>
+          <div><fa-icon class="mr-2" [icon]="faClock"></fa-icon>{{ teacher.teacher_info.time }}</div>
+          <div class="span2">Location: {{ teacher.city.name}}</div>
         </div>
       </div>
     </div>
@@ -19,7 +19,13 @@
   <div class="card-footer">
     <div class="d-grid grd-col-2">
 
-      <ngb-rating [(rate)]="currentRate"  [readonly]="true" [max]="5">
+      <ng-template #t let-fill="fill">
+        <span class="star" [class.full]="fill === 100">
+          <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+        </span>
+      </ng-template>
+
+      <ngb-rating [(rate)]="currentRate" [starTemplate]="t" [readonly]="true" [max]="5">
         <ng-template let-fill="fill" let-index="index">
           <span class="star" [class.filled]="fill === 100" >&#9733;</span>
         </ng-template>

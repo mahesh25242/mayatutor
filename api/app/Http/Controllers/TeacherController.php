@@ -44,4 +44,12 @@ class TeacherController extends Controller
             ], 421);
         }
     }
+
+    public function topRatedTeacher(Request $request){
+        $teachers = \App\Rating::whereHas("user.role", function($q){
+            $q->where("roles.id" , 2);
+        })->with(["user.rating", "user.teacherInfo", "user.subject", "user.city"])->orderBy("rate", "DESC")
+        ->orderBy("tot_users", "DESC")->get();
+        return response($teachers);
+    }
 }

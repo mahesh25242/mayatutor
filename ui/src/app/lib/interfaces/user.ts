@@ -5,6 +5,7 @@ import { Role } from './role';
 import { TeacherPaymentInfo } from './teacherPaymentInfo';
 import { Subject } from './subject';
 import { TeacherInfo, TeacherBannerImg } from './teacherInfo';
+import { Rating } from './rating';
 
 export interface UserLogin {
   id?: number,
@@ -42,5 +43,6 @@ export interface User {
   teacher_payment_info?: TeacherPaymentInfo,
   subject?: Subject[],
   teacher_info?: TeacherInfo,
-  teacher_banner?: TeacherBannerImg
+  teacher_banner?: TeacherBannerImg,
+  rating?: Rating
 }

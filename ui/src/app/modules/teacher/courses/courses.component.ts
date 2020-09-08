@@ -3,7 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddNewComponent } from './add-new/add-new.component';
 import { Observable, Subscription } from 'rxjs';
 import { Course } from 'src/app/lib/interfaces';
-import { TeacherService } from 'src/app/lib/services';
+import {  CourseService } from 'src/app/lib/services';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import Notiflix from "notiflix";
 import { mergeMap, map } from 'rxjs/operators';
@@ -23,7 +23,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
   searchFrm: FormGroup;
 
   constructor(private _modalService: NgbModal,
-    private teacherService: TeacherService,
+    private courseService: CourseService,
     private formBuilder: FormBuilder) { }
 
   addNew(course: Course = null ){
@@ -38,12 +38,12 @@ export class CoursesComponent implements OnInit, OnDestroy {
     Notiflix.Block.Merge({svgSize:'20px',});
     Notiflix.Block.Dots(`.del-${course.id}`);
     Notiflix.Confirm.Show('Delete', `Do you want to delete ${course.name} ?`, 'Yes', 'No', () => {
-      this.deleteCouseSuScr = this.teacherService.deleteCourse(course).pipe(mergeMap(res=>{
+      this.deleteCouseSuScr = this.courseService.deleteCourse(course).pipe(mergeMap(res=>{
         const postData ={
           q: this.searchFrm.controls.q.value
         }
 
-          return this.teacherService.listCourses(postData);
+          return this.courseService.listCourses(postData);
         })).subscribe(res=>{
           Notiflix.Block.Remove(`.del-${course.id}`);
           Notiflix.Notify.Success(`Successfully deleted ${course.name}`);
@@ -62,7 +62,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
       q: this.searchFrm.controls.q.value
     }
 
-    this.teacherService.listCourses(postData).subscribe(res=>{
+    this.courseService.listCourses(postData).subscribe(res=>{
       Notiflix.Block.Remove(`app-courses table`);
     }, error=>{
       Notiflix.Block.Remove(`app-courses table`);
@@ -71,7 +71,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.courses$ = this.teacherService.courses;
+    this.courses$ = this.courseService.courses;
 
     this.searchFrm = this.formBuilder.group({
       q: [null, [ Validators.required]],

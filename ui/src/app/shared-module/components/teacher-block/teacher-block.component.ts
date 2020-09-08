@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {faUser,faClock } from '@fortawesome/free-solid-svg-icons';
+import { User } from 'src/app/lib/interfaces';
+
 
 @Component({
   selector: 'app-teacher-block',
@@ -7,13 +9,15 @@ import {faUser,faClock } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./teacher-block.component.scss']
 })
 export class TeacherBlockComponent implements OnInit {
+  @Input() teacher: User;
   faUser = faUser;
   faClock = faClock;
-    currentRate = 3;
+    currentRate ;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.currentRate = this.teacher.rating.rate / this.teacher.rating.tot_users;
   }
 
 }

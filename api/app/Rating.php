@@ -21,18 +21,19 @@ class Rating extends Model implements AuthenticatableContract, AuthorizableContr
      * @var array
      */
     protected $fillable = [
-        'rate', 'user_id', 'created_by', 'updated_by', 'deleted_by'
+        'rate', 'user_id', 'created_by', 'updated_by', 'deleted_by', 'tot_users'
     ];
 
 
 
     public function user()
     {
-        return $this->belongTo('App\User');
+        return $this->belongsTo('App\User');
     }
+
 
     public function createdBy()
     {
-        return $this->belongTo('App\User', 'created_by');
+        return $this->belongsTo('App\User', 'created_by');
     }
 }

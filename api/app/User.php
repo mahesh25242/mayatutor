@@ -133,6 +133,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return $this->hasMany('App\MsgThread');
     }
 
+    public function rating()
+    {
+        return $this->hasOne('App\Rating');
+    }
+
     public function teacherPaymentInfo()
     {
         return $this->hasOne('App\TeacherPaymentInfo');
@@ -157,6 +162,16 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     public function course()
     {
         return $this->hasMany('App\Course');
+    }
+
+    public function teacherStudent()
+    {
+        return $this->hasMany('App\TeacherStudent');
+    }
+
+    public function studentTeacher()
+    {
+        return $this->hasMany('App\TeacherStudent', 'teacher_user_id');
     }
 
     public function subject()

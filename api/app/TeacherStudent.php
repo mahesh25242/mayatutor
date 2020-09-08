@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Laravel\Lumen\Auth\Authorizable;
 use Laravel\Passport\HasApiTokens;
 
-class Course extends Model implements AuthenticatableContract, AuthorizableContract
+class City extends Model implements AuthenticatableContract, AuthorizableContract
 {
     use HasApiTokens, Authenticatable, Authorizable;
 
@@ -20,19 +20,19 @@ class Course extends Model implements AuthenticatableContract, AuthorizableContr
      * @var array
      */
     protected $fillable = [
-        'user_id', 'name', 'price', 'demo_video_url', 'image', 'description',
-        'status', 'live_class', 'live_class_url', 'news', 'sortorder'
+        'teacher_user_id', 'user_id', 'status'
     ];
 
 
 
-    public function user()
+    public function student()
     {
         return $this->belongsTo('App\User');
     }
 
-    public function courseModule()
+    public function teacher()
     {
-        return $this->hasMany('App\CourseModule');
+        return $this->belongsTo('App\User', 'teacher_user_id');
     }
+
 }
