@@ -1,30 +1,8 @@
-<div class="card list-box">
+<div class="card" style="width: 18rem;">
+  <img [src]="course.image" class="card-img-top" [alt]="course.name" [title]="course.name" *ngIf="course.image">
   <div class="card-body">
-    <div class="row">
-      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
-        <img [src]="teacher.avatar" alt="avathar">
-      </div>
-      <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12">
-        <h5 class="text-left">{{ teacher.fname }} {{ teacher.lname }}</h5>
-        <div class="d-grid grd-col-2 text-left">
-          <div>Tutor</div>
-          <div>Sub: <span *ngFor="let subject of teacher.subject; let last = last">{{ subject.name }} <i *ngIf="!last">, </i> </span></div>
-          <div><fa-icon class="mr-2" [icon]="faUser"></fa-icon>233</div>
-          <div><fa-icon class="mr-2" [icon]="faClock"></fa-icon>{{ teacher.teacher_info.time }}</div>
-          <div class="span2">Location: {{ teacher.city.name}}</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="card-footer">
-    <div class="d-grid grd-col-2">
-
-      <app-rating [rating]="teacher.rating" [readonly]="true"></app-rating>
-      <div>
-        <button class="btn btn-primary float-right">
-          Contact
-        </button>
-      </div>
-    </div>
+    <h5 class="card-title">{{course.name}}</h5>
+    <p class="card-text">{{course.description}}</p>
+    <a href="#" class="btn btn-primary">Detail</a>
   </div>
 </div>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/lib/services';
+import { UserService, CourseService } from 'src/app/lib/services';
 import { Observable } from 'rxjs';
-import { User } from 'src/app/lib/interfaces';
+import { User, Course } from 'src/app/lib/interfaces';
 import {faEdit } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -12,10 +12,15 @@ import {faEdit } from '@fortawesome/free-solid-svg-icons';
 export class DashBoardComponent implements OnInit {
   faEdit = faEdit;
   user$: Observable<User>;
-  constructor(private userSerivce: UserService) { }
+  courses$: Observable<Course[]>;
+
+  constructor(private userSerivce: UserService,
+    private courseService: CourseService) { }
 
   ngOnInit(): void {
     this.user$ = this.userSerivce.getloggedUser;
+
+    this.courses$ = this.courseService.listCourses();
   }
 
 }
