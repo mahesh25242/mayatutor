@@ -1,16 +1,88 @@
 <div class="card" *ngIf="(user$ | async) as user">
-  <div class="card-body">
-    <img [src]="user.avatar" alt="avatar" class="img-thumbnail">
-    {{ user.fname }} {{ user.lname }}
-    <address>
-      {{ user.address }}
-    </address>
-    {{ user.country.name }}
-    {{ user.state.name }}
-    {{ user.city.name }} - {{ user.pin }}
 
-    <div>Mobile: {{ user.phone }}</div>
-    <div>Email: {{ user.email }}</div>
+<app-change-banner></app-change-banner>
+<div class="alert alert-danger">
+  <h3>Your Free Trial Remaining 20 Days</h3>
+  <p>Make a Payment soon, Avoid account blocking</p>
+  <a href="javascript:{}" class="btn btn-primary">View Plans</a>
+</div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6">
+        <img [src]="user.avatar" alt="avatar" class="img-thumbnail">
+        <app-rating [rating]="user.rating" [readonly]="true"></app-rating>
+        <a href="javascript:{}" class="btn btn-primary">Share</a>
+
+        {{ user.fname }} {{ user.lname }} <br/>
+        Time: {{user.teacher_info.time}}
+       <div>
+        Location
+        {{ user.country.name }}
+        {{ user.state.name }}
+        {{ user.city.name }} - {{ user.pin }}
+       </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-6">
+            <address>
+              Address<br/>
+              {{ user.address }}
+              {{ user.country.name }}
+              {{ user.state.name }}
+              {{ user.city.name }} - {{ user.pin }}
+            </address>
+
+            <div>Mobile: {{ user.phone }}</div>
+          </div>
+          <div class="col-md-6">
+            <div>Active From: {{ user.created_at | date:'medium' }}</div>
+            <div>Last Login: {{ user.last_login.created_at | date:'medium'}}</div>
+            <div>Email: <a [href]="'mailto:'+user.email">{{ user.email }}</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <h5>Subject / Syllabus</h5>
+        <span *ngFor="let subject of user.subject; let last = last">{{ subject.name }} <i *ngIf="!last">, </i> </span>
+      </div>
+      <div class="col-md-4">
+        <h5>Experiance</h5>
+        <p [innerHTML]="user.teacher_info.experiance"></p>
+      </div>
+      <div class="col-md-4">
+        <h5>Education</h5>
+        <p [innerHTML]="user.teacher_info.education.name"></p>
+      </div>
+    </div>
     <a href="javascript:{}" routerLink="edit-profile" class="btn btn-outline-primary"><fa-icon [icon]="faEdit" ></fa-icon> Edit</a>
+
+
+    <ngb-tabset type="pills">
+      <ngb-tab>
+        <ng-template ngbTabTitle>All Courses</ng-template>
+        <ng-template ngbTabContent>
+          <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth
+          master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh
+          dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum
+          iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab>
+        <ng-template ngbTabTitle>New Courses</ng-template>
+        <ng-template ngbTabContent>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.
+          <p>Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table
+          craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl
+          cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia
+          yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean
+          shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero
+          sint qui sapiente accusamus tattooed echo park.</p>
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
+
   </div>
 </div>
