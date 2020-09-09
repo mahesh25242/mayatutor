@@ -32,6 +32,10 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
     $router->post('sentContact','ContactUsController@sentContact');
 
 
+    $router->group(['prefix' => 'teacher'], function () use ($router) {
+        $router->get('topRatedTeacher','TeacherController@topRatedTeacher');
+    });
+
     $router->group(['middleware' => 'auth'], function () use ($router) {
         $router->post('updateAvatar','UsersController@updateAvatar');
 
@@ -45,7 +49,6 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
 
         $router->group(['prefix' => 'teacher'], function () use ($router) {
             $router->post('changeBanner','TeacherController@changeBanner');
-            $router->get('topRatedTeacher','TeacherController@topRatedTeacher');
         });
 
         $router->group(['prefix' => 'course'], function () use ($router) {
