@@ -6,7 +6,6 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 import { HowItWorksComponent } from './how-it-works/how-it-works.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
-
 const routes: Routes = [
   {
     path: '',
