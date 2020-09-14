@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Laravel\Lumen\Auth\Authorizable;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Carbon\Carbon;
 
 class UserPlan extends Model implements AuthenticatableContract, AuthorizableContract
 {
@@ -24,6 +25,16 @@ class UserPlan extends Model implements AuthenticatableContract, AuthorizableCon
         'user_id', 'plan_id', 'start_date', 'end_date'
     ];
 
+    protected $appends = array('remaining_days');
+
+    public function getRemainingDaysAttribute()
+    {
+        $date = Carbon::parse($this->end_date);
+        $now = Carbon::now();
+
+        return $date->diffInDays($now);
+    }
+
     public function user()
     {
         return $this->belongsTo('App\User');
@@ -33,6 +44,7 @@ class UserPlan extends Model implements AuthenticatableContract, AuthorizableCon
     {
         return $this->belongsTo('App\Plan');
     }
+
 
 
 

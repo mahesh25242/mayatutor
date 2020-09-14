@@ -19,6 +19,9 @@ class CreatePlansTable extends Migration
             $table->string('description')->nullable();
             $table->json('features')->nullable();
             $table->double('price', 8, 2)->nullable();
+            $table->integer('sortorder')->nullable();
+            $table->boolean('basic')->nullable();
+            $table->integer('days')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

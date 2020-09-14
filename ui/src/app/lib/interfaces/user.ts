@@ -14,6 +14,17 @@ export interface UserLogin {
   updated_at?: string,
 }
 
+export interface UserPlan {
+  id?: number,
+  plan_id?: number,
+  remaining_days?: number,
+  user_id?: number,
+  start_date?: string,
+  created_at?: string,
+  updated_at?: string,
+  end_date?: string
+}
+
 export interface User {
   id?: number,
   fname?: string,
@@ -44,5 +55,6 @@ export interface User {
   subject?: Subject[],
   teacher_info?: TeacherInfo,
   teacher_banner?: TeacherBannerImg,
-  rating?: Rating
+  rating?: Rating,
+  current_user_plan?: UserPlan
 }

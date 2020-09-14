@@ -2,7 +2,7 @@
 
 <app-change-banner></app-change-banner>
 <div class="alert alert-danger">
-  <h3>Your Free Trial Remaining 20 Days</h3>
+  <h3>Your Free Trial Remaining {{ (user.current_user_plan) ?  user.current_user_plan.remaining_days : '0'}} Days</h3>
   <p>Make a Payment soon, Avoid account blocking</p>
   <a routerLink="plans" class="btn btn-primary">View Plans</a>
 </div>

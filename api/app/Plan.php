@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Model;
 use Laravel\Lumen\Auth\Authorizable;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class Plan extends Model implements AuthenticatableContract, AuthorizableContract
 {
@@ -21,7 +23,7 @@ class Plan extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $fillable = [
-        'code', 'description', 'features'
+        'code', 'description', 'features', 'sortorder', 'basic', 'days'
     ];
 
     public function getFeaturesAttribute($value)
@@ -32,6 +34,12 @@ class Plan extends Model implements AuthenticatableContract, AuthorizableContrac
     public function userPlan()
     {
         return $this->hasMany('App\UserPlan');
+    }
+
+    public function myUserPlan()
+    {
+        return $this->hasOne('App\UserPlan')->where("user_id", Auth::id())
+        ->where("end_date", ">", new Carbon);
     }
 
 }

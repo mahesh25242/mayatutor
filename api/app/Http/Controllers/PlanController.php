@@ -9,7 +9,7 @@ class PlanController extends Controller
 
 
     public function plans(Request $request){
-        $plans = \App\Plan::all();
+        $plans = \App\Plan::with(["myUserPlan"])->get();
         return response($plans);
     }
 

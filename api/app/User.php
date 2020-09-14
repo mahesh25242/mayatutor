@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use Cache;
 use Lexx\ChatMessenger\Traits\Messagable;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class User extends Model implements AuthenticatableContract, AuthorizableContract
 {
@@ -177,6 +178,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     public function userPlan()
     {
         return $this->hasMany('App\UserPlan');
+    }
+
+    public function currentUserPlan()
+    {
+        return $this->hasOne('App\UserPlan')->where("end_date", ">", new Carbon);
     }
 
     public function subject()

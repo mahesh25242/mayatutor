@@ -10,7 +10,7 @@ use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Cookie;
 use Image;
 use Illuminate\Support\Facades\Storage;
-
+use Carbon\Carbon;
 
 class UsersController extends Controller
 {
@@ -71,6 +71,23 @@ class UsersController extends Controller
                     ]
                 );
 
+                //user pla selection
+                $UserPlan = \App\UserPlan::where("user_id", $user->id)
+                ->where("end_date", ">", new Carbon)->get()->first();
+                if(!$UserPlan){
+                        $currentTime = new Carbon;
+                        $plan = \App\Plan::where("basic", 1)->get()->first();
+                        $user->userPlan()->updateOrCreate(
+                            [
+                                "plan_id" => $plan->id,
+                            ],
+                            [
+                                "plan_id" => $plan->id,
+                                "start_date" => new Carbon,
+                                "end_date" => $currentTime->add($plan->days, 'day'),
+                            ]
+                        );
+                }
             break;
             default:
                 $user->userRole()->updateOrCreate(
@@ -92,7 +109,7 @@ class UsersController extends Controller
 
     public function authUser(Request $request){
         $user = \App\User::with(["country", "state", "city", "role", "lastLogin",
-        "teacherPaymentInfo", "subject", "teacherInfo.education", "teacherBanner", "rating"])->find(Auth::id());
+        "teacherPaymentInfo", "subject", "teacherInfo.education", "teacherBanner", "rating", "currentUserPlan"])->find(Auth::id());
         return response($user);
     }
 
@@ -175,6 +192,23 @@ class UsersController extends Controller
 
         if($user->userRole()->where("role_id", 2)->exists()){
            $this->updateTeacherMyProfile($request, $user);
+
+           //plan updation if user has no plan it wont exicute onlty rare condition
+           if(!$user->userPlan->count()){
+                $currentTime = new Carbon;
+                $plan = \App\Plan::where("basic", 1)->get()->first();
+               $user->userPlan()->updateOrCreate(
+                   [
+                       "plan_id" => $plan->id,
+                   ],
+                   [
+                       "plan_id" => $plan->id,
+                       "start_date" => new Carbon,
+                       "end_date" => $currentTime->add($plan->days, 'day'),
+                   ]
+               );
+           }
+
         }
 
 
@@ -198,8 +232,8 @@ class UsersController extends Controller
                 'account_number' => $request->input("payment.account_number", ''),
                 'ifsc_code' => $request->input("payment.ifsc_code", ''),
                 'bank_name' => $request->input("payment.bank_name", ''),
-                'qr_code1' => $request->input("payment.qr_code1", ''),
-                'qr_code2' => $request->input("payment.qr_code2", ''),
+                // 'qr_code1' => $request->input("payment.qr_code1", ''),
+                // 'qr_code2' => $request->input("payment.qr_code2", ''),
                 'user_id' => $user->id
             ]
         );
