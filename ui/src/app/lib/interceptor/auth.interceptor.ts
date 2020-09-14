@@ -40,7 +40,6 @@ export class AuthInterceptor implements HttpInterceptor {
       catchError(error => {
 
         if (error instanceof HttpErrorResponse && error.status === 401 ) {
-          console.log(request)
           if(!request.url.includes("oauth/token")){
             return this.handle401Error(request, next);
           }
@@ -65,7 +64,6 @@ export class AuthInterceptor implements HttpInterceptor {
 
       return this.userService.refreshToken().pipe(
         switchMap((token: any) => {
-          console.log(token)
           this.isRefreshing = false;
           if(token.token){
             this.refreshTokenSubject.next(token);
