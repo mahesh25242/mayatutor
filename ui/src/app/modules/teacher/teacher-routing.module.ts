@@ -9,6 +9,7 @@ import { CoursesComponent } from './courses/courses.component';
 import { CoursesResolver } from './courses/courses-resolver';
 import { ModulesComponent } from './courses/modules/modules.component';
 import { ModulesResolver } from './courses/modules/modules-resolver';
+import { PlansComponent } from './plans/plans.component';
 
 const routes: Routes = [
   {
@@ -50,6 +51,11 @@ const routes: Routes = [
       type: 'teacher'
     }
   },
+  {
+    path: 'plans',
+    component: PlansComponent,
+  },
+
 
 
   {

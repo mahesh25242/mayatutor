@@ -22,6 +22,7 @@ import { ModulesComponent } from './courses/modules/modules.component';
 import { ModulesResolver } from './courses/modules/modules-resolver';
 import { AddModuleComponent } from './courses/modules/add-module/add-module.component';
 import { VideoPreviewComponent } from './courses/modules/add-module/video-preview/video-preview.component';
+import { PlansComponent } from './plans/plans.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { VideoPreviewComponent } from './courses/modules/add-module/video-previe
     AddNewComponent,
     ModulesComponent,
     AddModuleComponent,
-    VideoPreviewComponent
+    VideoPreviewComponent,
+    PlansComponent
   ],
   imports: [
     CommonModule,

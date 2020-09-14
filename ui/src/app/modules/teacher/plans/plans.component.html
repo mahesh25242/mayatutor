@@ -1,0 +1,14 @@
+<div *ngIf="(plans$ | async) as plans" class="row">
+  <div class="col" *ngFor="let plan of plans">
+    <h3>{{plan.name}}</h3>
+    <ng-container *ngIf="plan.features && plan.features.length">
+      <p *ngFor="let feature of plan.features">
+        {{feature}}
+      </p>
+    </ng-container>
+    <p>{{plan.price}}</p>
+    <a href="javascript:{}" class="btn btn-primary">
+    {{ plan.price > 0 ? 'Buy Now' : 'Free Trial'}}
+    </a>
+  </div>
+</div>

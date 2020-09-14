@@ -10,7 +10,7 @@ use Laravel\Lumen\Auth\Authorizable;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Subject extends Model implements AuthenticatableContract, AuthorizableContract
+class Plan extends Model implements AuthenticatableContract, AuthorizableContract
 {
     use HasApiTokens, Authenticatable, Authorizable, SoftDeletes;
 
@@ -21,12 +21,17 @@ class Subject extends Model implements AuthenticatableContract, AuthorizableCont
      * @var array
      */
     protected $fillable = [
-        'name', 'status'
+        'code', 'description', 'features'
     ];
 
-
-    public function teacherSubject()
+    public function getFeaturesAttribute($value)
     {
-        return $this->hasMany('App\TeacherSubject');
+        return json_decode($value);
     }
+
+    public function userPlan()
+    {
+        return $this->hasMany('App\UserPlan');
+    }
+
 }

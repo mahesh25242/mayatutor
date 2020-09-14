@@ -10,3 +10,4 @@ export * from './teacherInfo';
 export * from './teacherSubject';
 export * from './course';
 export * from './rating';
+export * from './plan';

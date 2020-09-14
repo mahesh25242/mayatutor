@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Course, CourseModule, User, Rating } from '../interfaces';
+import { Course, CourseModule, User, Rating, Plan } from '../interfaces';
 import { map, mergeMap } from 'rxjs/operators';
 
 @Injectable({
@@ -26,4 +26,8 @@ export class TeacherService {
     return this.http.post('/teacher/updatePaymentQRCode', postData);
   }
 
+
+  plans(){
+    return this.http.get<Plan[]>('/teacher/plans');
+  }
 }
