@@ -24,18 +24,18 @@
           <a class="nav-link" (click)="signIn()" href="javascript:{}" >Login</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="student/register" >student Register</a>
+          <a class="nav-link" routerLink="student/register" routerLinkActive="active">student Register</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="teacher/register" >Teacher Register</a>
+          <a class="nav-link" routerLink="teacher/register" routerLinkActive="active">Teacher Register</a>
         </li>
       </ng-container>
       <ng-container *ngIf="(loggedUser$ | async) as loggedUser">
         <li class="nav-item">
-          <a [routerLink]="loggedUser?.role_url" class="nav-link">My Home</a>
+          <a [routerLink]="loggedUser?.role_url" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">My Home</a>
         </li>
         <li class="nav-item">
-          <a [routerLink]="loggedUser?.role_url+'/courses'" class="nav-link">Courses</a>
+          <a [routerLink]="loggedUser?.role_url+'/courses'" class="nav-link" routerLinkActive="active">Courses</a>
         </li>
         <li class="nav-item">
           <div ngbDropdown class="d-inline-block">
