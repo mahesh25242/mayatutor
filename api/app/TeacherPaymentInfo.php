@@ -26,6 +26,15 @@ class TeacherPaymentInfo extends Model implements AuthenticatableContract, Autho
     ];
 
 
+    public function getQrCode1Attribute($qrCode)
+    {
+        return (($qrCode) ? url().'/assets/teacher/'.$qrCode : '');
+    }
+
+    public function getQrCode2Attribute($qrCode)
+    {
+        return (($qrCode) ? url().'/assets/teacher/'.$qrCode : '');
+    }
 
     public function user()
     {

@@ -22,5 +22,8 @@ export class TeacherService {
   }
 
 
+  updatePaymentQRCode(postData: any = null){
+    return this.http.post('/teacher/updatePaymentQRCode', postData);
+  }
 
 }

@@ -49,6 +49,7 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
 
         $router->group(['prefix' => 'teacher'], function () use ($router) {
             $router->post('changeBanner','TeacherController@changeBanner');
+            $router->post('updatePaymentQRCode','TeacherController@updatePaymentQRCode');
         });
 
         $router->group(['prefix' => 'course'], function () use ($router) {

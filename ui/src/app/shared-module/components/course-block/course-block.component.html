@@ -8,6 +8,7 @@
     </p>
     <app-rating [rating]="course.user.rating" [readonly]="true"></app-rating>
     <p class="card-text">{{course.description}}</p>
+    <p *ngIf="course.price">Fees: {{ course.price }}</p>
     <a href="javascript:{}" class="btn btn-primary">Detail</a>
   </div>
 </div>
