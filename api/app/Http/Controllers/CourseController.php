@@ -16,7 +16,7 @@ class CourseController extends Controller
 
     public function listCourses(Request $request){
 
-        $courses = \App\Course::withCount(["courseModule"]);
+        $courses = \App\Course::withCount(["courseModule"])->with(["user.rating"]);
         $q = $request->input("q", null);
         if($q){
             $courses = $courses->where("name", "LIKE", "%{$q}%");
