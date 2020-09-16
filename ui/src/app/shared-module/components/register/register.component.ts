@@ -88,7 +88,19 @@ export class RegisterComponent implements OnInit, OnDestroy {
       postData.recaptcha = token;
       this.signUpSubscription = this.userService.signUp(postData).subscribe(res=>{
         Notiflix.Loading.Remove();
-        this.registerFrm.reset();
+        this.registerFrm.patchValue({
+          fname: null,
+          lname: null,
+          email: null,
+          phone: null,
+          address: null,
+          password: null,
+          password_confirmation: null,
+          country_id: null,
+          state_id: null,
+          city_id: null,
+          pin: null
+        });
         Notiflix.Notify.Success(`successfully registered as ${this.f.type.value}`);
       }, error=>{
         Notiflix.Loading.Remove();

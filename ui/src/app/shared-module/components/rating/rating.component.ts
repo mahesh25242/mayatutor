@@ -16,7 +16,8 @@ export class RatingComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.currentRate = this.rating.rate / this.rating.tot_users;
+    if(this.rating)
+      this.currentRate = this.rating.rate / this.rating.tot_users;
   }
 
 }

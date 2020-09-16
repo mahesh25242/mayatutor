@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Laravel\Lumen\Auth\Authorizable;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 class UserRole extends Model implements AuthenticatableContract, AuthorizableContract
 {
@@ -23,6 +24,32 @@ class UserRole extends Model implements AuthenticatableContract, AuthorizableCon
     protected $fillable = [
         'user_id', 'role_id', 'created_by', 'updated_by', 'deleted_by'
     ];
+
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($model) {
+            if($model->role_id == 2){
+                $firstName = strtolower($model->user->fname);
+                $lastName = strtolower($model->user->lname);
+                $url = Str::slug($firstName.$lastName);
+                $i = 0;
+                while(\App\User::whereUrl($url)->exists())
+                {
+                    $i++;
+                    $url = Str::slug($firstName[0] . $lastName . Str::random(4));
+                }
+
+                $model->user->url = $url;
+                $model->user->save();
+            }
+
+
+        });
+    }
+
 
     public function user()
     {

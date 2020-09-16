@@ -92,16 +92,16 @@ class UsersController extends Controller
             default:
                 $user->userRole()->updateOrCreate(
                 [
-                    "role_id" => 2,
+                    "role_id" => 3,
                 ],
                 [
-                    "role_id" => 2,
+                    "role_id" => 3,
                 ]
             );
             break;
         }
         /**Take note of this: Your user authentication access token is generated here **/
-        $data['token'] =  $user->createToken('MyApp')->accessToken;
+        $data['token'] =  $user->createToken('MayaTutorial')->accessToken;
         $data['name'] =  $user->fname;
 
         return response(['data' => $data, 'message' => 'Account created successfully!', 'status' => true]);

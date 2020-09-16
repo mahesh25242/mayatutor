@@ -14,7 +14,7 @@
         <a href="javascript:{}" class="btn btn-primary">Share</a>
 
         {{ user.fname }} {{ user.lname }} <br/>
-        Time: {{user.teacher_info.time}}
+        Time: {{user.teacher_info?.time}}
        <div>
         Location
         {{ user.country.name }}
@@ -37,7 +37,7 @@
           </div>
           <div class="col-md-6">
             <div>Active From: {{ user.created_at | date:'medium' }}</div>
-            <div>Last Login: {{ user.last_login.created_at | date:'medium'}}</div>
+            <div>Last Login: {{ user.last_login?.created_at | date:'medium'}}</div>
             <div>Email: <a [href]="'mailto:'+user.email">{{ user.email }}</a></div>
           </div>
         </div>
@@ -51,34 +51,37 @@
       </div>
       <div class="col-md-4">
         <h5>Experiance</h5>
-        <p [innerHTML]="user.teacher_info.experiance"></p>
+        <p [innerHTML]="user.teacher_info?.experiance"></p>
       </div>
       <div class="col-md-4">
         <h5>Education</h5>
-        <p [innerHTML]="user.teacher_info.education.name"></p>
+        <p [innerHTML]="user.teacher_info?.education.name"></p>
       </div>
     </div>
     <a href="javascript:{}" routerLink="edit-profile" class="btn btn-outline-primary"><fa-icon [icon]="faEdit" ></fa-icon> Edit</a>
 
 
-    <ngb-tabset type="pills" *ngIf="(courses$ | async) as courses">
-      <ngb-tab>
-        <ng-template ngbTabTitle>All Courses</ng-template>
-        <ng-template ngbTabContent>
-          <div *ngFor="let course of courses">
-            <app-course-block [course]="course"></app-course-block>
-          </div>
-        </ng-template>
-      </ngb-tab>
-      <ngb-tab>
-        <ng-template ngbTabTitle>New Courses</ng-template>
-        <ng-template ngbTabContent>
-          <div *ngFor="let course of courses | slice:0:2">
-            <app-course-block [course]="course"></app-course-block>
-          </div>
-        </ng-template>
-      </ngb-tab>
-    </ngb-tabset>
+    <ng-container *ngIf="(courses$ | async) as courses">
+      <ngb-tabset type="pills" *ngIf="courses && courses.length">
+        <ngb-tab>
+          <ng-template ngbTabTitle>All Courses</ng-template>
+          <ng-template ngbTabContent>
+            <div *ngFor="let course of courses">
+              <app-course-block [course]="course"></app-course-block>
+            </div>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab>
+          <ng-template ngbTabTitle>New Courses</ng-template>
+          <ng-template ngbTabContent>
+            <div *ngFor="let course of courses | slice:0:2">
+              <app-course-block [course]="course"></app-course-block>
+            </div>
+          </ng-template>
+        </ngb-tab>
+      </ngb-tabset>
+    </ng-container>
+
 
   </div>
 </div>

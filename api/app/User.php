@@ -40,25 +40,6 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'password',
     ];
 
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($model) {
-            $firstName = strtolower($model->fname);
-            $lastName = strtolower($model->lname);
-            $url = Str::slug($firstName.$lastName);
-            $i = 0;
-            while(User::whereUrl($url)->exists())
-            {
-                $i++;
-                $url = Str::slug($firstName[0] . $lastName . Str::random(4));
-            }
-
-            $model->url = $url;
-
-        });
-    }
 
 
 
