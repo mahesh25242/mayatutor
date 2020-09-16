@@ -21,6 +21,11 @@ class CourseModuleController extends Controller
         if($q){
             $courseModules = $courseModules->where("name", "LIKE", "%{$q}%");
         }
+        if($courseId){
+            $courseModules = $courseModules->where("course_id", $courseId);
+        }
+
+
         return response($courseModules->orderBy("sort_order", "ASC")->get());
     }
 

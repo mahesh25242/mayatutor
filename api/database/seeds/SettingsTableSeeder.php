@@ -14,8 +14,7 @@ public function run()
 	DB::table('settings')->truncate();
 	$countries = array(
             array('name' => 'site name','value' => 'MayaTutor'),
-            array('name' => 'email','value' => 'info@mayatutor.com'),
-            array('name' => 'teacher trial period','value' => '90'),
+            array('name' => 'email','value' => 'info@mayatutor.com')
 		);
 		DB::table('settings')->insert($countries);
 	}

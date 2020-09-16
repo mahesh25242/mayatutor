@@ -25,7 +25,10 @@ class Course extends Model implements AuthenticatableContract, AuthorizableContr
         'status', 'live_class', 'live_class_url', 'news', 'sortorder'
     ];
 
-
+    public function getImageAttribute($image)
+    {
+        return (($image) ? url().'/assets/course/'.$image : 'assets/tumb.png');
+    }
 
     public function user()
     {
