@@ -23,7 +23,7 @@ export class CourseService {
   }
 
   listCourses(postData: any = null):Observable<Course[]>{
-    return this.http.post<Course[]>('/course/courses', postData).pipe(map(res=>{
+    return this.http.post<Course[]>('/admin/courses', postData).pipe(map(res=>{
       this.courses$.next(res);
       return res;
     }));

@@ -73,6 +73,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return $this->hasMany('App\UserRole');
     }
 
+    public function isAdmin()
+    {
+        return $this->hasMany('App\UserRole')->where("role_id",1);
+    }
+
     public function country()
     {
         return $this->belongsTo('App\Country');

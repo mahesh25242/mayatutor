@@ -3,12 +3,13 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Rout
 import { Observable, of, throwError } from 'rxjs';
 import { UserService, SettingService } from '../services';
 import { map, take, mergeMap, tap, catchError } from 'rxjs/operators';
-import { User } from 'firebase';
+import { User } from '../interfaces';
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class TeacherAuthGuard implements CanActivate {
   constructor(private router: Router, private userService: UserService,
     private settingService: SettingService) { }
   canActivate(
@@ -19,8 +20,8 @@ export class AuthGuard implements CanActivate {
         take(1),
         map((user: User) => {
 
-          if (!user) {
-            this.router.navigate(['/']);
+          if (user.role_url !== 'teacher') {
+            this.router.navigate([`/${user.role_url}`]);
             return false;
           }
           return true;

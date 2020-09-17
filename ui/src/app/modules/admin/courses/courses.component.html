@@ -1,0 +1,44 @@
+<h3>Courses</h3>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>
+        Id
+      </th>
+      <th>
+        Name
+      </th>
+      <th>
+        Module#
+      </th>
+      <th>
+        Options
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngIf="courses$ | async as courses">
+      <tr *ngFor="let course of courses">
+        <td>
+          {{ course.id}}
+        </td>
+        <td>
+          {{ course.name}}
+        </td>
+        <td>
+          {{course.course_module_count}}
+        </td>
+        <td>
+          <a href="javascript:{}" class="btn btn-primary">Detail</a>
+        </td>
+      </tr>
+      <tr *ngIf="!courses.length">
+        <td colspan="4">
+          <div class="alert alert-warning">No course found</div>
+        </td>
+      </tr>
+    </ng-container>
+  </tbody>
+</table>
+

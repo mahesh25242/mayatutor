@@ -6,9 +6,10 @@ import {  AdminRoutingModule } from './admin-routing.module';
 import { AdminHomeComponent } from './admin-home.component';
 import { DashBoardComponent } from './dash-board/dash-board.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { CoursesComponent } from './courses/courses.component';
 
 @NgModule({
-  declarations: [AdminHomeComponent, DashBoardComponent, EditProfileComponent],
+  declarations: [AdminHomeComponent, DashBoardComponent, EditProfileComponent, CoursesComponent],
   imports: [
     CommonModule,
     SharedModuleModule,

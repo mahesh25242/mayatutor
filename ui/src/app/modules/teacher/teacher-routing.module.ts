@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { RegisterComponent } from 'src/app/shared-module/components/register/register.component';
 import { TeacherHomeComponent } from './teacher-home.component';
 import { DashBoardComponent } from './dash-board/dash-board.component';
-import { AuthGuard, NegateAuthGuard } from 'src/app/lib/guard';
+import { TeacherAuthGuard, NegateAuthGuard } from 'src/app/lib/guard';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { CoursesComponent } from './courses/courses.component';
 import { CoursesResolver } from './courses/courses-resolver';
@@ -15,7 +15,7 @@ const routes: Routes = [
   {
     path: '',
     component: TeacherHomeComponent,
-    canActivate: [AuthGuard],
+    canActivate: [TeacherAuthGuard],
     children:[
       {
         path: '',
@@ -30,7 +30,7 @@ const routes: Routes = [
   {
     path: 'courses',
     component: CoursesComponent,
-    canActivate: [AuthGuard],
+    canActivate: [TeacherAuthGuard],
     resolve:{
       course: CoursesResolver
     }
@@ -38,7 +38,7 @@ const routes: Routes = [
   {
     path: 'courses/:courseId/modules',
     component: ModulesComponent,
-    canActivate: [AuthGuard],
+    canActivate: [TeacherAuthGuard],
     resolve:{
       course: ModulesResolver
     }
@@ -61,7 +61,7 @@ const routes: Routes = [
   {
     path: 'mail',
     loadChildren: () => import('../mail/mail.module').then(m => m.MailModule),
-    canActivate: [AuthGuard],
+    canActivate: [TeacherAuthGuard],
   }
 ];
 

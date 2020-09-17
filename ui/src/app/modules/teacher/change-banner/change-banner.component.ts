@@ -20,15 +20,12 @@ export class ChangeBannerComponent implements OnInit {
   faTelegram  = faTelegram;
   faCopy =faCopy;
   user$: Observable<User>;
-  custmUrl: string;
+
   constructor(private userService: UserService,
     private teacherService: TeacherService) { }
 
   ngOnInit(): void {
-    this.user$ = this.userService.getloggedUser.pipe(map(res=>{
-      this.custmUrl  = `${environment.siteAddress}/${res.url}`;
-      return res;
-    }));
+    this.user$ = this.userService.getloggedUser;
   }
 
   changeBanner(files: FileList){

@@ -39,6 +39,14 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
     });
 
     $router->group(['middleware' => 'auth'], function () use ($router) {
+
+
+        $router->group(['prefix' => 'admin', 'middleware' =>  'admin'], function () use ($router) {
+            $router->group(['prefix' => 'courses'], function () use ($router) {
+                $router->post('/','CourseController@listAllCourses');
+            });
+
+        });
         $router->post('updateAvatar','UsersController@updateAvatar');
 
         $router->get('authUser','UsersController@authUser');
@@ -52,10 +60,13 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
         $router->group(['prefix' => 'teacher'], function () use ($router) {
             $router->post('changeBanner','TeacherController@changeBanner');
             $router->post('updatePaymentQRCode','TeacherController@updatePaymentQRCode');
+            $router->group(['prefix' => 'courses'], function () use ($router) {
+                $router->post('/','CourseController@listTeacherCourses');
+            });
         });
 
         $router->group(['prefix' => 'course'], function () use ($router) {
-            $router->post('courses','CourseController@listCourses');
+
             $router->post('createCourse','CourseController@createCourse');
             $router->post('deleteCourse','CourseController@deleteCourse');
             $router->get('{courseId}','CourseController@course');

@@ -3,7 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddNewComponent } from './add-new/add-new.component';
 import { Observable, Subscription } from 'rxjs';
 import { Course } from 'src/app/lib/interfaces';
-import {  CourseService } from 'src/app/lib/services';
+import {  CourseService, TeacherService } from 'src/app/lib/services';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import Notiflix from "notiflix";
 import { mergeMap, map } from 'rxjs/operators';
@@ -24,6 +24,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
 
   constructor(private _modalService: NgbModal,
     private courseService: CourseService,
+    private teacherService: TeacherService,
     private formBuilder: FormBuilder) { }
 
   addNew(course: Course = null ){
@@ -43,7 +44,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
           q: this.searchFrm.controls.q.value
         }
 
-          return this.courseService.listCourses(postData);
+          return this.teacherService.listCourses(postData);
         })).subscribe(res=>{
           Notiflix.Block.Remove(`.del-${course.id}`);
           Notiflix.Notify.Success(`Successfully deleted ${course.name}`);
@@ -62,7 +63,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
       q: this.searchFrm.controls.q.value
     }
 
-    this.courseService.listCourses(postData).subscribe(res=>{
+    this.teacherService.listCourses(postData).subscribe(res=>{
       Notiflix.Block.Remove(`app-courses table`);
     }, error=>{
       Notiflix.Block.Remove(`app-courses table`);
@@ -71,7 +72,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.courses$ = this.courseService.courses;
+    this.courses$ = this.teacherService.courses;
 
     this.searchFrm = this.formBuilder.group({
       q: [null, [ Validators.required]],

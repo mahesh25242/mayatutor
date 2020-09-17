@@ -14,9 +14,10 @@ use Illuminate\Support\Facades\Storage;
 class CourseController extends Controller
 {
 
-    public function listCourses(Request $request){
+    public function listTeacherCourses(Request $request){
 
-        $courses = \App\Course::withCount(["courseModule"])->with(["user.rating"]);
+        $courses = \App\Course::withCount(["courseModule"])->with(["user.rating"])
+        ->where("user_id", Auth::id());
         $q = $request->input("q", null);
         if($q){
             $courses = $courses->where("name", "LIKE", "%{$q}%");
@@ -96,5 +97,16 @@ class CourseController extends Controller
             'message' => 'successfully delete!', 'status' => 1
         ]);
 
+    }
+
+    public function listAllCourses(Request $request){
+
+        $isAdmin = \App\User::has("isAdmin")->find(Auth::id());
+        $courses = \App\Course::withCount(["courseModule"])->with(["user.rating"]);
+        $q = $request->input("q", null);
+        if($q){
+            $courses = $courses->where("name", "LIKE", "%{$q}%");
+        }
+        return response($courses->get());
     }
 }

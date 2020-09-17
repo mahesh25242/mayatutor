@@ -59,6 +59,7 @@ $app->singleton('filesystem', function ($app) {
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
     'maintanance' => App\Http\Middleware\SiteMaintenanceMiddleware::class,
+    'admin' => \App\Http\Middleware\AdminAuthenticate::class,
 ]);
 /*
 |--------------------------------------------------------------------------

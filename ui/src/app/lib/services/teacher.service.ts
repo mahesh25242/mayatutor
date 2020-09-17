@@ -9,9 +9,12 @@ import { map, mergeMap } from 'rxjs/operators';
 })
 export class TeacherService {
 
-
+  private courses$: BehaviorSubject<Course[]> = new BehaviorSubject<Course[]>(null);
   constructor(private http: HttpClient) { }
 
+  get courses(){
+    return this.courses$.asObservable();
+  }
 
   changeBanner(postData: any = null){
     return this.http.post('/teacher/changeBanner', postData);
@@ -29,5 +32,12 @@ export class TeacherService {
 
   plans(){
     return this.http.get<Plan[]>('/teacher/plans');
+  }
+
+  listCourses(postData: any = null):Observable<Course[]>{
+    return this.http.post<Course[]>('/teacher/courses', postData).pipe(map(res=>{
+      this.courses$.next(res);
+      return res;
+    }));
   }
 }
