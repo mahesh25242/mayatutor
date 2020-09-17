@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthGuard, NegateAuthGuard } from '../../lib/guard';
 import { InboxComponent } from './inbox/inbox.component';
 import { SentItemComponent } from './sent-item/sent-item.component';
 import { ComposeComponent } from './compose/compose.component';
