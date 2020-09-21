@@ -101,13 +101,15 @@
 
 
 <ng-container *ngIf="(topRatedTeachers$ | async) as topRatedTeachers">
-  <h1>TOP RATING TEACHERS</h1>
-  <div class="row">
-      <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mt-2" *ngFor="let teacher of topRatedTeachers">
-        <app-teacher-block [teacher]="teacher.user"></app-teacher-block>
-      </div>
-  </div>
-  <button class="btn btn-primary btn-sm mt-3" *ngIf="topRatedTeachers.length > 10">LOAD MORE</button>
+  <ng-container *ngIf="topRatedTeachers.length">
+    <h1>TOP RATING TEACHERS</h1>
+    <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mt-2" *ngFor="let teacher of topRatedTeachers">
+          <app-teacher-block [teacher]="teacher.user"></app-teacher-block>
+        </div>
+    </div>
+    <button class="btn btn-primary btn-sm mt-3" *ngIf="topRatedTeachers.length > 10">LOAD MORE</button>
+  </ng-container>
 </ng-container>
 
 
