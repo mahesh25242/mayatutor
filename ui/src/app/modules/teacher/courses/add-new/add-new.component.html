@@ -17,6 +17,23 @@
         </div>
 
         <div class="form-group">
+          <label for="tag_name">Tag</label>
+          <ng-select [items]="tags"
+              bindLabel="tag_name"
+              id="tag_name"
+              [ngClass]="{'is-invalid': ( f.tag_name.errors && f.country_id.errors.error)}"
+              placeholder="select Country"
+              formControlName="tag_name"
+              [addTag]="true"
+              [hideSelected]="true"
+              multiple="true">
+              </ng-select>
+              <div *ngIf="f.tag_name.errors && f.tag_name.errors.error" class="invalid-feedback">
+                {{f.tag_name.errors.error}}
+              </div>
+        </div>
+
+        <div class="form-group">
           <label for="price">Price</label>
           <input type="number" class="form-control" id="price"
           placeholder="Price" formControlName="price"

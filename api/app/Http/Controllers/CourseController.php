@@ -16,7 +16,7 @@ class CourseController extends Controller
 
     public function listTeacherCourses(Request $request){
 
-        $courses = \App\Course::withCount(["courseModule"])->with(["user.rating"])
+        $courses = \App\Course::withCount(["courseModule"])->with(["user.rating", "courseTag"])
         ->where("user_id", Auth::id());
         $q = $request->input("q", null);
         if($q){
@@ -71,13 +71,35 @@ class CourseController extends Controller
             $createUpdateArr["image"] = $courseImage;
         }
 
-        \App\Course::updateOrCreate(
+        $course = \App\Course::updateOrCreate(
             [
                 "id" => $request->input("id", 0),
                 "user_id" => Auth::id()
             ],
            $createUpdateArr
         );
+
+        if($request->input("tag_name", null)){
+            $tag_names = json_decode($request->input("tag_name", null));
+            $exceptTagNames = array();
+            foreach($tag_names as $tag_name){
+                if($tag_name->tag_name){
+                    $exceptTagNames[] = $tag_name->tag_name;
+                    $course->courseTag()->updateOrCreate(
+                       [
+                           "course_id" => $course->id,
+                           "tag_name" => $tag_name->tag_name
+                       ],
+                       [
+                        "course_id" => $course->id,
+                        "tag_name" => $tag_name->tag_name
+                       ]
+                   );
+                }
+
+            }
+            $course->courseTag()->whereNotIn("tag_name", $exceptTagNames)->delete();
+        }
 
 
         return response([

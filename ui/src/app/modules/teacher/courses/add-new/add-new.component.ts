@@ -19,7 +19,7 @@ export class AddNewComponent implements OnInit {
     private courseService: CourseService,
     private formbuilder: FormBuilder,
     private teacherService: TeacherService) { }
-
+    tags :any = [];
   get f() { return this.createCourseFrm.controls; }
 
   ngOnInit(): void {
@@ -33,7 +33,8 @@ export class AddNewComponent implements OnInit {
       live_class: [null, [ Validators.required]],
       live_class_url: [null, [ Validators.required]],
       news: [null, [ Validators.required]],
-      id: [null, []]
+      id: [null, []],
+      tag_name: [null, []]
     });
 
     if(this.course){
@@ -46,7 +47,8 @@ export class AddNewComponent implements OnInit {
         live_class: this.course.live_class,
         live_class_url: this.course.live_class_url,
         news: this.course.news,
-        id: this.course.id
+        id: this.course.id,
+        tag_name: this.course.course_tag
       });
     }
   }
@@ -66,6 +68,7 @@ export class AddNewComponent implements OnInit {
     formData.append('live_class', `${ (this.f.live_class.value) ? this.f.live_class.value : 0 }`);
     formData.append('live_class_url', `${ (this.f.live_class_url.value) ? this.f.live_class_url.value : '' }`);
     formData.append('news', `${ (this.f.news.value) ? this.f.news.value : '' }`);
+    formData.append('tag_name', `${ (this.f.tag_name.value) ? JSON.stringify(this.f.tag_name.value) : '' }`);
 
     Notiflix.Block.Pulse('app-add-new');
     this.courseService.createCourse(formData).pipe(mergeMap(res=>{

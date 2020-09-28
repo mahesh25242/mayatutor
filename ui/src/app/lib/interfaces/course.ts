@@ -1,3 +1,4 @@
+import { CourseTag } from './courseTag';
 import { User } from './user';
 
 export interface Course {
@@ -13,7 +14,8 @@ export interface Course {
   live_class_url?: string,
   news?: string,
   user?: User,
-  course_module_count?: number
+  course_module_count?: number,
+  course_tag?: CourseTag
 }
 
 
