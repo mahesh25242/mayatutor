@@ -15,9 +15,15 @@ class TeacherController extends Controller
 {
 
     public function search($q=''){
-        return response([
-            'message' => 'successfully updated!', 'status' => 1
-        ]);
+        $user = \App\User::whereHas("userRole", function ($qry){
+            $qry->where("role_id", 2);
+        });
+        if($q){
+            $user = $user->whereHas("course.courseTag",function($qry) use($q){
+                $qry->where("tag_name", 'like', "%{$q}%");
+            });
+        }
+        return response($user->get());
     }
 
     public function changeBanner(Request $request){

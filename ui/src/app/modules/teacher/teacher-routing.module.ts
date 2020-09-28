@@ -10,6 +10,8 @@ import { CoursesResolver } from './courses/courses-resolver';
 import { ModulesComponent } from './courses/modules/modules.component';
 import { ModulesResolver } from './courses/modules/modules-resolver';
 import { PlansComponent } from './plans/plans.component';
+import { ListTeachersComponent } from './list-teachers/list-teachers.component';
+import { ListTeachersResolver } from './list-teachers/list-teachers-resolver';
 
 const routes: Routes = [
   {
@@ -56,7 +58,21 @@ const routes: Routes = [
     component: PlansComponent,
   },
 
+  {
+    path: 'search/:q',
+    component: ListTeachersComponent,
+    resolve:{
+      teachers: ListTeachersResolver
+    }
+  },
 
+  {
+    path: 'search',
+    component: ListTeachersComponent,
+    resolve:{
+      teachers: ListTeachersResolver
+    }
+  },
 
   {
     path: 'mail',

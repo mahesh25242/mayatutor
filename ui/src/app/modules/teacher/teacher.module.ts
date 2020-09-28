@@ -23,6 +23,8 @@ import { ModulesResolver } from './courses/modules/modules-resolver';
 import { AddModuleComponent } from './courses/modules/add-module/add-module.component';
 import { VideoPreviewComponent } from './courses/modules/add-module/video-preview/video-preview.component';
 import { PlansComponent } from './plans/plans.component';
+import { ListTeachersComponent } from './list-teachers/list-teachers.component';
+import {ListTeachersResolver} from './list-teachers/list-teachers-resolver';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { PlansComponent } from './plans/plans.component';
     ModulesComponent,
     AddModuleComponent,
     VideoPreviewComponent,
-    PlansComponent
+    PlansComponent,
+    ListTeachersComponent
   ],
   imports: [
     CommonModule,
@@ -50,7 +53,8 @@ import { PlansComponent } from './plans/plans.component';
   ],
   providers:[
     CoursesResolver,
-    ModulesResolver
+    ModulesResolver,
+    ListTeachersResolver
   ]
 })
 export class TeacherModule { }

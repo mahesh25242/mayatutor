@@ -1,0 +1,7 @@
+<ng-container *ngIf="teachers && teachers.length">
+  <app-teacher-block *ngFor="let teacher of teachers" [teacher]="teacher"></app-teacher-block>
+</ng-container>
+<ng-container *ngIf="!teachers || !teachers.length">
+  <div class="alert alert-warning">No teacher found</div>
+</ng-container>
+

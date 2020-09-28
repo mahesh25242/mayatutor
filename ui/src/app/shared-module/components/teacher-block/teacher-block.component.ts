@@ -12,12 +12,11 @@ export class TeacherBlockComponent implements OnInit {
   @Input() teacher: User;
   faUser = faUser;
   faClock = faClock;
-    currentRate ;
 
   constructor() { }
 
   ngOnInit(): void {
-    this.currentRate = this.teacher.rating.rate / this.teacher.rating.tot_users;
+
   }
 
 }
