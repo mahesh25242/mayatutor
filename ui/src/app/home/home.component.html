@@ -1,26 +1,15 @@
 <section class="home-banner">
     <h1>Banner</h1>
 </section>
+
 <section class="search-container">
-    <div class="container pt-3 pb-3">
-<h5 class="">Find Personalised & 1-to-1 Classes with Online or nearby Tutors</h5>
-
-
-<div class="input-group mb-2 mr-sm-2">
-    <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Search">
-    <div class="input-group-append">
-      <div class="input-group-text">
-          <button class="btn btn-sm">
-            <fa-icon class="mr-2" [icon]="faSearch"></fa-icon>
-          </button>
-      </div>
-    </div>
-
+  <div class="container pt-3 pb-3">
+    <h5 class="">Find Personalised & 1-to-1 Classes with Online or nearby Tutors</h5>
+    <app-search></app-search>
+    <h6 class="mt-2">6.5 Lakh+ Verified Tutors & Institutes</h6>
   </div>
-
-<h6 class="mt-2">6.5 Lakh+ Verified Tutors & Institutes</h6>
-    </div>
 </section>
+
 <section class="register-sec">
 <div class="container">
   <ng-container *ngIf="!(loggedUser$ | async) as loggedUser">
