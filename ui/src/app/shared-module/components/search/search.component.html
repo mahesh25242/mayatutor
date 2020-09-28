@@ -1,14 +1,17 @@
 <section class="search-container">
-  <div class="container pt-3 pb-3">
-    <div class="input-group mb-2 mr-sm-2">
-      <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Search">
-      <div class="input-group-append">
-        <div class="input-group-text">
-            <button class="btn btn-sm">
-              <fa-icon class="mr-2" [icon]="faSearch"></fa-icon>
-            </button>
+  <form [formGroup]="searchFrn" (ngSubmit)="search()">
+    <div class="container pt-3 pb-3">
+      <div class="input-group mb-2 mr-sm-2">
+        <input type="text" class="form-control" id="inlineFormInputGroupUsername2"
+        placeholder="Search" formControlName="q">
+        <div class="input-group-append">
+          <div class="input-group-text">
+              <button class="btn btn-sm">
+                <fa-icon class="mr-2" [icon]="faSearch"></fa-icon>
+              </button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </form>
 </section>

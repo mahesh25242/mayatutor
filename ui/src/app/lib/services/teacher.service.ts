@@ -40,4 +40,8 @@ export class TeacherService {
       return res;
     }));
   }
+
+  searchTeachers(q: string=null){
+    return this.http.get<User[]>(`/teacher/search${(q) ? `/${q}` : ``}`);
+  }
 }

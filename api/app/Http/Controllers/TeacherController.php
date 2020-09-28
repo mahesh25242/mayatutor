@@ -14,6 +14,12 @@ use Illuminate\Support\Facades\Storage;
 class TeacherController extends Controller
 {
 
+    public function search($q=''){
+        return response([
+            'message' => 'successfully updated!', 'status' => 1
+        ]);
+    }
+
     public function changeBanner(Request $request){
         $status = false;
         if ($request->hasFile('img')) {
