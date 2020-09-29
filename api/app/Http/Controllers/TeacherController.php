@@ -26,6 +26,13 @@ class TeacherController extends Controller
         return response($user->get());
     }
 
+    public function teacher($url =''){
+        $user = \App\User::withCount("teacherStudent as student_count")->with(["rating", "teacherInfo", "subject", "city"])->whereHas("userRole", function ($qry){
+            $qry->where("role_id", 2);
+        })->where("url", $url);
+
+        return response($user->get()->first());
+    }
     public function changeBanner(Request $request){
         $status = false;
         if ($request->hasFile('img')) {

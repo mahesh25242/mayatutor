@@ -142,5 +142,8 @@ export class UserService {
   }
 
 
+  getUser(teacherUrl:string=''){
+    return this.http.get(`/teacher/getaTeacher/${teacherUrl}`);
+  }
 
 }

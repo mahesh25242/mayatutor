@@ -1,7 +1,7 @@
 <div class="card" *ngIf="(user$ | async) as user">
 
 <app-change-banner></app-change-banner>
-<div class="alert alert-danger">
+<div class="alert alert-danger" *ngIf="isDashBoard">
   <h3>Your Free Trial Remaining {{ (user.current_user_plan) ?  user.current_user_plan.remaining_days : '0'}} Days</h3>
   <p>Make a Payment soon, Avoid account blocking</p>
   <a routerLink="plans" class="btn btn-primary">View Plans</a>
@@ -17,9 +17,9 @@
         Time: {{user.teacher_info?.time}}
        <div>
         Location
-        {{ user.country.name }}
-        {{ user.state.name }}
-        {{ user.city.name }} - {{ user.pin }}
+        {{ user.country?.name }}
+        {{ user.state?.name }}
+        {{ user.city?.name }} - {{ user.pin }}
        </div>
       </div>
       <div class="col-md-6">
@@ -28,9 +28,9 @@
             <address>
               Address<br/>
               {{ user.address }}
-              {{ user.country.name }}
-              {{ user.state.name }}
-              {{ user.city.name }} - {{ user.pin }}
+              {{ user.country?.name }}
+              {{ user.state?.name }}
+              {{ user.city?.name }} - {{ user.pin }}
             </address>
 
             <div>Mobile: {{ user.phone }}</div>

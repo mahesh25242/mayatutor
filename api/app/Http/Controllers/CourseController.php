@@ -16,8 +16,15 @@ class CourseController extends Controller
 
     public function listTeacherCourses(Request $request){
 
-        $courses = \App\Course::withCount(["courseModule"])->with(["user.rating", "courseTag"])
-        ->where("user_id", Auth::id());
+        $courses = \App\Course::withCount(["courseModule"])->with(["user.rating", "courseTag"]);
+        if($request->input("url", null)){
+            $courses = $courses->whereHas("user", function($q) use($request) {
+                $q->where("url", $request->input("url",null));
+            });
+        }else{
+            $courses = $courses->where("user_id", Auth::id());
+        }
+
         $q = $request->input("q", null);
         if($q){
             $courses = $courses->where("name", "LIKE", "%{$q}%");

@@ -21,6 +21,8 @@ import { HowItWorksComponent } from './how-it-works/how-it-works.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
+import { DashBoardResolver } from './modules/teacher/dash-board/dash-board-resolver';
+
 var config = {
   apiKey: "AIzaSyBbf4J9nchYp2WSNePGZcRoYOUCYdCUiI0",
   authDomain: "mayatutor-f5748.firebaseapp.com",
@@ -55,7 +57,8 @@ var config = {
     AngularFireAuthModule
   ],
   providers: [
-    httpInterceptorProviders
+    httpInterceptorProviders,
+    DashBoardResolver
   ],
   bootstrap: [AppComponent]
 })
