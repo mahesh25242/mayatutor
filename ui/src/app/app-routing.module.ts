@@ -5,6 +5,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { HowItWorksComponent } from './how-it-works/how-it-works.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { DashBoardComponent } from './modules/teacher/dash-board/dash-board.component';
 
 const routes: Routes = [
   {
@@ -34,6 +35,10 @@ const routes: Routes = [
   {
     path: 'admin',
     loadChildren: () => import('./modules/admin/admin.module').then(m => m.AdminModule)
+  },
+  {
+    path: ':teacher',
+    component: DashBoardComponent,
   },
   { path: '**', component: PageNotFoundComponent }
 ];

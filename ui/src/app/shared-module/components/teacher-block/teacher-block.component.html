@@ -21,9 +21,9 @@
 
       <app-rating [rating]="teacher.rating" [readonly]="true" *ngIf="teacher.rating"></app-rating>
       <div>
-        <button class="btn btn-primary float-right">
+        <a class="btn btn-primary float-right" [routerLink]="'/'+teacher.url">
           Contact
-        </button>
+        </a>
       </div>
     </div>
   </div>
