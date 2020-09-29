@@ -37,7 +37,7 @@
           </div>
           <div class="col-md-6">
             <div>Active From: {{ user.created_at | date:'medium' }}</div>
-            <div>Last Login: {{ user.last_login?.created_at | date:'medium'}}</div>
+            <div>Last Login: {{ user.last_login?.created_at_human }}</div>
             <div>Email: <a [href]="'mailto:'+user.email">{{ user.email }}</a></div>
           </div>
         </div>

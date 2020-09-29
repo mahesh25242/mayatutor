@@ -30,7 +30,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'state_id', 'city_id', 'pin', 'status', 'created_by', 'updated_by', 'deleted_by',
         'avatar', 'url'
     ];
-    protected $appends = array('is_online');
+    protected $appends = array('is_online', 'created_at_human');
     /**
      * The attributes excluded from the model's JSON form.
      *
@@ -52,6 +52,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     public function getisOnlineAttribute()
     {
         return Cache::has('user-is-online-' . $this->id);
+    }
+
+    public function getCreatedAtHumanAttribute()
+    {
+        return $this->created_at->diffForHumans();
     }
 
 
@@ -151,12 +156,17 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return $this->hasMany('App\Course');
     }
 
-    public function teacherStudent()
+    // public function scopeMyStudents($query)
+    // {
+    //     return $query->leftJoin('teacher_students1', 'users.id', '=', 'teacher_students.teacher_user_id');
+    // }
+
+    public function student()
     {
         return $this->hasMany('App\TeacherStudent');
     }
 
-    public function studentTeacher()
+    public function teacherStudent()
     {
         return $this->hasMany('App\TeacherStudent', 'teacher_user_id');
     }

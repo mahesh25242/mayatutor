@@ -12,6 +12,7 @@ export interface UserLogin {
   name?: string,
   created_at?: string,
   updated_at?: string,
+  created_at_human?: string
 }
 
 export interface UserPlan {
@@ -56,5 +57,7 @@ export interface User {
   teacher_info?: TeacherInfo,
   teacher_banner?: TeacherBannerImg,
   rating?: Rating,
-  current_user_plan?: UserPlan
+  current_user_plan?: UserPlan,
+  student_count?: number,
+  created_at_human?: string
 }

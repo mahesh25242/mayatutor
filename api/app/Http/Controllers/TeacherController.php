@@ -15,7 +15,7 @@ class TeacherController extends Controller
 {
 
     public function search($q=''){
-        $user = \App\User::with(["rating", "teacherInfo", "subject", "city"])->whereHas("userRole", function ($qry){
+        $user = \App\User::withCount("teacherStudent as student_count")->with(["rating", "teacherInfo", "subject", "city"])->whereHas("userRole", function ($qry){
             $qry->where("role_id", 2);
         });
         if($q){

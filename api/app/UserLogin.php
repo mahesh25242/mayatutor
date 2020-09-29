@@ -24,7 +24,12 @@ class UserLogin extends Model implements AuthenticatableContract, AuthorizableCo
          'user_id', 'name'
     ];
 
+    protected $appends = array('created_at_human');
 
+    public function getCreatedAtHumanAttribute()
+    {
+        return $this->created_at->diffForHumans();
+    }
 
     public function user()
     {
