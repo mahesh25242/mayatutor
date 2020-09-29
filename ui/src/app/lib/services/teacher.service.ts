@@ -34,8 +34,8 @@ export class TeacherService {
     return this.http.get<Plan[]>('/teacher/plans');
   }
 
-  listCourses(postData: any = null):Observable<Course[]>{
-    return this.http.post<Course[]>('/teacher/courses', postData).pipe(map(res=>{
+  listCourses(postData: any = null, url='courses'):Observable<Course[]>{
+    return this.http.post<Course[]>(`/teacher/${url}`, postData).pipe(map(res=>{
       this.courses$.next(res);
       return res;
     }));

@@ -32,7 +32,7 @@ export class DashBoardComponent implements OnInit {
 
     this.courses$ = this.route.params.pipe(mergeMap(res=>{
       if(res && res.teacher){
-        return this.teacherService.listCourses({url: res.teacher})
+        return this.teacherService.listCourses({url: res.teacher},'teacherCourses')
       }else{
         return this.teacherService.listCourses()
       }
