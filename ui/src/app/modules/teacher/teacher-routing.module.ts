@@ -59,7 +59,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'search/:q',
+    path: 'lookups/:q',
     component: ListTeachersComponent,
     resolve:{
       teachers: ListTeachersResolver
@@ -67,7 +67,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'search',
+    path: 'lookups',
     component: ListTeachersComponent,
     resolve:{
       teachers: ListTeachersResolver

@@ -18,7 +18,7 @@ export class SearchComponent implements OnInit {
 
   get f() { return this.searchFrn.controls; }
   search(){
-    this.router.navigate([`/teacher/search${(this.f.q.value) ? `/${this.f.q.value}` : ``}`]);
+    this.router.navigate([`/teacher/lookups${(this.f.q.value) ? `/${this.f.q.value}` : ``}`]);
     //this.teacherService.searchTeachers(this.f.q.value).subscribe();
   }
   ngOnInit(): void {

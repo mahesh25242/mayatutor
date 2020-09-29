@@ -8,9 +8,9 @@
         <h5 class="text-left">{{ teacher.fname }} {{ teacher.lname }}</h5>
         <div class="d-grid grd-col-2 text-left">
           <div>Tutor</div>
-          <div>Sub: <span *ngFor="let subject of teacher.subject; let last = last">{{ subject.name }} <i *ngIf="!last">, </i> </span></div>
+          <div *ngIf="teacher.subject && teacher.subject.length">Sub: <span *ngFor="let subject of teacher.subject; let last = last">{{ subject.name }} <i *ngIf="!last">, </i> </span></div>
           <div><fa-icon class="mr-2" [icon]="faUser"></fa-icon>233</div>
-          <div><fa-icon class="mr-2" [icon]="faClock"></fa-icon>{{ teacher.teacher_info?.time }}</div>
+          <div *ngIf="teacher.teacher_info?.time"><fa-icon class="mr-2" [icon]="faClock"></fa-icon>{{ teacher.teacher_info.time }}</div>
           <div class="span2">Location: {{ teacher.city?.name}}</div>
         </div>
       </div>
