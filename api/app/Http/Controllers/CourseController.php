@@ -20,7 +20,7 @@ class CourseController extends Controller
         if($request->input("url", null)){
             $courses = $courses->whereHas("user", function($q) use($request) {
                 $q->where("url", $request->input("url",null));
-            });
+            })->where("status", 1);
         }else{
             $courses = $courses->where("user_id", Auth::id());
         }

@@ -29,9 +29,9 @@ class TeacherController extends Controller
     public function teacher($url =''){
         $user = \App\User::withCount("teacherStudent as student_count")->with(["rating", "teacherInfo", "subject", "city"])->whereHas("userRole", function ($qry){
             $qry->where("role_id", 2);
-        })->where("url", $url);
+        })->where("url", $url)->get()->first();
 
-        return response($user->get()->first());
+        return response($user);
     }
     public function changeBanner(Request $request){
         $status = false;

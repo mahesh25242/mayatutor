@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService, CourseService, TeacherService } from 'src/app/lib/services';
 import { Observable, of } from 'rxjs';
 import { User, Course } from 'src/app/lib/interfaces';
-import {faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faLock } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute } from '@angular/router';
 import { mergeMap } from 'rxjs/operators';
 
@@ -13,6 +13,7 @@ import { mergeMap } from 'rxjs/operators';
 })
 export class DashBoardComponent implements OnInit {
   faEdit = faEdit;
+  faLock = faLock;
   user$: Observable<User>;
   courses$: Observable<Course[]>;
   isDashBoard: boolean = false;

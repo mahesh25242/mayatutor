@@ -14,6 +14,7 @@ use Cache;
 use Lexx\ChatMessenger\Traits\Messagable;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Model implements AuthenticatableContract, AuthorizableContract
 {
@@ -41,7 +42,15 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     ];
 
 
+    public function getEmailAttribute($email)
+    {
+        return (Auth::id()) ? $email : ($email) ? '*': null;
+    }
 
+    public function getPhoneAttribute($phone)
+    {
+        return (Auth::id()) ? $phone : ($phone) ? '*': null;
+    }
 
 
     public function getAvatarAttribute($avatar)

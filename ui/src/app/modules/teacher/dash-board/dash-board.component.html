@@ -1,6 +1,6 @@
 <div class="card" *ngIf="(user$ | async) as user">
 
-<app-change-banner></app-change-banner>
+<app-change-banner *ngIf="isDashBoard"></app-change-banner>
 <div class="alert alert-danger" *ngIf="isDashBoard">
   <h3>Your Free Trial Remaining {{ (user.current_user_plan) ?  user.current_user_plan.remaining_days : '0'}} Days</h3>
   <p>Make a Payment soon, Avoid account blocking</p>
@@ -33,12 +33,26 @@
               {{ user.city?.name }} - {{ user.pin }}
             </address>
 
-            <div>Mobile: {{ user.phone }}</div>
+            <div *ngIf="isDashBoard">Mobile: {{ user.phone }}</div>
           </div>
           <div class="col-md-6">
             <div>Active From: {{ user.created_at | date:'medium' }}</div>
-            <div>Last Login: {{ user.last_login?.created_at_human }}</div>
-            <div>Email: <a [href]="'mailto:'+user.email">{{ user.email }}</a></div>
+            <div *ngIf="user.last_login?.created_at_human">Last Login: {{ user.last_login?.created_at_human }}</div>
+            <ng-container *ngIf="!isDashBoard">
+              <ng-container *ngIf="user.email">
+                <a href="javascript:{}" class="btn btn-primary">
+                  Message
+                  <fa-icon [icon]="faLock" *ngIf="user.email == '*'"></fa-icon>
+                </a>
+              </ng-container>
+              <ng-container *ngIf="user.phone">
+                <a href="javascript:{}" class="btn btn-primary">
+                  Mobile
+                  <fa-icon [icon]="faLock" *ngIf="user.phone == '*'"></fa-icon>
+                </a>
+              </ng-container>
+            </ng-container>
+            <div *ngIf="isDashBoard">Email: <a [href]="'mailto:'+user.email">{{ user.email }}</a></div>
           </div>
         </div>
       </div>
