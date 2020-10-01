@@ -13,12 +13,16 @@ import * as _ from 'lodash';
 })
 export class UserService {
     private loggedUser: BehaviorSubject<User> = new BehaviorSubject<User>(null);
+    private user$: BehaviorSubject<User> = new BehaviorSubject<User>(null);
 
   constructor(private http: HttpClient,public afAuth: AngularFireAuth) { }
 
 
   get getloggedUser() {
     return this.loggedUser.asObservable();
+  }
+  get user() {
+    return this.user$.asObservable();
   }
 
   GoogleAuth() {
@@ -143,7 +147,10 @@ export class UserService {
 
 
   getUser(teacherUrl:string=''){
-    return this.http.get(`/teacher/getaTeacher/${teacherUrl}`);
+    return this.http.get(`/teacher/getaTeacher/${teacherUrl}`).pipe(map(res=>{
+      this.user$.next(res);
+      return res;
+    }));
   }
 
 }

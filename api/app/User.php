@@ -44,12 +44,12 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     public function getEmailAttribute($email)
     {
-        return (Auth::id()) ? $email : ($email) ? '*': null;
+        return (Auth::id()) ? $email : (($email) ? '*': null);
     }
 
     public function getPhoneAttribute($phone)
     {
-        return (Auth::id()) ? $phone : ($phone) ? '*': null;
+        return (Auth::id()) ? $phone : (($phone) ? '*': null);
     }
 
 

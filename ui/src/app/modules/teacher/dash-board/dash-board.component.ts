@@ -22,14 +22,18 @@ export class DashBoardComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.user$ = this.route.params.pipe(mergeMap(res=>{
-      if(res && res.teacher){
-        return of(this.route.snapshot.data["user"]);
-      }else{
-        this.isDashBoard = true;
-        return this.userSerivce.getloggedUser
-      }
-    }));
+    this.user$ = this.userSerivce.getloggedUser.pipe(mergeMap(lUser=>{
+      return this.route.params.pipe(mergeMap(res=>{
+        if(res && res.teacher){
+          return this.userSerivce.user;
+        }else{
+          this.isDashBoard = true;
+          return this.userSerivce.getloggedUser
+        }
+      }));
+    }))
+
+
 
     this.courses$ = this.route.params.pipe(mergeMap(res=>{
       if(res && res.teacher){
