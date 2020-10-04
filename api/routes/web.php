@@ -50,7 +50,17 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
                 $router->post('/','CourseController@listAllCourses');
             });
 
+            $router->group(['prefix' => 'teacher'], function () use ($router) {
+                $router->get('fetchAll','UsersController@fetchAllTeacher');
+            });
+
+            $router->group(['prefix' => 'student'], function () use ($router) {
+                $router->get('fetchAll','UsersController@fetchAllStudent');
+            });
+
         });
+
+
         $router->post('updateAvatar','UsersController@updateAvatar');
 
         $router->get('authUser','UsersController@authUser');
@@ -62,12 +72,16 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
         });
 
         $router->group(['prefix' => 'teacher'], function () use ($router) {
+
+
             $router->post('changeBanner','TeacherController@changeBanner');
             $router->post('updatePaymentQRCode','TeacherController@updatePaymentQRCode');
             $router->group(['prefix' => 'courses'], function () use ($router) {
                 $router->post('/','CourseController@listTeacherCourses');
             });
         });
+
+
 
         $router->group(['prefix' => 'course'], function () use ($router) {
 

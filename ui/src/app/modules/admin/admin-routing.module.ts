@@ -5,6 +5,7 @@ import { AdminAuthGuard, NegateAuthGuard } from '../../lib/guard';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { AdminHomeComponent } from './admin-home.component';
 import { CoursesComponent } from './courses/courses.component';
+import { UsersComponent } from './users/users.component';
 
 
 const routes: Routes = [
@@ -26,6 +27,22 @@ const routes: Routes = [
         component: CoursesComponent,
       }
     ]
+  },
+  {
+    path: 'teachers',
+    component: UsersComponent,
+    canActivate: [AdminAuthGuard],
+    data:{
+      type: 'teacher'
+    }
+  },
+  {
+    path: 'students',
+    component: UsersComponent,
+    canActivate: [AdminAuthGuard],
+    data:{
+      type: 'student'
+    }
   },
   {
     path: 'mail',

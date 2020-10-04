@@ -1,0 +1,34 @@
+<ng-container *ngIf="(pageData$ | async ) as pageData">
+  <h3>{{ pageData.pageTitle}} </h3>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>
+          Sl
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Invoice
+        </th>
+        <th>
+          Status
+        </th>
+        <th>
+          Date
+        </th>
+        <th>
+          Students
+        </th>
+        <th>
+          Details
+        </th>
+        <th>
+          Delete
+        </th>
+      </tr>
+    </thead>
+  </table>
+</ng-container>

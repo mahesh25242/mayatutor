@@ -14,6 +14,7 @@ import * as _ from 'lodash';
 export class UserService {
     private loggedUser: BehaviorSubject<User> = new BehaviorSubject<User>(null);
     private user$: BehaviorSubject<User> = new BehaviorSubject<User>(null);
+    private users$: BehaviorSubject<User[]> = new BehaviorSubject<User[]>(null);
 
   constructor(private http: HttpClient,public afAuth: AngularFireAuth) { }
 
@@ -23,6 +24,9 @@ export class UserService {
   }
   get user() {
     return this.user$.asObservable();
+  }
+  get users() {
+    return this.users$.asObservable();
   }
 
   GoogleAuth() {
@@ -149,6 +153,13 @@ export class UserService {
   getUser(teacherUrl:string=''){
     return this.http.get(`/teacher/getaTeacher/${teacherUrl}`).pipe(map(res=>{
       this.user$.next(res);
+      return res;
+    }));
+  }
+
+  getAllUser(urlPart:string=''){
+    return this.http.get<User[]>(`/${urlPart}/fetchAll`).pipe(map(res=>{
+      this.users$.next(res);
       return res;
     }));
   }

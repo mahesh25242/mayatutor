@@ -321,4 +321,19 @@ class UsersController extends Controller
         }
 
     }
+
+
+    public function fetchAllStudent(Request $request){
+        $user = User::whereHas("userRole", function($q){
+            $q->where("role_id", 3);
+        })->get();
+        return response($user);
+    }
+
+    public function fetchAllTeacher(Request $request){
+        $user = User::whereHas("userRole", function($q){
+            $q->where("role_id", 2);
+        })->get();
+        return response($user);
+    }
 }
