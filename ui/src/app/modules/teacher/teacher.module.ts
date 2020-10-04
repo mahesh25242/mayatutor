@@ -25,6 +25,7 @@ import { VideoPreviewComponent } from './courses/modules/add-module/video-previe
 import { PlansComponent } from './plans/plans.component';
 import { ListTeachersComponent } from './list-teachers/list-teachers.component';
 import {ListTeachersResolver} from './list-teachers/list-teachers-resolver';
+import { ContactTeacherComponent } from './dash-board/contact-teacher/contact-teacher.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import {ListTeachersResolver} from './list-teachers/list-teachers-resolver';
     AddModuleComponent,
     VideoPreviewComponent,
     PlansComponent,
-    ListTeachersComponent
+    ListTeachersComponent,
+    ContactTeacherComponent
   ],
   imports: [
     CommonModule,

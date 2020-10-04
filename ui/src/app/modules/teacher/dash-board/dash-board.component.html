@@ -39,18 +39,22 @@
             <div>Active From: {{ user.created_at | date:'medium' }}</div>
             <div *ngIf="user.last_login?.created_at_human">Last Login: {{ user.last_login?.created_at_human }}</div>
             <ng-container *ngIf="!isDashBoard">
-              <ng-container *ngIf="user.email">
-                <a href="javascript:{}" class="btn btn-primary">
+              <span *ngIf="user.email" placement="top" [ngbTooltip]="(user.email == '*') ? 'Only logged user can contact teacher' : ''">
+                <button   class="btn btn-primary teacher-message-btn" [disabled]="user.email == '*'" (click)="contactTeacher(user)">
                   Message
                   <fa-icon [icon]="faLock" *ngIf="user.email == '*'"></fa-icon>
-                </a>
-              </ng-container>
-              <ng-container *ngIf="user.phone">
-                <a href="javascript:{}" class="btn btn-primary">
+                </button>
+              </span>
+              <span *ngIf="user.phone" placement="top" [ngbTooltip]="(user.email == '*') ? 'Only logged user can contact teacher' : ''">
+                <button  class="btn btn-primary" [disabled]="user.phone == '*'" *ngIf="user.phone == '*'">
                   Mobile
                   <fa-icon [icon]="faLock" *ngIf="user.phone == '*'"></fa-icon>
-                </a>
-              </ng-container>
+                </button>
+                <ng-container *ngIf="user.phone !== '*'">
+                  <a class="d-none d-sm-block btn btn-primary" target="_blank" [href]="'https://web.whatsapp.com/send?phone='+user.phone">Whats app</a>
+                  <a class="d-block d-sm-none btn btn-primary" target="_blank" [href]="'https://api.whatsapp.com/send?phone='+user.phone">Whats app</a>
+                </ng-container>
+              </span>
             </ng-container>
             <div *ngIf="isDashBoard">Email: <a [href]="'mailto:'+user.email">{{ user.email }}</a></div>
           </div>
