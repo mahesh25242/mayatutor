@@ -72,7 +72,13 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     public function findForPassport($username)
     {
         $customUsername = 'phone';
-        return $this->where($customUsername, $username)->first();
+        $userNameExists = $this->where($customUsername, $username)->where("status", 1)->first();
+        if($userNameExists){
+            return $userNameExists;
+        }else{
+            $userNameExists = $this->where("email", $username)->where("status", 1)->first();
+            return $userNameExists;
+        }
     }
     // Owerride password here
     public function validateForPassportPasswordGrant($password)
