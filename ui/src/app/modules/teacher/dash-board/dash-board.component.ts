@@ -8,6 +8,7 @@ import { mergeMap } from 'rxjs/operators';
 import Notiflix from "notiflix";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ContactTeacherComponent } from './contact-teacher/contact-teacher.component';
+import { SignInComponent } from 'src/app/sign-in/sign-in.component';
 
 @Component({
   selector: 'app-dash-board',
@@ -60,7 +61,7 @@ export class DashBoardComponent implements OnInit {
       });
       modalRef.componentInstance.user = user;
     }else{
-      Notiflix.Notify.Failure(`Only logged user can contact to teacher `);
+      const activeModal = this.modalService.open(SignInComponent);
     }
   }
 
