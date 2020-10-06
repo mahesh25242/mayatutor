@@ -45,7 +45,7 @@
     </div>
   </div>
   <div  footer>
-    <div class="custom-control custom-checkbox mr-sm-2">
+    <div class="custom-control custom-checkbox mr-sm-2" *ngIf="user.role_url == 'teacher'">
       <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
       <label class="custom-control-label" for="customControlAutosizing">Auto Approval enable for this user</label>
     </div>
