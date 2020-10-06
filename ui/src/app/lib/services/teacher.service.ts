@@ -8,12 +8,15 @@ import { map, mergeMap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class TeacherService {
-
+  private teacher$: BehaviorSubject<User> = new BehaviorSubject<User>(null);
   private courses$: BehaviorSubject<Course[]> = new BehaviorSubject<Course[]>(null);
   constructor(private http: HttpClient) { }
 
   get courses(){
     return this.courses$.asObservable();
+  }
+  get teacher() {
+    return this.teacher$.asObservable();
   }
 
   changeBanner(postData: any = null){
@@ -43,5 +46,12 @@ export class TeacherService {
 
   searchTeachers(q: string=null){
     return this.http.get<User[]>(`/teacher/search${(q) ? `/${q}` : ``}`);
+  }
+
+  getTeacher(teacherUrl:string='',){
+    return this.http.get(`/teacher/getaTeacher/${teacherUrl}`).pipe(map(res=>{
+      this.teacher$.next(res);
+      return res;
+    }));
   }
 }

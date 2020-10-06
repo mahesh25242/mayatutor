@@ -52,10 +52,16 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
 
             $router->group(['prefix' => 'teacher'], function () use ($router) {
                 $router->get('fetchAll','UsersController@fetchAllTeacher');
+                $router->get('fetch/{id}','UsersController@fetchTeacher');
+                $router->post('toggleStatus','UsersController@toggleStatus');
+                $router->post('delete','UsersController@delete');
             });
 
             $router->group(['prefix' => 'student'], function () use ($router) {
                 $router->get('fetchAll','UsersController@fetchAllStudent');
+                $router->get('fetch/{id}','UsersController@fetchStudent');
+                $router->post('toggleStatus','UsersController@toggleStatus');
+                $router->post('delete','UsersController@delete');
             });
 
         });

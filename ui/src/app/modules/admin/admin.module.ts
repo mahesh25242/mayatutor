@@ -8,15 +8,20 @@ import { DashBoardComponent } from './dash-board/dash-board.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { CoursesComponent } from './courses/courses.component';
 import { UsersComponent } from './users/users.component';
+import { UsersResolver } from './users/users-resolver';
+import { DetailsComponent } from './users/details/details.component';
 
 
 @NgModule({
-  declarations: [AdminHomeComponent, DashBoardComponent, EditProfileComponent, CoursesComponent, UsersComponent],
+  declarations: [AdminHomeComponent, DashBoardComponent, EditProfileComponent, CoursesComponent, UsersComponent, DetailsComponent],
   imports: [
     CommonModule,
     SharedModuleModule,
     AdminRoutingModule,
 
+  ],
+  providers:[
+    UsersResolver
   ]
 })
 export class AdminModule { }

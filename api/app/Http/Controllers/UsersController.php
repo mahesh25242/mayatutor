@@ -331,9 +331,42 @@ class UsersController extends Controller
     }
 
     public function fetchAllTeacher(Request $request){
-        $user = User::whereHas("userRole", function($q){
+        $user = User::withCount("teacherStudent as student_count")->whereHas("userRole", function($q){
             $q->where("role_id", 2);
         })->get();
         return response($user);
+    }
+
+    public function fetchStudent($id=0){
+        $user = User::with(["city"])->where("id", $id)->get()->first();
+        return response($user);
+    }
+
+    public function fetchTeacher($id=0){
+        $user = User::withCount("teacherStudent as student_count", "course")->with(["rating", "teacherInfo", "subject", "city"])
+        ->where("id", $id)->get()->first();
+        return response($user);
+    }
+
+    public function toggleStatus(Request $request){
+        $user = User::find($request->input("id", 0));
+        if($user){
+            $user->status =  !$user->status;
+            $user->save();
+        }
+
+        return response([
+            'message' => 'successfully changed status', 'status' => 1
+        ]);
+    }
+
+    public function delete(Request $request){
+        $user = User::find($request->input("id", 0));
+        if($user){
+            $user->delete();
+        }
+        return response([
+            'message' => 'successfully deleted', 'status' => 1
+        ]);
     }
 }

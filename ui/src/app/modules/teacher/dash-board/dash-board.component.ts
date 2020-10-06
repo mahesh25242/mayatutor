@@ -31,9 +31,9 @@ export class DashBoardComponent implements OnInit {
       return this.route.params.pipe(mergeMap(res=>{
         if(res && res.teacher){
           if(lUser && (this.route.snapshot.data["user"]?.phone == '*' || this.route.snapshot.data["user"]?.email == '*')){
-            return this.userService.getUser(res.teacher)
+            return this.teacherService.getTeacher(res.teacher)
           }else{
-            return this.userService.user;
+            return this.teacherService.teacher;
           }
         }else{
           this.isDashBoard = true;

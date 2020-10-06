@@ -6,6 +6,7 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { AdminHomeComponent } from './admin-home.component';
 import { CoursesComponent } from './courses/courses.component';
 import { UsersComponent } from './users/users.component';
+import { UsersResolver } from './users/users-resolver';
 
 
 const routes: Routes = [
@@ -25,25 +26,33 @@ const routes: Routes = [
       {
         path: 'courses',
         component: CoursesComponent,
-      }
+      },
+      {
+        path: 'teachers',
+        component: UsersComponent,
+        canActivate: [AdminAuthGuard],
+        data:{
+          type: 'teacher'
+        },
+        resolve:{
+          users: UsersResolver
+        }
+      },
+      {
+        path: 'students',
+        component: UsersComponent,
+        canActivate: [AdminAuthGuard],
+        data:{
+          type: 'student'
+        },
+        resolve:{
+          users: UsersResolver
+        }
+      },
     ]
   },
-  {
-    path: 'teachers',
-    component: UsersComponent,
-    canActivate: [AdminAuthGuard],
-    data:{
-      type: 'teacher'
-    }
-  },
-  {
-    path: 'students',
-    component: UsersComponent,
-    canActivate: [AdminAuthGuard],
-    data:{
-      type: 'student'
-    }
-  },
+
+
   {
     path: 'mail',
     loadChildren: () => import('../mail/mail.module').then(m => m.MailModule),

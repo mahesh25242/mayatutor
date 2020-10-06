@@ -150,8 +150,8 @@ export class UserService {
   }
 
 
-  getUser(teacherUrl:string=''){
-    return this.http.get(`/teacher/getaTeacher/${teacherUrl}`).pipe(map(res=>{
+  getUser(teacherUrl:string='', baseUrl: string = null){
+    return this.http.get(`/${baseUrl}/fetch/${teacherUrl}`).pipe(map(res=>{
       this.user$.next(res);
       return res;
     }));
@@ -163,5 +163,14 @@ export class UserService {
       return res;
     }));
   }
+
+  toggleStatus(urlPart:string='', user: User= null){
+    return this.http.post<any>(`/${urlPart}/toggleStatus`, user);
+  }
+
+  deleteUser(urlPart:string='', user: User= null){
+    return this.http.post<any>(`/${urlPart}/delete`, user);
+  }
+
 
 }

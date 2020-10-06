@@ -59,5 +59,6 @@ export interface User {
   rating?: Rating,
   current_user_plan?: UserPlan,
   student_count?: number,
-  created_at_human?: string
+  created_at_human?: string,
+  course_count?: number
 }

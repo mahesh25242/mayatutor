@@ -1,7 +1,7 @@
-<ng-container *ngIf="(pageData$ | async ) as pageData">
-  <h3>{{ pageData.pageTitle}} </h3>
+<ng-container >
+  <h3>{{ this.pageTitle}} </h3>
 
-  <table class="table">
+  <table class="table" *ngIf="(usersObs | async ) as users">
     <thead>
       <tr>
         <th>
@@ -19,7 +19,7 @@
         <th>
           Date
         </th>
-        <th>
+        <th *ngIf="type=='teacher'">
           Students
         </th>
         <th>
@@ -30,5 +30,41 @@
         </th>
       </tr>
     </thead>
+    <tbody>
+      <ng-container *ngIf="users && users.length">
+        <tr *ngFor="let item of users; let i= index;">
+          <td>
+            {{ i+1 }}
+          </td>
+          <td>
+            {{ item.fname }} {{ item.lname }}
+          </td>
+          <td>
+              <a href="javascript:{}">View</a>
+          </td>
+          <td>
+            <a href="javascript:{}"
+            (click)="toggleStatus(item)" [class]="'toggle-status-'+item.id"
+             [ngClass]="{ 'text-success': item.status, 'text-warning': !item.status }"
+             placement="top" [ngbTooltip]="!item.status && 'This user can\'t login'">
+              {{ (item.status && 'Active') || (!item.status && 'In-Active') }}
+            </a>
+          </td>
+          <td>
+            {{ item.created_at_human}}
+          </td>
+          <td *ngIf="type=='teacher'">
+            {{ item.student_count }}
+          </td>
+          <td>
+            <a href="javascript:{}" (click)="details(item)">Details</a>
+          </td>
+          <td>
+            <a href="javascript:{}" (click)="deleteUser(item)"
+             [class]="'delete-user-'+item.id">Del</a>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
   </table>
 </ng-container>
