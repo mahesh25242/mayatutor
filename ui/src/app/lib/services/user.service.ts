@@ -157,8 +157,8 @@ export class UserService {
     }));
   }
 
-  getAllUser(urlPart:string=''){
-    return this.http.get<User[]>(`/${urlPart}/fetchAll`).pipe(map(res=>{
+  getAllUser(urlPart:string='', parm: string = ''){
+    return this.http.get<User[]>(`/${urlPart}/fetchAll${(parm) ? `?${parm}` : ''}`).pipe(map(res=>{
       this.users$.next(res);
       return res;
     }));

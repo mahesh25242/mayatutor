@@ -7,6 +7,7 @@ import { UserService } from 'src/app/lib/services';
 import Notiflix from "notiflix";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DetailsComponent } from './details/details.component';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-users',
@@ -14,15 +15,18 @@ import { DetailsComponent } from './details/details.component';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit, OnDestroy {
+  searchFrm: FormGroup;
   pageTitle: string;
   type: string;
   users$: BehaviorSubject<User[]> = new BehaviorSubject<User[]>(null);
 
   toggleStstuSubScr: Subscription;
   delRefreshUserSubScr: Subscription;
+  searchSubScription: Subscription;
   constructor(private route:ActivatedRoute,
     private userService: UserService,
-    private _modalService: NgbModal,) { }
+    private _modalService: NgbModal,
+    private formBuilder: FormBuilder) { }
 
   get usersObs(){
     return this.users$.asObservable();
@@ -34,10 +38,7 @@ export class UsersComponent implements OnInit, OnDestroy {
 
     Notiflix.Confirm.Show('Change Status?', "Are you sure you want to change status?", 'Yes', 'No', () => {
       this.toggleStstuSubScr = this.userService.toggleStatus(`admin/${this.type}`, user).pipe(mergeMap(res=>{
-        return this.userService.getAllUser(`admin/${this.type}`).pipe(map(users =>{
-          this.users$.next(users);
-          return res;
-        }));
+        return this.loadUser(res);
     })).subscribe(res=>{
       Notiflix.Block.Remove(`.toggle-status-${user.id}`);
       Notiflix.Notify.Success(res.message);
@@ -56,10 +57,7 @@ export class UsersComponent implements OnInit, OnDestroy {
 
     Notiflix.Confirm.Show('Delete?', "Are you sure you want to delete?", 'Yes', 'No', () => {
       this.toggleStstuSubScr = this.userService.deleteUser(`admin/${this.type}`, user).pipe(mergeMap(res=>{
-        return this.userService.getAllUser(`admin/${this.type}`).pipe(map(users =>{
-          this.users$.next(users);
-          return res;
-        }));
+        return this.loadUser(res);
     })).subscribe(res=>{
       Notiflix.Block.Remove(`.delete-user-${user.id}`);
       Notiflix.Notify.Success(res.message);
@@ -81,21 +79,43 @@ export class UsersComponent implements OnInit, OnDestroy {
     activeModal.componentInstance.user = user;
 
     this.delRefreshUserSubScr = activeModal.componentInstance.loadUser.pipe(mergeMap(res =>{
-      return this.userService.getAllUser(`admin/${this.type}`).pipe(map(users=>{
-        this.users$.next(users);
-        return users;
-      }))
+      return this.loadUser()
     })).subscribe(res=>{
       activeModal.close();
     });
-
-
   }
 
+  loadUser(ret:any=null){
+    let parm: string;
+    if(this.searchFrm.controls.q.value){
+      parm = `q=${(this.searchFrm.controls.q.value) ? this.searchFrm.controls.q.value : ''}`
+    }
+
+    return this.userService.getAllUser(`admin/${this.type}`,parm).pipe(map(users=>{
+      this.users$.next(users);
+      if(ret)
+        return ret;
+      else
+        return users;
+    }))
+  }
+
+  search(){
+    this.searchSubScription = this.loadUser().subscribe();
+  }
+
+  resetSearch(){
+    this.searchFrm.controls.q.setValue(null);
+    this.search();
+  }
   ngOnInit(): void {
     this.pageTitle = this.route.snapshot.data['users']?.pageTitle;
     this.type = this.route.snapshot.data['users']?.type;
     this.users$.next(this.route.snapshot.data['users']?.data);
+
+    this.searchFrm = this.formBuilder.group({
+      q: [null, []]
+    });
   }
 
   ngOnDestroy(){
@@ -105,6 +125,10 @@ export class UsersComponent implements OnInit, OnDestroy {
 
     if(this.delRefreshUserSubScr){
       this.delRefreshUserSubScr.unsubscribe();
+    }
+
+    if(this.searchSubScription){
+      this.searchSubScription.unsubscribe();
     }
   }
 }
