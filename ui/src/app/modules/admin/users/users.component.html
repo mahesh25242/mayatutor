@@ -71,5 +71,12 @@
           </td>
         </tr>
       </ng-container>
+      <ng-container *ngIf="users && !users.length">
+        <tr>
+          <td colspan="8">
+            <div class="alert alert-warning">No result found!</div>
+          </td>
+        </tr>
+      </ng-container>
     </tbody>
   </table>
