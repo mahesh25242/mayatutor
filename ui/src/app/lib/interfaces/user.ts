@@ -60,5 +60,6 @@ export interface User {
   current_user_plan?: UserPlan,
   student_count?: number,
   created_at_human?: string,
-  course_count?: number
+  course_count?: number,
+  teacher_auto_approval_count?: number
 }

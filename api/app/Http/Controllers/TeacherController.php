@@ -133,4 +133,21 @@ class TeacherController extends Controller
             ]);
         }
     }
+
+    public function toggleAutoApproval(Request $request){
+        $teacherAutoApproval = \App\TeacherAutoApproval::where("user_id", $request->input("id", 0))
+        ->get()->first();
+
+        if($teacherAutoApproval){
+            $teacherAutoApproval->delete();
+        }else{
+            $teacherAutoApproval = new \App\TeacherAutoApproval;
+            $teacherAutoApproval->user_id = $request->input("id", 0);
+            $teacherAutoApproval->save();
+        }
+
+        return response([
+            'message' => 'successfully updated!', 'status' => 1
+        ]);
+    }
 }

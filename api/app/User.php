@@ -171,6 +171,10 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return $this->hasMany('App\Course');
     }
 
+
+
+
+
     // public function scopeMyStudents($query)
     // {
     //     return $query->leftJoin('teacher_students1', 'users.id', '=', 'teacher_students.teacher_user_id');
@@ -208,4 +212,8 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         );
     }
 
+    public function teacherAutoApproval()
+    {
+        return $this->hasOne('App\TeacherAutoApproval');
+    }
 }

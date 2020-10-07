@@ -55,6 +55,7 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
                 $router->get('fetch/{id}','UsersController@fetchTeacher');
                 $router->post('toggleStatus','UsersController@toggleStatus');
                 $router->post('delete','UsersController@delete');
+                $router->post('toggleAutoApproval','TeacherController@toggleAutoApproval');
             });
 
             $router->group(['prefix' => 'student'], function () use ($router) {

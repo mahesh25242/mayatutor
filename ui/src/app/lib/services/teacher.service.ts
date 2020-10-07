@@ -54,4 +54,9 @@ export class TeacherService {
       return res;
     }));
   }
+
+  toggleAutoApproval(user: User = null){
+    return this.http.post<any>(`/admin/teacher/toggleAutoApproval`, user);
+  }
+
 }

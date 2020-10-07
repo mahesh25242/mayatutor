@@ -61,13 +61,15 @@ class CourseController extends Controller
 
         }
 
+        $user = \App\User::withCount("teacherAutoApproval")->find(Auth::id());
+
         $createUpdateArr = [
             "user_id" => Auth::id(),
             "name" => $request->input("name", ""),
             "price" => $request->input("price", null),
             "demo_video_url" => $request->input("demo_video_url", ""),
             "description" => $request->input("description", ""),
-            "status" => 0,
+            "status" => ($user->teacher_auto_approval_count) ? 1 : 0,
             "live_class" => $request->input("live_class", 0),
             "live_class_url" => $request->input("live_class_url", ""),
             "news" => $request->input("news", "")

@@ -2,9 +2,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, Subscription } from 'rxjs';
 import { User } from 'src/app/lib/interfaces';
-import { UserService } from 'src/app/lib/services';
+import { UserService, TeacherService } from 'src/app/lib/services';
 import Notiflix from "notiflix";
 import { mergeMap } from 'rxjs/internal/operators/mergeMap';
+import { map } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-details',
@@ -18,10 +20,11 @@ export class DetailsComponent implements OnInit {
 
   deletUserSubScr: Subscription;
   constructor(private userService: UserService,
-    public modal: NgbActiveModal,) { }
+    public modal: NgbActiveModal,
+    private teacherService: TeacherService,) { }
 
 
-    deleteUser(){
+    deleteUser(): void{
       Notiflix.Block.Merge({svgSize:'20px',});
       Notiflix.Block.Dots(`.delete-user`);
 
@@ -41,8 +44,25 @@ export class DetailsComponent implements OnInit {
 
     }
 
+    toggleAutoApproval(): void{
+      Notiflix.Block.Merge({svgSize:'20px',});
+      Notiflix.Block.Dots(`.auto-approval`);
+
+      this.deletUserSubScr = this.teacherService.toggleAutoApproval(this.user).subscribe(res=>{
+        Notiflix.Block.Remove(`.auto-approval`);
+        Notiflix.Notify.Success(res.message);
+      }, err=>{
+        Notiflix.Block.Remove(`.auto-approval`);
+      });
+
+
+    }
+
   ngOnInit(): void {
-    this.user$ = this.userService.getUser(`${this.user.id}`, `admin/${this.user.role_url}`);
+    this.user$ = this.userService.getUser(`${this.user.id}`, `admin/${this.user.role_url}`).pipe(map(res=>{
+      this.user.teacher_auto_approval_count = res?.teacher_auto_approval_count;
+      return res;
+    }));
   }
 
 }

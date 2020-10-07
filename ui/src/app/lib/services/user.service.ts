@@ -151,7 +151,7 @@ export class UserService {
 
 
   getUser(teacherUrl:string='', baseUrl: string = null){
-    return this.http.get(`/${baseUrl}/fetch/${teacherUrl}`).pipe(map(res=>{
+    return this.http.get<User>(`/${baseUrl}/fetch/${teacherUrl}`).pipe(map(res=>{
       this.user$.next(res);
       return res;
     }));

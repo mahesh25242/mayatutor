@@ -343,7 +343,7 @@ class UsersController extends Controller
     }
 
     public function fetchTeacher($id=0){
-        $user = User::withCount("teacherStudent as student_count", "course")->with(["rating", "teacherInfo", "subject", "city"])
+        $user = User::withCount("teacherStudent as student_count", "course", "teacherAutoApproval")->with(["rating", "teacherInfo", "subject", "city"])
         ->where("id", $id)->get()->first();
         return response($user);
     }
