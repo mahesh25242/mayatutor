@@ -7,6 +7,7 @@ import { AdminHomeComponent } from './admin-home.component';
 import { CoursesComponent } from './courses/courses.component';
 import { UsersComponent } from './users/users.component';
 import { UsersResolver } from './users/users-resolver';
+import { CoursesResolver } from './courses/courses-resolver';
 
 
 const routes: Routes = [
@@ -26,6 +27,9 @@ const routes: Routes = [
       {
         path: 'courses',
         component: CoursesComponent,
+        resolve:{
+          courses: CoursesResolver
+        }
       },
       {
         path: 'teachers',

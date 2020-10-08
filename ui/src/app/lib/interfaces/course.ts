@@ -1,4 +1,6 @@
+import { courseApprovalRequest } from './courseApprovalRequest';
 import { CourseTag } from './courseTag';
+import { Pagination } from './pagination';
 import { User } from './user';
 
 export interface Course {
@@ -15,7 +17,8 @@ export interface Course {
   news?: string,
   user?: User,
   course_module_count?: number,
-  course_tag?: CourseTag
+  course_tag?: CourseTag,
+  latest_course_approval_request?: courseApprovalRequest
 }
 
 
@@ -29,4 +32,8 @@ export interface CourseModule {
   live_class?: number,
   sort_order?: number,
   course: Course
+}
+
+export interface CourseWithPagination extends Pagination {
+  data?: Course[]
 }

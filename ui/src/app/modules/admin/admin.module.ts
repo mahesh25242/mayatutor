@@ -7,6 +7,7 @@ import { AdminHomeComponent } from './admin-home.component';
 import { DashBoardComponent } from './dash-board/dash-board.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { CoursesComponent } from './courses/courses.component';
+import { CoursesResolver } from './courses/courses-resolver';
 import { UsersComponent } from './users/users.component';
 import { UsersResolver } from './users/users-resolver';
 import { DetailsComponent } from './users/details/details.component';
@@ -21,7 +22,9 @@ import { DetailsComponent } from './users/details/details.component';
 
   ],
   providers:[
+    CoursesResolver,
     UsersResolver
+
   ]
 })
 export class AdminModule { }

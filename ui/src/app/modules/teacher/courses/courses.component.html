@@ -7,6 +7,8 @@
   <button type="submit" class="btn btn-primary mb-2">Search</button>
 </form>
 <button class="btn btn-primary" (click)="addNew()">Add New</button>
+
+
 <table class="table">
   <thead>
     <tr>
@@ -28,13 +30,15 @@
     </tr>
   </thead>
   <tbody *ngIf="(courses$ | async) as courses">
-    <ng-container *ngIf="courses.length">
-      <tr *ngFor="let course of courses;let i=index; let last = last">
+    <ng-container *ngIf="courses?.data.length">
+      <tr *ngFor="let course of courses?.data;let i=index; let last = last">
         <td>
-          {{i+1}}
+          {{ ((courses?.current_page * courses?.per_page ) -courses?.per_page) + i + 1}}
         </td>
         <td>
           {{course.name}}
+
+          <span [class]="'status-'+course.latest_course_approval_request.status">{{ course.latest_course_approval_request.status_text}}</span>
         </td>
         <td>
           <a [routerLink]="course.id+'/modules'" class="btn btn-primary btn-sm" placement="top"
@@ -57,10 +61,16 @@
         </td>
       </tr>
     </ng-container>
-    <tr *ngIf="!courses.length">
+    <tr *ngIf="!courses?.data.length">
       <td colspan="6">
         <div class="alert alert-warning">No course found</div>
       </td>
     </tr>
   </tbody>
 </table>
+<ng-container *ngIf="courses$ | async as courses">
+  <div *ngIf="courses?.data.length">
+    <ngb-pagination [collectionSize]="courses?.total" [pageSize]="courses?.per_page" [(page)]="courses.current_page"
+    aria-label="Default pagination" (pageChange)="search($event)" [maxSize]="5" [boundaryLinks]="true"  [rotate]="true"></ngb-pagination>
+  </div>
+</ng-container>

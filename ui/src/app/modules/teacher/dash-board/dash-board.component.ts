@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService, CourseService, TeacherService } from 'src/app/lib/services';
 import { Observable, of } from 'rxjs';
-import { User, Course } from 'src/app/lib/interfaces';
+import { User, Course, CourseWithPagination } from 'src/app/lib/interfaces';
 import { faEdit, faLock } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute } from '@angular/router';
 import { mergeMap } from 'rxjs/operators';
@@ -19,7 +19,7 @@ export class DashBoardComponent implements OnInit {
   faEdit = faEdit;
   faLock = faLock;
   user$: Observable<User>;
-  courses$: Observable<Course[]>;
+  courses$: Observable<CourseWithPagination>;
   isDashBoard: boolean = false;
   constructor(private userService: UserService,
     private teacherService: TeacherService,
@@ -46,7 +46,7 @@ export class DashBoardComponent implements OnInit {
 
     this.courses$ = this.route.params.pipe(mergeMap(res=>{
       if(res && res.teacher){
-        return this.teacherService.listCourses({url: res.teacher},'teacherCourses')
+        return this.teacherService.listCourses(1,{url: res.teacher},'teacherCourses')
       }else{
         return this.teacherService.listCourses()
       }

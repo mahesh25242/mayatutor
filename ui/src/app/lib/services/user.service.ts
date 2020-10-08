@@ -4,7 +4,7 @@ import { of, BehaviorSubject, Observable, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { auth } from 'firebase/app';
 import { AngularFireAuth } from "@angular/fire/auth";
-import { User } from '../interfaces';
+import { Pagination, User, UserWithPagination } from '../interfaces';
 import { environment } from '../../../environments/environment';
 import * as _ from 'lodash';
 
@@ -14,7 +14,7 @@ import * as _ from 'lodash';
 export class UserService {
     private loggedUser: BehaviorSubject<User> = new BehaviorSubject<User>(null);
     private user$: BehaviorSubject<User> = new BehaviorSubject<User>(null);
-    private users$: BehaviorSubject<User[]> = new BehaviorSubject<User[]>(null);
+    private users$: BehaviorSubject<UserWithPagination> = new BehaviorSubject<UserWithPagination>(null);
 
   constructor(private http: HttpClient,public afAuth: AngularFireAuth) { }
 
@@ -157,8 +157,17 @@ export class UserService {
     }));
   }
 
-  getAllUser(urlPart:string='', parm: string = ''){
-    return this.http.get<User[]>(`/${urlPart}/fetchAll${(parm) ? `?${parm}` : ''}`).pipe(map(res=>{
+  getAllUser(urlPart:string='', page:number= 1,parm: string = ''){
+    let qryStr = '';
+    if(page){
+      qryStr += `?page=${page}`;
+    }
+    if(parm){
+
+      qryStr = (qryStr && `&${parm}`) || (!qryStr && `?${parm}`);
+    }
+
+    return this.http.get<UserWithPagination>(`/${urlPart}/fetchAll${qryStr}`).pipe(map(res=>{
       this.users$.next(res);
       return res;
     }));

@@ -324,23 +324,25 @@ class UsersController extends Controller
 
 
     public function fetchAllStudent(Request $request){
+        $perPage = 20;
         $q = $request->input("q",'');
         $user = User::whereHas("userRole", function($q){
             $q->where("role_id", 3);
         })->WhereRaw(" ( concat(`fname`, ' ', `lname`) like '%{$q}%'
         OR `email` like '%{$q}%'
-        OR `phone` like '%{$q}%') ")->get();
+        OR `phone` like '%{$q}%') ")->paginate($perPage);
         return response($user);
     }
 
     public function fetchAllTeacher(Request $request){
+        $perPage = 20;
         $q = $request->input("q",'');
         $user = User::withCount("teacherStudent as student_count")->whereHas("userRole", function($q){
             $q->where("role_id", 2);
         })->WhereRaw(" ( concat(`fname`, ' ', `lname`) like '%{$q}%'
                         OR `email` like '%{$q}%'
                         OR `phone` like '%{$q}%') ")
-        ->get();
+        ->paginate($perPage);
         return response($user);
     }
 

@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, empty, Observable, of, Subscription } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
-import { User } from 'src/app/lib/interfaces';
+import { User, UserWithPagination } from 'src/app/lib/interfaces';
 import { UserService } from 'src/app/lib/services';
 import Notiflix from "notiflix";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -18,7 +18,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   searchFrm: FormGroup;
   pageTitle: string;
   type: string;
-  users$: BehaviorSubject<User[]> = new BehaviorSubject<User[]>(null);
+  users$: Observable<UserWithPagination>;
 
   toggleStstuSubScr: Subscription;
   delRefreshUserSubScr: Subscription;
@@ -28,9 +28,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     private _modalService: NgbModal,
     private formBuilder: FormBuilder) { }
 
-  get usersObs(){
-    return this.users$.asObservable();
-  }
+
 
   toggleStatus(user: User){
     Notiflix.Block.Merge({svgSize:'20px',});
@@ -85,14 +83,13 @@ export class UsersComponent implements OnInit, OnDestroy {
     });
   }
 
-  loadUser(ret:any=null){
+  loadUser(ret:any=null, page:number = 1){
     let parm: string;
     if(this.searchFrm.controls.q.value){
       parm = `q=${(this.searchFrm.controls.q.value) ? this.searchFrm.controls.q.value : ''}`
     }
 
-    return this.userService.getAllUser(`admin/${this.type}`,parm).pipe(map(users=>{
-      this.users$.next(users);
+    return this.userService.getAllUser(`admin/${this.type}`,page, parm).pipe(map(users=>{
       if(ret)
         return ret;
       else
@@ -100,8 +97,13 @@ export class UsersComponent implements OnInit, OnDestroy {
     }))
   }
 
-  search(){
-    this.searchSubScription = this.loadUser().subscribe();
+  search(event = null){
+    Notiflix.Block.Dots(`.table`);
+    this.searchSubScription = this.loadUser(null, event).subscribe(res=>{
+      Notiflix.Block.Remove(`.table`);
+    }, err=>{
+      Notiflix.Block.Remove(`.table`);
+    });
   }
 
   resetSearch(){
@@ -111,7 +113,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.pageTitle = this.route.snapshot.data['users']?.pageTitle;
     this.type = this.route.snapshot.data['users']?.type;
-    this.users$.next(this.route.snapshot.data['users']?.data);
+    this.users$ = this.userService.users;
 
     this.searchFrm = this.formBuilder.group({
       q: [null, []]

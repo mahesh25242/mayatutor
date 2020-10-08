@@ -15,8 +15,8 @@ class CourseController extends Controller
 {
 
     public function listTeacherCourses(Request $request){
-
-        $courses = \App\Course::withCount(["courseModule"])->with(["user.rating", "courseTag"]);
+        $perPage = 20;
+        $courses = \App\Course::withCount(["courseModule"])->with(["user.rating", "courseTag", "latestCourseApprovalRequest"]);
         if($request->input("url", null)){
             $courses = $courses->whereHas("user", function($q) use($request) {
                 $q->where("url", $request->input("url",null));
@@ -29,7 +29,7 @@ class CourseController extends Controller
         if($q){
             $courses = $courses->where("name", "LIKE", "%{$q}%");
         }
-        return response($courses->get());
+        return response($courses->paginate($perPage));
     }
 
     public function createCourse(Request $request){
@@ -69,12 +69,14 @@ class CourseController extends Controller
             "price" => $request->input("price", null),
             "demo_video_url" => $request->input("demo_video_url", ""),
             "description" => $request->input("description", ""),
-            "status" => ($user->teacher_auto_approval_count) ? 1 : 0,
+            "status" => 1,
             "live_class" => $request->input("live_class", 0),
             "live_class_url" => $request->input("live_class_url", ""),
             "news" => $request->input("news", "")
 
         ];
+
+
 
         if($courseImage){
             $createUpdateArr["image"] = $courseImage;
@@ -87,6 +89,19 @@ class CourseController extends Controller
             ],
            $createUpdateArr
         );
+
+        $courseApprovalRequest = \App\CourseApprovalRequest::where("course_id", $course->id)
+        ->where("status", 0)->latest()->first();
+        if($courseApprovalRequest){
+            $courseApprovalRequest->status = ($user->teacher_auto_approval_count || $courseApprovalRequest->status) ? 1 : 0;
+        }else{
+            $courseApprovalRequest = new \App\CourseApprovalRequest;
+            $courseApprovalRequest->course_id = $course->id;
+            $courseApprovalRequest->status = ($user->teacher_auto_approval_count) ? 1 : 0;
+        }
+        $courseApprovalRequest->save();
+
+
 
         if($request->input("tag_name", null)){
             $tag_names = json_decode($request->input("tag_name", null));
@@ -132,12 +147,13 @@ class CourseController extends Controller
 
     public function listAllCourses(Request $request){
 
-        $isAdmin = \App\User::has("isAdmin")->find(Auth::id());
-        $courses = \App\Course::withCount(["courseModule"])->with(["user.rating"]);
+//        $isAdmin = \App\User::has("isAdmin")->find(Auth::id());
+        $perPage = 2;
+        $courses = \App\Course::withCount(["courseModule"])->with(["user.rating", "latestCourseApprovalRequest"]);
         $q = $request->input("q", null);
         if($q){
             $courses = $courses->where("name", "LIKE", "%{$q}%");
         }
-        return response($courses->get());
+        return response($courses->paginate($perPage));
     }
 }

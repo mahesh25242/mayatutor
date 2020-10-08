@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddNewComponent } from './add-new/add-new.component';
 import { Observable, Subscription } from 'rxjs';
-import { Course } from 'src/app/lib/interfaces';
+import { Course, CourseWithPagination } from 'src/app/lib/interfaces';
 import {  CourseService, TeacherService } from 'src/app/lib/services';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import Notiflix from "notiflix";
@@ -17,7 +17,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class CoursesComponent implements OnInit, OnDestroy {
   faEdit = faEdit;
   faTrash = faTrash;
-  courses$: Observable<Course[]>;
+  courses$: Observable<CourseWithPagination>;
   deleteCouseSuScr: Subscription;
 
   searchFrm: FormGroup;
@@ -44,7 +44,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
           q: this.searchFrm.controls.q.value
         }
 
-          return this.teacherService.listCourses(postData);
+          return this.teacherService.listCourses(1, postData);
         })).subscribe(res=>{
           Notiflix.Block.Remove(`.del-${course.id}`);
           Notiflix.Notify.Success(`Successfully deleted ${course.name}`);
@@ -63,7 +63,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
       q: this.searchFrm.controls.q.value
     }
 
-    this.teacherService.listCourses(postData).subscribe(res=>{
+    this.teacherService.listCourses(1, postData).subscribe(res=>{
       Notiflix.Block.Remove(`app-courses table`);
     }, error=>{
       Notiflix.Block.Remove(`app-courses table`);
@@ -79,6 +79,9 @@ export class CoursesComponent implements OnInit, OnDestroy {
     });
   }
 
+  search(evt){
+    this.teacherService.listCourses(evt).subscribe();
+  }
   ngOnDestroy(){
     if(this.deleteCouseSuScr){
       this.deleteCouseSuScr.unsubscribe();

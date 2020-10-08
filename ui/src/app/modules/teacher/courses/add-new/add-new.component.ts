@@ -77,7 +77,7 @@ export class AddNewComponent implements OnInit {
       }
 
 
-      return this.teacherService.listCourses(postData).pipe(map(courses=>{
+      return this.teacherService.listCourses(1, postData).pipe(map(courses=>{
         return res;
       }))
     })).subscribe(res=>{

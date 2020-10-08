@@ -6,6 +6,7 @@ import { TeacherPaymentInfo } from './teacherPaymentInfo';
 import { Subject } from './subject';
 import { TeacherInfo, TeacherBannerImg } from './teacherInfo';
 import { Rating } from './rating';
+import { Pagination } from './pagination';
 
 export interface UserLogin {
   id?: number,
@@ -62,4 +63,7 @@ export interface User {
   created_at_human?: string,
   course_count?: number,
   teacher_auto_approval_count?: number
+}
+export interface UserWithPagination extends Pagination {
+  data?: User[]
 }

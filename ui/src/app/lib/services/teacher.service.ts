@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Course, CourseModule, User, Rating, Plan } from '../interfaces';
+import { Course, CourseModule, User, Rating, Plan, CourseWithPagination } from '../interfaces';
 import { map, mergeMap } from 'rxjs/operators';
 
 @Injectable({
@@ -9,7 +9,7 @@ import { map, mergeMap } from 'rxjs/operators';
 })
 export class TeacherService {
   private teacher$: BehaviorSubject<User> = new BehaviorSubject<User>(null);
-  private courses$: BehaviorSubject<Course[]> = new BehaviorSubject<Course[]>(null);
+  private courses$: BehaviorSubject<CourseWithPagination> = new BehaviorSubject<CourseWithPagination>(null);
   constructor(private http: HttpClient) { }
 
   get courses(){
@@ -37,8 +37,8 @@ export class TeacherService {
     return this.http.get<Plan[]>('/teacher/plans');
   }
 
-  listCourses(postData: any = null, url='courses'):Observable<Course[]>{
-    return this.http.post<Course[]>(`/teacher/${url}`, postData).pipe(map(res=>{
+  listCourses(page:number = 1,postData: any = null, url='courses'):Observable<CourseWithPagination>{
+    return this.http.post<CourseWithPagination>(`/teacher/${url}${(page) ? `?page=${page}` : ``}`, postData).pipe(map(res=>{
       this.courses$.next(res);
       return res;
     }));

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { State, Course, CourseModule } from '../interfaces';
+import { State, Course, CourseModule, CourseWithPagination } from '../interfaces';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class CourseService {
-  private courses$: BehaviorSubject<Course[]> = new BehaviorSubject<Course[]>(null);
+  private courses$: BehaviorSubject<CourseWithPagination> = new BehaviorSubject<CourseWithPagination>(null);
   private courseModules$: BehaviorSubject<CourseModule[]> = new BehaviorSubject<CourseModule[]>(null);
 
 
@@ -22,8 +22,8 @@ export class CourseService {
     return this.courseModules$.asObservable();
   }
 
-  listCourses(postData: any = null):Observable<Course[]>{
-    return this.http.post<Course[]>('/admin/courses', postData).pipe(map(res=>{
+  listCourses(page: number = 1, postData: any = null):Observable<CourseWithPagination>{
+    return this.http.post<CourseWithPagination>(`/admin/courses${(page) ? `?page=${page}` : ''}`, postData).pipe(map(res=>{
       this.courses$.next(res);
       return res;
     }));

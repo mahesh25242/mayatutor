@@ -1,10 +1,16 @@
 <h3>Courses</h3>
 
+<form class="form-inline" [formGroup]="searchFrm" (ngSubmit)="search()">
+  <input type="text" class="form-control my-1 mr-sm-2" placeholder="Search" formControlName="q" />
+  <button type="submit" class="btn btn-primary my-1">Search</button>
+  <button type="button" class="btn btn-primary my-1" (click)="resetSearch()">Clear</button>
+</form>
+
 <table class="table">
   <thead>
     <tr>
       <th>
-        Id
+        SL
       </th>
       <th>
         Name
@@ -19,26 +25,32 @@
   </thead>
   <tbody>
     <ng-container *ngIf="courses$ | async as courses">
-      <tr *ngFor="let course of courses">
-        <td>
-          {{ course.id}}
+      <tr *ngFor="let course of courses?.data; let i = index">
+        <td data-label="Id">
+          {{ ((courses?.current_page * courses?.per_page ) -courses?.per_page) + i + 1}}
         </td>
-        <td>
+        <td data-label="Name">
           {{ course.name}}
         </td>
-        <td>
+        <td data-label="Module#">
           {{course.course_module_count}}
         </td>
-        <td>
-          <a href="javascript:{}" class="btn btn-primary">Detail</a>
+        <td data-label="Detail">
+          <a href="javascript:{}" class="btn btn-primary btn-sm">Detail</a>
         </td>
       </tr>
-      <tr *ngIf="!courses.length">
+      <tr *ngIf="!courses?.data.length">
         <td colspan="4">
           <div class="alert alert-warning">No course found</div>
         </td>
       </tr>
     </ng-container>
   </tbody>
+  <ng-container *ngIf="courses$ | async as courses">
+    <div *ngIf="courses?.data.length">
+      <ngb-pagination [collectionSize]="courses?.total" [pageSize]="courses?.per_page" [(page)]="courses.current_page"
+      aria-label="Default pagination" (pageChange)="search($event)" [maxSize]="5" [boundaryLinks]="true"  [rotate]="true"></ngb-pagination>
+    </div>
+  </ng-container>
 </table>
 

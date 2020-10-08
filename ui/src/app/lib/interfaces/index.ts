@@ -12,3 +12,5 @@ export * from './course';
 export * from './rating';
 export * from './plan';
 export * from './courseTag';
+export * from './pagination';
+export * from './courseApprovalRequest';
