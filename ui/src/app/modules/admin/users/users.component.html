@@ -40,16 +40,16 @@
       <tbody>
         <ng-container *ngIf="users?.data && users?.data.length">
           <tr *ngFor="let item of users?.data; let i= index;">
-            <td>
+            <td data-label="SL">
               {{ i+1 }}
             </td>
-            <td>
+            <td data-label="Name">
               {{ item.fname }} {{ item.lname }}
             </td>
-            <td>
+            <td data-label="Invoice">
                 <a href="javascript:{}">View</a>
             </td>
-            <td>
+            <td data-label="Status">
               <a href="javascript:{}"
               (click)="toggleStatus(item)" [class]="'toggle-status-'+item.id"
               [ngClass]="{ 'text-success': item.status, 'text-warning': !item.status }"
@@ -57,18 +57,18 @@
                 {{ (item.status && 'Active') || (!item.status && 'In-Active') }}
               </a>
             </td>
-            <td>
+            <td data-label="Date">
               <span placement="top" [ngbTooltip]="item.created_at | date:'mediumDate'">{{ item.created_at_human}}</span>
             </td>
-            <td *ngIf="type=='teacher'">
+            <td *ngIf="type=='teacher'" data-label="Students">
               {{ item.student_count }}
             </td>
-            <td>
+            <td data-label="Details">
               <a href="javascript:{}" (click)="details(item)">Details</a>
             </td>
-            <td>
+            <td data-label="Delete">
               <a href="javascript:{}" (click)="deleteUser(item)"
-              [class]="'delete-user-'+item.id">Del</a>
+              [class]="'delete-user-'+item.id" class="btn btn-danger btn-sm"><fa-icon [icon]="faTrash"></fa-icon></a>
             </td>
           </tr>
         </ng-container>

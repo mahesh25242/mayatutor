@@ -32,22 +32,22 @@
   <tbody *ngIf="(courses$ | async) as courses">
     <ng-container *ngIf="courses?.data.length">
       <tr *ngFor="let course of courses?.data;let i=index; let last = last">
-        <td>
+        <td data-label="SL">
           {{ ((courses?.current_page * courses?.per_page ) -courses?.per_page) + i + 1}}
         </td>
-        <td>
+        <td data-label="Course Name">
           {{course.name}}
 
           <span [class]="'status-'+course.latest_course_approval_request.status">{{ course.latest_course_approval_request.status_text}}</span>
         </td>
-        <td>
+        <td data-label="Add Modules">
           <a [routerLink]="course.id+'/modules'" class="btn btn-primary btn-sm" placement="top"
            ngbTooltip="Add or Manage modules to this course">Add Modules <span *ngIf="course.course_module_count">( {{course.course_module_count}} )</span></a>
         </td>
-        <td>
+        <td data-label="Fees">
           {{course.price}}
         </td>
-        <td>
+        <td data-label="Options">
           <a href="javascript:{}" class="btn btn-primary btn-sm" (click)="addNew(course)" placement="top" ngbTooltip="click here for edit this course">
             <fa-icon [icon]="faEdit"></fa-icon>
           </a>

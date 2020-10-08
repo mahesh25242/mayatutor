@@ -16,6 +16,9 @@
         Name
       </th>
       <th>
+        Status
+      </th>
+      <th>
         Module#
       </th>
       <th>
@@ -31,6 +34,9 @@
         </td>
         <td data-label="Name">
           {{ course.name}}
+        </td>
+        <td data-label="Status">
+          <span [class]="'status-'+course.latest_course_approval_request.status">{{course.latest_course_approval_request.status_text}}</span>
         </td>
         <td data-label="Module#">
           {{course.course_module_count}}

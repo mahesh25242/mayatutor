@@ -32,7 +32,7 @@ class CourseApprovalRequest extends Model implements AuthenticatableContract, Au
         $text = '';
         switch($this->status){
             case 0:
-                $text = 'Requested';
+                $text = 'New';
             break;
             case 1:
                 $text = 'Approved';

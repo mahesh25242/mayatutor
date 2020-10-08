@@ -8,6 +8,7 @@ import Notiflix from "notiflix";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DetailsComponent } from './details/details.component';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-users',
@@ -15,6 +16,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit, OnDestroy {
+  faTrash = faTrash;
   searchFrm: FormGroup;
   pageTitle: string;
   type: string;
