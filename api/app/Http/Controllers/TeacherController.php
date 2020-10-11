@@ -15,6 +15,7 @@ class TeacherController extends Controller
 {
 
     public function search($q=''){
+        $perPage = 20;
         $user = \App\User::withCount("teacherStudent as student_count")->with(["rating", "teacherInfo", "subject", "city"])->whereHas("userRole", function ($qry){
             $qry->where("role_id", 2);
         });
@@ -23,7 +24,7 @@ class TeacherController extends Controller
                 $qry->where("tag_name", 'like', "%{$q}%");
             });
         }
-        return response($user->get());
+        return response($user->paginate($perPage));
     }
 
     public function teacher($url =''){

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Course, CourseModule, User, Rating, Plan, CourseWithPagination } from '../interfaces';
+import { Course, CourseModule, User, Rating, Plan, CourseWithPagination, UserWithPagination } from '../interfaces';
 import { map, mergeMap } from 'rxjs/operators';
 
 @Injectable({
@@ -9,6 +9,7 @@ import { map, mergeMap } from 'rxjs/operators';
 })
 export class TeacherService {
   private teacher$: BehaviorSubject<User> = new BehaviorSubject<User>(null);
+  private teachers$: BehaviorSubject<UserWithPagination> = new BehaviorSubject<UserWithPagination>(null);
   private courses$: BehaviorSubject<CourseWithPagination> = new BehaviorSubject<CourseWithPagination>(null);
   constructor(private http: HttpClient) { }
 
@@ -17,6 +18,9 @@ export class TeacherService {
   }
   get teacher() {
     return this.teacher$.asObservable();
+  }
+  get teachers() {
+    return this.teachers$.asObservable();
   }
 
   changeBanner(postData: any = null){
@@ -44,8 +48,11 @@ export class TeacherService {
     }));
   }
 
-  searchTeachers(q: string=null){
-    return this.http.get<User[]>(`/teacher/search${(q) ? `/${q}` : ``}`);
+  searchTeachers(q: string=null, page: number = 1){
+    return this.http.get<UserWithPagination>(`/teacher/search${(q) ? `/${q}` : ``}${(page) ? `?page=${page}` : ``}`).pipe(map(res=>{
+        this.teachers$.next(res);
+        return res;
+    }));
   }
 
   getTeacher(teacherUrl:string='',){

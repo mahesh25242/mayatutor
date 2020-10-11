@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { User } from 'src/app/lib/interfaces';
+import { Observable } from 'rxjs';
+import { map, mergeMap } from 'rxjs/operators';
+import { User, UserWithPagination } from 'src/app/lib/interfaces';
+import { TeacherService } from 'src/app/lib/services';
 
 
 @Component({
@@ -9,11 +12,20 @@ import { User } from 'src/app/lib/interfaces';
   styleUrls: ['./list-teachers.component.scss']
 })
 export class ListTeachersComponent implements OnInit {
-  teachers: User[];
-  constructor(private route: ActivatedRoute) { }
+  teachers$: Observable<UserWithPagination>;
+  q: string = '';
+  constructor(private route: ActivatedRoute,
+    private teacherService: TeacherService) { }
 
+  loadMore(nextPage:number = 1){
+    this.teacherService.searchTeachers(this.q, nextPage).subscribe()
+
+  }
   ngOnInit(): void {
-    this.teachers = this.route.snapshot.data["teachers"];
+    this.teachers$ = this.route.params.pipe(mergeMap(parm=>{
+      this.q = (parm?.q) ? parm?.q : '';
+      return this.teacherService.teachers;
+    }));
   }
 
 }
