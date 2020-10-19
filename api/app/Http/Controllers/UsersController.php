@@ -322,6 +322,10 @@ class UsersController extends Controller
 
     }
 
+    public function myStudents(Request $request){
+        $request->request->add(['teacherId' => Auth::id()]);
+        return $this->fetchAllStudent($request);
+    }
 
     public function fetchAllStudent(Request $request){
         $perPage = 20;
@@ -330,8 +334,13 @@ class UsersController extends Controller
             $q->where("role_id", 3);
         })->WhereRaw(" ( concat(`fname`, ' ', `lname`) like '%{$q}%'
         OR `email` like '%{$q}%'
-        OR `phone` like '%{$q}%') ")->paginate($perPage);
-        return response($user);
+        OR `phone` like '%{$q}%') ");
+
+        if($request->input("teacherId", null)){
+            $user = $user->has("teacherStudent");
+        }
+
+        return response($user->paginate($perPage));
     }
 
     public function fetchAllTeacher(Request $request){

@@ -12,6 +12,8 @@ import { ModulesResolver } from './courses/modules/modules-resolver';
 import { PlansComponent } from './plans/plans.component';
 import { ListTeachersComponent } from './list-teachers/list-teachers.component';
 import { ListTeachersResolver } from './list-teachers/list-teachers-resolver';
+import { StudentsResolver } from './students/students-resolver';
+import { StudentsComponent } from './students/students.component';
 
 const routes: Routes = [
   {
@@ -43,6 +45,14 @@ const routes: Routes = [
     canActivate: [TeacherAuthGuard],
     resolve:{
       course: ModulesResolver
+    }
+  },
+  {
+    path: 'students',
+    component: StudentsComponent,
+    canActivate: [TeacherAuthGuard],
+    resolve:{
+      students: StudentsResolver
     }
   },
   {

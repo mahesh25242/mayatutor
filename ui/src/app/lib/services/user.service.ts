@@ -164,10 +164,27 @@ export class UserService {
     }
     if(parm){
 
-      qryStr = (qryStr && `&${parm}`) || (!qryStr && `?${parm}`);
+      qryStr += (qryStr && `&${parm}`) || (!qryStr && `?${parm}`);
     }
 
     return this.http.get<UserWithPagination>(`/${urlPart}/fetchAll${qryStr}`).pipe(map(res=>{
+      this.users$.next(res);
+      return res;
+    }));
+  }
+
+  fetchAllStudent(page:number= 1,parm: string = ''){
+
+    let qryStr = '';
+    if(page){
+      qryStr += `?page=${page}`;
+    }
+    if(parm){
+
+      qryStr += (qryStr && `&${parm}`) || (!qryStr && `?${parm}`);
+    }
+
+    return this.http.get<UserWithPagination>(`/student/fetchAllStudent${qryStr}`).pipe(map(res=>{
       this.users$.next(res);
       return res;
     }));

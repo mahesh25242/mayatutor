@@ -26,6 +26,10 @@ import { PlansComponent } from './plans/plans.component';
 import { ListTeachersComponent } from './list-teachers/list-teachers.component';
 import {ListTeachersResolver} from './list-teachers/list-teachers-resolver';
 import { ContactTeacherComponent } from './dash-board/contact-teacher/contact-teacher.component';
+import { StudentsComponent } from './students/students.component';
+import { StudentsResolver } from './students/students-resolver';
+import { DetailsComponent } from './students/details/details.component';
+import { AddStudentComponent } from './students/add-student/add-student.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +47,10 @@ import { ContactTeacherComponent } from './dash-board/contact-teacher/contact-te
     VideoPreviewComponent,
     PlansComponent,
     ListTeachersComponent,
-    ContactTeacherComponent
+    ContactTeacherComponent,
+    StudentsComponent,
+    DetailsComponent,
+    AddStudentComponent
   ],
   imports: [
     CommonModule,
@@ -56,7 +63,8 @@ import { ContactTeacherComponent } from './dash-board/contact-teacher/contact-te
   providers:[
     CoursesResolver,
     ModulesResolver,
-    ListTeachersResolver
+    ListTeachersResolver,
+    StudentsResolver
   ]
 })
 export class TeacherModule { }
