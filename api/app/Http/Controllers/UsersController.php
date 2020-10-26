@@ -337,7 +337,9 @@ class UsersController extends Controller
         OR `phone` like '%{$q}%') ");
 
         if($request->input("teacherId", null)){
-            $user = $user->has("teacherStudent");
+            $user = $user->whereHas("student", function($qry) use($request){
+                $qry->where("teacher_user_id", $request->input("teacherId", null));
+            });
         }
 
         return response($user->paginate($perPage));

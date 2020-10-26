@@ -1,8 +1,9 @@
 <form class="form-inline" [formGroup]="addStudenttFrm" (ngSubmit)="addStudent()">
   <div class="form-group">
-    <label for="phone">Phone / Email</label>
+    <label for="phone">Mobile / Email</label>
     <ng-select [items]="students$ | async"
            bindLabel="email"
+           placeholder="Mobile / Email"
            [addTag]="true"
            [multiple]="true"
            [hideSelected]="true"

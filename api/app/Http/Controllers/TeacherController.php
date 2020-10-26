@@ -156,6 +156,17 @@ class TeacherController extends Controller
         $co = $request->input("course", null);
         $phone = $request->input("phone", null);
 
+        $validator = Validator::make($request->all(), [
+            'phone' => ['required'],
+         ],[],[
+             'phone' => 'Mobile / Email',
+         ]);
+
+
+         if($validator->fails()){
+             return response(['message' => 'Validation errors', 'errors' =>  $validator->errors(), 'status' => false], 422);
+         }
+
         $course = \App\Course::find($co["id"]);
         if(is_array($phone) && !empty($phone)){
             foreach( $phone as $usr){

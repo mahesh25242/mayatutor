@@ -12,4 +12,5 @@ export class StudentService {
   addStudent(postData: any = null){
     return this.http.post("/student/addStudent", postData);
   }
+
 }

@@ -33,7 +33,18 @@ export class AddStudentComponent implements OnInit {
       Notiflix.Loading.Remove();
       Notiflix.Notify.Success(`Successfully added student `);
     }, error=>{
-      Notiflix.Notify.Failure(`Sorry can't be added please try again later `);
+      if(error.status == 422){
+        for(let result in this.addStudenttFrm.controls){
+          if(error.error.errors[result]){
+            this.addStudenttFrm.controls[result].setErrors({ error: error.error.errors[result] });
+          }else{
+            this.addStudenttFrm.controls[result].setErrors(null);
+          }
+        }
+      }else{
+        Notiflix.Notify.Failure(`Sorry can't be added please try again later `);
+      }
+
       Notiflix.Loading.Remove();
     });
   }
