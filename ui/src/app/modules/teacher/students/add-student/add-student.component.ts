@@ -4,6 +4,7 @@ import { concat, Observable, of, Subject } from 'rxjs';
 import { catchError, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
 import { CourseWithPagination, User, UserWithPagination } from 'src/app/lib/interfaces';
 import { StudentService, TeacherService, UserService } from 'src/app/lib/services';
+import Notiflix from "notiflix";
 
 @Component({
   selector: 'app-add-student',
@@ -27,8 +28,14 @@ export class AddStudentComponent implements OnInit {
       phone: this.f.phone.value,
       course: this.f.course.value,
     }
-
-    this.studentService.addStudent(postData).subscribe();
+    Notiflix.Loading.Pulse();
+    this.studentService.addStudent(postData).subscribe(res=>{
+      Notiflix.Loading.Remove();
+      Notiflix.Notify.Success(`Successfully added student `);
+    }, error=>{
+      Notiflix.Notify.Failure(`Sorry can't be added please try again later `);
+      Notiflix.Loading.Remove();
+    });
   }
 
   resetSearch(){
