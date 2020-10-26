@@ -184,10 +184,7 @@ export class UserService {
       qryStr += (qryStr && `&${parm}`) || (!qryStr && `?${parm}`);
     }
 
-    return this.http.get<UserWithPagination>(`/student/fetchAllStudent${qryStr}`).pipe(map(res=>{
-      this.users$.next(res);
-      return res;
-    }));
+    return this.http.get<UserWithPagination>(`/student/fetchAllStudent${qryStr}`);
   }
 
   toggleStatus(urlPart:string='', user: User= null){

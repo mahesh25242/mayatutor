@@ -98,6 +98,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return $this->hasMany('App\UserRole')->where("role_id",1);
     }
 
+    public function isTeacher()
+    {
+        return $this->hasMany('App\UserRole')->where("role_id",2);
+    }
+
     public function country()
     {
         return $this->belongsTo('App\Country');
@@ -188,6 +193,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     public function teacherStudent()
     {
         return $this->hasMany('App\TeacherStudent', 'teacher_user_id');
+    }
+
+    public function studentCourse()
+    {
+        return $this->hasMany('App\StudentCourse');
     }
 
     public function userPlan()

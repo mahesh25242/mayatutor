@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { concat, Observable, of, Subject } from 'rxjs';
 import { catchError, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
 import { CourseWithPagination, User, UserWithPagination } from 'src/app/lib/interfaces';
-import { TeacherService, UserService } from 'src/app/lib/services';
+import { StudentService, TeacherService, UserService } from 'src/app/lib/services';
 
 @Component({
   selector: 'app-add-student',
@@ -19,10 +19,16 @@ export class AddStudentComponent implements OnInit {
   courses$: Observable<CourseWithPagination>;
   constructor(private formBuilder: FormBuilder,
     private teacherService: TeacherService,
-    private userService: UserService) { }
+    private userService: UserService,
+    private studentService: StudentService) { }
 
   addStudent(){
+    const postData = {
+      phone: this.f.phone.value,
+      course: this.f.course.value,
+    }
 
+    this.studentService.addStudent(postData).subscribe();
   }
 
   resetSearch(){
@@ -34,6 +40,7 @@ export class AddStudentComponent implements OnInit {
   }
 
   get f(){ return this.addStudenttFrm.controls; }
+
 
   ngOnInit(): void {
     this.addStudenttFrm = this.formBuilder.group({

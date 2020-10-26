@@ -151,4 +151,46 @@ class TeacherController extends Controller
             'message' => 'successfully updated!', 'status' => 1
         ]);
     }
+
+    public function addStudent(Request $request){
+        $co = $request->input("course", null);
+        $phone = $request->input("phone", null);
+
+        $course = \App\Course::find($co["id"]);
+        if(is_array($phone) && !empty($phone)){
+            foreach( $phone as $usr){
+                $user = \App\User::find($usr["id"]);
+                if($user){
+                    $teacherStudent = \App\TeacherStudent::updateOrCreate(
+                        [
+                            "teacher_user_id" => Auth::id(),
+                            "user_id" => $user->id
+                        ],
+                        [
+                            "teacher_user_id" => Auth::id(),
+                            "user_id" => $user->id,
+                            "status" => 1
+                        ]
+                    );
+                    if($course && $teacherStudent){
+                        \App\StudentCourse::updateOrCreate(
+                            [
+                                "user_id" => $user->id,
+                                "course_id" => $course->id
+                            ],
+                            [
+                                "user_id" => $user->id,
+                                "course_id" => $course->id,
+                                "status" => 1
+                            ]
+                        );
+                    }
+                }
+            }
+            return response([
+                'message' => 'successfully added student!', 'status' => 1
+            ]);
+        }
+
+    }
 }

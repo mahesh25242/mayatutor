@@ -60,6 +60,7 @@ $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
     'maintanance' => App\Http\Middleware\SiteMaintenanceMiddleware::class,
     'admin' => \App\Http\Middleware\AdminAuthenticate::class,
+    'teacher' => \App\Http\Middleware\TeacherAuthenticate::class,
 ]);
 /*
 |--------------------------------------------------------------------------

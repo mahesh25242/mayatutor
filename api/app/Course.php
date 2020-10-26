@@ -54,4 +54,9 @@ class Course extends Model implements AuthenticatableContract, AuthorizableContr
     {
         return $this->hasOne('App\CourseApprovalRequest')->latest();
     }
+
+    public function studentCourse()
+    {
+        return $this->hasMany('App\StudentCourse');
+    }
 }

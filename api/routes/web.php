@@ -68,12 +68,14 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
         });
 
 
-        $router->group(['prefix' => 'student'], function () use ($router) {
+        $router->group(['prefix' => 'student', 'middleware' =>  'teacher'], function () use ($router) {
             $router->get('fetchAll','UsersController@myStudents');
             $router->get('fetchAllStudent','UsersController@fetchAllStudent');
             $router->get('fetch/{id}','UsersController@fetchStudent');
             $router->post('toggleStatus','UsersController@toggleStatus');
             $router->post('delete','UsersController@delete');
+
+            $router->post('addStudent','TeacherController@addStudent');
         });
 
         $router->post('updateAvatar','UsersController@updateAvatar');
@@ -86,7 +88,7 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
             $router->post('updateProfile','UsersController@updateProfile');
         });
 
-        $router->group(['prefix' => 'teacher'], function () use ($router) {
+        $router->group(['prefix' => 'teacher',  'middleware' =>  'teacher'], function () use ($router) {
 
 
             $router->post('changeBanner','TeacherController@changeBanner');
