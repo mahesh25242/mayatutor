@@ -3,6 +3,8 @@ import {faUserGraduate,faUser,faClock,faStar,faStarHalfAlt,faSearch } from '@for
 import { UserService, TeacherService } from '../lib/services';
 import { Observable } from 'rxjs';
 import { User, Rating } from '../lib/interfaces';
+import { BreadCrumbsService } from '../shared-module/components/bread-crumbs/bread-crumbs.component';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -20,9 +22,15 @@ export class HomeComponent implements OnInit {
 
   loggedUser$: Observable<User>;
   constructor(private userService: UserService,
-    private teacherService: TeacherService) { }
+    private teacherService: TeacherService,
+    private breadCrumbsService: BreadCrumbsService) { }
 
   ngOnInit(): void {
+    this.breadCrumbsService.bcs$.next([
+      {
+        name: 'Home',
+      }
+    ]);
     this.loggedUser$ = this.userService.getloggedUser;
 
     this.topRatedTeachers$ = this.teacherService.topRatedTeacher();

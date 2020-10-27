@@ -1,0 +1,8 @@
+<ng-container *ngIf="(bcs | async) as bc">
+  <ul *ngIf="!hide">
+    <li *ngFor="let bread of bc">
+      <a [routerLink]="bread.url" *ngIf="bread.url">{{bread.name}}</a>
+      <label *ngIf="!bread.url">{{bread.name}}</label>
+    </li>
+  </ul>
+</ng-container>

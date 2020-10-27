@@ -20,6 +20,7 @@ import { CourseBlockComponent } from './components/course-block/course-block.com
 import { CourseDetailComponent } from './components/course-detail/course-detail.component';
 import { SearchComponent } from './components/search/search.component';
 import { RatingComponent } from './components/rating/rating.component';
+import { BreadCrumbsComponent } from './components/bread-crumbs/bread-crumbs.component';
 
 Notiflix.Confirm.Init({ borderRadius:"5px",titleColor:"#204486",okButtonBackground:"#204486",cancelButtonBackground:"#e2e2e2",cancelButtonColor:"#393939", });
 Notiflix.Notify.Init({ width:"390px", success: {background:"#d4edda",textColor:"#155724",}, failure: {background:"#f8d7da",textColor:"#721c24",}, warning: {background:"#fff3cd",textColor:"#856404",}, info: {background:"#cce5ff",textColor:"#004085",}, });
@@ -37,7 +38,8 @@ Notiflix.Block.Init({ svgColor:"#204486", });
     CourseBlockComponent,
     SearchComponent,
     RatingComponent,
-    CourseDetailComponent
+    CourseDetailComponent,
+    BreadCrumbsComponent
   ],
   imports: [
     CommonModule,
@@ -66,7 +68,8 @@ Notiflix.Block.Init({ svgColor:"#204486", });
     SearchComponent,
     DragDropModule,
     RatingComponent,
-    CourseDetailComponent
+    CourseDetailComponent,
+    BreadCrumbsComponent
   ]
 })
 export class SharedModuleModule { }

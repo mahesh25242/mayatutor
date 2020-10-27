@@ -5,7 +5,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, Subscription } from 'rxjs';
 import { CourseWithPagination, User, UserWithPagination } from 'src/app/lib/interfaces';
-import { TeacherService, UserService } from 'src/app/lib/services';
+import { StudentService, TeacherService, UserService } from 'src/app/lib/services';
 import Notiflix from "notiflix";
 import { map, mergeMap } from 'rxjs/operators';
 import { DetailsComponent } from './details/details.component';
@@ -28,7 +28,8 @@ export class StudentsComponent implements OnInit, OnDestroy {
   constructor(private route:ActivatedRoute,
     private userService: UserService,
     private _modalService: NgbModal,
-    private formBuilder: FormBuilder    ) { }
+    private formBuilder: FormBuilder,
+    private studentService: StudentService    ) { }
 
 
   toggleStatus(user: User){
@@ -36,7 +37,7 @@ export class StudentsComponent implements OnInit, OnDestroy {
     Notiflix.Block.Dots(`.toggle-status-${user.id}`);
 
     Notiflix.Confirm.Show('Change Status?', "Are you sure you want to change status?", 'Yes', 'No', () => {
-      this.toggleStstuSubScr = this.userService.toggleStatus(`student`, user).pipe(mergeMap(res=>{
+      this.toggleStstuSubScr = this.studentService.toggleStatus(user).pipe(mergeMap(res=>{
         return this.loadUser(res);
     })).subscribe((res: any)=>{
       Notiflix.Block.Remove(`.toggle-status-${user.id}`);
@@ -55,16 +56,18 @@ export class StudentsComponent implements OnInit, OnDestroy {
     Notiflix.Block.Dots(`.delete-user-${user.id}`);
 
     Notiflix.Confirm.Show('Delete?', "Are you sure you want to delete?", 'Yes', 'No', () => {
-      this.toggleStstuSubScr = this.userService.deleteUser(`student`, user).pipe(mergeMap(res=>{
+      this.toggleStstuSubScr = this.studentService.deleteStudent(user).pipe(mergeMap(res=>{
         return this.loadUser(res);
     })).subscribe((res: any)=>{
       Notiflix.Block.Remove(`.delete-user-${user.id}`);
       Notiflix.Notify.Success(res.message);
     }, err=>{
+      Notiflix.Notify.Failure(`Sorry can't be deleted `);
       Notiflix.Block.Remove(`.delete-user-${user.id}`);
     });
 
     }, () => {
+
       Notiflix.Block.Remove(`.delete-user-${user.id}`);
     } )
 

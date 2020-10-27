@@ -9,6 +9,7 @@ import Notiflix from "notiflix";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ContactTeacherComponent } from './contact-teacher/contact-teacher.component';
 import { SignInComponent } from 'src/app/sign-in/sign-in.component';
+import { BreadCrumbsService } from 'src/app/shared-module/components/bread-crumbs/bread-crumbs.component';
 
 @Component({
   selector: 'app-dash-board',
@@ -24,11 +25,23 @@ export class DashBoardComponent implements OnInit {
   constructor(private userService: UserService,
     private teacherService: TeacherService,
     private route: ActivatedRoute,
-    private modalService: NgbModal) { }
+    private modalService: NgbModal,
+    private breadCrumbsService: BreadCrumbsService) { }
 
   ngOnInit(): void {
+
     this.user$ = this.userService.getloggedUser.pipe(mergeMap(lUser=>{
       return this.route.params.pipe(mergeMap(res=>{
+        this.breadCrumbsService.bcs$.next([
+          {
+            url: '/',
+            name: 'Home',
+          },
+          {
+            name: `${lUser.fname} ${lUser.lname} Dashboard`,
+          }
+        ]);
+
         if(res && res.teacher){
           if(lUser && (this.route.snapshot.data["user"]?.phone == '*' || this.route.snapshot.data["user"]?.email == '*')){
             return this.teacherService.getTeacher(res.teacher)

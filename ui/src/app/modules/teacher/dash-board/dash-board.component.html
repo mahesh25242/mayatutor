@@ -1,4 +1,5 @@
 <div class="card" *ngIf="(user$ | async) as user">
+<app-bread-crumbs [hide]="true"></app-bread-crumbs>
 
 <app-change-banner *ngIf="isDashBoard"></app-change-banner>
 <div class="alert alert-danger" *ngIf="isDashBoard">

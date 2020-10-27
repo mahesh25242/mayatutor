@@ -1,6 +1,6 @@
 <app-modal>
   <div header>
-    {{ (user.role_url == 'teacher' && 'Teacher') || (user.role_url == 'student' && 'Student') }} - {{ user.fname}} {{ user.lname}}
+  Student - {{ user.fname}} {{ user.lname}}
   </div>
   <div  body>
     <div *ngIf="user$ | async as usr">

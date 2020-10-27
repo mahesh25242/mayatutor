@@ -62,7 +62,8 @@ export interface User {
   student_count?: number,
   created_at_human?: string,
   course_count?: number,
-  teacher_auto_approval_count?: number
+  teacher_auto_approval_count?: number,
+  student_course_count?: number
 }
 export interface UserWithPagination extends Pagination {
   data?: User[]

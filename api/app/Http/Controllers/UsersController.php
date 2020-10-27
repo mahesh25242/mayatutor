@@ -332,7 +332,7 @@ class UsersController extends Controller
         $q = $request->input("q",'');
         $user = User::whereHas("userRole", function($q){
             $q->where("role_id", 3);
-        })->WhereRaw(" ( concat(`fname`, ' ', `lname`) like '%{$q}%'
+        })->withCount(["studentCourse"])->WhereRaw(" ( concat(`fname`, ' ', `lname`) like '%{$q}%'
         OR `email` like '%{$q}%'
         OR `phone` like '%{$q}%') ");
 

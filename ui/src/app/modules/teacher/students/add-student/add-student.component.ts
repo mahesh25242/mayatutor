@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { concat, Observable, of, Subject } from 'rxjs';
-import { catchError, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
+import { catchError, distinctUntilChanged, map, mergeMap, switchMap, tap } from 'rxjs/operators';
 import { CourseWithPagination, User, UserWithPagination } from 'src/app/lib/interfaces';
 import { StudentService, TeacherService, UserService } from 'src/app/lib/services';
 import Notiflix from "notiflix";
@@ -29,7 +29,9 @@ export class AddStudentComponent implements OnInit {
       course: this.f.course.value,
     }
     Notiflix.Loading.Pulse();
-    this.studentService.addStudent(postData).subscribe(res=>{
+    this.studentService.addStudent(postData).pipe(mergeMap(res=>{
+      return this.userService.getAllUser('student').pipe(map(students=> res));
+    })).subscribe(res=>{
       Notiflix.Loading.Remove();
       Notiflix.Notify.Success(`Successfully added student `);
     }, error=>{

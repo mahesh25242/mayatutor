@@ -5,6 +5,7 @@ import { environment } from '../../environments/environment';
 import { Subscription } from 'rxjs';
 import {GeneralService} from '../lib/services';
 import Notiflix from "notiflix";
+import { BreadCrumbsService } from '../shared-module/components/bread-crumbs/bread-crumbs.component';
 
 @Component({
   selector: 'app-contact-us',
@@ -16,11 +17,22 @@ export class ContactUsComponent implements OnInit, OnDestroy {
   contactUsSubscription: Subscription;
   constructor(private formBuilder: FormBuilder,
     private reCaptchaV3Service: ReCaptchaV3Service,
-    private generalService : GeneralService) { }
+    private generalService : GeneralService,
+    private breadCrumbsService: BreadCrumbsService) { }
 
   get f() { return this.contactUsFrm.controls; }
 
   ngOnInit(): void {
+    this.breadCrumbsService.bcs$.next([
+      {
+        url: '/',
+        name: 'Home',
+      },
+      {
+        name: 'Contact Us',
+      }
+    ]);
+
     this.contactUsFrm = this.formBuilder.group({
       name: ['', [Validators.required]],
       email:['', [Validators.required, Validators.email]],

@@ -13,4 +13,12 @@ export class StudentService {
     return this.http.post("/student/addStudent", postData);
   }
 
+  deleteStudent(postData: any = null){
+    return this.http.post("/student/deleteStudent", postData);
+  }
+
+  toggleStatus(postData: any = null){
+    return this.http.post("/student/toggleStatus", postData);
+  }
+
 }
