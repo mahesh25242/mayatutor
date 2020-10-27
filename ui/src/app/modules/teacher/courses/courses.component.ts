@@ -8,6 +8,7 @@ import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import Notiflix from "notiflix";
 import { mergeMap, map } from 'rxjs/operators';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { BreadCrumbsService } from 'src/app/shared-module/components/bread-crumbs/bread-crumbs.component';
 
 @Component({
   selector: 'app-courses',
@@ -25,7 +26,8 @@ export class CoursesComponent implements OnInit, OnDestroy {
   constructor(private _modalService: NgbModal,
     private courseService: CourseService,
     private teacherService: TeacherService,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder,
+    private breadCrumbsService: BreadCrumbsService) { }
 
   addNew(course: Course = null ){
     const activeModal = this._modalService.open(AddNewComponent,{
@@ -72,6 +74,17 @@ export class CoursesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+
+    this.breadCrumbsService.bcs$.next([
+      {
+        url: '/',
+        name: 'Home',
+      },
+      {
+        name: 'Courses',
+      }
+    ]);
+
     this.courses$ = this.teacherService.courses;
 
     this.searchFrm = this.formBuilder.group({

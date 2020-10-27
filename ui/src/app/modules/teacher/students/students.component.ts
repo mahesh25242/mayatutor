@@ -9,6 +9,7 @@ import { StudentService, TeacherService, UserService } from 'src/app/lib/service
 import Notiflix from "notiflix";
 import { map, mergeMap } from 'rxjs/operators';
 import { DetailsComponent } from './details/details.component';
+import { BreadCrumbsService } from 'src/app/shared-module/components/bread-crumbs/bread-crumbs.component';
 
 @Component({
   selector: 'app-students',
@@ -29,7 +30,8 @@ export class StudentsComponent implements OnInit, OnDestroy {
     private userService: UserService,
     private _modalService: NgbModal,
     private formBuilder: FormBuilder,
-    private studentService: StudentService    ) { }
+    private studentService: StudentService,
+    private breadCrumbsService: BreadCrumbsService    ) { }
 
 
   toggleStatus(user: User){
@@ -115,6 +117,17 @@ export class StudentsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.breadCrumbsService.bcs$.next([
+      {
+        url: '/',
+        name: 'Home',
+      },
+      {
+        name: 'Students',
+      }
+    ]);
+
+
     this.users$ = this.userService.users;
 
 

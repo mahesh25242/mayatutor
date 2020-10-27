@@ -1,4 +1,5 @@
 <div *ngIf="(plans$ | async) as plans" class="row">
+  <app-bread-crumbs [hide]="true"></app-bread-crumbs>
   <div class="col" *ngFor="let plan of plans">
     <h3>{{plan.name}}</h3>
     <ng-container *ngIf="plan.features && plan.features.length">

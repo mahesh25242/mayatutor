@@ -8,6 +8,7 @@ import { map } from 'rxjs/operators';
 import { ReCaptchaV3Service } from 'ngx-captcha';
 import { environment } from '../../../../environments/environment';
 import Notiflix from "notiflix";
+import { BreadCrumbsService } from '../bread-crumbs/bread-crumbs.component';
 
 @Component({
   selector: 'app-register',
@@ -31,7 +32,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
     private cityService: CityService,
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private reCaptchaV3Service: ReCaptchaV3Service) { }
+    private reCaptchaV3Service: ReCaptchaV3Service,
+    private breadCrumbsService: BreadCrumbsService) { }
 
   get f() { return this.registerFrm.controls; }
   ngOnInit(): void {
@@ -61,6 +63,16 @@ export class RegisterComponent implements OnInit, OnDestroy {
     });
 
     this.regTypeSubscription = this.route.data.subscribe(res=>{
+      this.breadCrumbsService.bcs$.next([
+        {
+          url: '/',
+          name: 'Home',
+        },
+        {
+          name: `${ res.type.charAt(0).toUpperCase() + res.type.slice(1) } Registration`,
+        }
+      ]);
+
       this.f.type.setValue(res.type);
     });
   }

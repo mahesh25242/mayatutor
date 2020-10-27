@@ -6,6 +6,7 @@ import { Country, State, City, User } from 'src/app/lib/interfaces';
 import { Subscription } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
 import Notiflix from "notiflix";
+import { BreadCrumbsService } from 'src/app/shared-module/components/bread-crumbs/bread-crumbs.component';
 
 
 @Component({
@@ -29,10 +30,14 @@ export class EditProfileComponent implements OnInit, OnDestroy {
     private stateService: StateService,
     private cityService: CityService,
     private formBuilder: FormBuilder,
-    private userService: UserService,) { }
+    private userService: UserService,
+    private breadCrumbsService: BreadCrumbsService) { }
 
     get f() { return this.editProfileFrm.controls; }
   ngOnInit(): void {
+
+
+
     this.editProfileFrm = this.formBuilder.group({
       fname: [null, [ Validators.required]],
       lname:[null, [Validators.required]],
@@ -88,6 +93,16 @@ export class EditProfileComponent implements OnInit, OnDestroy {
 
     this.loggedUser$ = this.userService.getloggedUser.pipe(map(res=>{
       if(res){
+        this.breadCrumbsService.bcs$.next([
+          {
+            url: '/',
+            name: 'Home',
+          },
+          {
+            name: `Edit ${ res.fname } Profile`,
+          }
+        ]);
+
         this.editProfileFrm.patchValue({
           fname: res.fname,
           lname: res.lname,

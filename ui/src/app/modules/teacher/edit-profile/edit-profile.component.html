@@ -1,6 +1,7 @@
 
 <app-change-banner></app-change-banner>
 <app-custom-url></app-custom-url>
+<app-bread-crumbs [hide]="true"></app-bread-crumbs>
 <form [formGroup]="editProfileFrm" *ngIf="(loggedUser$ | async) as loggedUser" (ngSubmit)="updateProfile()">
   <!-- common profile secion -->
   <img [src]="loggedUser.avatar" class="avatar-img img-thumbnail" />

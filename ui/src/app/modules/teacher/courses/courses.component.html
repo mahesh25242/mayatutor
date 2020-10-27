@@ -1,4 +1,7 @@
 <h3>Courses</h3>
+
+<app-bread-crumbs [hide]="true"></app-bread-crumbs>
+
 <form class="form-inline" [formGroup]="searchFrm" (ngSubmit)="searchCourse()">
   <div class="form-group mb-2">
     <input type="text" class="form-control" id="search-course" value=""
