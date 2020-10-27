@@ -322,10 +322,7 @@ class UsersController extends Controller
 
     }
 
-    public function myStudents(Request $request){
-        $request->request->add(['teacherId' => Auth::id()]);
-        return $this->fetchAllStudent($request);
-    }
+
 
     public function fetchAllStudent(Request $request){
         $perPage = 20;
@@ -367,6 +364,7 @@ class UsersController extends Controller
         ->where("id", $id)->get()->first();
         return response($user);
     }
+
 
     public function toggleStatus(Request $request){
         $user = User::find($request->input("id", 0));

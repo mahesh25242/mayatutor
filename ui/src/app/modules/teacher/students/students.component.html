@@ -60,20 +60,20 @@
           </td>
           <td data-label="Status">
             <a href="javascript:{}"
-            (click)="toggleStatus(item)" [class]="'toggle-status-'+item.id"
+            (click)="toggleStatus(item.student)" [class]="'toggle-status-'+item.id"
             [ngClass]="{ 'text-success': item.status, 'text-warning': !item.status }"
             placement="top" [ngbTooltip]="!item.status && 'This user can\'t login'">
-              {{ (item.status && 'Active') || (!item.status && 'In-Active') }}
+              {{ (item.student.status && 'Active') || (!item.student.status && 'In-Active') }}
             </a>
           </td>
           <td data-label="Date">
-            <span placement="top" [ngbTooltip]="item.created_at | date:'mediumDate'">{{ item.created_at_human}}</span>
+            <span placement="top" [ngbTooltip]="item.student.created_at | date:'mediumDate'">{{ item.student.created_at_human}}</span>
           </td>
           <td data-label="Details">
             <a href="javascript:{}" (click)="details(item)">Details</a>
           </td>
           <td data-label="Delete">
-            <a href="javascript:{}" (click)="deleteUser(item)"
+            <a href="javascript:{}" (click)="deleteUser(item.student)"
             [class]="'delete-user-'+item.id" class="btn btn-danger btn-sm"><fa-icon [icon]="faTrash"></fa-icon></a>
           </td>
         </tr>

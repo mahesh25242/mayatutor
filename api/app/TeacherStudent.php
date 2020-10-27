@@ -23,12 +23,17 @@ class TeacherStudent extends Model implements AuthenticatableContract, Authoriza
     protected $fillable = [
         'teacher_user_id', 'user_id', 'status'
     ];
+    protected $appends = array('created_at_human');
 
+    public function getCreatedAtHumanAttribute()
+    {
+        return $this->created_at->diffForHumans();
+    }
 
 
     public function student()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User', 'user_id', 'id');
     }
 
     public function teacher()

@@ -69,13 +69,14 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
 
 
         $router->group(['prefix' => 'student', 'middleware' =>  'teacher'], function () use ($router) {
-            $router->get('fetchAll','UsersController@myStudents');
+            $router->get('fetchAll','StudentController@myStudents');
             $router->get('fetchAllStudent','UsersController@fetchAllStudent');
             $router->get('fetch/{id}','UsersController@fetchStudent');
-            $router->post('toggleStatus','UsersController@toggleStatus');
+            $router->post('toggleStatus','StudentController@studenttoggleStatus');
             $router->post('delete','UsersController@delete');
 
             $router->post('addStudent','TeacherController@addStudent');
+            $router->post('deleteStudent','StudentController@deleteStudent');
         });
 
         $router->post('updateAvatar','UsersController@updateAvatar');

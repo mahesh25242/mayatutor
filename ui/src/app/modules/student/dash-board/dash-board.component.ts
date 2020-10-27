@@ -27,7 +27,7 @@ export class DashBoardComponent implements OnInit {
           name: 'Home',
         },
         {
-          name: `${res.fname} Dashboard`,
+          name: `${res?.fname} Dashboard`,
         }
       ]);
     }));

@@ -187,7 +187,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     public function student()
     {
-        return $this->hasMany('App\TeacherStudent');
+        return $this->hasOne('App\TeacherStudent');
     }
 
     public function teacherStudent()
@@ -197,7 +197,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     public function studentCourse()
     {
-        return $this->hasMany('App\StudentCourse');
+        return $this->hasMany('App\StudentCourse', 'user_id');
     }
 
     public function userPlan()
