@@ -3,6 +3,8 @@ import { UserService } from 'src/app/lib/services';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/lib/interfaces';
 import {faEdit } from '@fortawesome/free-solid-svg-icons';
+import { tap } from 'rxjs/operators';
+import { BreadCrumbsService } from 'src/app/shared-module/components/bread-crumbs/bread-crumbs.component';
 
 @Component({
   selector: 'app-dash-board',
@@ -14,10 +16,21 @@ export class DashBoardComponent implements OnInit {
   user$: Observable<User>;
   currentRate = 2.3;
 
-  constructor(private userSerivce: UserService) { }
+  constructor(private userSerivce: UserService,
+    private breadCrumbsService: BreadCrumbsService) { }
 
   ngOnInit(): void {
-    this.user$ = this.userSerivce.getloggedUser;
+    this.user$ = this.userSerivce.getloggedUser.pipe(tap(res=>{
+      this.breadCrumbsService.bcs$.next([
+        {
+          url: '/',
+          name: 'Home',
+        },
+        {
+          name: `${res.fname} Dashboard`,
+        }
+      ]);
+    }));
   }
 
 }

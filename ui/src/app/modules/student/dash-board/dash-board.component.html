@@ -1,4 +1,5 @@
 <div class="card" *ngIf="(user$ | async) as user">
+  <app-bread-crumbs [hide]="true"></app-bread-crumbs>
   <div class="card-body">
     <img [src]="user.avatar" class="avatar-img img-thumbnail" />
     {{ user.fname }} {{ user.lname }}
