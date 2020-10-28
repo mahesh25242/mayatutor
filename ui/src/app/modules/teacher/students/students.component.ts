@@ -57,7 +57,7 @@ export class StudentsComponent implements OnInit, OnDestroy {
     Notiflix.Block.Merge({svgSize:'20px',});
     Notiflix.Block.Dots(`.delete-user-${user.id}`);
 
-    Notiflix.Confirm.Show('Delete?', "Are you sure you want to delete?", 'Yes', 'No', () => {
+    Notiflix.Confirm.Show('Delete?', "Are you sure you want remove him from your class?", 'Yes', 'No', () => {
       this.toggleStstuSubScr = this.studentService.deleteStudent(user).pipe(mergeMap(res=>{
         return this.loadUser(res);
     })).subscribe((res: any)=>{

@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, Subscription } from 'rxjs';
 import { User } from 'src/app/lib/interfaces';
-import { UserService, TeacherService } from 'src/app/lib/services';
+import { UserService, TeacherService, StudentService } from 'src/app/lib/services';
 import Notiflix from "notiflix";
 import { mergeMap } from 'rxjs/internal/operators/mergeMap';
 import { map } from 'rxjs/operators';
@@ -21,7 +21,8 @@ export class DetailsComponent implements OnInit {
   deletUserSubScr: Subscription;
   constructor(private userService: UserService,
     public modal: NgbActiveModal,
-    private teacherService: TeacherService,) { }
+    private teacherService: TeacherService,
+    private studentService: StudentService) { }
 
 
     deleteUser(): void{
@@ -29,9 +30,9 @@ export class DetailsComponent implements OnInit {
       Notiflix.Block.Dots(`.delete-user`);
 
       Notiflix.Confirm.Show('Delete?', "Are you sure you want to delete?", 'Yes', 'No', () => {
-        this.deletUserSubScr = this.userService.deleteUser(`admin/${this.user.role_url}`, this.user).subscribe(res=>{
+        this.deletUserSubScr = this.studentService.deleteStudent(this.user.student).subscribe(res=>{
         Notiflix.Block.Remove(`.delete-user`);
-        Notiflix.Notify.Success(res.message);
+        Notiflix.Notify.Success('successfully deleted');
         this.loadUser.emit();
       }, err=>{
         Notiflix.Block.Remove(`.delete-user`);
@@ -59,10 +60,7 @@ export class DetailsComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    this.user$ = this.userService.getUser(`${this.user.id}`, `admin/${this.user.role_url}`).pipe(map(res=>{
-      this.user.teacher_auto_approval_count = res?.teacher_auto_approval_count;
-      return res;
-    }));
+
   }
 
 }
