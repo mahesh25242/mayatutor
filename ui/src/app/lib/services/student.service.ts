@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { StudentCourse } from '../interfaces';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 
 @Injectable({
@@ -8,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class StudentService {
 
   constructor(private http: HttpClient) { }
+
 
   addStudent(postData: any = null){
     return this.http.post("/student/addStudent", postData);
@@ -20,5 +23,6 @@ export class StudentService {
   toggleStatus(postData: any = null){
     return this.http.post("/student/toggleStatus", postData);
   }
+
 
 }

@@ -25,6 +25,13 @@ class StudentCourse extends Model implements AuthenticatableContract, Authorizab
     ];
 
 
+    protected $appends = array('status_text');
+
+    public function getStatusTextAttribute()
+    {
+        return (($this->status) ? 'Active' : 'In-Active');
+    }
+
 
     public function student()
     {

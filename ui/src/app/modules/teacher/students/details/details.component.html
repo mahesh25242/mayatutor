@@ -22,6 +22,36 @@
         Contact Number: {{ user.phone}}
         Email: {{ user.email}}
 
+        <table class="table">
+          <thead>
+            <tr>
+              <th>
+                Course
+              </th>
+              <th>
+                Assigned
+              </th>
+              <th>
+                Status
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngIf="(studentCourses$ | async) as studentCourses">
+              <tr *ngFor="let studentCourse of studentCourses">
+                <td>
+                  {{ studentCourse.course.name}}
+                </td>
+                <td>
+                  {{ studentCourse.created_at | date :'medium'}}
+                </td>
+                <td>
+                  <a href="javascript:{}" (click)="toggleCourseStatus(studentCourse)">{{ studentCourse.status_text }}</a>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
 
     </div>
   </div>

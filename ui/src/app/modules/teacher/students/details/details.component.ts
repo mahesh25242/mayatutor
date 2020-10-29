@@ -1,11 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, Subscription } from 'rxjs';
-import { User } from 'src/app/lib/interfaces';
-import { UserService, TeacherService, StudentService } from 'src/app/lib/services';
+import { StudentCourse, User } from 'src/app/lib/interfaces';
+import { UserService, TeacherService, StudentService, StudentCourseService } from 'src/app/lib/services';
 import Notiflix from "notiflix";
 import { mergeMap } from 'rxjs/internal/operators/mergeMap';
 import { map } from 'rxjs/operators';
+
 
 
 @Component({
@@ -13,16 +14,20 @@ import { map } from 'rxjs/operators';
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.scss']
 })
-export class DetailsComponent implements OnInit {
+export class DetailsComponent implements OnInit,OnDestroy {
   @Input() user: User;
   user$: Observable<User>;
   @Output() public loadUser = new EventEmitter();
+  studentCourses$: Observable<StudentCourse[]>;
 
   deletUserSubScr: Subscription;
+  toggleStstuSubScr: Subscription;
+  studentCoursesSubScr: Subscription;
   constructor(private userService: UserService,
     public modal: NgbActiveModal,
     private teacherService: TeacherService,
-    private studentService: StudentService) { }
+    private studentService: StudentService,
+    private studentCourseService: StudentCourseService    ) { }
 
 
     deleteUser(): void{
@@ -45,22 +50,38 @@ export class DetailsComponent implements OnInit {
 
     }
 
-    toggleAutoApproval(): void{
-      Notiflix.Block.Merge({svgSize:'20px',});
-      Notiflix.Block.Dots(`.auto-approval`);
-
-      this.deletUserSubScr = this.teacherService.toggleAutoApproval(this.user).subscribe(res=>{
-        Notiflix.Block.Remove(`.auto-approval`);
+    toggleCourseStatus(studentCourse: StudentCourse){
+      Notiflix.Confirm.Show('Change Status?', "Are you sure you want to change status?", 'Yes', 'No', () => {
+        Notiflix.Loading.Arrows();
+        this.toggleStstuSubScr = this.studentCourseService.toggleStatus(studentCourse).pipe(mergeMap(res=>{
+          return this.studentCourseService.studentCourses(this.user);
+        })).subscribe((res: any)=>{
+        Notiflix.Loading.Remove();
         Notiflix.Notify.Success(res.message);
       }, err=>{
-        Notiflix.Block.Remove(`.auto-approval`);
+        Notiflix.Loading.Remove();
       });
 
+      }, () => {
 
+      } )
     }
 
   ngOnInit(): void {
+    this.studentCoursesSubScr = this.studentCourseService.studentCourses(this.user).subscribe();
+    this.studentCourses$ = this.studentCourseService.studentCourse;
+  }
 
+  ngOnDestroy(){
+    if(this.deletUserSubScr){
+      this.deletUserSubScr.unsubscribe();
+    }
+    if(this.toggleStstuSubScr){
+      this.toggleStstuSubScr.unsubscribe();
+    }
+    if(this.studentCoursesSubScr){
+      this.studentCoursesSubScr.unsubscribe();
+    }
   }
 
 }

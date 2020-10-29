@@ -15,3 +15,4 @@ export * from './courseTag';
 export * from './pagination';
 export * from './courseApprovalRequest';
 export * from './teacherStudent';
+export * from './student-course';
