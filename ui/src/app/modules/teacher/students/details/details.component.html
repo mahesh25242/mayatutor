@@ -34,6 +34,9 @@
               <th>
                 Status
               </th>
+              <th>
+                Delete
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -48,6 +51,12 @@
                 <td>
                   <a href="javascript:{}" (click)="toggleCourseStatus(studentCourse)">{{ studentCourse.status_text }}</a>
                 </td>
+                <td>
+                  <a href="javascript:{}" (click)="deleteStudentCourse(studentCourse)">Delete</a>
+                </td>
+              </tr>
+              <tr *ngIf="!studentCourses || !studentCourses.length">
+                <td colspan="4">No course found</td>
               </tr>
             </ng-container>
           </tbody>

@@ -1,0 +1,18 @@
+<form [formGroup]="paymentFrm">
+  <app-modal>
+    <div header>Payments - {{user.fname}} {{user.lname }}</div>
+    <div body>
+      <div class="form-group">
+        <label for="course">Course</label>
+        <ng-select [items]="(courses$ | async)?.data"
+            bindLabel="name"
+            id="id"
+            placeholder="Select Course"
+            formControlName="course">
+            </ng-select>
+      </div>
+
+    </div>
+    <div footer></div>
+  </app-modal>
+</form>

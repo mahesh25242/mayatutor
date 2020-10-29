@@ -67,6 +67,23 @@ export class DetailsComponent implements OnInit,OnDestroy {
       } )
     }
 
+    deleteStudentCourse(studentCourse: StudentCourse){
+      Notiflix.Confirm.Show('Delete', "Are you sure you want to delete?", 'Yes', 'No', () => {
+        Notiflix.Loading.Arrows();
+        this.toggleStstuSubScr = this.studentCourseService.deleteCourse(studentCourse).pipe(mergeMap(res=>{
+          return this.studentCourseService.studentCourses(this.user);
+        })).subscribe((res: any)=>{
+        Notiflix.Loading.Remove();
+        Notiflix.Notify.Success(res.message);
+      }, err=>{
+        Notiflix.Loading.Remove();
+      });
+
+      }, () => {
+
+      } )
+    }
+
   ngOnInit(): void {
     this.studentCoursesSubScr = this.studentCourseService.studentCourses(this.user).subscribe();
     this.studentCourses$ = this.studentCourseService.studentCourse;

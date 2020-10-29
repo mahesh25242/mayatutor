@@ -56,7 +56,7 @@
             {{ item.fname }} {{ item.lname }}
           </td>
           <td data-label="Invoice">
-              <a href="javascript:{}">View</a>
+              <a href="javascript:{}" (click)="payments(item)">View</a>
           </td>
           <td data-label="Status">
             <a href="javascript:{}"

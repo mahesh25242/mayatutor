@@ -24,4 +24,8 @@ export class StudentCourseService {
     return this.http.post("/student/course/toggleStatus", postData);
   }
 
+  deleteCourse(postData: any = null){
+    return this.http.post("/student/course/deleteCourse", postData);
+  }
+
 }

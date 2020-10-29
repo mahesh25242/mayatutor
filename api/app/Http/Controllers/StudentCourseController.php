@@ -16,7 +16,13 @@ class StudentCourseController extends Controller
             $studentCourse->save();
         }
 
-        return response($studentCourse);
+        return response(["message" => 'Successfully changed status', "status" => true]);
+    }
+
+    public function deleteCourse(Request $request){
+        $studentCourse = \App\StudentCourse::find($request->input("id"))->delete();;
+
+        return response(["message" => 'Successfully deleted course', "status" => true]);
     }
 
     public function studentCourse(Request $request){

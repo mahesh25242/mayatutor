@@ -30,6 +30,7 @@ import { StudentsComponent } from './students/students.component';
 import { StudentsResolver } from './students/students-resolver';
 import { DetailsComponent } from './students/details/details.component';
 import { AddStudentComponent } from './students/add-student/add-student.component';
+import { StudentPaymentComponent } from './students/student-payment/student-payment.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { AddStudentComponent } from './students/add-student/add-student.componen
     ContactTeacherComponent,
     StudentsComponent,
     DetailsComponent,
-    AddStudentComponent
+    AddStudentComponent,
+    StudentPaymentComponent
   ],
   imports: [
     CommonModule,

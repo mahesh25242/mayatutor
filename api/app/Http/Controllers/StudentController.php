@@ -16,7 +16,7 @@ class StudentController extends Controller
             $teacherStudent->save();
         }
 
-        return response($teacherStudent);
+        return response(["message" => 'Successfully changed status', "status" => true]);
     }
 
     public function myStudents(Request $request){

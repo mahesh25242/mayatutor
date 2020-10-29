@@ -10,6 +10,7 @@ import Notiflix from "notiflix";
 import { map, mergeMap } from 'rxjs/operators';
 import { DetailsComponent } from './details/details.component';
 import { BreadCrumbsService } from 'src/app/shared-module/components/bread-crumbs/bread-crumbs.component';
+import { StudentPaymentComponent } from './student-payment/student-payment.component';
 
 @Component({
   selector: 'app-students',
@@ -86,6 +87,13 @@ export class StudentsComponent implements OnInit, OnDestroy {
     })).subscribe(res=>{
       activeModal.close();
     });
+  }
+
+  payments(user:User=null){
+    const activeModal = this._modalService.open(StudentPaymentComponent,{ size: 'lg'});
+
+    activeModal.componentInstance.user = user;
+
   }
 
   loadUser(ret:any=null, page:number = 1){
