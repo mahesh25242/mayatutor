@@ -79,7 +79,8 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
             $router->post('deleteStudent','StudentController@deleteStudent');
 
             $router->group(['prefix' => 'course'], function () use ($router) {
-                $router->post('/','StudentCourseController@studentCourse');
+                $router->post('/','StudentCourseController@studentTeacherCourse');
+                $router->post('allMyCourses','StudentCourseController@allMyCourses');
                 $router->post('toggleStatus','StudentCourseController@toggleCourse');
                 $router->post('deleteCourse','StudentCourseController@deleteCourse');
 

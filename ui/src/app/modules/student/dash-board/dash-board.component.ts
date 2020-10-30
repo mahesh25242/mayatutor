@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/lib/services';
+import { StudentCourseService, UserService } from 'src/app/lib/services';
 import { Observable } from 'rxjs';
-import { User } from 'src/app/lib/interfaces';
+import { StudentCourse, User } from 'src/app/lib/interfaces';
 import {faEdit } from '@fortawesome/free-solid-svg-icons';
 import { tap } from 'rxjs/operators';
 import { BreadCrumbsService } from 'src/app/shared-module/components/bread-crumbs/bread-crumbs.component';
@@ -15,9 +15,10 @@ export class DashBoardComponent implements OnInit {
   faEdit = faEdit;
   user$: Observable<User>;
   currentRate = 2.3;
-
+  studentCourses$: Observable<StudentCourse[]>;
   constructor(private userSerivce: UserService,
-    private breadCrumbsService: BreadCrumbsService) { }
+    private breadCrumbsService: BreadCrumbsService,
+    private studentCourseService: StudentCourseService) { }
 
   ngOnInit(): void {
     this.user$ = this.userSerivce.getloggedUser.pipe(tap(res=>{
@@ -31,6 +32,9 @@ export class DashBoardComponent implements OnInit {
         }
       ]);
     }));
+
+    this.studentCourses$ = this.studentCourseService.allMyCourses();
+
   }
 
 }

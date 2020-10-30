@@ -25,7 +25,7 @@ class StudentCourseController extends Controller
         return response(["message" => 'Successfully deleted course', "status" => true]);
     }
 
-    public function studentCourse(Request $request){
+    public function studentTeacherCourse(Request $request){
         $studentCourse = \App\StudentCourse::with(["course"])
         ->where("user_id", $request->input("id", 0))
         ->whereHas("course" , function($query){
@@ -35,7 +35,12 @@ class StudentCourseController extends Controller
         return response($studentCourse);
     }
 
+    public function allMyCourses(Request $request){
+        $studentCourse = \App\StudentCourse::with(["course.user"])
+        ->where("user_id", Auth::id())->get();
 
+        return response($studentCourse);
+    }
 
 
 

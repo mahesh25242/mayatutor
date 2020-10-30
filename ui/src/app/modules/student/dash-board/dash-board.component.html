@@ -1,5 +1,11 @@
 <div class="card" *ngIf="(user$ | async) as user">
   <app-bread-crumbs [hide]="true"></app-bread-crumbs>
+
+  <ng-container *ngIf="(studentCourses$ | async) as studentCourses">
+    <app-assigned-course-block *ngFor="let studentCourse of studentCourses" [studentCourse]="studentCourse"></app-assigned-course-block>
+  </ng-container>
+  <h3>Total Course: {{ (studentCourses$ | async)?.length }}</h3>
+
   <div class="card-body">
     <img [src]="user.avatar" class="avatar-img img-thumbnail" />
     {{ user.fname }} {{ user.lname }}
