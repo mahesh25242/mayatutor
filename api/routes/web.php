@@ -82,6 +82,12 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
                 $router->post('/','StudentCourseController@studentCourse');
                 $router->post('toggleStatus','StudentCourseController@toggleCourse');
                 $router->post('deleteCourse','StudentCourseController@deleteCourse');
+
+                $router->group(['prefix' => 'payment'], function () use ($router) {
+                    $router->post('/','UserPaymentController@studentPaymentByCourse');
+                    $router->post('create','UserPaymentController@createStudentPaymentByCourse');
+                });
+
             });
         });
 

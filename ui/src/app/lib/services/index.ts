@@ -10,3 +10,4 @@ export * from './teacher.service';
 export * from './course.service';
 export * from './student.service';
 export * from './student-course.service';
+export * from './student-payment.service';
