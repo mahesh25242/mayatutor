@@ -133,7 +133,7 @@ class CourseController extends Controller
     }
 
     public function course($courseId = 0){
-        $course = \App\Course::find($courseId);
+        $course = \App\Course::with()->find($courseId);
         return response($course);
     }
 
@@ -148,7 +148,7 @@ class CourseController extends Controller
     public function listAllCourses(Request $request){
 
 //        $isAdmin = \App\User::has("isAdmin")->find(Auth::id());
-        $perPage = 2;
+        $perPage = 20;
         $courses = \App\Course::withCount(["courseModule"])->with(["user.rating", "latestCourseApprovalRequest"]);
         $q = $request->input("q", null);
         if($q){

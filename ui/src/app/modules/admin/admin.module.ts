@@ -11,10 +11,12 @@ import { CoursesResolver } from './courses/courses-resolver';
 import { UsersComponent } from './users/users.component';
 import { UsersResolver } from './users/users-resolver';
 import { DetailsComponent } from './users/details/details.component';
+import { CourseDetailComponent } from './courses/course-detail/course-detail.component';
+import { CourseDetailResolver } from './courses/course-detail/course-detail-resolver';
 
 
 @NgModule({
-  declarations: [AdminHomeComponent, DashBoardComponent, EditProfileComponent, CoursesComponent, UsersComponent, DetailsComponent],
+  declarations: [AdminHomeComponent, DashBoardComponent, EditProfileComponent, CoursesComponent, UsersComponent, DetailsComponent, CourseDetailComponent],
   imports: [
     CommonModule,
     SharedModuleModule,
@@ -23,8 +25,8 @@ import { DetailsComponent } from './users/details/details.component';
   ],
   providers:[
     CoursesResolver,
-    UsersResolver
-
+    UsersResolver,
+    CourseDetailResolver
   ]
 })
 export class AdminModule { }

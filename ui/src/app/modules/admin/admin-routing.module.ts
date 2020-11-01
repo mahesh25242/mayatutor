@@ -8,6 +8,8 @@ import { CoursesComponent } from './courses/courses.component';
 import { UsersComponent } from './users/users.component';
 import { UsersResolver } from './users/users-resolver';
 import { CoursesResolver } from './courses/courses-resolver';
+import { CourseDetailComponent } from './courses/course-detail/course-detail.component';
+import { CourseDetailResolver } from './courses/course-detail/course-detail-resolver';
 
 
 const routes: Routes = [
@@ -29,7 +31,14 @@ const routes: Routes = [
         component: CoursesComponent,
         resolve:{
           courses: CoursesResolver
-        }
+        },
+      },
+      {
+        path: 'courses/:id/detail',
+        component: CourseDetailComponent,
+        resolve:{
+          course: CourseDetailResolver
+        },
       },
       {
         path: 'teachers',

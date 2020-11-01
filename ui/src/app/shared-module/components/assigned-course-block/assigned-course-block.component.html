@@ -5,6 +5,9 @@
     <p>{{ studentCourse.course.user.fname }} {{ studentCourse.course.user.lname }}</p>
     <app-rating [rating]="studentCourse.course.user.rating" [readonly]="true"></app-rating>
     <p class="card-text">{{studentCourse.course.description}}</p>
-    <a href="javascript:{}" class="btn btn-primary">Continue</a>
+    <span placement="top" [ngbTooltip]="(studentCourse.course.latest_course_approval_request.status != 1) ? 'Course is under approvel' :''">
+      <button href="javascript:{}" class="btn btn-primary"
+      [disabled]="studentCourse.course.latest_course_approval_request.status != 1">Continue</button>
+    </span>
   </div>
 </div>

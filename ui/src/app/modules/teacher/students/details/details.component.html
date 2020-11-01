@@ -43,13 +43,13 @@
             <ng-container *ngIf="(studentCourses$ | async) as studentCourses">
               <tr *ngFor="let studentCourse of studentCourses">
                 <td>
-                  {{ studentCourse.course.name}}
+                 <span [ngClass]="{'text-warning' : studentCourse.course.latest_course_approval_request.status != 1}" placement="top" [ngbTooltip]="(studentCourse.course.latest_course_approval_request.status != 1) ? ' Course is in '+studentCourse.course.latest_course_approval_request.status_text+' status  student can\'t launch this course': '' ">{{ studentCourse.course.name}}</span>
                 </td>
                 <td>
                   {{ studentCourse.created_at | date :'medium'}}
                 </td>
                 <td>
-                  <a href="javascript:{}" (click)="toggleCourseStatus(studentCourse)">{{ studentCourse.status_text }}</a>
+                  <a href="javascript:{}" placement="top" [ngbTooltip]="(!studentCourse.status) ? ' Course is in in-active status  so student can\'t launch this course': '' " (click)="toggleCourseStatus(studentCourse)"  [ngClass]="{'text-warning': !studentCourse.status}">{{ studentCourse.status_text }}</a>
                 </td>
                 <td>
                   <a href="javascript:{}" (click)="deleteStudentCourse(studentCourse)">Delete</a>

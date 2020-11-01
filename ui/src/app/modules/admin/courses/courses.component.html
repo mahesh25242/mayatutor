@@ -42,7 +42,7 @@
           {{course.course_module_count}}
         </td>
         <td data-label="Detail">
-          <a href="javascript:{}" class="btn btn-primary btn-sm">Detail</a>
+          <a [routerLink]="course.id+'/detail'" class="btn btn-primary btn-sm">Detail</a>
         </td>
       </tr>
       <tr *ngIf="!courses?.data.length">
