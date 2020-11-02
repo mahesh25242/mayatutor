@@ -103,8 +103,6 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
         });
 
         $router->group(['prefix' => 'teacher',  'middleware' =>  'teacher'], function () use ($router) {
-
-
             $router->post('changeBanner','TeacherController@changeBanner');
             $router->post('updatePaymentQRCode','TeacherController@updatePaymentQRCode');
             $router->group(['prefix' => 'courses'], function () use ($router) {
@@ -125,6 +123,7 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
                 $router->post('createModule','CourseModuleController@createCourseModule');
                 $router->post('deleteModule','CourseModuleController@deleteCourseModule');
                 $router->post('orderCourseModule','CourseModuleController@orderCourseModule');
+                $router->get('aModule/{id}','CourseModuleController@getAModule');
             });
         });
 

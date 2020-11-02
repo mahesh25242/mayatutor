@@ -21,6 +21,14 @@
   </div>
 
   <div class="form-group">
+    <label for="pdf">Video From</label>
+    <select class="form-control" formControlName="video_type">
+      <option value="youtube">Youtube</option>
+      <option value="vimeo">Vimeo</option>
+    </select>
+  </div>
+
+  <div class="form-group">
     <label for="video_url">Video Link</label>
     <input type="url" class="form-control" id="video_url" aria-describedby="videoLinkHelp"
     placeholder="Video Link" formControlName="video_url"

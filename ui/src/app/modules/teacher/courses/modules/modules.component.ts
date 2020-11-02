@@ -47,7 +47,7 @@ export class ModulesComponent implements OnInit, OnDestroy {
       source : [
         {
           src: `${module.video_url}&modestbranding=1&showinfo=0&rel=0`,
-          provider: 'youtube',
+          provider: module.video_type,
         },
       ]
     };

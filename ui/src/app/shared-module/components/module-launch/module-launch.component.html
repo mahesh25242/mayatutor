@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="col">
+    <app-player [videoSources]="video"></app-player>
+  </div>
+  <div class="col">
+    <pdf-viewer [src]="pdfSrc"
+        [render-text]="true"
+        [fit-to-page]="false"
+        [stick-to-page]="false"
+    ></pdf-viewer>
+  </div>
+</div>

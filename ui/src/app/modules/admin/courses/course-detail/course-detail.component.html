@@ -8,4 +8,20 @@
   </div>
 </div>
 
-{{ course.name}}
+<ng-container *ngIf="course.course_tag">
+  <span class="badge" *ngFor="let course_tag of course.course_tag">{{course_tag.tag_name}}</span>
+</ng-container>
+
+<p [innerHTML]="course.description"></p>
+
+<ng-container *ngIf="course.course_module">
+  <div class="card" *ngFor="let course_module of course.course_module">
+    <div class="card-body">
+      <a *ngIf="course_module.video_url" href="javascript:{}" [routerLink]="course_module.id+'/launch'">
+        <img [src]="course_module.thumb_image" />
+      </a>
+      <h5 class="card-title" [innerHTML]="course_module.name"></h5>
+      <!-- <app-player [videoSources]="videoResourse(course_module)"></app-player> -->
+    </div>
+  </div>
+</ng-container>

@@ -4,8 +4,7 @@ import { Observable, Subscription } from 'rxjs';
 import { StudentCourse, User } from 'src/app/lib/interfaces';
 import { UserService, TeacherService, StudentService, StudentCourseService } from 'src/app/lib/services';
 import Notiflix from "notiflix";
-import { mergeMap } from 'rxjs/internal/operators/mergeMap';
-import { map } from 'rxjs/operators';
+import { map, mergeMap } from 'rxjs/operators';
 
 
 

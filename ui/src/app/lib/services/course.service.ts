@@ -33,6 +33,11 @@ export class CourseService {
     return this.http.get<Course>(`/course/${courseId}`);
   }
 
+
+  module(courseId:number=0, moduleId:number=0):Observable<Course>{
+    return this.http.get<Course>(`/course/${courseId}/module/aModule/${moduleId}`);
+  }
+
   createCourse(postData: any = null){
     return this.http.post('/course/createCourse', postData);
   }
@@ -60,5 +65,6 @@ export class CourseService {
   orderCourseModule(courseId:number=0, postData: any = null){
     return this.http.post(`/course/${courseId}/module/orderCourseModule`, postData);
   }
+
 
 }

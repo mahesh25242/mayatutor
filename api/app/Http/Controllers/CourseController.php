@@ -133,7 +133,7 @@ class CourseController extends Controller
     }
 
     public function course($courseId = 0){
-        $course = \App\Course::with()->find($courseId);
+        $course = \App\Course::with(["courseTag", "courseModule"])->find($courseId);
         return response($course);
     }
 

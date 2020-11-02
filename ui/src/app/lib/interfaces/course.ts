@@ -17,8 +17,9 @@ export interface Course {
   news?: string,
   user?: User,
   course_module_count?: number,
-  course_tag?: CourseTag,
-  latest_course_approval_request?: courseApprovalRequest
+  course_tag?: CourseTag[],
+  latest_course_approval_request?: courseApprovalRequest,
+  course_module?: CourseModule[]
 }
 
 
@@ -31,7 +32,9 @@ export interface CourseModule {
   status?: number,
   live_class?: number,
   sort_order?: number,
-  course: Course
+  course?: Course,
+  video_type?: string,
+  thumb_image?: string
 }
 
 export interface CourseWithPagination extends Pagination {

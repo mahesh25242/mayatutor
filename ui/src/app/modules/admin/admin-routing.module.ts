@@ -10,6 +10,8 @@ import { UsersResolver } from './users/users-resolver';
 import { CoursesResolver } from './courses/courses-resolver';
 import { CourseDetailComponent } from './courses/course-detail/course-detail.component';
 import { CourseDetailResolver } from './courses/course-detail/course-detail-resolver';
+import { LaunchModuleComponent } from './courses/course-detail/launch-module/launch-module.component';
+import { LaunchModuleResolver } from './courses/course-detail/launch-module/launch-moduleresolver';
 
 
 const routes: Routes = [
@@ -38,6 +40,13 @@ const routes: Routes = [
         component: CourseDetailComponent,
         resolve:{
           course: CourseDetailResolver
+        },
+      },
+      {
+        path: 'courses/:id/detail/:moduleId/launch',
+        component: LaunchModuleComponent,
+        resolve:{
+          module: LaunchModuleResolver
         },
       },
       {

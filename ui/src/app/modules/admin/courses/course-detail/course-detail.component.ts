@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Course } from 'src/app/lib/interfaces';
+import { Course, CourseModule } from 'src/app/lib/interfaces';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModuleLaunchComponent } from 'src/app/shared-module/components/module-launch/module-launch.component';
 
 @Component({
   selector: 'app-course-detail',
@@ -9,10 +11,16 @@ import { Course } from 'src/app/lib/interfaces';
 })
 export class CourseDetailComponent implements OnInit {
   course: Course;
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute,
+    private _modalService: NgbModal,) { }
+
 
   ngOnInit(): void {
     this.course = this.route.snapshot.data["course"];
   }
+
+
+
+
 
 }

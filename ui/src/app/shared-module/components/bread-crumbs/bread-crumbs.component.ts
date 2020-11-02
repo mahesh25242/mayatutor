@@ -20,7 +20,7 @@ export class BreadCrumbsService {
   get bcs(){
     return this.bcs$.asObservable().pipe(tap(res=>{
       const lbc = last(res);
-      if(lbc.name){
+      if(lbc?.name){
         this.titleService.setTitle(`${environment.siteName}: ${lbc.name}`);
       }else{
         this.titleService.setTitle(`${environment.siteName}`);

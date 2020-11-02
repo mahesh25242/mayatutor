@@ -39,7 +39,7 @@ myInputVariable: ElementRef;
       source : [
         {
           src: `${this.f.video_url.value}&modestbranding=1&showinfo=0&rel=0`,
-          provider: 'youtube',
+          provider: this.f.video_type.value,
         },
       ]
     };
@@ -57,6 +57,7 @@ myInputVariable: ElementRef;
       formData.append('pdf', this.f.pdf.value);
 
     formData.append('video_url', `${(this.f.video_url.value) ? this.f.video_url.value : ''}`);
+    formData.append('video_type', `${(this.f.video_type.value) ? this.f.video_type.value : ''}`);
 
     this.courseService.createModule(this.course.id, formData).pipe(mergeMap(res=>{
       return this.courseService.listModules(this.course.id).pipe(map(modules=>{
@@ -93,7 +94,8 @@ myInputVariable: ElementRef;
       id: [null, [ ]],
       name: [null, [ Validators.required]],
       pdf: [null, [ Validators.required]],
-      video_url: [null, [ Validators.required]]
+      video_url: [null, [ Validators.required]],
+      video_type: [null, [ Validators.required]],
     });
 
   }
@@ -103,7 +105,8 @@ myInputVariable: ElementRef;
       id: this.module?.id,
       name: this.module?.name,
       pdf: this.module?.pdf,
-      video_url: this.module?.video_url
+      video_url: this.module?.video_url,
+      video_type: this.module?.video_type
     });
     if(this.myInputVariable && this.myInputVariable.nativeElement)
       this.myInputVariable.nativeElement.value = "";
