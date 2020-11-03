@@ -116,6 +116,7 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
 
             $router->post('createCourse','CourseController@createCourse');
             $router->post('deleteCourse','CourseController@deleteCourse');
+            $router->post('approveCourse','CourseController@approveCourse');
             $router->get('{courseId}','CourseController@course');
 
             $router->group(['prefix' => '{courseId}/module'], function () use ($router) {

@@ -1,4 +1,5 @@
 <h3>Courses</h3>
+<app-bread-crumbs></app-bread-crumbs>
 
 <form class="form-inline" [formGroup]="searchFrm" (ngSubmit)="search()">
   <input type="text" class="form-control my-1 mr-sm-2" placeholder="Search" formControlName="q" />
@@ -36,7 +37,8 @@
           {{ course.name}}
         </td>
         <td data-label="Status">
-          <span [class]="'status-'+course.latest_course_approval_request.status">{{course.latest_course_approval_request.status_text}}</span>
+          <span [class]="'status-'+course.latest_course_approval_request.status" placement="top"
+          [ngbTooltip]="(course.latest_course_approval_request.message) ? course.latest_course_approval_request.message : ''">{{course.latest_course_approval_request.status_text}}</span>
         </td>
         <td data-label="Module#">
           {{course.course_module_count}}

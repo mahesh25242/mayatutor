@@ -49,7 +49,7 @@ class CourseModuleController extends Controller
         if ($request->hasFile('pdf')) {
             $status = true;
             $modulePdf = sprintf("%s.%s",time(), $request->file('pdf')->extension());
-            $destinationPath = "assets/course";
+            $destinationPath = "assets/course/".$request->input("course_id", 0);
             $request->file('pdf')->move($destinationPath, $modulePdf);
         }
 
@@ -119,7 +119,9 @@ class CourseModuleController extends Controller
         ]);
     }
 
-    public function getAModule(Request $request){
+    public function getAModule($courseId =0,$id = 0){
+        $module = \App\CourseModule::with(["course"])->find($id);
+        return response($module);
 
     }
 }

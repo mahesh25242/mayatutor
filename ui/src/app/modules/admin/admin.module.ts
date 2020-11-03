@@ -17,10 +17,11 @@ import { CourseDetailComponent } from './courses/course-detail/course-detail.com
 import { CourseDetailResolver } from './courses/course-detail/course-detail-resolver';
 import { LaunchModuleComponent } from './courses/course-detail/launch-module/launch-module.component';
 import { LaunchModuleResolver } from './courses/course-detail/launch-module/launch-moduleresolver';
+import { RejectMessageComponent } from './courses/course-detail/reject-message/reject-message.component';
 
 
 @NgModule({
-  declarations: [AdminHomeComponent, DashBoardComponent, EditProfileComponent, CoursesComponent, UsersComponent, DetailsComponent, CourseDetailComponent, LaunchModuleComponent],
+  declarations: [AdminHomeComponent, DashBoardComponent, EditProfileComponent, CoursesComponent, UsersComponent, DetailsComponent, CourseDetailComponent, LaunchModuleComponent, RejectMessageComponent],
   imports: [
     CommonModule,
     SharedModuleModule,

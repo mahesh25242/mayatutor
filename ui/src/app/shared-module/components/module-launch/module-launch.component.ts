@@ -24,7 +24,12 @@ export class ModuleLaunchComponent implements OnInit {
         },
       ]
     };
-    this.pdfSrc =  "https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf"
+    //this.courseModule.pdf = 'https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf';
+    this.pdfSrc =  this.courseModule.pdf
+  }
+
+  onPdfError(error: any) {
+    console.log(error)
   }
 
 }

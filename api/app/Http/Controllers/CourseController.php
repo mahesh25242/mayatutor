@@ -133,7 +133,9 @@ class CourseController extends Controller
     }
 
     public function course($courseId = 0){
-        $course = \App\Course::with(["courseTag", "courseModule"])->find($courseId);
+        $course = \App\Course::with(["courseTag", "courseModule", "user" => function($query){
+            $query->withCount(["teacherAutoApproval"]);
+        }, "latestCourseApprovalRequest"])->find($courseId);
         return response($course);
     }
 
@@ -155,6 +157,22 @@ class CourseController extends Controller
             $courses = $courses->where("name", "LIKE", "%{$q}%");
         }
         return response($courses->paginate($perPage));
+    }
+
+    public function approveCourse(Request $request){
+        $courseApprovalRequest = \App\CourseApprovalRequest::find($request->input("id", 0));
+        if($courseApprovalRequest){
+            $courseApprovalRequest->status = $request->input("status", 0);
+            $courseApprovalRequest->message = ($courseApprovalRequest->status ==1 ) ? '' :$request->input("message", '');
+            $courseApprovalRequest->save();
+            return response([
+                'message' => 'successfully approved!', 'status' => true
+            ]);
+        }else{
+            return response([
+                'message' => 'sorry request not found', 'status' => false
+            ], 422);
+        }
     }
 
 

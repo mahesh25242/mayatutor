@@ -27,7 +27,7 @@ export interface CourseModule {
   id?: number,
   course_id?: number,
   name?: string,
-  pdf?: number,
+  pdf?: string,
   video_url?: string,
   status?: number,
   live_class?: number,

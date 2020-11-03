@@ -1,8 +1,10 @@
 <ng-container *ngIf="(bcs | async) as bc">
-  <ul *ngIf="!hide">
-    <li *ngFor="let bread of bc">
-      <a [routerLink]="bread.url" *ngIf="bread.url">{{bread.name}}</a>
-      <label *ngIf="!bread.url">{{bread.name}}</label>
-    </li>
-  </ul>
+  <nav *ngIf="!hide" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li *ngFor="let bread of bc" class="breadcrumb-item" [ngClass]="{'active': !bread.url}">
+        <a [routerLink]="bread.url" *ngIf="bread.url">{{bread.name}}</a>
+        <label *ngIf="!bread.url">{{bread.name}}</label>
+      </li>
+    </ol>
+  </nav>
 </ng-container>

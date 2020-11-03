@@ -21,7 +21,7 @@ class CourseApprovalRequest extends Model implements AuthenticatableContract, Au
      * @var array
      */
     protected $fillable = [
-        'course_id', 'status'
+        'course_id', 'status', 'message'
     ];
 
 
@@ -37,7 +37,7 @@ class CourseApprovalRequest extends Model implements AuthenticatableContract, Au
             case 1:
                 $text = 'Approved';
             break;
-            case 3:
+            case 2:
                 $text = 'Rejected';
             break;
         }

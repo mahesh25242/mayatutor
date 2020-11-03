@@ -1,11 +1,18 @@
-<div class="card">
-  <button class="btn btn-default">Reject</button>
-  <button class="btn btn-primary">Accept</button>
+<h3>Course Details</h3>
+<app-bread-crumbs></app-bread-crumbs>
+<div class="alert alert-warning" *ngIf="course.latest_course_approval_request.message" [innerHTML]="course.latest_course_approval_request.message"></div>
+<div class="card" >
+  <ng-container *ngIf="!course.latest_course_approval_request.status && !course.user.teacher_auto_approval_count">
+    <button class="btn btn-default" (click)="rejectIt()">Reject</button>
+    <button class="btn btn-primary" *ngIf="course.latest_course_approval_request.status != 1" (click)="approveIt()">Accept</button>
+  </ng-container>
 
-  <div class="custom-control custom-checkbox">
-    <input type="checkbox" class="custom-control-input" id="autoApproval">
-    <label class="custom-control-label" for="autoApproval">Auto Approval enable for this learner</label>
+  <div class="custom-control custom-checkbox mr-sm-2 auto-approval">
+    <input type="checkbox" class="custom-control-input" id="customControlAutosizing" (change)="toggleAutoApproval()" [checked]="course.user.teacher_auto_approval_count">
+    <label class="custom-control-label" for="customControlAutosizing">Auto Approval enable for this user</label>
   </div>
+
+
 </div>
 
 <ng-container *ngIf="course.course_tag">

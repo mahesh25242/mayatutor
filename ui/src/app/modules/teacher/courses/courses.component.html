@@ -41,7 +41,7 @@
         <td data-label="Course Name">
           {{course.name}}
 
-          <span [class]="'status-'+course.latest_course_approval_request.status">{{ course.latest_course_approval_request.status_text}}</span>
+          <span [class]="'status-'+course.latest_course_approval_request.status" placement="top" [ngbTooltip]="(course.latest_course_approval_request.message) ? course.latest_course_approval_request.message : ''">{{ course.latest_course_approval_request.status_text}}</span>
         </td>
         <td data-label="Add Modules">
           <a [routerLink]="course.id+'/modules'" class="btn btn-primary btn-sm" placement="top"

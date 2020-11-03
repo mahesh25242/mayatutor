@@ -46,6 +46,10 @@ export class CourseService {
     return this.http.post('/course/deleteCourse', postData);
   }
 
+  approveOrRejectCourse(postData: any = null){
+    return this.http.post('/course/approveCourse', postData);
+  }
+
 
   listModules(courseId:number=0,postData: any = null):Observable<CourseModule[]>{
     return this.http.post<CourseModule[]>(`/course/${courseId}/module/modules`, postData).pipe(map(res=>{

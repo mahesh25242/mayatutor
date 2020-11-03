@@ -1,0 +1,14 @@
+<app-modal>
+  <div header>Reject {{course.name}}</div>
+  <div body>
+    <div class="form-group">
+      <label for="message">Reason for rejection?</label>
+      <textarea ngbAutofocus class="form-control" id="message" aria-describedby="messageHealp" [(ngModel)]="message"></textarea>
+      <small id="messageHealp" class="form-text text-muted">Reason for reject {{course.name}}.</small>
+    </div>
+  </div>
+  <div footer>
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
+    <button type="button" class="btn btn-outline-danger delete-user" (click)="rejectRequest()" [disabled]="!message">Reject It</button>
+  </div>
+</app-modal>

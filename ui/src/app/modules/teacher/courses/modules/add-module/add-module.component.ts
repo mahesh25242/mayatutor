@@ -94,6 +94,7 @@ myInputVariable: ElementRef;
       id: [null, [ ]],
       name: [null, [ Validators.required]],
       pdf: [null, [ Validators.required]],
+      pdf_file: [null, []],
       video_url: [null, [ Validators.required]],
       video_type: [null, [ Validators.required]],
     });
@@ -104,7 +105,7 @@ myInputVariable: ElementRef;
     this.addModuleFrm?.patchValue({
       id: this.module?.id,
       name: this.module?.name,
-      pdf: this.module?.pdf,
+      pdf_file: this.module?.pdf,
       video_url: this.module?.video_url,
       video_type: this.module?.video_type
     });

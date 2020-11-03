@@ -9,6 +9,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DetailsComponent } from './details/details.component';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { BreadCrumbsService } from 'src/app/shared-module/components/bread-crumbs/bread-crumbs.component';
 
 @Component({
   selector: 'app-users',
@@ -28,7 +29,8 @@ export class UsersComponent implements OnInit, OnDestroy {
   constructor(private route:ActivatedRoute,
     private userService: UserService,
     private _modalService: NgbModal,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder,
+    private breadCrumbsService: BreadCrumbsService) { }
 
 
 
@@ -116,6 +118,18 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.pageTitle = this.route.snapshot.data['users']?.pageTitle;
     this.type = this.route.snapshot.data['users']?.type;
     this.users$ = this.userService.users;
+
+
+
+    this.breadCrumbsService.bcs$.next([
+      {
+        url: '/',
+        name: 'Home',
+      },
+      {
+        name: this.pageTitle,
+      }
+    ]);
 
     this.searchFrm = this.formBuilder.group({
       q: [null, []]

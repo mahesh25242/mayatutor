@@ -1,6 +1,6 @@
 
   <h3>{{ this.pageTitle}} </h3>
-
+  <app-bread-crumbs></app-bread-crumbs>
   <form class="form-inline" [formGroup]="searchFrm" (ngSubmit)="search()">
     <input type="text" class="form-control my-1 mr-sm-2" placeholder="Search" formControlName="q" />
     <button type="submit" class="btn btn-primary my-1">Search</button>
