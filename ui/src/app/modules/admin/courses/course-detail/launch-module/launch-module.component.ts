@@ -10,23 +10,14 @@ import { BreadCrumbsService } from 'src/app/shared-module/components/bread-crumb
 })
 export class LaunchModuleComponent implements OnInit {
   module: CourseModule;
-  video: any = null;
+
   constructor(private route: ActivatedRoute,
     private breadCrumbsService: BreadCrumbsService) { }
 
   ngOnInit(): void {
     this.module = this.route.snapshot.data["module"];
 
-    if(this.module.course?.live_class && this.module.course?.live_class_url){
-      this.video =  {
-        source : [
-          {
-            src: `${this.module.course.live_class_url}&modestbranding=1&showinfo=0&rel=0`,
-            provider: 'youtube',
-          },
-        ]
-      };
-    }
+
     this.breadCrumbsService.bcs$.next([
       {
         url: '/',

@@ -17,6 +17,8 @@ import { RejectMessageComponent } from './reject-message/reject-message.componen
 })
 export class CourseDetailComponent implements OnInit, OnDestroy {
   course: Course;
+  video: any = null;
+
   changeAutoApprovalSubScr: Subscription;
   approveCourseSubScr: Subscription;
   reloadDaatSubScr: Subscription;
@@ -69,6 +71,17 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.course = this.route.snapshot.data["course"];
+
+    if(this.course?.live_class && this.course?.live_class_url){
+      this.video =  {
+        source : [
+          {
+            src: `${this.course.live_class_url}&modestbranding=1&showinfo=0&rel=0`,
+            provider: 'youtube',
+          },
+        ]
+      };
+    }
 
     this.breadCrumbsService.bcs$.next([
       {

@@ -1,5 +1,11 @@
 <h3>Course Details</h3>
 <app-bread-crumbs></app-bread-crumbs>
+<app-teacher-full-info-block [user]="course.user">
+  <span *ngIf="course" course_price>
+    Fees: {{ course.price }}
+  </span>
+
+</app-teacher-full-info-block>
 <div class="alert alert-warning" *ngIf="course.latest_course_approval_request.message" [innerHTML]="course.latest_course_approval_request.message"></div>
 <div class="card" >
   <ng-container *ngIf="!course.latest_course_approval_request.status && !course.user.teacher_auto_approval_count">

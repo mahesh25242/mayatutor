@@ -1,14 +1,5 @@
 <h3>Launch {{module.name}}</h3>
 <app-bread-crumbs></app-bread-crumbs>
-<app-teacher-full-info-block [user]="module.course.user">
-  <span *ngIf="module.course" course_price>
-    Fees: {{ module.course.price }}
-  </span>
 
-  <div live_class class="col" *ngIf="module.course && module.course.live_class && module.course.live_class_url">
-    <h5>Live Class</h5>
-    <app-player [videoSources]="video"></app-player>
-  </div>
-</app-teacher-full-info-block>
 
 <app-module-launch [courseModule]="module"></app-module-launch>
