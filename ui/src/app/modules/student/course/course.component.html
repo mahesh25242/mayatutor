@@ -1,0 +1,11 @@
+<app-teacher-info-block [teacher]="course.user">
+  <span *ngIf="course" course_price>
+    Fees: {{ course.price }}
+  </span>
+
+  <div live_class class="col" *ngIf="course && course.live_class && course.live_class_url">
+    <h5>Live Class</h5>
+    <app-player [videoSources]="video"></app-player>
+  </div>
+</app-teacher-info-block>
+<h4>{{course.name}}</h4>

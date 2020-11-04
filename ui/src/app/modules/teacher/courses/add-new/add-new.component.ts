@@ -65,7 +65,7 @@ export class AddNewComponent implements OnInit {
     if(this.f.image.value)
       formData.append('image', this.f.image.value);
     formData.append('description', `${ (this.f.description.value) ? this.f.description.value : '' }`);
-    formData.append('live_class', `${ (this.f.live_class.value) ? this.f.live_class.value : 0 }`);
+    formData.append('live_class', `${ (this.f.live_class.value) ? 1 : 0 }`);
     formData.append('live_class_url', `${ (this.f.live_class_url.value) ? this.f.live_class_url.value : '' }`);
     formData.append('news', `${ (this.f.news.value) ? this.f.news.value : '' }`);
     formData.append('tag_name', `${ (this.f.tag_name.value) ? JSON.stringify(this.f.tag_name.value) : '' }`);

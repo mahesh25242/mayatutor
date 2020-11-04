@@ -1,0 +1,17 @@
+<div>
+  <div class="row">
+    <div class="col">
+      <img [src]="teacher.avatar" [alt]="teacher.fname">
+      New Messages 25
+      {{ teacher.fname }} {{ teacher.lname}}
+      Status: <span class="text-success">PAID</span>
+      <button class="btn btn-primary">Mobile</button>
+      <button class="btn btn-primary">Message</button>
+
+      <ng-content select="[course_price]"></ng-content>
+    </div>
+    <ng-content select="[live_class]"></ng-content>
+
+  </div>
+
+</div>

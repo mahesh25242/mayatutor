@@ -7,7 +7,7 @@
     <p class="card-text">{{studentCourse.course.description}}</p>
     <span placement="top" [ngbTooltip]="(studentCourse.course.latest_course_approval_request.status != 1) ? 'Course is under approvel' :''">
       <button href="javascript:{}" class="btn btn-primary"
-      [disabled]="studentCourse.course.latest_course_approval_request.status != 1">Continue</button>
+      [disabled]="studentCourse.course.latest_course_approval_request.status != 1" [routerLink]="'course/'+studentCourse.course.id">Continue</button>
     </span>
   </div>
 </div>

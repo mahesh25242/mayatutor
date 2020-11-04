@@ -5,6 +5,8 @@ import { StudentAuthGuard, NegateAuthGuard } from '../../lib/guard';
 import { RegisterComponent } from 'src/app/shared-module/components/register/register.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { StudentHomeComponent } from './student-home.component';
+import { CourseComponent } from './course/course.component';
+import { CourseResolver } from './course/course-resolver';
 
 
 const routes: Routes = [
@@ -22,6 +24,14 @@ const routes: Routes = [
         component: EditProfileComponent,
       }
     ]
+  },
+  {
+    path: 'course/:id',
+    component: CourseComponent,
+    resolve:{
+      course: CourseResolver
+    },
+    canActivate: [StudentAuthGuard],
   },
   {
     path: 'mail',
