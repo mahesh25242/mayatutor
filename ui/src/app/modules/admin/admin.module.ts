@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { SharedModuleModule } from '../../shared-module/shared-module.module';
 import { PlayerModuleModule } from '../../shared-module/player-module.module';
+import { TeacherSharedModule } from '../teacher/teacher-shared/teacher-shared.module';
 
 import {  AdminRoutingModule } from './admin-routing.module';
 import { AdminHomeComponent } from './admin-home.component';
@@ -26,7 +27,8 @@ import { RejectMessageComponent } from './courses/course-detail/reject-message/r
     CommonModule,
     SharedModuleModule,
     AdminRoutingModule,
-    PlayerModuleModule
+    PlayerModuleModule,
+    TeacherSharedModule
   ],
   providers:[
     CoursesResolver,

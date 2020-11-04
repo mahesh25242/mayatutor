@@ -120,7 +120,7 @@ class CourseModuleController extends Controller
     }
 
     public function getAModule($courseId =0,$id = 0){
-        $module = \App\CourseModule::with(["course"])->find($id);
+        $module = \App\CourseModule::with(["course.user"])->find($id);
         return response($module);
 
     }

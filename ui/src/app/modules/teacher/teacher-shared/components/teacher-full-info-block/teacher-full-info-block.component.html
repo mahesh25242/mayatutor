@@ -1,0 +1,69 @@
+<div class="row">
+  <div class="col-md-6">
+    <img [src]="user.avatar" alt="avatar" class="img-thumbnail">
+    <app-rating [rating]="user.rating" [readonly]="true"></app-rating>
+    <a href="javascript:{}" class="btn btn-primary">Share</a>
+
+    {{ user.fname }} {{ user.lname }} <br/>
+    Time: {{user.teacher_info?.time}}
+   <div>
+    Location
+    {{ user.country?.name }}
+    {{ user.state?.name }}
+    {{ user.city?.name }} - {{ user.pin }}
+   </div>
+  </div>
+  <div class="col-md-6">
+    <div class="row">
+      <div class="col-md-6">
+        <address>
+          Address<br/>
+          {{ user.address }}
+          {{ user.country?.name }}
+          {{ user.state?.name }}
+          {{ user.city?.name }} - {{ user.pin }}
+        </address>
+
+        <div>Mobile: {{ user.phone }}</div>
+      </div>
+      <div class="col-md-6">
+        <div>Active From: {{ user.created_at | date:'medium' }}</div>
+        <div *ngIf="user.last_login?.created_at_human">Last Login: {{ user.last_login?.created_at_human }}</div>
+        <ng-container>
+          <ng-container *ngIf="user.email" >
+            <button   class="btn btn-primary teacher-message-btn" placement="top" [ngbTooltip]="(user.email == '*') ? 'Only logged user can contact teacher' : ''">
+              Message
+              <fa-icon [icon]="faLock" *ngIf="user.email == '*'"></fa-icon>
+            </button>
+          </ng-container>
+          <ng-container *ngIf="user.phone" >
+            <button  class="btn btn-primary" *ngIf="user.phone == '*'"   placement="top" [ngbTooltip]="(user.email == '*') ? 'Only logged user can contact teacher' : ''">
+              Mobile
+              <fa-icon [icon]="faLock" *ngIf="user.phone == '*'"></fa-icon>
+            </button>
+            <ng-container *ngIf="user.phone && user.phone !== '*'">
+              <a class="d-none d-sm-block btn btn-primary" target="_blank" [href]="'https://web.whatsapp.com/send?phone='+user.phone">Whats app</a>
+              <a class="d-block d-sm-none btn btn-primary" target="_blank" [href]="'https://api.whatsapp.com/send?phone='+user.phone">Whats app</a>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+        <div >Email: <a [href]="'mailto:'+user.email">{{ user.email }}</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-4">
+    <h5>Subject / Syllabus</h5>
+    <span *ngFor="let subject of user.subject; let last = last">{{ subject.name }} <i *ngIf="!last">, </i> </span>
+  </div>
+  <div class="col-md-4">
+    <h5>Experiance</h5>
+    <p [innerHTML]="user.teacher_info?.experiance"></p>
+  </div>
+  <div class="col-md-4">
+    <h5>Education</h5>
+    <p [innerHTML]="user.teacher_info?.education.name"></p>
+  </div>
+</div>

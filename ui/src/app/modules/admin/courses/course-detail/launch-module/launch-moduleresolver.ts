@@ -12,7 +12,7 @@ export class LaunchModuleResolver implements Resolve<any> {
 
   resolve(route: ActivatedRouteSnapshot): Observable<any> {
 
-console.log(route.params)
+
     return this.courseService.module(route.params.id, route.params.moduleId);
 
 
