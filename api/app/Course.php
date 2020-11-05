@@ -25,6 +25,25 @@ class Course extends Model implements AuthenticatableContract, AuthorizableContr
         'status', 'live_class', 'live_class_url', 'news', 'sortorder'
     ];
 
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($course) { // before delete() method call this
+             $course->courseModule()->delete();
+             $course->courseTag()->delete();
+             $course->courseApprovalRequest()->delete();
+             $course->studentCourse()->delete();
+        });
+
+        static::created(function ($course) {
+            \App\CourseApprovalRequest::create(["status" => 0, "course_id" => $course->id]);
+        });
+
+        static::updated(function ($course) {
+            $course->courseApprovalRequest()->update(["status" => 0]);
+        });
+    }
+
     public function getImageAttribute($image)
     {
         return (($image) ? url().'/assets/course/'.$image : 'assets/tumb.png');

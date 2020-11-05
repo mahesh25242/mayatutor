@@ -90,16 +90,6 @@ class CourseController extends Controller
            $createUpdateArr
         );
 
-        $courseApprovalRequest = \App\CourseApprovalRequest::where("course_id", $course->id)
-        ->where("status", 0)->latest()->first();
-        if($courseApprovalRequest){
-            $courseApprovalRequest->status = ($user->teacher_auto_approval_count || $courseApprovalRequest->status) ? 1 : 0;
-        }else{
-            $courseApprovalRequest = new \App\CourseApprovalRequest;
-            $courseApprovalRequest->course_id = $course->id;
-            $courseApprovalRequest->status = ($user->teacher_auto_approval_count) ? 1 : 0;
-        }
-        $courseApprovalRequest->save();
 
 
 

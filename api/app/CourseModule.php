@@ -28,6 +28,19 @@ class CourseModule extends Model implements AuthenticatableContract, Authorizabl
 
     protected $appends = array('thumb_image');
 
+    public static function boot() {
+        parent::boot();
+
+
+        static::created(function ($courseModule) {
+            \App\CourseApprovalRequest::create(["status" => 0, "course_id" => $courseModule->course->id]);
+        });
+
+        static::updated(function ($courseModule) {
+            $courseModule->course()->courseApprovalRequest()->update(["status" => 0]);
+        });
+    }
+
     public function getPdfAttribute($pdf)
     {
         return (($pdf) ? url("/assets/course/{$this->course_id}/{$pdf}") : '');

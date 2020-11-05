@@ -41,6 +41,26 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'password',
     ];
 
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($course) { // before delete() method call this
+             $course->userRole()->delete();
+             $course->userLogin()->delete();
+             $course->rating()->delete();
+             $course->teacherPaymentInfo()->delete();
+             $course->teacherSubject()->delete();
+             $course->teacherInfo()->delete();
+             $course->teacherBanner()->delete();
+             $course->course()->delete();
+             $course->student()->delete();
+             $course->teacherStudent()->delete();
+             $course->studentCourse()->delete();
+             $course->userPlan()->delete();
+             $course->teacherAutoApproval()->delete();
+             $course->UserPayment()->delete();
+        });
+    }
 
     public function getEmailAttribute($email)
     {
