@@ -8,4 +8,24 @@
     <app-player [videoSources]="video"></app-player>
   </div>
 </app-teacher-info-block>
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">NEWS UPDATES</h5>
+    <p [innerHTML]="course.news"></p>
+  </div>
+</div>
+
 <h4>{{course.name}}</h4>
+<ng-container *ngIf="course.course_tag && course.course_tag.length">
+  <span *ngFor="let course_tag of course.course_tag">
+    {{course_tag.tag_name}}
+  </span>
+</ng-container>
+<p [innerHTML]="course.description"></p>
+
+<ng-container *ngIf="course.course_module && course.course_module.length">
+  <div class="row">
+    <app-course-module class="col" *ngFor="let course_module of course.course_module" [course_module]="course_module"></app-course-module>
+  </div>
+</ng-container>
+
