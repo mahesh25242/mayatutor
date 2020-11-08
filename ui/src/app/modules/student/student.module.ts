@@ -12,9 +12,10 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { CourseComponent } from './course/course.component';
 import { CourseResolver } from './course/course-resolver';
 import { CourseModuleComponent } from './course/course-module/course-module.component';
+import { LaunchModuleComponent } from './launch-module/launch-module.component';
 
 @NgModule({
-  declarations: [StudentHomeComponent, DashBoardComponent, EditProfileComponent, CourseComponent, CourseModuleComponent],
+  declarations: [StudentHomeComponent, DashBoardComponent, EditProfileComponent, CourseComponent, CourseModuleComponent, LaunchModuleComponent],
   imports: [
     CommonModule,
     SharedModuleModule,
