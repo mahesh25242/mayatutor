@@ -1,1 +1,11 @@
-<p>launch-module works!</p>
+
+<app-bread-crumbs></app-bread-crumbs>
+<h3>{{module.name}}</h3>
+<ng-container *ngIf="module.course.course_tag && module.course.course_tag.length">
+  <span *ngFor="let course_tag of module.course.course_tag">
+    {{course_tag.tag_name}}
+  </span>
+</ng-container>
+<app-module-launch [courseModule]="module"></app-module-launch>
+<button class="btn btn-primary" appBackButton>Back</button>
+<button class="btn btn-primary">Finished</button>

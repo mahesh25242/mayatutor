@@ -13,6 +13,7 @@ import { CourseComponent } from './course/course.component';
 import { CourseResolver } from './course/course-resolver';
 import { CourseModuleComponent } from './course/course-module/course-module.component';
 import { LaunchModuleComponent } from './launch-module/launch-module.component';
+import { LaunchModuleResolver } from './launch-module/launch-module.resolver';
 
 @NgModule({
   declarations: [StudentHomeComponent, DashBoardComponent, EditProfileComponent, CourseComponent, CourseModuleComponent, LaunchModuleComponent],
@@ -24,7 +25,8 @@ import { LaunchModuleComponent } from './launch-module/launch-module.component';
     PlayerModuleModule
   ],
   providers:[
-    CourseResolver
+    CourseResolver,
+    LaunchModuleResolver
   ]
 })
 export class StudentModule { }

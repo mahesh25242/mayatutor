@@ -11,7 +11,7 @@ import { CoursesResolver } from './courses/courses-resolver';
 import { CourseDetailComponent } from './courses/course-detail/course-detail.component';
 import { CourseDetailResolver } from './courses/course-detail/course-detail-resolver';
 import { LaunchModuleComponent } from './courses/course-detail/launch-module/launch-module.component';
-import { LaunchModuleResolver } from './courses/course-detail/launch-module/launch-moduleresolver';
+import { LaunchModuleResolver } from './courses/course-detail/launch-module/launch-module.resolver';
 
 
 const routes: Routes = [

@@ -8,6 +8,7 @@ import { StudentHomeComponent } from './student-home.component';
 import { CourseComponent } from './course/course.component';
 import { CourseResolver } from './course/course-resolver';
 import { LaunchModuleComponent } from './launch-module/launch-module.component';
+import { LaunchModuleResolver } from './launch-module/launch-module.resolver';
 
 
 const routes: Routes = [
@@ -35,6 +36,9 @@ const routes: Routes = [
         path:'course/:id/launch/:moduleId',
         component: LaunchModuleComponent,
         canActivate: [StudentAuthGuard],
+        resolve:{
+          module: LaunchModuleResolver
+        }
       },
     ]
   },
