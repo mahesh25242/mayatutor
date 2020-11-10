@@ -17,3 +17,5 @@ export * from './courseApprovalRequest';
 export * from './teacherStudent';
 export * from './student-course';
 export * from './user-payment';
+export * from './student-course-module-track';
+export * from './student-course-module-track';

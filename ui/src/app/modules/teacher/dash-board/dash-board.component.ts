@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { User, Course, CourseWithPagination } from 'src/app/lib/interfaces';
 import { faEdit, faLock } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute } from '@angular/router';
-import { mergeMap } from 'rxjs/operators';
+import { mergeMap, tap } from 'rxjs/operators';
 import Notiflix from "notiflix";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ContactTeacherComponent } from './contact-teacher/contact-teacher.component';
@@ -32,25 +32,46 @@ export class DashBoardComponent implements OnInit {
 
     this.user$ = this.userService.getloggedUser.pipe(mergeMap(lUser=>{
       return this.route.params.pipe(mergeMap(res=>{
-        this.breadCrumbsService.bcs$.next([
-          {
-            url: '/',
-            name: 'Home',
-          },
-          {
-            name: `${lUser.fname} ${lUser.lname} Dashboard`,
-          }
-        ]);
 
         if(res && res.teacher){
           if(lUser && (this.route.snapshot.data["user"]?.phone == '*' || this.route.snapshot.data["user"]?.email == '*')){
-            return this.teacherService.getTeacher(res.teacher)
+            return this.teacherService.getTeacher(res.teacher).pipe(tap(ther=>{
+              this.breadCrumbsService.bcs$.next([
+                {
+                  url: '/',
+                  name: 'Home',
+                },
+                {
+                  name: `${ther.fname} ${ther.lname}`,
+                }
+              ]);
+            }))
           }else{
-            return this.teacherService.teacher;
+            return this.teacherService.teacher.pipe(tap(ther=>{
+              this.breadCrumbsService.bcs$.next([
+                {
+                  url: '/',
+                  name: 'Home',
+                },
+                {
+                  name: `${ther.fname} ${ther.lname}`,
+                }
+              ]);
+            }));
           }
         }else{
           this.isDashBoard = true;
-          return this.userService.getloggedUser
+          return this.userService.getloggedUser.pipe(tap(usr=>{
+            this.breadCrumbsService.bcs$.next([
+              {
+                url: '/',
+                name: 'Home',
+              },
+              {
+                name: `${usr.fname} ${usr.lname} Dashboard`,
+              }
+            ]);
+          }))
         }
       }));
     }))

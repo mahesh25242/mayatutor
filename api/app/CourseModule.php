@@ -79,4 +79,9 @@ class CourseModule extends Model implements AuthenticatableContract, Authorizabl
         return $this->belongsTo('App\Course');
     }
 
+    public function studentCourseModuleTrack()
+    {
+        return $this->hasMany('App\StudentCourseModuleTrack');
+    }
+
 }

@@ -55,8 +55,8 @@ export class TeacherService {
     }));
   }
 
-  getTeacher(teacherUrl:string='',){
-    return this.http.get(`/teacher/getaTeacher/${teacherUrl}`).pipe(map(res=>{
+  getTeacher(teacherUrl:string=''): Observable<User>{
+    return this.http.get<User>(`/teacher/getaTeacher/${teacherUrl}`).pipe(map(res=>{
       this.teacher$.next(res);
       return res;
     }));

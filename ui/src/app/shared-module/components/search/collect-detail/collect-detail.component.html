@@ -1,0 +1,18 @@
+<form [formGroup]="searchFrn">
+  <app-modal [noHeader]="true" [noFooter]="true">
+    <div body>
+
+       Email id or Phone number
+      <input type="text" class="form-control" id="phone"
+       formControlName="phone" placeholder="Email id or Phone number">
+       <br/>
+       What is your location
+       <input type="text" class="form-control" id="lco"
+        formControlName="loc" placeholder="What is your location">
+
+
+       <button type="submit" class="btn btn-primary" (click)="search.emit()" [disabled]="!f.phone.value">Go</button>
+
+    </div>
+  </app-modal>
+</form>
