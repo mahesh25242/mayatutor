@@ -41,7 +41,7 @@ export class TeacherService {
     return this.http.get<Plan[]>('/teacher/plans');
   }
 
-  listCourses(page:number = 1,postData: any = null, url='courses'):Observable<CourseWithPagination>{
+  listCourses(page:number = 1,postData: any = null, url='course'):Observable<CourseWithPagination>{
     return this.http.post<CourseWithPagination>(`/teacher/${url}${(page) ? `?page=${page}` : ``}`, postData).pipe(map(res=>{
       this.courses$.next(res);
       return res;

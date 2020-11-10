@@ -96,7 +96,7 @@ myInputVariable: ElementRef;
       pdf: [null, [ Validators.required]],
       pdf_file: [null, []],
       video_url: [null, [ Validators.required]],
-      video_type: [null, [ Validators.required]],
+      video_type: ['youtube', [ Validators.required]],
     });
 
   }
@@ -107,7 +107,7 @@ myInputVariable: ElementRef;
       name: this.module?.name,
       pdf_file: this.module?.pdf,
       video_url: this.module?.video_url,
-      video_type: this.module?.video_type
+      video_type: (this.module?.video_type) ? this.module?.video_type: 'youtube'
     });
     if(this.myInputVariable && this.myInputVariable.nativeElement)
       this.myInputVariable.nativeElement.value = "";

@@ -26,9 +26,7 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
     $router->get('countries','CountryController@countries');
     $router->get('states','StateController@states');
     $router->get('cities','CityController@cities');
-
     $router->post('signUp','UsersController@signUp');
-
     $router->post('sentContact','ContactUsController@sentContact');
 
 
@@ -42,12 +40,13 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
         });
     });
 
+
     $router->group(['middleware' => 'auth'], function () use ($router) {
 
-
         $router->group(['prefix' => 'admin', 'middleware' =>  'admin'], function () use ($router) {
-            $router->group(['prefix' => 'courses'], function () use ($router) {
+            $router->group(['prefix' => 'course'], function () use ($router) {
                 $router->post('/','CourseController@listAllCourses');
+                $router->post('approveCourse','CourseController@approveCourse');
             });
 
             $router->group(['prefix' => 'teacher'], function () use ($router) {
@@ -68,28 +67,40 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
         });
 
 
-        $router->group(['prefix' => 'student', 'middleware' =>  'teacher'], function () use ($router) {
-            $router->get('fetchAll','StudentController@myStudents');
-            $router->get('fetchAllStudent','UsersController@fetchAllStudent');
-            $router->get('fetch/{id}','UsersController@fetchStudent');
-            $router->post('toggleStatus','StudentController@studenttoggleStatus');
-            $router->post('delete','UsersController@delete');
+        $router->group(['middleware' =>  'teacher'], function () use ($router) {
+            $router->group(['prefix' => 'student'], function () use ($router) {
+                $router->get('fetchAll','StudentController@myStudents');
+                $router->get('fetchAllStudent','UsersController@fetchAllStudent');
+                $router->get('fetch/{id}','UsersController@fetchStudent');
+                $router->post('toggleStatus','StudentController@studenttoggleStatus');
+                $router->post('delete','UsersController@delete');
 
-            $router->post('addStudent','TeacherController@addStudent');
-            $router->post('deleteStudent','StudentController@deleteStudent');
+                $router->post('addStudent','TeacherController@addStudent');
+                $router->post('deleteStudent','StudentController@deleteStudent');
 
-            $router->group(['prefix' => 'course'], function () use ($router) {
-                $router->post('/','StudentCourseController@studentTeacherCourse');
-                $router->post('allMyCourses','StudentCourseController@allMyCourses');
-                $router->post('toggleStatus','StudentCourseController@toggleCourse');
-                $router->post('deleteCourse','StudentCourseController@deleteCourse');
+                $router->group(['prefix' => 'course'], function () use ($router) {
+                    $router->post('/','StudentCourseController@studentTeacherCourse');
+                    $router->post('allMyCourses','StudentCourseController@allMyCourses');
+                    $router->post('toggleStatus','StudentCourseController@toggleCourse');
+                    $router->post('deleteCourse','StudentCourseController@deleteCourse');
 
-                $router->group(['prefix' => 'payment'], function () use ($router) {
-                    $router->post('/','UserPaymentController@studentPaymentByCourse');
-                    $router->post('create','UserPaymentController@createStudentPaymentByCourse');
+                    $router->group(['prefix' => 'payment'], function () use ($router) {
+                        $router->post('/','UserPaymentController@studentPaymentByCourse');
+                        $router->post('create','UserPaymentController@createStudentPaymentByCourse');
+                    });
+
                 });
-
             });
+
+
+            $router->group(['prefix' => 'teacher'], function () use ($router) {
+                $router->post('changeBanner','TeacherController@changeBanner');
+                $router->post('updatePaymentQRCode','TeacherController@updatePaymentQRCode');
+                $router->group(['prefix' => 'course'], function () use ($router) {
+                    $router->post('/','CourseController@listTeacherCourses');
+                });
+            });
+
         });
 
         $router->post('updateAvatar','UsersController@updateAvatar');
@@ -102,13 +113,7 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
             $router->post('updateProfile','UsersController@updateProfile');
         });
 
-        $router->group(['prefix' => 'teacher',  'middleware' =>  'teacher'], function () use ($router) {
-            $router->post('changeBanner','TeacherController@changeBanner');
-            $router->post('updatePaymentQRCode','TeacherController@updatePaymentQRCode');
-            $router->group(['prefix' => 'courses'], function () use ($router) {
-                $router->post('/','CourseController@listTeacherCourses');
-            });
-        });
+
 
 
 
@@ -116,7 +121,7 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
 
             $router->post('createCourse','CourseController@createCourse');
             $router->post('deleteCourse','CourseController@deleteCourse');
-            $router->post('approveCourse','CourseController@approveCourse');
+
             $router->get('{courseId}','CourseController@course');
 
             $router->group(['prefix' => '{courseId}/module'], function () use ($router) {

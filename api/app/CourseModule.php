@@ -37,7 +37,7 @@ class CourseModule extends Model implements AuthenticatableContract, Authorizabl
         });
 
         static::updated(function ($courseModule) {
-            $courseModule->course()->courseApprovalRequest()->update(["status" => 0]);
+            \App\CourseApprovalRequest::create(["status" => 0, "course_id" => $courseModule->course->id]);
         });
     }
 

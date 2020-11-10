@@ -23,7 +23,7 @@ export class CourseService {
   }
 
   listCourses(page: number = 1, postData: any = null):Observable<CourseWithPagination>{
-    return this.http.post<CourseWithPagination>(`/admin/courses${(page) ? `?page=${page}` : ''}`, postData).pipe(map(res=>{
+    return this.http.post<CourseWithPagination>(`/admin/course${(page) ? `?page=${page}` : ''}`, postData).pipe(map(res=>{
       this.courses$.next(res);
       return res;
     }));
@@ -47,7 +47,7 @@ export class CourseService {
   }
 
   approveOrRejectCourse(postData: any = null){
-    return this.http.post('/course/approveCourse', postData);
+    return this.http.post('/admin/course/approveCourse', postData);
   }
 
 
