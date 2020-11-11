@@ -36,4 +36,8 @@ export class StudentCourseService {
   launchModule(postData: any = null){
     return this.http.post("/student/course/launchModule", postData);
   }
+
+  markAsFinished(postData: any = null){
+    return this.http.post("/student/course/markAsFinished", postData);
+  }
 }

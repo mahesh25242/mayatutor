@@ -84,4 +84,5 @@ class CourseModule extends Model implements AuthenticatableContract, Authorizabl
         return $this->hasMany('App\StudentCourseModuleTrack');
     }
 
+
 }

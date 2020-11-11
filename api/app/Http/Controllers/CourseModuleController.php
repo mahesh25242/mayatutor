@@ -120,7 +120,11 @@ class CourseModuleController extends Controller
     }
 
     public function getAModule($courseId =0,$id = 0){
-        $module = \App\CourseModule::with(["course.user", "course.courseTag"])->find($id);
+        $module = \App\CourseModule::with(["course.user", "course.courseTag", "studentCourseModuleTrack" => function($query){
+            $query->whereHas("studentCourseTrack", function($query){
+                $query->where("user_id", Auth::id());
+            });
+        }])->find($id);
         return response($module);
 
     }

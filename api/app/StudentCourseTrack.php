@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Laravel\Lumen\Auth\Authorizable;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use Illuminate\Support\Facades\Auth;
 
 class StudentCourseTrack extends Model implements AuthenticatableContract, AuthorizableContract
 {
@@ -52,5 +52,7 @@ class StudentCourseTrack extends Model implements AuthenticatableContract, Autho
     {
         return $this->hasMany('App\StudentCourseModuleTrack');
     }
+
+
 
 }
