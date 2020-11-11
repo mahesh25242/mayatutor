@@ -30,20 +30,20 @@ export class CourseService {
   }
 
   course(courseId:number=0):Observable<Course>{
-    return this.http.get<Course>(`/course/${courseId}`);
+    return this.http.get<Course>(`/teacher/course/${courseId}`);
   }
 
 
   module(courseId:number=0, moduleId:number=0):Observable<Course>{
-    return this.http.get<Course>(`/course/${courseId}/module/aModule/${moduleId}`);
+    return this.http.get<Course>(`/teacher/course/${courseId}/module/aModule/${moduleId}`);
   }
 
   createCourse(postData: any = null){
-    return this.http.post('/course/createCourse', postData);
+    return this.http.post('/teacher/course/createCourse', postData);
   }
 
   deleteCourse(postData: any = null){
-    return this.http.post('/course/deleteCourse', postData);
+    return this.http.post('/teacher/course/deleteCourse', postData);
   }
 
   approveOrRejectCourse(postData: any = null){
@@ -52,22 +52,22 @@ export class CourseService {
 
 
   listModules(courseId:number=0,postData: any = null):Observable<CourseModule[]>{
-    return this.http.post<CourseModule[]>(`/course/${courseId}/module/modules`, postData).pipe(map(res=>{
+    return this.http.post<CourseModule[]>(`/teacher/course/${courseId}/module/modules`, postData).pipe(map(res=>{
       this.courseModules$.next(res);
       return res;
     }));
   }
 
   createModule(courseId:number=0,postData: any = null){
-    return this.http.post(`/course/${courseId}/module/createModule`, postData);
+    return this.http.post(`/teacher/course/${courseId}/module/createModule`, postData);
   }
 
   deleteModule(courseId:number=0, postData: any = null){
-    return this.http.post(`/course/${courseId}/module/deleteModule`, postData);
+    return this.http.post(`/teacher/course/${courseId}/module/deleteModule`, postData);
   }
 
   orderCourseModule(courseId:number=0, postData: any = null){
-    return this.http.post(`/course/${courseId}/module/orderCourseModule`, postData);
+    return this.http.post(`/teacher/course/${courseId}/module/orderCourseModule`, postData);
   }
 
 

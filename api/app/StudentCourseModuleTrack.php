@@ -28,6 +28,8 @@ class StudentCourseModuleTrack extends Model implements AuthenticatableContract,
 
 
     protected $appends = array('status_text');
+    protected $touches = ['studentCourseTrack'];
+
 
     public function getStatusTextAttribute()
     {
@@ -48,13 +50,13 @@ class StudentCourseModuleTrack extends Model implements AuthenticatableContract,
         parent::boot();
 
         static::created(function ($studentCourseModuleTrack) {
-            \App\StudentCourseTrack::create(["user_id" => Auth::id(),
+            $studentCourseTrack = \App\StudentCourseTrack::create(["user_id" => Auth::id(),
              "course_id" => $studentCourseModuleTrack->courseModule->course->id]);
+             $studentCourseModuleTrack->student_course_track_id = $studentCourseTrack->id;
+             $studentCourseModuleTrack->save();
         });
 
-        static::updated(function ($studentCourseModuleTrack) {
-            $studentCourseModuleTrack->courseModule()->course()->touch();
-        });
+
 
     }
 

@@ -32,4 +32,8 @@ export class StudentCourseService {
     return this.http.post("/student/course/deleteCourse", postData);
   }
 
+
+  launchModule(postData: any = null){
+    return this.http.post("/student/course/launchModule", postData);
+  }
 }

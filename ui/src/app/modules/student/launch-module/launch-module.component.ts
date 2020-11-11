@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { CourseModule } from 'src/app/lib/interfaces';
+import { StudentCourseService } from 'src/app/lib/services';
 import { BreadCrumbsService } from 'src/app/shared-module/components/bread-crumbs/bread-crumbs.component';
 
 @Component({
@@ -8,14 +10,16 @@ import { BreadCrumbsService } from 'src/app/shared-module/components/bread-crumb
   templateUrl: './launch-module.component.html',
   styleUrls: ['./launch-module.component.scss']
 })
-export class LaunchModuleComponent implements OnInit {
+export class LaunchModuleComponent implements OnInit, OnDestroy {
   module: CourseModule;
+  launchSubScr: Subscription;
   constructor(private route: ActivatedRoute,
-    private breadCrumbsService: BreadCrumbsService) { }
+    private breadCrumbsService: BreadCrumbsService,
+    private studentCourseService: StudentCourseService) { }
 
   ngOnInit(): void {
     this.module = this.route.snapshot.data["module"];
-
+    this.launchSubScr = this.studentCourseService.launchModule({id: this.module.id}).subscribe();
 
     this.breadCrumbsService.bcs$.next([
       {
@@ -32,4 +36,9 @@ export class LaunchModuleComponent implements OnInit {
     ]);
   }
 
+  ngOnDestroy(){
+    if(this.launchSubScr){
+      this.launchSubScr.unsubscribe();
+    }
+  }
 }

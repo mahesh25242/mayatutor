@@ -67,7 +67,7 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
         });
 
 
-        $router->group(['middleware' =>  'teacher'], function () use ($router) {
+        $router->group(['middleware' =>  'teacherOrAdmin'], function () use ($router) {
             $router->group(['prefix' => 'student'], function () use ($router) {
                 $router->get('fetchAll','StudentController@myStudents');
                 $router->get('fetchAllStudent','UsersController@fetchAllStudent');
@@ -97,41 +97,42 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
                 $router->post('changeBanner','TeacherController@changeBanner');
                 $router->post('updatePaymentQRCode','TeacherController@updatePaymentQRCode');
                 $router->group(['prefix' => 'course'], function () use ($router) {
+
+                    $router->post('createCourse','CourseController@createCourse');
+                    $router->post('deleteCourse','CourseController@deleteCourse');
+
+                    $router->get('{courseId}','CourseController@course');
+
+                    $router->group(['prefix' => '{courseId}/module'], function () use ($router) {
+                        $router->post('modules','CourseModuleController@listModules');
+                        $router->post('createModule','CourseModuleController@createCourseModule');
+                        $router->post('deleteModule','CourseModuleController@deleteCourseModule');
+                        $router->post('orderCourseModule','CourseModuleController@orderCourseModule');
+                        $router->get('aModule/{id}','CourseModuleController@getAModule');
+                    });
+
                     $router->post('/','CourseController@listTeacherCourses');
                 });
             });
 
         });
 
-        $router->post('updateAvatar','UsersController@updateAvatar');
 
+        $router->post('updateAvatar','UsersController@updateAvatar');
         $router->get('authUser','UsersController@authUser');
         $router->post('setUserLogin','UsersController@setUserLogin');
         $router->get('signOut','UsersController@signOut');
+        $router->post('updateProfile','UsersController@updateProfile');
+
+
 
         $router->group(['prefix' => 'student'], function () use ($router) {
-            $router->post('updateProfile','UsersController@updateProfile');
-        });
-
-
-
-
-
-        $router->group(['prefix' => 'course'], function () use ($router) {
-
-            $router->post('createCourse','CourseController@createCourse');
-            $router->post('deleteCourse','CourseController@deleteCourse');
-
-            $router->get('{courseId}','CourseController@course');
-
-            $router->group(['prefix' => '{courseId}/module'], function () use ($router) {
-                $router->post('modules','CourseModuleController@listModules');
-                $router->post('createModule','CourseModuleController@createCourseModule');
-                $router->post('deleteModule','CourseModuleController@deleteCourseModule');
-                $router->post('orderCourseModule','CourseModuleController@orderCourseModule');
-                $router->get('aModule/{id}','CourseModuleController@getAModule');
+            $router->group(['prefix' => 'course'], function () use ($router) {
+                $router->post('launchModule','StudentCourseTrackController@launchModule');
             });
         });
+
+
 
         $router->group(['prefix' => 'education'], function () use ($router) {
             $router->get('getAllEducation','EducationController@getAllEducation');
