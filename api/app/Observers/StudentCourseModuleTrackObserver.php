@@ -13,7 +13,13 @@ trait StudentCourseModuleTrackObserver
         parent::boot();
 
         static::creating(function($studentCourseModuleTrack){
-
+            // $studentCourse = \App\StudentCourse::whereHas("course.courseModule", function($query) use($studentCourseModuleTrack){
+            //     $query->where("id", $studentCourseModuleTrack->course_module_id);
+            // })
+            // ->where("user_id", Auth::id())->exists();
+            // if(!$studentCourse){
+            //     return false;
+            // }
         });
     }
 

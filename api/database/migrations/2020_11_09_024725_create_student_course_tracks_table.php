@@ -15,8 +15,8 @@ class CreateStudentCourseTracksTable extends Migration
     {
         Schema::create('student_course_tracks', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id')->default(0);
-            $table->bigInteger('course_id')->default(0);
+            $table->bigInteger('student_course_id')->default(0);
+            $table->boolean('status')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

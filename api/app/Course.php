@@ -79,8 +79,8 @@ class Course extends Model implements AuthenticatableContract, AuthorizableContr
         return $this->hasMany('App\StudentCourse');
     }
 
-    public function studentCourseModule()
-    {
-        return $this->hasMany('App\StudentCourseModule');
-    }
+    // public function studentCourseModule()
+    // {
+    //     return $this->hasMany('App\StudentCourseModule');
+    // }
 }

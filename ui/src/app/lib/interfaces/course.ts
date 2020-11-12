@@ -1,6 +1,7 @@
 import { courseApprovalRequest } from './courseApprovalRequest';
 import { CourseTag } from './courseTag';
 import { Pagination } from './pagination';
+import { StudentCourse } from './student-course';
 import { User } from './user';
 
 export interface Course {
@@ -34,7 +35,8 @@ export interface CourseModule {
   sort_order?: number,
   course?: Course,
   video_type?: string,
-  thumb_image?: string
+  thumb_image?: string,
+  logged_student_course?: StudentCourse
 }
 
 export interface CourseWithPagination extends Pagination {

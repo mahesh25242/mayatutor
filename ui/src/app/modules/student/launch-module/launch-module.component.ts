@@ -23,7 +23,7 @@ export class LaunchModuleComponent implements OnInit, OnDestroy {
 
       Notiflix.Confirm.Show('Change Status?', "Are you sure you want to change status?", 'Yes', 'No', () => {
         Notiflix.Loading.Dots();
-        this.finishedSubScr = this.studentCourseService.markAsFinished({id: this.module.id}).subscribe((res: any)=>{
+        this.finishedSubScr = this.studentCourseService.markAsFinished({id: this.module.logged_student_course.id, module_id: this.module.id}).subscribe((res: any)=>{
         Notiflix.Loading.Remove();
         Notiflix.Notify.Success(res.message);
       }, err=>{
@@ -35,7 +35,7 @@ export class LaunchModuleComponent implements OnInit, OnDestroy {
     }
   ngOnInit(): void {
     this.module = this.route.snapshot.data["module"];
-    this.launchSubScr = this.studentCourseService.launchModule({id: this.module.id}).subscribe();
+    this.launchSubScr = this.studentCourseService.launchModule({id: this.module.logged_student_course.id, module_id: this.module.id}).subscribe();
 
     this.breadCrumbsService.bcs$.next([
       {

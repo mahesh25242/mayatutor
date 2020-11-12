@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use DB;
 
 class StudentCourseController extends Controller
 {
@@ -63,11 +64,33 @@ class StudentCourseController extends Controller
         })
         ->where("user_id", Auth::id())->get()->count();
 
+        $studentCourseQry = \App\StudentCourse::whereHas("course" , function($query) {
+            $query->where("status", 1)->whereHas("studentCourseTrack" , function($quesry){
+                $query->where("user_id", Auth::id());
+            });
+        })->where("user_id", Auth::id())
+
+        ->join("course_modules", "course_modules.course_id", "=", "student_courses.course_id");
+
+        $courseModuleQry = \App\StudentCourse::whereHas("course" , function($query) {
+            $query->where("status", 1);
+        })->join("course_modules", "course_modules.course_id", "=", "student_courses.course_id")
+        ->where("student_courses.user_id", Auth::id())
+        ->where("course_modules.status", 1)
+        ->select("student_courses.course_id", DB::raw("COUNT(".DB::getTablePrefix()."course_modules.id) as module_counts"))
+        ->groupBy("student_courses.course_id");
+
+
+
+        $completedCourseCourse = $studentCourseQry->joinSub($courseModuleQry, 'course_modules', function ($join) {
+            $join->on('student_courses.course_id', '=', 'course_modules.course_id');
+        });
 
         $stati = [
             "course" => $assignedCourse,
             "startedCourse" => $startedCourse,
-            "notStartedCourse" => $notStartedCourse
+            "notStartedCourse" => $notStartedCourse,
+            "completedCourseCourse" =>$completedCourseCourse->get()
         ];
         return response($stati);
     }

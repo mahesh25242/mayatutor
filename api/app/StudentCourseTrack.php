@@ -10,10 +10,11 @@ use Laravel\Lumen\Auth\Authorizable;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
+use App\Observers\StudentCourseTrackObserver;
 
 class StudentCourseTrack extends Model implements AuthenticatableContract, AuthorizableContract
 {
-    use HasApiTokens, Authenticatable, Authorizable, SoftDeletes;
+    use HasApiTokens, Authenticatable, Authorizable, SoftDeletes, StudentCourseTrackObserver;
 
 
     /**
@@ -22,45 +23,22 @@ class StudentCourseTrack extends Model implements AuthenticatableContract, Autho
      * @var array
      */
     protected $fillable = [
-        'user_id', 'course_id'
+        'student_course_id', 'status'
     ];
 
 
 
-    public static function boot() {
-        parent::boot();
 
-
-
-        static::deleting(function($studentCourseTrack) {
-            $studentCourseTrack->studentCourseModuleTrack()->delete();
-        });
-    }
-
-
-    public function course()
-    {
-        return $this->belongsTo('App\Course');
-    }
-
-    public function user()
-    {
-        return $this->belongsTo('App\Course');
-    }
 
     public function studentCourseModuleTrack()
     {
         return $this->hasMany('App\StudentCourseModuleTrack');
     }
 
-    public function studentCourseTrack()
+    public function studentCourse()
     {
-        return $this->belongsTo('App\StudentCourse', 'user_id', 'user_id');
+        return $this->belongsTo('App\StudentCourse');
     }
 
-    public function courseTrack()
-    {
-        return $this->belongsTo('App\StudentCourse', 'course_id', 'course_id');
-    }
 
 }

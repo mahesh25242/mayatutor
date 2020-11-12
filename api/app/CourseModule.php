@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Laravel\Lumen\Auth\Authorizable;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use Illuminate\Support\Facades\Auth;
 
 class CourseModule extends Model implements AuthenticatableContract, AuthorizableContract
 {
@@ -77,6 +77,11 @@ class CourseModule extends Model implements AuthenticatableContract, Authorizabl
     public function course()
     {
         return $this->belongsTo('App\Course');
+    }
+
+    public function loggedStudentCourse()
+    {
+        return $this->hasOne('App\StudentCourse', 'course_id', 'course_id')->where("user_id", Auth::id());
     }
 
     public function studentCourseModuleTrack()

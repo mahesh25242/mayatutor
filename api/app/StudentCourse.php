@@ -43,14 +43,16 @@ class StudentCourse extends Model implements AuthenticatableContract, Authorizab
         return $this->belongsTo('App\Course');
     }
 
-    public function courseTrack()
-    {
-        return $this->hasMany('App\StudentCourseTrack','course_id', 'course_id');
-    }
+
 
     public function studentCourseTrack()
     {
-        return $this->hasMany('App\StudentCourseTrack','user_id', 'user_id');
+        return $this->hasOne('App\StudentCourseTrack');
+    }
+
+    public function courseModule()
+    {
+        return $this->belongsTo('App\CourseModule', 'course_id', 'course_id');
     }
 
 }
