@@ -52,7 +52,9 @@ class StudentCourseController extends Controller
 
         $startedCourse = \App\StudentCourse::whereHas("course" , function($query) {
              $query->where("status", 1);
-        })->has("studentCourseTrack")
+        })->whereHas("studentCourseTrack", function($query){
+            $query->where("status", "!=", 1);
+        })
         ->where("user_id", Auth::id())->get()->count();
 
         $notStartedCourse = \App\StudentCourse::whereHas("course" , function($query) {
@@ -60,33 +62,18 @@ class StudentCourseController extends Controller
         })->doesntHave("studentCourseTrack")
         ->where("user_id", Auth::id())->get()->count();
 
-        // $studentCourseQry = \App\StudentCourse::whereHas("course" , function($query) {
-        //     $query->where("status", 1)->whereHas("studentCourseTrack" , function($quesry){
-        //         $query->where("user_id", Auth::id());
-        //     });
-        // })->where("user_id", Auth::id())
-
-        // ->join("course_modules", "course_modules.course_id", "=", "student_courses.course_id");
-
-        // $courseModuleQry = \App\StudentCourse::whereHas("course" , function($query) {
-        //     $query->where("status", 1);
-        // })->join("course_modules", "course_modules.course_id", "=", "student_courses.course_id")
-        // ->where("student_courses.user_id", Auth::id())
-        // ->where("course_modules.status", 1)
-        // ->select("student_courses.course_id", DB::raw("COUNT(".DB::getTablePrefix()."course_modules.id) as module_counts"))
-        // ->groupBy("student_courses.course_id");
-
-
-
-        // $completedCourseCourse = $studentCourseQry->joinSub($courseModuleQry, 'course_modules', function ($join) {
-        //     $join->on('student_courses.course_id', '=', 'course_modules.course_id');
-        // });
+        $completedCourse = \App\StudentCourse::whereHas("course" , function($query) {
+            $query->where("status", 1);
+        })->whereHas("studentCourseTrack", function($query){
+            $query->where("status", 1);
+        })
+        ->where("user_id", Auth::id())->get()->count();
 
         $stati = [
             "course" => $assignedCourse,
             "startedCourse" => $startedCourse,
             "notStartedCourse" => $notStartedCourse,
-            "completedCourseCourse" => 0
+            "completedCourseCourse" => $completedCourse
         ];
         return response($stati);
     }
