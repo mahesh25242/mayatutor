@@ -14,6 +14,7 @@ import { BreadCrumbsService } from 'src/app/shared-module/components/bread-crumb
 export class DashBoardComponent implements OnInit {
   faEdit = faEdit;
   user$: Observable<User>;
+  courseStat$: Observable<any>;
   currentRate = 2.3;
   studentCourses$: Observable<StudentCourse[]>;
   constructor(private userSerivce: UserService,
@@ -34,7 +35,7 @@ export class DashBoardComponent implements OnInit {
     }));
 
     this.studentCourses$ = this.studentCourseService.allMyCourses();
-
+    this.courseStat$ = this.studentCourseService.myCourseStatistics();
   }
 
 }

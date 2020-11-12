@@ -79,7 +79,7 @@ export class AddStudentComponent implements OnInit {
         this.studentInput$.pipe(
             distinctUntilChanged(),
             tap(() => this.peopleLoading = true),
-            switchMap(term => this.userService.fetchAllStudent(1, `q=${term}`).pipe(
+            switchMap(term => this.userService.fetchAllStudent(1, `q=${term}&status=1`).pipe(
                 map(res=>{
                   return res.data;
                 }),

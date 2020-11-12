@@ -9,7 +9,6 @@ export class ListTeachersResolver implements Resolve<any> {
     private teacherService: TeacherService) { }
 
   resolve(route: ActivatedRouteSnapshot): Observable<any> {
-    console.log(route.params)
     return this.teacherService.searchTeachers(route.params.q);
   }
 }

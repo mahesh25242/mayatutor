@@ -338,6 +338,9 @@ class UsersController extends Controller
                 $qry->where("teacher_user_id", $request->input("teacherId", null));
             });
         }
+        if($request->input("status", null)){
+            $user = $user->where("status", $request->input("status", null));
+        }
 
         return response($user->paginate($perPage));
     }

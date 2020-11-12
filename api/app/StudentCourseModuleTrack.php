@@ -10,10 +10,12 @@ use Laravel\Lumen\Auth\Authorizable;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
+use App\Observers\StudentCourseModuleTrackObserver;
+
 
 class StudentCourseModuleTrack extends Model implements AuthenticatableContract, AuthorizableContract
 {
-    use HasApiTokens, Authenticatable, Authorizable, SoftDeletes;
+    use HasApiTokens, Authenticatable, Authorizable, SoftDeletes, StudentCourseModuleTrackObserver;
 
 
     /**
@@ -46,19 +48,7 @@ class StudentCourseModuleTrack extends Model implements AuthenticatableContract,
     }
 
 
-    public static function boot() {
-        parent::boot();
 
-        static::created(function ($studentCourseModuleTrack) {
-            $studentCourseTrack = \App\StudentCourseTrack::create(["user_id" => Auth::id(),
-             "course_id" => $studentCourseModuleTrack->courseModule->course->id]);
-             $studentCourseModuleTrack->student_course_track_id = $studentCourseTrack->id;
-             $studentCourseModuleTrack->save();
-        });
-
-
-
-    }
 
 
     public function studentCourseTrack()

@@ -24,6 +24,10 @@ export class StudentCourseService {
     return this.http.post<StudentCourse[]>("/student/course/allMyCourses", postData).pipe(tap(res=> this.studentCourse$.next(res)));
   }
 
+  myCourseStatistics(postData: any = null): Observable<any>{
+    return this.http.post<any>("/student/course/myCourseStatistics", postData);
+  }
+
   toggleStatus(postData: any = null){
     return this.http.post("/student/course/toggleStatus", postData);
   }

@@ -10,13 +10,28 @@ class StudentCourseTrackController extends Controller
 
 
     public function launchModule(Request $request){
-        $studentCourseModuleTrack = \App\StudentCourseModuleTrack::updateOrCreate(
+        $courseModule = \App\CourseModule::find($request->input("id", 0));
+        $studentCourseTrack = \App\StudentCourseTrack::updateOrCreate(
             [
-                'course_module_id' => $request->input("id", 0)
+                "course_id" => $courseModule->course->id,
+                "user_id" => Auth::id(),
             ],
             [
-                'course_module_id' => $request->input("id", 0),
-                'status' => 0
+                "course_id" => $courseModule->course->id,
+                "user_id" => Auth::id(),
+            ]
+        );
+
+
+        $studentCourseModuleTrack = \App\StudentCourseModuleTrack::updateOrCreate(
+            [
+                "course_module_id" => $request->input("id", 0),
+                "student_course_track_id" => $studentCourseTrack->id
+            ],
+            [
+                "course_module_id" => $request->input("id", 0),
+                "student_course_track_id" => $studentCourseTrack->id,
+                "status" => 0
             ]
         );
 

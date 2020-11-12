@@ -45,6 +45,33 @@ class StudentCourseController extends Controller
         return response($studentCourse);
     }
 
+    public function myCourseStatistics(Request $request){
+        $assignedCourse = \App\StudentCourse::whereHas("course" , function($query) { $query->where("status", 1); })
+        ->where("user_id", Auth::id())->get()->count();
+
+        $startedCourse = \App\StudentCourse::whereHas("course" , function($query) {
+             $query->where("status", 1);
+        })->whereHas("courseTrack" , function($query){
+            $query->where("user_id", Auth::id());
+        })
+        ->where("user_id", Auth::id())->get()->count();
+
+        $notStartedCourse = \App\StudentCourse::whereHas("course" , function($query) {
+             $query->where("status", 1);
+        })->whereDoesntHave("courseTrack" , function($query){
+            $query->where("user_id", Auth::id());
+        })
+        ->where("user_id", Auth::id())->get()->count();
+
+
+        $stati = [
+            "course" => $assignedCourse,
+            "startedCourse" => $startedCourse,
+            "notStartedCourse" => $notStartedCourse
+        ];
+        return response($stati);
+    }
+
 
 
 }
