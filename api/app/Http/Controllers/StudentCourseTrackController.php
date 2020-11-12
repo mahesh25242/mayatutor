@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Validator;
-
+use App\Events\CourseModuleEvent;
 class StudentCourseTrackController extends Controller
 {
 
@@ -50,6 +50,7 @@ class StudentCourseTrackController extends Controller
         $studentCourseModuleTrack->status = 1;
         $studentCourseModuleTrack->save();
 
+        event(new CourseModuleEvent($studentCourseModuleTrack));
         return response(['message' => 'Successfully completed the module', 'status' => true]);
     }
 
