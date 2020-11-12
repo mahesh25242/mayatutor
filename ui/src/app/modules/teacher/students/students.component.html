@@ -48,6 +48,7 @@
           </td>
           <td data-label="Name">
             {{ item.fname }} {{ item.lname }}
+            {{ (item.is_online) ? 'Online': 'Offline' }}
           </td>
           <td data-label="Course Name">
             {{ item.student_course_count  }}

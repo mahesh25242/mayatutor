@@ -65,7 +65,8 @@ export interface User {
   course_count?: number,
   teacher_auto_approval_count?: number,
   student_course_count?: number,
-  student?: TeacherStudent
+  student?: TeacherStudent,
+  is_online?: boolean
 }
 export interface UserWithPagination extends Pagination {
   data?: User[]
