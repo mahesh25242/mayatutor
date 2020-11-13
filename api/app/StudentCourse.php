@@ -24,6 +24,16 @@ class StudentCourse extends Model implements AuthenticatableContract, Authorizab
          'user_id', 'course_id', 'status'
     ];
 
+    public static function boot() {
+        parent::boot();
+
+
+        static::deleting(function ($studentCourse) {
+            $studentCourse->studentCourseTrack()->delete();
+        });
+
+    }
+
 
     protected $appends = array('status_text');
 
