@@ -42,8 +42,13 @@
           <a [routerLink]="loggedUser?.role_url+'/students'" class="nav-link" routerLinkActive="active">Students</a>
         </li>
 
+
         <li class="nav-item" *ngIf="loggedUser?.role_url != 'student'">
           <a [routerLink]="loggedUser?.role_url+'/courses'" class="nav-link" routerLinkActive="active">Courses</a>
+        </li>
+
+        <li class="nav-item">
+          <a [routerLink]="loggedUser?.role_url+'/mail'" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Message</a>
         </li>
         <li class="nav-item">
           <div ngbDropdown class="d-inline-block">

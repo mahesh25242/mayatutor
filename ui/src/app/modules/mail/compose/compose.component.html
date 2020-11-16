@@ -1,4 +1,27 @@
 <form [formGroup]="composeFrm" (ngSubmit)="sentMessage()">
+
+  <div class="form-group" *ngIf="!reply">
+    <label for="phone">To</label>
+    <ng-select [items]="users$ | async"
+           bindLabel="email"
+           placeholder="To"
+           [addTag]="true"
+           [multiple]="true"
+           [hideSelected]="true"
+           [trackByFn]="trackByFn"
+           [minTermLength]="2"
+           [loading]="peopleLoading"
+           typeToSearchText="Please enter 2 or more characters"
+           [typeahead]="userInput$"
+           [ngClass]="{'is-invalid': ( f.recipients.errors && f.recipients.errors.error)}"
+           formControlName="recipients" >
+</ng-select>
+
+    <div *ngIf="f.recipients.errors && f.recipients.errors.error" class="invalid-feedback">
+      {{f.recipients.errors.error}}
+    </div>
+  </div>
+<!--
   <div class="form-group" *ngIf="!reply">
     <label for="to">To</label>
     <input type="text" class="form-control" id="to"
@@ -7,7 +30,7 @@
     <div *ngIf="f.recipients.errors && f.recipients.errors.error" class="invalid-feedback">
       {{f.recipients.errors.error}}
     </div>
-  </div>
+  </div> -->
   <div class="form-group" *ngIf="!reply">
     <label for="subject">Subject</label>
     <input type="text" class="form-control" id="subject"
