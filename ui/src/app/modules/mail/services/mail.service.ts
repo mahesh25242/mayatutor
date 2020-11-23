@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ThreadMessageParticipant, Thread } from '../interfaces';
-import { BehaviorSubject, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
+import { UserWithPagination } from 'src/app/lib/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -69,5 +70,9 @@ export class MailService {
         return res;
       }));
     }));
+  }
+
+  toUser(parm: string=''): Observable<UserWithPagination>{
+    return this.http.get<UserWithPagination>(`/messages/toUser${parm}`);
   }
 }

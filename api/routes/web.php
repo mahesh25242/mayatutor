@@ -146,6 +146,7 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
 
 
         $router->group(['prefix' => 'messages'], function () use ($router) {
+            $router->get('/toUser', 'UsersController@toUser');
             $router->get('/', 'MessagesController@index');
             $router->get('/unread', 'MessagesController@unread'); // ajax + Pusher
             $router->post('/', 'MessagesController@store');

@@ -62,7 +62,7 @@ export class ComposeComponent implements OnInit {
           this.userInput$.pipe(
               distinctUntilChanged(),
               tap(() => this.peopleLoading = true),
-              switchMap(term => this.userService.fetchAllStudent(1, `q=${term}&status=1`).pipe(
+              switchMap(term => this.mailService.toUser(`?q=${term}`).pipe(
                   map(res=>{
                     return res.data;
                   }),

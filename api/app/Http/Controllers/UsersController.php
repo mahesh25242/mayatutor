@@ -390,4 +390,21 @@ class UsersController extends Controller
             'message' => 'successfully deleted', 'status' => 1
         ]);
     }
+
+    public function toUser(Request $request){
+        $users = [];
+        $q = $request->input("q", '');
+        if( \App\User::has("isTeacher")->find(Auth::id())){
+            $users = \App\User::whereHas("student", function($query){
+                $query->where("teacher_user_id", Auth::id());
+            })->where("fname", "LIKE", "%{$q}%")->paginate(40);
+        }else if( \App\User::has("isAdmin")->find(Auth::id())){
+             $users = \App\User::where("fname", "LIKE", "%{$q}%")->paginate(40);
+        }else{
+            $users = \App\User::whereHas("teacherStudent", function($query){
+                $query->where("user_id", Auth::id());
+            })->where("fname", "LIKE", "%{$q}%")->paginate(40);
+        }
+        return response($users);
+    }
 }
