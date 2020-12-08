@@ -50,6 +50,11 @@
         <li class="nav-item">
           <a [routerLink]="loggedUser?.role_url+'/mail'" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Message</a>
         </li>
+
+        <li class="nav-item" *ngIf="loggedUser?.role_url == 'admin'">
+          <a [routerLink]="loggedUser?.role_url+'/coupons'" class="nav-link" routerLinkActive="active">Coupons</a>
+        </li>
+
         <li class="nav-item">
           <div ngbDropdown class="d-inline-block">
             <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{loggedUser.fname}}</button>

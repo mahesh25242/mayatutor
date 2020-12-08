@@ -10,7 +10,7 @@ use Laravel\Lumen\Auth\Authorizable;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Role extends Model implements AuthenticatableContract, AuthorizableContract
+class CouponGroup extends Model implements AuthenticatableContract, AuthorizableContract
 {
     use HasApiTokens, Authenticatable, Authorizable, SoftDeletes;
 
@@ -21,18 +21,18 @@ class Role extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $fillable = [
-        'name', 'status', 'created_by', 'updated_by', 'deleted_by'
+        'name', 'no_of_coupon', 'created_by'
     ];
 
 
-
-    public function role()
+    public function user()
     {
-        return $this->hasMany('App\Role');
+        return $this->belongsTo('App\User', 'created_by');
     }
 
     public function coupon()
     {
         return $this->hasMany('App\Coupon');
     }
+
 }

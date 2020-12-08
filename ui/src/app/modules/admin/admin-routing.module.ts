@@ -71,6 +71,13 @@ const routes: Routes = [
           users: UsersResolver
         }
       },
+      {
+        path: 'coupons',
+        loadChildren: () => import('../coupon/coupon.module').then(m => m.CouponModule),
+        data:{
+          url: 'admin'
+        },
+      },
     ]
   },
 

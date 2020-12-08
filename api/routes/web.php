@@ -158,6 +158,15 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
         });
 
 
+        $router->group(['prefix' => 'coupons'], function () use ($router) {
+
+            $router->post('/', 'CouponsController@index');
+            $router->post('/store', 'CouponsController@store');
+            $router->get('/coupon/{id}', 'CouponsController@getCoupon');
+
+        });
+
+
 
     });
 });

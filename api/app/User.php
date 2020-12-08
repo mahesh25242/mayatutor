@@ -247,9 +247,14 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return $this->hasOne('App\TeacherAutoApproval');
     }
 
-    public function UserPayment()
+    public function userPayment()
     {
         return $this->hasMany('App\UserPayment');
+    }
+
+    public function couponGroup()
+    {
+        return $this->hasMany('App\CouponGroup', 'created_by');
     }
 
     // public function studentCourseModule()
