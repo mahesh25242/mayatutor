@@ -1,0 +1,6 @@
+<div *ngIf="(plan$ | async) as plan">
+  plan Name: {{plan.name}}
+
+  <app-apply-coupon></app-apply-coupon>
+
+</div>

@@ -31,7 +31,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'state_id', 'city_id', 'pin', 'status', 'created_by', 'updated_by', 'deleted_by',
         'avatar', 'url'
     ];
-    protected $appends = array('is_online', 'created_at_human');
+    protected $appends = array('is_online', 'created_at_human', 'is_able');
     /**
      * The attributes excluded from the model's JSON form.
      *
@@ -70,6 +70,19 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     public function getPhoneAttribute($phone)
     {
         return (Auth::id()) ? $phone : (($phone) ? '*': null);
+    }
+
+    public function getIsAbleAttribute()
+    {
+        if($this->status  == 1 && $this->isTeacher()->exists() && $this->currentUserPlan()->exists()){
+            return true;
+        }else if($this->status  == 1 && $this->isAdmin()->exists()){
+            return true;
+        }else if($this->status  == 1 && $this->isStudent()->exists()){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 
@@ -121,6 +134,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     public function isTeacher()
     {
         return $this->hasMany('App\UserRole')->where("role_id",2);
+    }
+
+    public function isStudent()
+    {
+        return $this->hasMany('App\UserRole')->where("role_id",3);
     }
 
     public function country()

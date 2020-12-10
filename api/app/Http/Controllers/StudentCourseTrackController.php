@@ -33,7 +33,6 @@ class StudentCourseTrackController extends Controller
             ]
         );
 
-        return $studentCourseModuleTrack;
         if(! $studentCourseModuleTrack->wasChanged()){
             $studentCourseModuleTrack->touch();
         }

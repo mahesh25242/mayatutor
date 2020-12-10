@@ -14,7 +14,10 @@ class PlanController extends Controller
     }
 
 
-
+    public function plan($id){
+        $plan = \App\Plan::with(["myUserPlan"])->find($id);
+        return response($plan);
+    }
 
 
 

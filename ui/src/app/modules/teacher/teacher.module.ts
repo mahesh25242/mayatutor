@@ -23,6 +23,7 @@ import { ModulesResolver } from './courses/modules/modules-resolver';
 import { AddModuleComponent } from './courses/modules/add-module/add-module.component';
 import { VideoPreviewComponent } from './courses/modules/add-module/video-preview/video-preview.component';
 import { PlansComponent } from './plans/plans.component';
+import { PlanPurchaseComponent } from './plan-purchase/plan-purchase.component';
 import { ListTeachersComponent } from './list-teachers/list-teachers.component';
 import {ListTeachersResolver} from './list-teachers/list-teachers-resolver';
 import { ContactTeacherComponent } from './dash-board/contact-teacher/contact-teacher.component';
@@ -32,6 +33,7 @@ import { DetailsComponent } from './students/details/details.component';
 import { AddStudentComponent } from './students/add-student/add-student.component';
 import { StudentPaymentComponent } from './students/student-payment/student-payment.component';
 import { AddPaymentComponent } from './students/student-payment/add-payment/add-payment.component';
+import { ApplyCouponComponent } from './plan-purchase/apply-coupon/apply-coupon.component';
 
 @NgModule({
   declarations: [
@@ -48,13 +50,15 @@ import { AddPaymentComponent } from './students/student-payment/add-payment/add-
     AddModuleComponent,
     VideoPreviewComponent,
     PlansComponent,
+    PlanPurchaseComponent,
     ListTeachersComponent,
     ContactTeacherComponent,
     StudentsComponent,
     DetailsComponent,
     AddStudentComponent,
     StudentPaymentComponent,
-    AddPaymentComponent
+    AddPaymentComponent,
+    ApplyCouponComponent
   ],
   imports: [
     CommonModule,

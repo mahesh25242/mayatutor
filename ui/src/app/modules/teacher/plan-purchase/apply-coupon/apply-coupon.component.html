@@ -1,0 +1,10 @@
+  <form [formGroup]="couponFrm" (ngSubmit)="validateCoupon()" class="form-inline">
+
+    <div class="form-group mb-2">
+      <label for="code" class="sr-only">Coupon Code</label>
+      <input type="text" placeholder="Code" class="form-control" id="code" aria-describedby="emailHelp" formControlName="code">
+    </div>
+
+    <button type="submit" class="btn btn-primary mb-2">Submit</button>
+  </form>
+

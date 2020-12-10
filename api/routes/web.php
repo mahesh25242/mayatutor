@@ -34,6 +34,7 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
         $router->get('getaTeacher/{url}','TeacherController@teacher');
         $router->get('topRatedTeacher','TeacherController@topRatedTeacher');
         $router->get('plans','PlanController@plans');
+        $router->get('plan/{id}','PlanController@plan');
         $router->get('search[/{q}]','TeacherController@search');
         $router->group(['prefix' => 'teacherCourses'], function () use ($router) {
             $router->post('/','CourseController@listTeacherCourses');

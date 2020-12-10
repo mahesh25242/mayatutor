@@ -6,6 +6,7 @@
     {{course_tag.tag_name}}
   </span>
 </ng-container>
-<app-module-launch [courseModule]="module"></app-module-launch>
+<div *ngIf="!module.course.user.is_able" class="alert alert-warning">Sorry teacher plan was expired</div>
+<app-module-launch [courseModule]="module" *ngIf="module.course.user.is_able"></app-module-launch>
 <button class="btn btn-primary" appBackButton>Back</button>
-<button class="btn btn-primary" (click)="markAsFinished()">Finished</button>
+<button class="btn btn-primary" (click)="markAsFinished()" *ngIf="module.course.user.is_able">Finished</button>

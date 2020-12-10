@@ -6,7 +6,10 @@
 
   <div live_class class="col" *ngIf="course && course.live_class && course.live_class_url">
     <h5>Live Class</h5>
-    <app-player [videoSources]="video"></app-player>
+    <div *ngIf="!course.user.is_able" class="alert alert-warning">Sorry teacher plan was expired</div>
+    <ng-container *ngIf="course.user.is_able">
+      <app-player [videoSources]="video"></app-player>
+    </ng-container>
   </div>
 </app-teacher-info-block>
 <div class="card">
@@ -25,7 +28,8 @@
 <p [innerHTML]="course.description"></p>
 
 <ng-container *ngIf="course.course_module && course.course_module.length">
-  <div class="row">
+  <div *ngIf="!course.user.is_able" class="alert alert-warning">Sorry teacher plan was expired</div>
+  <div class="row" *ngIf="course.user.is_able">
     <app-course-module class="col" *ngFor="let course_module of course.course_module" [course_module]="course_module"></app-course-module>
   </div>
 </ng-container>

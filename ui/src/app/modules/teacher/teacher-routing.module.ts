@@ -14,6 +14,7 @@ import { ListTeachersComponent } from './list-teachers/list-teachers.component';
 import { ListTeachersResolver } from './list-teachers/list-teachers-resolver';
 import { StudentsResolver } from './students/students-resolver';
 import { StudentsComponent } from './students/students.component';
+import { PlanPurchaseComponent } from './plan-purchase/plan-purchase.component';
 
 const routes: Routes = [
   {
@@ -66,6 +67,10 @@ const routes: Routes = [
   {
     path: 'plans',
     component: PlansComponent,
+  },
+  {
+    path: 'plans/:id',
+    component: PlanPurchaseComponent,
   },
 
   {
