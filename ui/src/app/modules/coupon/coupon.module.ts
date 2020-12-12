@@ -9,9 +9,10 @@ import { CouponsComponent } from './coupons/coupons.component';
 import { CouponsResolver } from './coupons/coupons-resolver';
 import { CreateCouponComponent } from './coupons/create-coupon/create-coupon.component';
 import { CreateCouponResolver } from './coupons/create-coupon/create-coupon-resolver';
+import { ApplyCouponComponent } from './coupons/components/apply-coupon/apply-coupon.component';
 
 @NgModule({
-  declarations: [CouponComponent, CouponsComponent, CreateCouponComponent],
+  declarations: [CouponComponent, CouponsComponent, CreateCouponComponent, ApplyCouponComponent],
   imports: [
     CommonModule,
     SharedModuleModule,
@@ -20,6 +21,9 @@ import { CreateCouponResolver } from './coupons/create-coupon/create-coupon-reso
   providers:[
     CouponsResolver,
     CreateCouponResolver
+  ],
+  exports:[
+    ApplyCouponComponent
   ]
 })
 export class CouponModule { }
