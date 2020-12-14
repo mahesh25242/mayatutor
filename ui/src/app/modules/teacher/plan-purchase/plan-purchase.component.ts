@@ -25,10 +25,11 @@ export class PlanPurchaseComponent implements OnInit {
     setCoupon(coupon){
       this.coupon$.next(coupon);
     }
+
+    goToPurchase(plan: Plan = null){
+      this.coupon$.asObservable().pipe()
+    }
   ngOnInit(): void {
-
-
-
     this.plan$ = this.coupon$.asObservable().pipe(mergeMap(coupon=>{
       return this.route.params.pipe(mergeMap(res=>{
         return this.teacherService.plan(res.id).pipe(map((plan: Plan) =>{
