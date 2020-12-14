@@ -30,4 +30,8 @@ export class CouponService {
     return this.http.get<Coupon>(`/coupons/coupon/${id}`);
   }
 
+  validateCoupon(postData: any = null){
+    return this.http.post<any>(`/coupons/validateCoupon`, postData);
+  }
+
 }

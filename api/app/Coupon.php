@@ -59,5 +59,10 @@ class Coupon extends Model implements AuthenticatableContract, AuthorizableContr
         return $this->belongsTo('App\Role');
     }
 
+    public function couponTrack()
+    {
+        return $this->hasMany('App\CouponTrack');
+    }
+
 
 }

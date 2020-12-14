@@ -42,6 +42,12 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
     });
 
 
+    $router->group(['prefix' => 'coupons'], function () use ($router) {
+        $router->post('/validateCoupon', 'CouponsController@validateCoupon');
+
+    });
+
+
     $router->group(['middleware' => 'auth'], function () use ($router) {
 
         $router->group(['prefix' => 'admin', 'middleware' =>  'admin'], function () use ($router) {

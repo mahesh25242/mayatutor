@@ -126,6 +126,24 @@ class CouponsController extends Controller
         return response($coupon);
     }
 
+    public function validateCoupon(Request $request){
+        $code = $request->input("code", '');
+        $coupon = \App\Coupon::where("code", $code)->withCount("couponTrack")
+        ->where(function ($query) {
+            $query->whereNull("start_date")->orWhereDate('start_date', '>=',  \Carbon\Carbon::now());
+        })
+        ->where(function ($query) {
+            $query->whereNull("end_date")
+            ->orWhereDate('end_date', '<=',  \Carbon\Carbon::now());
+        })
+        ->havingRaw('coupon_track_count < no_use')->get()->first();
+        if($coupon->count()){
+            return response($coupon);
+        }else{
+            return response(['message' => 'Invalid Coupon', 'status' => false], 422);
+        }
+    }
+
     private  function generateRandomString($length = 20) {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);

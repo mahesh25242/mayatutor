@@ -275,6 +275,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return $this->hasMany('App\CouponGroup', 'created_by');
     }
 
+    public function couponTrack()
+    {
+        return $this->hasMany('App\CouponTrack');
+    }
+
     // public function studentCourseModule()
     // {
     //     return $this->hasMany('App\StudentCourseModule');
