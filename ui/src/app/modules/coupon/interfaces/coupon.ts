@@ -7,7 +7,7 @@ export interface Coupon {
   description?: string,
   no_use?: number,
   type?: string,
-  value?: string,
+  value?: number,
   start_date?: string,
   end_date?: string,
   status?: number

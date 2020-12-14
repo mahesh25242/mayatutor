@@ -1,6 +1,7 @@
 <div *ngIf="(plan$ | async) as plan">
   plan Name: {{plan.name}}
+  <app-apply-coupon *ngIf="plan.price" (setCoupon)="setCoupon($event)"></app-apply-coupon>
 
-  <app-apply-coupon></app-apply-coupon>
 
+  Price ₹ {{ plan.price }}
 </div>

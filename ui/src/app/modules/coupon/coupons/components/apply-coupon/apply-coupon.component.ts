@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { CouponService } from '../../../services';
@@ -12,6 +12,7 @@ import { Coupon, CouponWithPagination } from '../../../interfaces';
 })
 export class ApplyCouponComponent implements OnInit, OnDestroy {
   coupon: Coupon ;
+  @Output() setCoupon = new EventEmitter();
   couponFrm: FormGroup;
   couponValidationSubscr: Subscription;
   constructor(private formBuilder: FormBuilder,
@@ -26,6 +27,7 @@ export class ApplyCouponComponent implements OnInit, OnDestroy {
       this.couponValidationSubscr = this.couponService.validateCoupon(postData).subscribe(res=>{
         this.coupon = res;
         Notiflix.Notify.Success(`Successfully applied`);
+        this.setCoupon.emit(this.coupon);
       }, error=>{
         Notiflix.Notify.Failure(`Invalid Coupon code`);
       });
