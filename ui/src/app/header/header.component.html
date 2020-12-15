@@ -48,7 +48,7 @@
         </li>
 
         <li class="nav-item">
-          <a [routerLink]="loggedUser?.role_url+'/mail'" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Message</a>
+          <a [routerLink]="loggedUser?.role_url+'/mail/inbox'" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Message</a>
         </li>
 
         <li class="nav-item" *ngIf="loggedUser?.role_url == 'admin'">
