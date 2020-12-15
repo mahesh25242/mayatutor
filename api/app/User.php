@@ -245,7 +245,8 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     public function currentUserPlan()
     {
-        return $this->hasOne('App\UserPlan')->where("end_date", ">", new Carbon);
+        return $this->hasOne('App\UserPlan')->where("end_date", ">", new Carbon)
+        ->orderBy("end_date", "ASC")->take(1);;
     }
 
     public function subject()
@@ -278,6 +279,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     public function couponTrack()
     {
         return $this->hasMany('App\CouponTrack');
+    }
+
+    public function planPurchase()
+    {
+        return $this->hasMany('App\PlanPurchase');
     }
 
     // public function studentCourseModule()

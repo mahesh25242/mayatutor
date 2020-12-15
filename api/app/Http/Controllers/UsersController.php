@@ -109,7 +109,7 @@ class UsersController extends Controller
 
     public function authUser(Request $request){
         $user = \App\User::with(["country", "state", "city", "role", "lastLogin",
-        "teacherPaymentInfo", "subject", "teacherInfo.education", "teacherBanner", "rating", "currentUserPlan"])->find(Auth::id());
+        "teacherPaymentInfo", "subject", "teacherInfo.education", "teacherBanner", "rating", "currentUserPlan.plan"])->find(Auth::id());
         return response($user);
     }
 

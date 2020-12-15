@@ -2,8 +2,8 @@
 <app-bread-crumbs [hide]="true"></app-bread-crumbs>
 
 <app-change-banner *ngIf="isDashBoard"></app-change-banner>
-<div class="alert alert-danger" *ngIf="isDashBoard">
-  <h3>Your Free Trial Remaining {{ (user.current_user_plan) ?  user.current_user_plan.remaining_days : '0'}} Days</h3>
+<div class="alert alert-danger" *ngIf="isDashBoard && (!user.current_user_plan || user.current_user_plan?.remaining_days < 10)">
+  <h3>Your {{user.current_user_plan.plan.name}} Remaining {{ (user.current_user_plan) ?  user.current_user_plan.remaining_days : '0'}} Days</h3>
   <p>Make a Payment soon, Avoid account blocking</p>
   <a routerLink="plans" class="btn btn-primary">View Plans</a>
 </div>

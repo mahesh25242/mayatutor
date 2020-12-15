@@ -8,6 +8,7 @@ import { TeacherInfo, TeacherBannerImg } from './teacherInfo';
 import { Rating } from './rating';
 import { Pagination } from './pagination';
 import { TeacherStudent } from './teacherStudent';
+import { Plan } from './plan';
 
 export interface UserLogin {
   id?: number,
@@ -25,7 +26,8 @@ export interface UserPlan {
   start_date?: string,
   created_at?: string,
   updated_at?: string,
-  end_date?: string
+  end_date?: string,
+  plan?: Plan
 }
 
 export interface User {

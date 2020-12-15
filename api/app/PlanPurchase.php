@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
-class Plan extends Model implements AuthenticatableContract, AuthorizableContract
+class PlanPurchase extends Model implements AuthenticatableContract, AuthorizableContract
 {
     use HasApiTokens, Authenticatable, Authorizable, SoftDeletes;
 
@@ -23,29 +23,25 @@ class Plan extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $fillable = [
-        'name', 'description', 'features', 'price', 'sortorder',
-         'basic', 'days'
+        'user_id', 'plan_id', 'amount', 'discount', 'status',
+         'tran_no', 'log'
     ];
 
-    public function getFeaturesAttribute($value)
+    public function getLogAttribute($value)
     {
         return json_decode($value);
     }
 
-    public function userPlan()
+    public function user()
     {
-        return $this->hasMany('App\UserPlan');
+        return $this->belongsTo('App\User');
     }
 
-    public function myUserPlan()
+    public function plan()
     {
-        return $this->hasOne('App\UserPlan')->where("user_id", Auth::id())
-        ->where("end_date", ">", new Carbon)->orderBy("end_date", "ASC")->take(1);
+        return $this->belongsTo('App\Plan');
     }
 
-    public function planPurchase()
-    {
-        return $this->hasMany('App\PlanPurchase');
-    }
+
 
 }

@@ -27,8 +27,14 @@
         <td>{{coupon.coupon_group?.name}}</td>
         <td><a [routerLink]="'create-coupon/'+coupon.id">{{coupon.code}}</a></td>
         <td>{{coupon.no_use}}</td>
-        <td>{{coupon.start_date | date:'medium'}}</td>
-        <td>{{coupon.end_date | date:'medium'}}</td>
+        <td>
+          <span *ngIf="coupon.start_date">{{coupon.start_date}}</span>
+        </td>
+        <td>
+            <span *ngIf="coupon.end_date">
+              {{coupon.end_date}}
+            </span>
+          </td>
         <td>
           <a href="javascript:{}">Delete</a>
         </td>

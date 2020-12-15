@@ -27,7 +27,14 @@ export class PlanPurchaseComponent implements OnInit {
     }
 
     goToPurchase(plan: Plan = null){
-      this.coupon$.asObservable().pipe()
+      this.coupon$.asObservable().pipe(mergeMap(coupon=>{
+        return this.teacherService.purchasePlan({
+          plan: plan?.id,
+          coupon:coupon?.id
+        });
+      })).subscribe(res=>{
+
+      })
     }
   ngOnInit(): void {
     this.plan$ = this.coupon$.asObservable().pipe(mergeMap(coupon=>{

@@ -18,5 +18,9 @@ class EventServiceProvider extends ServiceProvider
         \App\Events\CourseModuleEvent::class => [
             \App\Listeners\CourseModuleListener::class,
         ],
+
+        \App\Events\PlanPurchaseEvent::class => [
+            \App\Listeners\PlanPurchaseListener::class,
+        ],
     ];
 }

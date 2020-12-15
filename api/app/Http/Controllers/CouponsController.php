@@ -128,7 +128,9 @@ class CouponsController extends Controller
 
     public function validateCoupon(Request $request){
         $code = $request->input("code", '');
-        $coupon = \App\Coupon::where("code", $code)->withCount("couponTrack")
+        $coupon = \App\Coupon::where("code", $code)
+        ->where("status", 1)
+        ->withCount("couponTrack")
         ->where(function ($query) {
             $query->whereNull("start_date")->orWhereDate('start_date', '>=',  \Carbon\Carbon::now());
         })
