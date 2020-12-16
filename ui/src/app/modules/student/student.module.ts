@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { SharedModuleModule } from '../../shared-module/shared-module.module';
 import { PlayerModuleModule } from '../../shared-module/player-module.module';
 
+import { AssignedCourseBlockComponent } from './components/assigned-course-block/assigned-course-block.component';
+
 import { TeacherSharedModule } from '../teacher/teacher-shared/teacher-shared.module';
 import {  StudentRoutingModule } from './student-routing.module';
 import { StudentHomeComponent } from './student-home.component';
@@ -16,7 +18,7 @@ import { LaunchModuleComponent } from './launch-module/launch-module.component';
 import { LaunchModuleResolver } from './launch-module/launch-module.resolver';
 
 @NgModule({
-  declarations: [StudentHomeComponent, DashBoardComponent, EditProfileComponent, CourseComponent, CourseModuleComponent, LaunchModuleComponent],
+  declarations: [StudentHomeComponent, DashBoardComponent, EditProfileComponent, CourseComponent, CourseModuleComponent, LaunchModuleComponent, AssignedCourseBlockComponent],
   imports: [
     CommonModule,
     SharedModuleModule,

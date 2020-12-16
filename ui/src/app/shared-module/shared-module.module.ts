@@ -19,7 +19,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { TeacherBlockComponent } from './components/teacher-block/teacher-block.component';
 import { CourseBlockComponent } from './components/course-block/course-block.component';
-import { AssignedCourseBlockComponent } from './components/assigned-course-block/assigned-course-block.component';
+
 import { CourseDetailComponent } from './components/course-detail/course-detail.component';
 import { SearchComponent } from './components/search/search.component';
 import { RatingComponent } from './components/rating/rating.component';
@@ -42,7 +42,6 @@ Notiflix.Block.Init({ svgColor:"#204486", });
     RegisterComponent,
     TeacherBlockComponent,
     CourseBlockComponent,
-    AssignedCourseBlockComponent,
     SearchComponent,
     RatingComponent,
     CourseDetailComponent,
@@ -77,7 +76,6 @@ Notiflix.Block.Init({ svgColor:"#204486", });
     RegisterComponent,
     TeacherBlockComponent,
     CourseBlockComponent,
-    AssignedCourseBlockComponent,
     SearchComponent,
     DragDropModule,
     RatingComponent,
