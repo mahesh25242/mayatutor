@@ -44,11 +44,37 @@ class PlanController extends Controller
 
 
         if(!Auth::user()->currentUserPlan || (Auth::user()->currentUserPlan && Auth::user()->currentUserPlan->remaining_days <= 5)){
+
+            $discount = 0;
+            if($coupon && $coupon->id){
+                switch($coupon->type){
+                    case '%':
+                        $discount = ($plan->price * ($coupon->value / 100));
+                    break;
+                    default:
+                        $discount = $coupon->value;
+                    break;
+                }
+
+                $discount = ($discount > $plan->price)  ? $plan->price : $discount;
+            }
+
+            $total = $plan->price - $discount;
+
             event(new PlanPurchaseEvent($plan, $coupon, Auth::user()));
-            return response([
-                "success" => true,
-                "message" => 'successfully purchased.'
-            ]);
+
+            if($total){
+                return response([
+                    "success" => false,
+                    "message" => 'remaining amout should pay through gateway'
+                ], 422);
+            }else{
+                return response([
+                    "success" => true,
+                    "message" => 'successfully purchased.'
+                ]);
+            }
+
         }else{
             return response([
                 "success" => false,
