@@ -13,7 +13,7 @@
         <img [src]="user.avatar" alt="avatar" class="img-thumbnail">
         <app-rating [rating]="user.rating" [readonly]="true"></app-rating>
         <a href="javascript:{}" class="btn btn-primary">Share</a>
-
+        <app-custom-url [shareOnly]="true"></app-custom-url>
         {{ user.fname }} {{ user.lname }} <br/>
         Time: {{user.teacher_info?.time}}
        <div>
