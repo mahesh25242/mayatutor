@@ -38,7 +38,8 @@
             ],
             "styles": [
               "src/styles.scss",
-              "node_modules/plyr/dist/plyr.css"
+              "node_modules/plyr/dist/plyr.css",
+              "./node_modules/animate.css/animate.compat.css"
             ],
             "scripts": []
           },
