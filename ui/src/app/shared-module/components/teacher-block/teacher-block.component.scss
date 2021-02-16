@@ -1,3 +1,9 @@
+@import '../../../../variables';
 .card-body {
     img { width:100%;}
+    
+}
+.btn {
+    border-radius: $rdius;
+    padding:7px 20px;
 }

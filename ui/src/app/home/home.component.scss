@@ -17,11 +17,16 @@
     .card-body {
         h1 {
             font-size:$fontsize-2;
+            color:$primaryColor;
         }
     }
     .card-footer {
         h2 {
             font-size: $fontsize-1;
+            text-transform: uppercase;
+            color:$black;
         }
+        background-color: #fff;
+        border-top: none;
     }
 } 

@@ -6,14 +6,14 @@
   <div class="container pt-3 pb-3">
     <h5 class="">Find Personalised & 1-to-1 Classes with Online or nearby Tutors</h5>
     <app-search></app-search>
-    <h6 class="mt-2">6.5 Lakh+ Verified Tutors & Institutes</h6>
+    <h6 class="mt-1">6.5 Lakh+ Verified Tutors & Institutes</h6>
   </div>
 </section>
 
 <section class="register-sec">
 <div class="container">
   <ng-container *ngIf="!(loggedUser$ | async) as loggedUser">
-    <h1>Who Can Register</h1>
+    <h1 class="mt-5 mb-4 text-uppercase">Who Can Register</h1>
     <div class="row">
       <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3">
         <app-login type="student"></app-login>
@@ -24,13 +24,13 @@
     </div>
   </ng-container>
 
-  <h1>1000 + CATEGORIES</h1>
+  <h1 class="mt-5 mb-4 text-uppercase">1000 + CATEGORIES</h1>
 <div class="row">
 
     <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-3">
-        <div class="card">
+        <div class="card shadow-sm ">
             <div class="card-body">
-<h1>25000</h1>
+<h1 class="mt-3">25000</h1>
 <p>Verified Tutors
     & Institutes</p>
             </div>
@@ -42,9 +42,9 @@
 
     </div>
     <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-3">
-        <div class="card">
+        <div class="card shadow-sm ">
             <div class="card-body">
-<h1>25000</h1>
+<h1 class="mt-3">25000</h1>
 <p>Verified Tutors
     & Institutes</p>
             </div>
@@ -56,9 +56,9 @@
 
     </div>
     <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-3">
-        <div class="card">
+        <div class="card shadow-sm ">
             <div class="card-body">
-<h1>25000</h1>
+<h1 class="mt-3">25000</h1>
 <p>Verified Tutors
     & Institutes</p>
             </div>
@@ -70,9 +70,9 @@
 
     </div>
     <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-3">
-        <div class="card">
+        <div class="card shadow-sm ">
             <div class="card-body">
-<h1>25000</h1>
+<h1 class="mt-3">25000</h1>
 <p>Verified Tutors
     & Institutes</p>
             </div>
@@ -91,7 +91,7 @@
 
 <ng-container *ngIf="(topRatedTeachers$ | async) as topRatedTeachers">
   <ng-container *ngIf="topRatedTeachers.length">
-    <h1>TOP RATING TEACHERS</h1>
+    <h1 class="mt-5 mb-4 text-uppercase">TOP RATING TEACHERS</h1>
     <div class="row">
         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mt-2" *ngFor="let teacher of topRatedTeachers">
           <app-teacher-block [teacher]="teacher.user"></app-teacher-block>

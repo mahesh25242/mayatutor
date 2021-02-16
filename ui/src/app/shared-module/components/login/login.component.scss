@@ -16,4 +16,22 @@
             
         }
     }
+    .btn-custom {
+        border-radius: 25px;
+    padding: 12px 42px;
+    }
+    i {
+        width:75px;
+    height:75px;
+    background: #fff;
+    border:1px solid #ddd;
+    border-radius: 50px;
+    margin-top: -40px;
+    margin-left: auto;
+    margin-right: auto;
+    .ng-fa-icon {
+        font-size: 33px;
+    line-height: 63px;
+    }
+    }
 }

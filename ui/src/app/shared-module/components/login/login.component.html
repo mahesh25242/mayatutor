@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card shadow-sm">
     <i>
       <fa-icon [icon]="faUserGraduate" *ngIf="(type ==='student')"></fa-icon>
       <fa-icon [icon]="faUser" *ngIf="(type ==='teacher')"></fa-icon>
@@ -7,7 +7,7 @@
       <h3>
         {{ (type ==='student' ) ? 'Student' : 'Teacher'}}
       </h3>
-      <a class="btn btn-primary" [routerLink]="type+'/register'" >Register</a>
+      <a class="btn btn-primary btn-custom" [routerLink]="type+'/register'" >Register</a>
     </div>
     <div class="card-footer">
       <div class="d-grid" [ngClass]="{ 'grd-col-2': type ==='student', 'grd-col-3': type ==='teacher'}">
