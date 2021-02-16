@@ -32,7 +32,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   signIn(){
-    const activeModal = this._modalService.open(SignInComponent);
+    const activeModal = this._modalService.open(SignInComponent, {
+      size:'lg'
+    });
     //activeModal.componentInstance.isEdit = false;
   }
 
