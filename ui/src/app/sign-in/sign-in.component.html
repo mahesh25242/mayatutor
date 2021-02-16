@@ -4,7 +4,8 @@
   <div  body class="border-0">
 <div class="row">
   <div class="col-6">
-    <a href="javascript:{}" (click)="signInWithFB()" class="btn btn-primary d-block mb-3">Login with Facebook</a>
+    <a href="javascript:{}" (click)="signInWithFB()" class="btn btn-primary d-block mb-3">
+      <fa-icon [icon]="faFacebook"></fa-icon>Login with Facebook</a>
     <a href="javascript:{}" (click)="signInWithGoogle()" class="btn btn-primary d-block">Login with Google</a>
     <b class="d-block mt-3 mb-3 text-center">OR</b>
     <a href="#" class="btn btn-outline-secondary d-block text-center mb-3 text-primary">Register Here</a>
@@ -53,10 +54,10 @@
     </div>
 </div>
 
-<div> 
+<div>
   <button type="button" class="btn btn-outline-secondary mr-3 d-none" (click)="modal.dismiss('cancel click')">Cancel</button>
   <button type="submit" class="btn btn-primary btn-block mt-4"  [disabled]="signInFrm.invalid">
-      LOGIN 
+      LOGIN
   </button>
 
   <a href="#" class="d-block text-center mt-4">Forgot Password?</a>
@@ -66,11 +67,11 @@
 </div>
 </div>
 
-    
-    
+
+
 
 
   </div>
- 
+
 </app-modal>
 </form>
