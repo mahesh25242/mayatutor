@@ -1,8 +1,20 @@
 <app-bread-crumbs [hide]="true"></app-bread-crumbs>
 
 <form [formGroup]="registerFrm" (ngSubmit)="saveUser()">
-  <h3>{{ f.type.value}} Registration</h3>
-  <div class="form-group">
+  <section class="well-bg-header">
+  <div class="container">
+    <h3>{{ f.type.value}} Registration</h3>
+  </div>
+</section>
+<section class="container">
+  
+<div class="row">
+
+  
+
+
+
+  <div class="form-group col-md-6 col-lg-6 col-xl-6">
     <label for="fname">First Name</label>
     <input type="text" class="form-control" id="fname"
     [ngClass]="{'is-invalid': (f.fname.errors && f.fname.errors.error) }"
@@ -11,7 +23,7 @@
         {{f.fname.errors.error}}
       </div>
   </div>
-  <div class="form-group">
+  <div class="form-group col-md-6 col-lg-6 col-xl-6">
     <label for="lname">Last Name</label>
     <input type="text" class="form-control" id="lname"
     [ngClass]="{'is-invalid': (f.lname.errors && f.lname.errors.error)}"
@@ -20,7 +32,7 @@
       {{f.lname.errors.error}}
     </div>
   </div>
-  <div class="form-group">
+  <div class="form-group col-md-6 col-lg-6 col-xl-6">
     <label for="email">Email Address</label>
     <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
     [ngClass]="{'is-invalid': (f.email.errors && f.email.errors.error)}"
@@ -31,7 +43,7 @@
     </div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group col-md-6 col-lg-6 col-xl-6">
     <label for="country_id">Country</label>
     <ng-select [items]="(countries$ | async)"
         bindLabel="name"
@@ -45,7 +57,7 @@
         </div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group col-md-6 col-lg-6 col-xl-6">
     <label for="phone">Mobile</label>
     <ng-container *ngIf="f.country_id.value">
       +{{f.country_id.value.phonecode}}
@@ -58,7 +70,7 @@
       {{f.phone.errors.error}}
     </div>
   </div>
-  <div class="form-group">
+  <div class="form-group col-md-6 col-lg-6 col-xl-6">
     <label for="address">Address</label>
     <input type="text" class="form-control" id="address"
     [ngClass]="{'is-invalid': (f.address.errors && f.address.errors.error)}"
@@ -69,7 +81,7 @@
   </div>
 
 
-  <div class="form-group">
+  <div class="form-group col-md-6 col-lg-6 col-xl-6">
     <label for="state_id">State</label>
     <ng-select [items]="(states$ | async)"
         bindLabel="name"
@@ -83,7 +95,7 @@
       </div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group col-md-6 col-lg-6 col-xl-6">
     <label for="city_id">City</label>
     <ng-select [items]="(cities$ | async)"
       [ngClass]="{'is-invalid': ( f.city_id.errors && f.city_id.errors.error)}"
@@ -96,7 +108,7 @@
           {{f.city_id.errors.error}}
         </div>
   </div>
-  <div class="form-group">
+  <div class="form-group col-md-6 col-lg-6 col-xl-6">
     <label for="pin">Pin</label>
     <input type="text" class="form-control" id="pin"
     [ngClass]="{'is-invalid': ( f.pin.errors && f.pin.errors.error)}"
@@ -105,7 +117,7 @@
       {{f.pin.errors.error}}
     </div>
   </div>
-  <div class="form-group">
+  <div class="form-group col-md-6 col-lg-6 col-xl-6">
     <label for="password">Password</label>
     <input type="password" class="form-control" id="password"
     [ngClass]="{'is-invalid': ( f.password.errors && f.password.errors.error)}"
@@ -114,7 +126,7 @@
       {{f.password.errors.error}}
     </div>
   </div>
-  <div class="form-group">
+  <div class="form-group col-md-6 col-lg-6 col-xl-6">
     <label for="password_confirmation">Confirm Password</label>
     <input type="password" class="form-control" id="password_confirmation"
     [ngClass]="{'is-invalid': ( f.password_confirmation.errors && f.password_confirmation.errors.error)}"
@@ -123,7 +135,10 @@
       {{f.password_confirmation.errors.error}}
     </div>
   </div>
+  <div class="col-12 text-right border-top pt-3 mt-3"> <div id="recaptcha-container"></div>
+  <button type="submit" class="btn btn-outline-secondary mr-3">Cancel</button> <button type="submit" class="btn btn-primary ml-auto">Register</button></div>
+</div>
 
-  <div id="recaptcha-container"></div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+</section>
+ 
 </form>

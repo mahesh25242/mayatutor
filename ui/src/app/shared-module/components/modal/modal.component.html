@@ -1,5 +1,5 @@
 <div>
-  <div class="modal-header" *ngIf="!noHeader">
+  <div class="modal-header border-0" *ngIf="!noHeader">
       <h4 class="modal-title" id="modal-title">
         <ng-content select="[header]"></ng-content>
       </h4>
@@ -7,10 +7,10 @@
       <span aria-hidden="true">&times;</span>
       </button>
   </div>
-  <div class="modal-body">
+  <div class="modal-body border-0">
     <ng-content select="[body]"></ng-content>
   </div>
-  <div class="modal-footer" *ngIf="!noFooter">
+  <div class="modal-footer border-0" *ngIf="!noFooter">
     <ng-content select="[footer]"></ng-content>
   </div>
 </div>

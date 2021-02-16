@@ -39,3 +39,9 @@
       font-size: 0.7rem;
   }
   h1 {font-size:$fontsize-2;}
+  .well-bg-header{
+    background-color:$primaryColor;
+    color:#fff;
+    padding: 37px;
+    margin-bottom: 55px;
+  }
