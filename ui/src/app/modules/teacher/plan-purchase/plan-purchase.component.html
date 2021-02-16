@@ -1,0 +1,9 @@
+<div *ngIf="(plan$ | async) as plan">
+  plan Name: {{plan.name}}
+  <app-apply-coupon *ngIf="plan.price" (setCoupon)="setCoupon($event)"></app-apply-coupon>
+
+
+  Price ₹ {{ plan.price }}
+
+  <button class="btn btn-primary" (click)="goToPurchase(plan)">Continue</button>
+</div>

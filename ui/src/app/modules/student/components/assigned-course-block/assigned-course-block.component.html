@@ -1,0 +1,13 @@
+<div class="card" style="width: 18rem;">
+  <img [src]="studentCourse.course.image" class="card-img-top" [alt]="studentCourse.course.name" [title]="studentCourse.course.name" *ngIf="studentCourse.course.image">
+  <div class="card-body">
+    <h5 class="card-title">{{studentCourse.course.name}}</h5>
+    <p>{{ studentCourse.course.user.fname }} {{ studentCourse.course.user.lname }}</p>
+    <app-rating [rating]="studentCourse.course.user.rating" [readonly]="true"></app-rating>
+    <p class="card-text">{{studentCourse.course.description}}</p>
+    <span placement="top" [ngbTooltip]="(studentCourse.course.latest_course_approval_request.status != 1) ? 'Course is under approvel' :''">
+      <button href="javascript:{}" class="btn btn-primary"
+      [disabled]="studentCourse.course.latest_course_approval_request.status != 1" [routerLink]="'course/'+studentCourse.course.id">Continue</button>
+    </span>
+  </div>
+</div>

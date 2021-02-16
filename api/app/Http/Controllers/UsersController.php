@@ -109,7 +109,7 @@ class UsersController extends Controller
 
     public function authUser(Request $request){
         $user = \App\User::with(["country", "state", "city", "role", "lastLogin",
-        "teacherPaymentInfo", "subject", "teacherInfo.education", "teacherBanner", "rating", "currentUserPlan"])->find(Auth::id());
+        "teacherPaymentInfo", "subject", "teacherInfo.education", "teacherBanner", "rating", "currentUserPlan.plan"])->find(Auth::id());
         return response($user);
     }
 
@@ -323,17 +323,88 @@ class UsersController extends Controller
     }
 
 
+
     public function fetchAllStudent(Request $request){
+        $perPage = 20;
+        $q = $request->input("q",'');
         $user = User::whereHas("userRole", function($q){
             $q->where("role_id", 3);
-        })->get();
-        return response($user);
+        })->withCount(["studentCourse"])->WhereRaw(" ( concat(`fname`, ' ', `lname`) like '%{$q}%'
+        OR `email` like '%{$q}%'
+        OR `phone` like '%{$q}%') ");
+
+        if($request->input("teacherId", null)){
+            $user = $user->whereHas("student", function($qry) use($request){
+                $qry->where("teacher_user_id", $request->input("teacherId", null));
+            });
+        }
+        if($request->input("status", null)){
+            $user = $user->where("status", $request->input("status", null));
+        }
+
+        return response($user->paginate($perPage));
     }
 
     public function fetchAllTeacher(Request $request){
-        $user = User::whereHas("userRole", function($q){
+        $perPage = 20;
+        $q = $request->input("q",'');
+        $user = User::withCount("teacherStudent as student_count")->whereHas("userRole", function($q){
             $q->where("role_id", 2);
-        })->get();
+        })->WhereRaw(" ( concat(`fname`, ' ', `lname`) like '%{$q}%'
+                        OR `email` like '%{$q}%'
+                        OR `phone` like '%{$q}%') ")
+        ->paginate($perPage);
         return response($user);
+    }
+
+    public function fetchStudent($id=0){
+        $user = User::with(["city"])->where("id", $id)->get()->first();
+        return response($user);
+    }
+
+    public function fetchTeacher($id=0){
+        $user = User::withCount("teacherStudent as student_count", "course", "teacherAutoApproval")->with(["rating", "teacherInfo", "subject", "city"])
+        ->where("id", $id)->get()->first();
+        return response($user);
+    }
+
+
+    public function toggleStatus(Request $request){
+        $user = User::find($request->input("id", 0));
+        if($user){
+            $user->status =  !$user->status;
+            $user->save();
+        }
+
+        return response([
+            'message' => 'successfully changed status', 'status' => 1
+        ]);
+    }
+
+    public function delete(Request $request){
+        $user = User::find($request->input("id", 0));
+        if($user){
+            $user->delete();
+        }
+        return response([
+            'message' => 'successfully deleted', 'status' => 1
+        ]);
+    }
+
+    public function toUser(Request $request){
+        $users = [];
+        $q = $request->input("q", '');
+        if( \App\User::has("isTeacher")->find(Auth::id())){
+            $users = \App\User::whereHas("student", function($query){
+                $query->where("teacher_user_id", Auth::id());
+            })->where("fname", "LIKE", "%{$q}%")->paginate(40);
+        }else if( \App\User::has("isAdmin")->find(Auth::id())){
+             $users = \App\User::where("fname", "LIKE", "%{$q}%")->paginate(40);
+        }else{
+            $users = \App\User::whereHas("teacherStudent", function($query){
+                $query->where("user_id", Auth::id());
+            })->where("fname", "LIKE", "%{$q}%")->paginate(40);
+        }
+        return response($users);
     }
 }

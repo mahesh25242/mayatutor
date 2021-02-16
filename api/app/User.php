@@ -31,7 +31,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'state_id', 'city_id', 'pin', 'status', 'created_by', 'updated_by', 'deleted_by',
         'avatar', 'url'
     ];
-    protected $appends = array('is_online', 'created_at_human');
+    protected $appends = array('is_online', 'created_at_human', 'is_able');
     /**
      * The attributes excluded from the model's JSON form.
      *
@@ -41,6 +41,26 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'password',
     ];
 
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($course) { // before delete() method call this
+             $course->userRole()->delete();
+             $course->userLogin()->delete();
+             $course->rating()->delete();
+             $course->teacherPaymentInfo()->delete();
+             $course->teacherSubject()->delete();
+             $course->teacherInfo()->delete();
+             $course->teacherBanner()->delete();
+             $course->course()->delete();
+             $course->student()->delete();
+             $course->teacherStudent()->delete();
+             $course->studentCourse()->delete();
+             $course->userPlan()->delete();
+             $course->teacherAutoApproval()->delete();
+             $course->UserPayment()->delete();
+        });
+    }
 
     public function getEmailAttribute($email)
     {
@@ -50,6 +70,19 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     public function getPhoneAttribute($phone)
     {
         return (Auth::id()) ? $phone : (($phone) ? '*': null);
+    }
+
+    public function getIsAbleAttribute()
+    {
+        if($this->status  == 1 && $this->isTeacher()->exists() && $this->currentUserPlan()->exists()){
+            return true;
+        }else if($this->status  == 1 && $this->isAdmin()->exists()){
+            return true;
+        }else if($this->status  == 1 && $this->isStudent()->exists()){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 
@@ -96,6 +129,16 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     public function isAdmin()
     {
         return $this->hasMany('App\UserRole')->where("role_id",1);
+    }
+
+    public function isTeacher()
+    {
+        return $this->hasMany('App\UserRole')->where("role_id",2);
+    }
+
+    public function isStudent()
+    {
+        return $this->hasMany('App\UserRole')->where("role_id",3);
     }
 
     public function country()
@@ -171,6 +214,10 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return $this->hasMany('App\Course');
     }
 
+
+
+
+
     // public function scopeMyStudents($query)
     // {
     //     return $query->leftJoin('teacher_students1', 'users.id', '=', 'teacher_students.teacher_user_id');
@@ -178,12 +225,17 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     public function student()
     {
-        return $this->hasMany('App\TeacherStudent');
+        return $this->hasOne('App\TeacherStudent');
     }
 
     public function teacherStudent()
     {
         return $this->hasMany('App\TeacherStudent', 'teacher_user_id');
+    }
+
+    public function studentCourse()
+    {
+        return $this->hasMany('App\StudentCourse', 'user_id');
     }
 
     public function userPlan()
@@ -193,7 +245,8 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     public function currentUserPlan()
     {
-        return $this->hasOne('App\UserPlan')->where("end_date", ">", new Carbon);
+        return $this->hasOne('App\UserPlan')->where("end_date", ">", new Carbon)
+        ->orderBy("end_date", "ASC")->take(1);;
     }
 
     public function subject()
@@ -208,4 +261,33 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         );
     }
 
+    public function teacherAutoApproval()
+    {
+        return $this->hasOne('App\TeacherAutoApproval');
+    }
+
+    public function userPayment()
+    {
+        return $this->hasMany('App\UserPayment');
+    }
+
+    public function couponGroup()
+    {
+        return $this->hasMany('App\CouponGroup', 'created_by');
+    }
+
+    public function couponTrack()
+    {
+        return $this->hasMany('App\CouponTrack');
+    }
+
+    public function planPurchase()
+    {
+        return $this->hasMany('App\PlanPurchase');
+    }
+
+    // public function studentCourseModule()
+    // {
+    //     return $this->hasMany('App\StudentCourseModule');
+    // }
 }

@@ -7,9 +7,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {  RouterModule } from '@angular/router';
 import { NgxCaptchaModule } from 'ngx-captcha';
 import Notiflix from "notiflix";
+import { PlayerModuleModule } from './player-module.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -17,9 +19,14 @@ import { RegisterComponent } from './components/register/register.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { TeacherBlockComponent } from './components/teacher-block/teacher-block.component';
 import { CourseBlockComponent } from './components/course-block/course-block.component';
+
 import { CourseDetailComponent } from './components/course-detail/course-detail.component';
 import { SearchComponent } from './components/search/search.component';
 import { RatingComponent } from './components/rating/rating.component';
+import { BreadCrumbsComponent } from './components/bread-crumbs/bread-crumbs.component';
+import { ModuleLaunchComponent } from './components/module-launch/module-launch.component';
+import { BackButtonDirective } from './directives/back-button.directive';
+import { CollectDetailComponent } from './components/search/collect-detail/collect-detail.component';
 
 Notiflix.Confirm.Init({ borderRadius:"5px",titleColor:"#204486",okButtonBackground:"#204486",cancelButtonBackground:"#e2e2e2",cancelButtonColor:"#393939", });
 Notiflix.Notify.Init({ width:"390px", success: {background:"#d4edda",textColor:"#155724",}, failure: {background:"#f8d7da",textColor:"#721c24",}, warning: {background:"#fff3cd",textColor:"#856404",}, info: {background:"#cce5ff",textColor:"#004085",}, });
@@ -37,10 +44,15 @@ Notiflix.Block.Init({ svgColor:"#204486", });
     CourseBlockComponent,
     SearchComponent,
     RatingComponent,
-    CourseDetailComponent
+    CourseDetailComponent,
+    BreadCrumbsComponent,
+    ModuleLaunchComponent,
+    BackButtonDirective,
+    CollectDetailComponent
   ],
   imports: [
     CommonModule,
+    PlayerModuleModule, //no export it
     NgbModule,
     NgSelectModule,
     RouterModule,
@@ -48,7 +60,8 @@ Notiflix.Block.Init({ svgColor:"#204486", });
     FormsModule,
     ReactiveFormsModule,
     NgxCaptchaModule,
-    DragDropModule
+    DragDropModule,
+    PdfViewerModule
   ],
   exports:[
     NgSelectModule,
@@ -66,7 +79,11 @@ Notiflix.Block.Init({ svgColor:"#204486", });
     SearchComponent,
     DragDropModule,
     RatingComponent,
-    CourseDetailComponent
+    CourseDetailComponent,
+    BreadCrumbsComponent,
+    ModuleLaunchComponent,
+    PdfViewerModule,
+    BackButtonDirective
   ]
 })
 export class SharedModuleModule { }

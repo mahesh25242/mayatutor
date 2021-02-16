@@ -33,6 +33,7 @@ class CourseModuleController extends Controller
         $validator = Validator::make($request->all(), [
             'course_id' => ['required', 'integer'],
             'name' => ['required', 'string'],
+            'video_type' => ['required', 'string'],
             'video_url' => ['required_without:pdf', 'string'],
             'pdf' => ['required_without:video_url', 'mimes:pdf'],
         ]);
@@ -48,7 +49,7 @@ class CourseModuleController extends Controller
         if ($request->hasFile('pdf')) {
             $status = true;
             $modulePdf = sprintf("%s.%s",time(), $request->file('pdf')->extension());
-            $destinationPath = "assets/course";
+            $destinationPath = "assets/course/".$request->input("course_id", 0);
             $request->file('pdf')->move($destinationPath, $modulePdf);
         }
 
@@ -56,6 +57,7 @@ class CourseModuleController extends Controller
             "course_id" => $request->input("course_id", 0),
             "name" => $request->input("name", ""),
             "video_url" => $request->input("video_url", ''),
+            "video_type" => $request->input("video_type", ''),
             "status" => 0
         ];
 
@@ -115,5 +117,11 @@ class CourseModuleController extends Controller
         return response([
             'message' => 'successfully reordered!', 'status' => 1
         ]);
+    }
+
+    public function getAModule($courseId =0,$id = 0){
+        $module = \App\CourseModule::with(["course.user", "course.courseTag", "loggedStudentCourse.studentCourseTrack.studentCourseModuleTrack" ])->find($id);
+        return response($module);
+
     }
 }

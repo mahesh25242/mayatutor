@@ -1,0 +1,73 @@
+<app-modal>
+  <div header>
+  Student - {{ user.fname}} {{ user.lname}}
+  </div>
+  <div  body>
+    <div>
+      <img [src]="user.avatar" />
+        <div>
+          {{user.address}}<br/>
+          {{ user.city?.name }} - {{ user.pin }}
+        </div>
+        <ng-container *ngIf="user.role_url == 'teacher'">
+          Courses: {{ user.course_count }}
+        </ng-container>
+
+
+        <a [href]="'tel://'+user.phone" class="btn btn-primary">Call</a>
+        <a class="d-none d-sm-block btn btn-primary" target="_blank" [href]="'https://web.whatsapp.com/send?phone='+user.phone">Message</a>
+        <a class="d-block d-sm-none btn btn-primary" target="_blank" [href]="'https://api.whatsapp.com/send?phone='+user.phone">Message</a>
+
+
+        Contact Number: {{ user.phone}}
+        Email: {{ user.email}}
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>
+                Course
+              </th>
+              <th>
+                Assigned
+              </th>
+              <th>
+                Status
+              </th>
+              <th>
+                Delete
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngIf="(studentCourses$ | async) as studentCourses">
+              <tr *ngFor="let studentCourse of studentCourses">
+                <td>
+                 <span [ngClass]="{'text-warning' : studentCourse.course.latest_course_approval_request.status != 1}" placement="top" [ngbTooltip]="(studentCourse.course.latest_course_approval_request.status != 1) ? ' Course is in '+studentCourse.course.latest_course_approval_request.status_text+' status  student can\'t launch this course': '' ">{{ studentCourse.course.name}}</span>
+                </td>
+                <td>
+                  {{ studentCourse.created_at | date :'medium'}}
+                </td>
+                <td>
+                  <a href="javascript:{}" placement="top" [ngbTooltip]="(!studentCourse.status) ? ' Course is in in-active status  so student can\'t launch this course': '' " (click)="toggleCourseStatus(studentCourse)"  [ngClass]="{'text-warning': !studentCourse.status}">{{ studentCourse.status_text }}</a>
+                </td>
+                <td>
+                  <a href="javascript:{}" (click)="deleteStudentCourse(studentCourse)">Delete</a>
+                </td>
+              </tr>
+              <tr *ngIf="!studentCourses || !studentCourses.length">
+                <td colspan="4">No course found</td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+
+    </div>
+  </div>
+  <div  footer>
+
+
+    <button type="button" class="btn btn-outline-danger delete-user" (click)="deleteUser()">Delete</button>
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
+  </div>
+</app-modal>

@@ -30,4 +30,9 @@ class Role extends Model implements AuthenticatableContract, AuthorizableContrac
     {
         return $this->hasMany('App\Role');
     }
+
+    public function coupon()
+    {
+        return $this->hasMany('App\Coupon');
+    }
 }

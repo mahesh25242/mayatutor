@@ -29,7 +29,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
   // ];
 
   played(event: Plyr.PlyrEvent) {
-    console.log('played', event);
+   // console.log('played', event);
   }
 
   play(): void {

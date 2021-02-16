@@ -1,8 +1,15 @@
 <app-search></app-search>
-<ng-container *ngIf="teachers && teachers.length">
-  <app-teacher-block *ngFor="let teacher of teachers" [teacher]="teacher"></app-teacher-block>
+<ng-container *ngIf="(teachers$ | async) as teachers">
+  <div>{{ teachers.total }} {{ (teachers.total > 1) ? 'results' : 'result'}} found</div>
+  <ng-container *ngIf="teachers && teachers.data.length">
+    <app-teacher-block *ngFor="let teacher of teachers.data" [teacher]="teacher"></app-teacher-block>
+    <div *ngIf="teachers.next_page_url">
+      <a href="javascript:{}" (click)="loadMore(teachers.current_page + 1)">Load More</a>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="!teachers || !teachers.data.length">
+    <div class="alert alert-warning">No teacher found</div>
+  </ng-container>
 </ng-container>
-<ng-container *ngIf="!teachers || !teachers.length">
-  <div class="alert alert-warning">No teacher found</div>
-</ng-container>
+
 

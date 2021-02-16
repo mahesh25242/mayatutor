@@ -1,1 +1,10 @@
 // @import '~video.js/dist/video-js.css';
+:host ::ng-deep {
+  iframe {
+    transition: 0.2s filter linear;
+  }
+
+  .plyr--paused iframe {
+    filter: blur(1.5rem);
+  }
+}

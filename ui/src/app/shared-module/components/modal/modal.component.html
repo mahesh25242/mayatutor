@@ -1,5 +1,5 @@
 <div>
-  <div class="modal-header">
+  <div class="modal-header" *ngIf="!noHeader">
       <h4 class="modal-title" id="modal-title">
         <ng-content select="[header]"></ng-content>
       </h4>

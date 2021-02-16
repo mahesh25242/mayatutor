@@ -1,8 +1,9 @@
 <div class="card" *ngIf="(user$ | async) as user">
+<app-bread-crumbs [hide]="true"></app-bread-crumbs>
 
 <app-change-banner *ngIf="isDashBoard"></app-change-banner>
-<div class="alert alert-danger" *ngIf="isDashBoard">
-  <h3>Your Free Trial Remaining {{ (user.current_user_plan) ?  user.current_user_plan.remaining_days : '0'}} Days</h3>
+<div class="alert alert-danger" *ngIf="isDashBoard && (!user.current_user_plan || user.current_user_plan?.remaining_days < 10)">
+  <h3>Your {{user.current_user_plan.plan.name}} Remaining {{ (user.current_user_plan) ?  user.current_user_plan.remaining_days : '0'}} Days</h3>
   <p>Make a Payment soon, Avoid account blocking</p>
   <a routerLink="plans" class="btn btn-primary">View Plans</a>
 </div>
@@ -11,8 +12,7 @@
       <div class="col-md-6">
         <img [src]="user.avatar" alt="avatar" class="img-thumbnail">
         <app-rating [rating]="user.rating" [readonly]="true"></app-rating>
-        <a href="javascript:{}" class="btn btn-primary">Share</a>
-
+        <app-custom-url [shareOnly]="true"></app-custom-url>
         {{ user.fname }} {{ user.lname }} <br/>
         Time: {{user.teacher_info?.time}}
        <div>
@@ -80,11 +80,11 @@
 
 
     <ng-container *ngIf="(courses$ | async) as courses">
-      <ngb-tabset type="pills" *ngIf="courses && courses.length">
+      <ngb-tabset type="pills" *ngIf="courses && courses?.data.length">
         <ngb-tab>
           <ng-template ngbTabTitle>All Courses</ng-template>
           <ng-template ngbTabContent>
-            <div *ngFor="let course of courses">
+            <div *ngFor="let course of courses?.data">
               <app-course-block [course]="course"></app-course-block>
             </div>
           </ng-template>
@@ -92,7 +92,7 @@
         <ngb-tab>
           <ng-template ngbTabTitle>New Courses</ng-template>
           <ng-template ngbTabContent>
-            <div *ngFor="let course of courses | slice:0:2">
+            <div *ngFor="let course of courses?.data | slice:0:2">
               <app-course-block [course]="course"></app-course-block>
             </div>
           </ng-template>

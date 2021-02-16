@@ -1,4 +1,5 @@
 <div *ngIf="(plans$ | async) as plans" class="row">
+  <app-bread-crumbs [hide]="true"></app-bread-crumbs>
   <div class="col" *ngFor="let plan of plans">
     <h3>{{plan.name}}</h3>
     <ng-container *ngIf="plan.features && plan.features.length">
@@ -6,8 +7,8 @@
         {{feature}}
       </p>
     </ng-container>
-    <p>{{plan.price}}</p>
-    <a href="" class="btn btn-primary" *ngIf="!plan.my_user_plan">
+    <p *ngIf="plan.price">₹ {{plan.price}}</p>
+    <a [routerLink]="plan.id" class="btn btn-primary" *ngIf="!plan.my_user_plan">
     {{ plan.price > 0 ? 'Buy Now' : 'Free Trial'}}
     </a>
     <span *ngIf="plan.my_user_plan" class="badge badge-primary">Current Plan</span>

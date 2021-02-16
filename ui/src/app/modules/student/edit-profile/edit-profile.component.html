@@ -1,3 +1,4 @@
+<app-bread-crumbs [hide]="true"></app-bread-crumbs>
 <form [formGroup]="editProfileFrm" *ngIf="(loggedUser$ | async) as loggedUser" (ngSubmit)="updateProfile()">
   <img [src]="loggedUser.avatar" class="avatar-img img-thumbnail" />
   <button type="button" (click)="fileInput.click()" class="btn btn-primary avatar-up-btn">

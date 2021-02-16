@@ -6,6 +6,9 @@ import { TeacherPaymentInfo } from './teacherPaymentInfo';
 import { Subject } from './subject';
 import { TeacherInfo, TeacherBannerImg } from './teacherInfo';
 import { Rating } from './rating';
+import { Pagination } from './pagination';
+import { TeacherStudent } from './teacherStudent';
+import { Plan } from './plan';
 
 export interface UserLogin {
   id?: number,
@@ -23,7 +26,8 @@ export interface UserPlan {
   start_date?: string,
   created_at?: string,
   updated_at?: string,
-  end_date?: string
+  end_date?: string,
+  plan?: Plan
 }
 
 export interface User {
@@ -59,5 +63,14 @@ export interface User {
   rating?: Rating,
   current_user_plan?: UserPlan,
   student_count?: number,
-  created_at_human?: string
+  created_at_human?: string,
+  course_count?: number,
+  teacher_auto_approval_count?: number,
+  student_course_count?: number,
+  student?: TeacherStudent,
+  is_online?: boolean,
+  is_able?: boolean
+}
+export interface UserWithPagination extends Pagination {
+  data?: User[]
 }

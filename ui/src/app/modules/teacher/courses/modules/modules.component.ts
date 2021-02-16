@@ -3,12 +3,14 @@ import { ActivatedRoute } from '@angular/router';
 import { Course, CourseModule } from 'src/app/lib/interfaces';
 import { Observable, Subscription } from 'rxjs';
 import { CourseService } from 'src/app/lib/services';
-import { mergeMap } from 'rxjs/operators';
+import { mergeMap, tap } from 'rxjs/operators';
 import { faEdit, faTrash, faCheck, faWindowClose, faPlay, faFilePdf } from '@fortawesome/free-solid-svg-icons';
 import Notiflix from "notiflix";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { VideoPreviewComponent } from './add-module/video-preview/video-preview.component';
 import { CdkDragStart, CdkDragEnd, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { BreadCrumbsService } from 'src/app/shared-module/components/bread-crumbs/bread-crumbs.component';
+
 
 @Component({
   selector: 'app-modules',
@@ -34,7 +36,8 @@ export class ModulesComponent implements OnInit, OnDestroy {
 
   constructor(private route:ActivatedRoute,
     private courseService: CourseService,
-    private _modalService: NgbModal) { }
+    private _modalService: NgbModal,
+    private breadCrumbsService: BreadCrumbsService) { }
 
   playVideo(module:CourseModule){
     const activeModal = this._modalService.open(VideoPreviewComponent,{
@@ -44,7 +47,7 @@ export class ModulesComponent implements OnInit, OnDestroy {
       source : [
         {
           src: `${module.video_url}&modestbranding=1&showinfo=0&rel=0`,
-          provider: 'youtube',
+          provider: module.video_type,
         },
       ]
     };
@@ -126,7 +129,22 @@ export class ModulesComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.course$ = this.route.params.pipe(mergeMap(res=>{
-      return this.courseService.course(res.courseId);
+
+      return this.courseService.course(res.courseId).pipe(tap(res=>{
+        this.breadCrumbsService.bcs$.next([
+          {
+            url: '/',
+            name: 'Home',
+          },
+          {
+            url: '/teacher/courses',
+            name: 'Courses',
+          },
+          {
+            name: `${res.name} Modules `,
+          }
+        ]);
+      }));
     }));
 
     this.courseModules$ = this.courseService.courseModules;

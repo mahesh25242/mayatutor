@@ -1,0 +1,68 @@
+<form [formGroup]="paymentFrm">
+  <app-modal>
+    <div header>Payments - {{user.fname}} {{user.lname }}</div>
+    <div body>
+      <div class="form-group">
+        <label for="course">Course</label>
+        <ng-select [items]="(courses$ | async)?.data"
+            bindLabel="name"
+            id="id"
+            placeholder="Select Course"
+            (change)="changeCourse($event)"
+            formControlName="course">
+            </ng-select>
+      </div>
+      <div *ngIf="f.course.value?.id">
+        <app-add-payment [user]="user" [course]="f.course.value" (changeCourse)="changeCourse(f.course.value)"></app-add-payment>
+        <h3>{{ f.course.value.name }}</h3>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>
+                From Date
+              </th>
+              <th>
+                To Date
+              </th>
+              <th>
+                Amount
+              </th>
+              <th>
+                Date
+              </th>
+              <th>
+                Method
+              </th>
+            </tr>
+          </thead>
+          <tbody *ngIf="(studentPayments$ | async) as studentPayments">
+            <tr *ngFor="let studentPayment of studentPayments">
+              <td>
+                <span *ngIf="studentPayment.start_date">{{ studentPayment.start_date | date: 'medium'}}</span>
+              </td>
+              <td>
+                <span *ngIf="studentPayment.end_date">{{ studentPayment.end_date | date: 'medium'}}</span>
+              </td>
+              <td>
+                {{ studentPayment.amount}}
+              </td>
+              <td>
+                {{ studentPayment.created_at | date: 'medium'}}
+              </td>
+              <td>
+                {{ studentPayment.method }}
+              </td>
+            </tr>
+            <tr *ngIf="!studentPayments || !studentPayments.length">
+              <td colspan="5">
+                <div class="alert alert-warning">No Payment found</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+    <div footer></div>
+  </app-modal>
+</form>

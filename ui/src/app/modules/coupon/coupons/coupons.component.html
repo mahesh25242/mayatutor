@@ -1,0 +1,44 @@
+<a routerLink="create-coupon/0" class="btn btn-primary">Create Coupon</a>
+<h3>Coupons</h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th>
+        Name
+      </th>
+      <th>
+        Code
+      </th>
+      <th>
+        No of Usage
+      </th>
+      <th>
+        From Date
+      </th>
+      <th>
+        To Date
+      </th>
+      <th>Options</th>
+    </tr>
+  </thead>
+  <ng-container *ngIf="(coupons$ | async) as coupons">
+    <tbody>
+      <tr *ngFor="let coupon of coupons.data">
+        <td>{{coupon.coupon_group?.name}}</td>
+        <td><a [routerLink]="'create-coupon/'+coupon.id">{{coupon.code}}</a></td>
+        <td>{{coupon.no_use}}</td>
+        <td>
+          <span *ngIf="coupon.start_date">{{coupon.start_date}}</span>
+        </td>
+        <td>
+            <span *ngIf="coupon.end_date">
+              {{coupon.end_date}}
+            </span>
+          </td>
+        <td>
+          <a href="javascript:{}">Delete</a>
+        </td>
+      </tr>
+    </tbody>
+  </ng-container>
+</table>

@@ -1,0 +1,120 @@
+<a appBackButton href="javascript:{}" class="btn btn-primary">Back</a>
+<form [formGroup]="createCouponFrm" (ngSubmit)="saveCoupon()">
+
+  <div class="form-group">
+    <label for="no_of_coupon">Number of Coupon</label>
+    <input type="number" class="form-control" id="no_of_coupon"
+    placeholder="Number of Coupon" formControlName="no_of_coupon" min="1"
+    [ngClass]="{'is-invalid': (f.no_of_coupon.errors && f.no_of_coupon.errors.error) }">
+    <div *ngIf="f.no_of_coupon.errors && f.no_of_coupon.errors.error" class="invalid-feedback">
+      {{f.no_of_coupon.errors.error}}
+    </div>
+  </div>
+
+
+  <div class="form-group" *ngIf="f.no_of_coupon.value > 1">
+    <label for="groupName">Name</label>
+    <input type="text" class="form-control" id="groupName"
+    placeholder="Name" formControlName="groupName"
+    [ngClass]="{'is-invalid': (f.groupName.errors && f.groupName.errors.error) }" >
+    <div *ngIf="f.groupName.errors && f.groupName.errors.error" class="invalid-feedback">
+      {{f.groupName.errors.error}}
+    </div>
+  </div>
+  <div class="form-group" *ngIf="f.no_of_coupon.value == 1">
+    <label for="code">Coupon Code</label>
+    <input type="text" class="form-control" id="code"
+    placeholder="Coupon Code" formControlName="code"
+    [ngClass]="{'is-invalid': (f.code.errors && f.code.errors.error) }">
+    <div *ngIf="f.code.errors && f.code.errors.error" class="invalid-feedback">
+      {{f.code.errors.error}}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="description">Description</label>
+    <textarea class="form-control" id="description"
+    placeholder="Description" formControlName="description"
+    [ngClass]="{'is-invalid': (f.description.errors && f.description.errors.error) }"></textarea>
+    <div *ngIf="f.description.errors && f.description.errors.error" class="invalid-feedback">
+      {{f.description.errors.error}}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="no_use">Number of use</label>
+    <input type="number" class="form-control" id="no_use"
+    placeholder="Number of use" formControlName="no_use" min="0"
+    [ngClass]="{'is-invalid': (f.no_use.errors && f.no_use.errors.error) }">
+    <div *ngIf="f.no_use.errors && f.no_use.errors.error" class="invalid-feedback">
+      {{f.no_use.errors.error}}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="type">Type</label>
+    <select class="form-control" id="type"
+    placeholder="Number of use" formControlName="type"
+    [ngClass]="{'is-invalid': (f.type.errors && f.type.errors.error) }">
+      <option value="%">%</option>
+      <option value="Amount">Amount</option>
+    </select>
+    <div *ngIf="f.type.errors && f.type.errors.error" class="invalid-feedback">
+      {{f.type.errors.error}}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="value">{{f.type.value}} Value</label>
+    <input type="number" class="form-control" id="value"
+    [placeholder]="f.type.value+' Value'" formControlName="value" min="0"
+    [ngClass]="{'is-invalid': (f.value.errors && f.value.errors.error) }">
+    <div *ngIf="f.value.errors && f.value.errors.error" class="invalid-feedback">
+      {{f.value.errors.error}}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="amount">Start Date</label>
+    <div class="input-group">
+      <input class="form-control" placeholder="dd/mm/yyyy"
+             name="dp" formControlName="start_date" ngbDatepicker #stDate="ngbDatepicker">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" (click)="stDate.toggle()" type="button">
+          <fa-icon [icon]="faCalendar"></fa-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="amount">End Date</label>
+    <div class="input-group">
+      <input class="form-control" placeholder="dd/mm/yyyy"
+             name="dp" formControlName="end_date" ngbDatepicker #endDate="ngbDatepicker"
+             [minDate]="f.start_date.value">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" (click)="endDate.toggle()" type="button">
+          <fa-icon [icon]="faCalendar"></fa-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="status">Status</label>
+    <select class="form-control" id="status"
+    formControlName="status"
+    [ngClass]="{'is-invalid': (f.status.errors && f.status.errors.error) }">
+    <option value="1">Active</option>
+    <option value="0">In-Active</option>
+    </select>
+
+    <div *ngIf="f.status.errors && f.status.errors.error" class="invalid-feedback">
+      {{f.status.errors.error}}
+    </div>
+  </div>
+
+  <button class="btn btn-primary">Save</button>
+</form>
+

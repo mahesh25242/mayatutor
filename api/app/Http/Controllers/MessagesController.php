@@ -132,7 +132,13 @@ class MessagesController extends Controller
             // add code logic here to check if a thread has max participants set
             // utilize either $thread->getMaxParticipants()  or $thread->hasMaxParticipants()
 
-            $thread->addParticipant($input['recipients']);
+            if(is_array($input['recipients']) && !empty($input['recipients'])){
+                foreach($input['recipients'] as $recipients){
+                    if(isset($recipients["id"]) && $recipients["id"])
+                        $thread->addParticipant($recipients["id"]);
+                }
+            }
+
         }
 
         // check if pusher is allowed

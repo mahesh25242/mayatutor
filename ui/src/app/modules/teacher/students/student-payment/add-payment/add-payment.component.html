@@ -1,0 +1,50 @@
+<form [formGroup]="addPaymentFrm" (ngSubmit)="savePayment()">
+  <div class="form-group">
+    <label for="amount">Payment</label>
+    <input type="number" class="form-control" id="amount"
+    [ngClass]="{'is-invalid': (f.amount.errors && f.amount.errors.error)}"
+    placeholder="Payment Amount" formControlName="amount">
+    <div *ngIf="f.amount.errors && f.amount.errors.error" class="invalid-feedback">
+      {{f.amount.errors.error}}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="amount">Start Date</label>
+    <div class="input-group">
+      <input class="form-control" placeholder="dd/mm/yyyy"
+             name="dp" formControlName="start_date" ngbDatepicker #stDate="ngbDatepicker">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" (click)="stDate.toggle()" type="button">
+          <fa-icon [icon]="faCalendar"></fa-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="amount">End Date</label>
+    <div class="input-group">
+      <input class="form-control" placeholder="dd/mm/yyyy"
+             name="dp" formControlName="end_date" ngbDatepicker #endDate="ngbDatepicker"
+             [minDate]="f.start_date.value">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" (click)="endDate.toggle()" type="button">
+          <fa-icon [icon]="faCalendar"></fa-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="method">Method</label>
+    <input type="text" class="form-control" id="method"
+    [ngClass]="{'is-invalid': (f.method.errors && f.method.errors.error)}"
+    placeholder="Payment Method" formControlName="method">
+    <div *ngIf="f.method.errors && f.method.errors.error" class="invalid-feedback">
+      {{f.method.errors.error}}
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Save</button>
+</form>

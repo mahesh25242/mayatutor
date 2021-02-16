@@ -23,7 +23,8 @@
               "firebase/app",
               "@firebase/auth",
               "notiflix",
-              "lodash"
+              "lodash",
+              "ng2-pdf-viewer"
             ],
             "outputPath": "dist/mayaTutor",
             "index": "src/index.html",
@@ -37,7 +38,8 @@
             ],
             "styles": [
               "src/styles.scss",
-              "node_modules/plyr/dist/plyr.css"
+              "node_modules/plyr/dist/plyr.css",
+              "./node_modules/animate.css/animate.compat.css"
             ],
             "scripts": []
           },

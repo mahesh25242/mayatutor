@@ -23,7 +23,8 @@ class Plan extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $fillable = [
-        'code', 'description', 'features', 'sortorder', 'basic', 'days'
+        'name', 'description', 'features', 'price', 'sortorder',
+         'basic', 'days'
     ];
 
     public function getFeaturesAttribute($value)
@@ -39,7 +40,12 @@ class Plan extends Model implements AuthenticatableContract, AuthorizableContrac
     public function myUserPlan()
     {
         return $this->hasOne('App\UserPlan')->where("user_id", Auth::id())
-        ->where("end_date", ">", new Carbon);
+        ->where("end_date", ">", new Carbon)->orderBy("end_date", "ASC")->take(1);
+    }
+
+    public function planPurchase()
+    {
+        return $this->hasMany('App\PlanPurchase');
     }
 
 }

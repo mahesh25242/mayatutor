@@ -1,0 +1,7 @@
+<div class="card">
+  <img [src]="course_module.thumb_image" class="card-img-top" [alt]="course_module.name">
+  <div class="card-body">
+    <h3 class="card-title" [innerHTML]="course_module.name"></h3>
+    <a [routerLink]="'launch/'+course_module.id" class="btn btn-primary">Continue</a>
+  </div>
+</div>

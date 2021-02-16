@@ -15,6 +15,7 @@ class TeacherController extends Controller
 {
 
     public function search($q=''){
+        $perPage = 20;
         $user = \App\User::withCount("teacherStudent as student_count")->with(["rating", "teacherInfo", "subject", "city"])->whereHas("userRole", function ($qry){
             $qry->where("role_id", 2);
         });
@@ -23,7 +24,7 @@ class TeacherController extends Controller
                 $qry->where("tag_name", 'like', "%{$q}%");
             });
         }
-        return response($user->get());
+        return response($user->paginate($perPage));
     }
 
     public function teacher($url =''){
@@ -132,5 +133,75 @@ class TeacherController extends Controller
                 'message' => 'sorry unexpected error occur', 'status' => 0
             ]);
         }
+    }
+
+    public function toggleAutoApproval(Request $request){
+        $teacherAutoApproval = \App\TeacherAutoApproval::where("user_id", $request->input("id", 0))
+        ->get()->first();
+
+        if($teacherAutoApproval){
+            $teacherAutoApproval->delete();
+        }else{
+            $teacherAutoApproval = new \App\TeacherAutoApproval;
+            $teacherAutoApproval->user_id = $request->input("id", 0);
+            $teacherAutoApproval->save();
+        }
+
+        return response([
+            'message' => 'successfully updated!', 'status' => 1
+        ]);
+    }
+
+    public function addStudent(Request $request){
+        $co = $request->input("course", null);
+        $phone = $request->input("phone", null);
+
+        $validator = Validator::make($request->all(), [
+            'phone' => ['required'],
+         ],[],[
+             'phone' => 'Mobile / Email',
+         ]);
+
+
+         if($validator->fails()){
+             return response(['message' => 'Validation errors', 'errors' =>  $validator->errors(), 'status' => false], 422);
+         }
+
+        $course = \App\Course::find($co["id"]);
+        if(is_array($phone) && !empty($phone)){
+            foreach( $phone as $usr){
+                $user = \App\User::find($usr["id"]);
+                if($user){
+                    $teacherStudent = \App\TeacherStudent::updateOrCreate(
+                        [
+                            "teacher_user_id" => Auth::id(),
+                            "user_id" => $user->id
+                        ],
+                        [
+                            "teacher_user_id" => Auth::id(),
+                            "user_id" => $user->id,
+                            "status" => 1
+                        ]
+                    );
+                    if($course && $teacherStudent){
+                        \App\StudentCourse::updateOrCreate(
+                            [
+                                "user_id" => $user->id,
+                                "course_id" => $course->id
+                            ],
+                            [
+                                "user_id" => $user->id,
+                                "course_id" => $course->id,
+                                "status" => 1
+                            ]
+                        );
+                    }
+                }
+            }
+            return response([
+                'message' => 'successfully added student!', 'status' => 1
+            ]);
+        }
+
     }
 }

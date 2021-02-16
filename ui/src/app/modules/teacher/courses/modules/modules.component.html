@@ -1,3 +1,5 @@
+<app-bread-crumbs [hide]="true"></app-bread-crumbs>
+
 <app-add-module [course]="course$ | async" [module]="courseModule" (resetEdit)="editModule($event)"></app-add-module>
 
 
@@ -32,24 +34,24 @@
       [cdkDragData]="courseModule"
       [cdkDragDisabled]="isDragging && isDragging !== courseModule.id"
       >
-        <td>
+        <td data-label="Order">
           <img class="drag-icon dragable" src="assets/drag-icon.svg" *ngIf="!isDragging || isDragging === courseModule.id">
           {{ setSortOrder(courseModule, i) }}
         </td>
-        <td>
+        <td data-label="Module Name">
           {{ courseModule.name}}
         </td>
-        <td>
+        <td data-label="PDF">
           <a [href]="courseModule.pdf" *ngIf="courseModule.pdf" target="_blank">
             <fa-icon [icon]="faFilePdf"></fa-icon>
           </a>
         </td>
-        <td>
+        <td data-label="Video">
           <a href="javascript:{}" *ngIf="courseModule.video_url" (click)="playVideo(courseModule)">
             <fa-icon [icon]="faPlay"></fa-icon>
           </a>
         </td>
-        <td>
+        <td data-label="Option">
           <ng-container *ngIf="isDragging && isDragging === courseModule.id">
             <a href="javascript:{}" class="btn btn-outline-warning btn-sm"
               placement="top" ngbTooltip="clik here to cancel the move" (click)="resetDrag()">

@@ -4,7 +4,7 @@ import { of, BehaviorSubject, Observable, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { auth } from 'firebase/app';
 import { AngularFireAuth } from "@angular/fire/auth";
-import { User } from '../interfaces';
+import { Pagination, User, UserWithPagination } from '../interfaces';
 import { environment } from '../../../environments/environment';
 import * as _ from 'lodash';
 
@@ -14,7 +14,7 @@ import * as _ from 'lodash';
 export class UserService {
     private loggedUser: BehaviorSubject<User> = new BehaviorSubject<User>(null);
     private user$: BehaviorSubject<User> = new BehaviorSubject<User>(null);
-    private users$: BehaviorSubject<User[]> = new BehaviorSubject<User[]>(null);
+    private users$: BehaviorSubject<UserWithPagination> = new BehaviorSubject<UserWithPagination>(null);
 
   constructor(private http: HttpClient,public afAuth: AngularFireAuth) { }
 
@@ -142,7 +142,7 @@ export class UserService {
   }
 
   updateProfile(postData:any= null){
-    return this.http.post('/student/updateProfile', postData);
+    return this.http.post('/updateProfile', postData);
   }
 
   updateAvatar(postData:any= null){
@@ -150,18 +150,50 @@ export class UserService {
   }
 
 
-  getUser(teacherUrl:string=''){
-    return this.http.get(`/teacher/getaTeacher/${teacherUrl}`).pipe(map(res=>{
+  getUser(teacherUrl:string='', baseUrl: string = null){
+    return this.http.get<User>(`/${baseUrl}/fetch/${teacherUrl}`).pipe(map(res=>{
       this.user$.next(res);
       return res;
     }));
   }
 
-  getAllUser(urlPart:string=''){
-    return this.http.get<User[]>(`/${urlPart}/fetchAll`).pipe(map(res=>{
+  getAllUser(urlPart:string='', page:number= 1,parm: string = ''){
+    let qryStr = '';
+    if(page){
+      qryStr += `?page=${page}`;
+    }
+    if(parm){
+
+      qryStr += (qryStr && `&${parm}`) || (!qryStr && `?${parm}`);
+    }
+
+    return this.http.get<UserWithPagination>(`/${urlPart}/fetchAll${qryStr}`).pipe(map(res=>{
       this.users$.next(res);
       return res;
     }));
   }
+
+  fetchAllStudent(page:number= 1,parm: string = ''){
+
+    let qryStr = '';
+    if(page){
+      qryStr += `?page=${page}`;
+    }
+    if(parm){
+
+      qryStr += (qryStr && `&${parm}`) || (!qryStr && `?${parm}`);
+    }
+
+    return this.http.get<UserWithPagination>(`/student/fetchAllStudent${qryStr}`);
+  }
+
+  toggleStatus(urlPart:string='', user: User= null){
+    return this.http.post<any>(`/${urlPart}/toggleStatus`, user);
+  }
+
+  deleteUser(urlPart:string='', user: User= null){
+    return this.http.post<any>(`/${urlPart}/delete`, user);
+  }
+
 
 }

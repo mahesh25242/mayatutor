@@ -18,6 +18,15 @@
       <div *ngIf="f.pdf.errors && f.pdf.errors.error" class="invalid-feedback">
         {{f.pdf.errors.error}}
       </div>
+      <a [href]="f.pdf_file.value" target="_blank" *ngIf="f.pdf_file.value">PDF</a>
+  </div>
+
+  <div class="form-group">
+    <label for="pdf">Video From</label>
+    <select class="form-control" formControlName="video_type">
+      <option value="youtube">Youtube</option>
+      <option value="vimeo">Vimeo</option>
+    </select>
   </div>
 
   <div class="form-group">

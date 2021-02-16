@@ -78,7 +78,7 @@
             <input type="checkbox" class="custom-control-input" id="live_class"
             formControlName="live_class"
             [ngClass]="{'is-invalid': (f.live_class.errors && f.live_class.errors.error) }">
-            <label class="custom-control-label" for="live_class">Check this custom checkbox</label>
+            <label class="custom-control-label" for="live_class">Check this if you host live video</label>
           </div>
           <div *ngIf="f.live_class.errors && f.live_class.errors.error" class="invalid-feedback">
             {{f.live_class.errors.error}}

@@ -1,0 +1,56 @@
+<app-modal>
+  <div header>
+    {{ (user.role_url == 'teacher' && 'Teacher') || (user.role_url == 'student' && 'Student') }} - {{ user.fname}} {{ user.lname}}
+  </div>
+  <div  body>
+    <div *ngIf="user$ | async as usr">
+      <img [src]="usr.avatar" />
+        <div>
+          {{usr.address}}<br/>
+          {{ user.city?.name }} - {{ user.pin }}
+        </div>
+        <ng-container *ngIf="user.role_url == 'teacher'">
+          Courses: {{ usr.course_count }}
+        </ng-container>
+
+
+        <a [href]="'tel://'+usr.phone" class="btn btn-primary">Call</a>
+        <a class="d-none d-sm-block btn btn-primary" target="_blank" [href]="'https://web.whatsapp.com/send?phone='+usr.phone">Message</a>
+        <a class="d-block d-sm-none btn btn-primary" target="_blank" [href]="'https://api.whatsapp.com/send?phone='+usr.phone">Message</a>
+
+
+        Contact Number: {{ usr.phone}}
+        Email: {{ usr.email}}
+        Status:
+        <ng-container *ngIf="user.role_url == 'teacher'">
+          Plan: Trial
+
+          <div class="row">
+            <div class="col-md-4">
+              <h5>Subject / Syllabus</h5>
+              <span *ngFor="let subject of usr.subject; let last = last">{{ subject.name }} <i *ngIf="!last">, </i> </span>
+            </div>
+            <div class="col-md-4">
+              <h5>Experiance</h5>
+              <p [innerHTML]="usr.teacher_info?.experiance"></p>
+            </div>
+            <div class="col-md-4">
+              <h5>Education</h5>
+              <p [innerHTML]="usr.teacher_info?.education.name"></p>
+            </div>
+          </div>
+        </ng-container>
+
+
+    </div>
+  </div>
+  <div  footer>
+    <div class="custom-control custom-checkbox mr-sm-2 auto-approval" *ngIf="user.role_url == 'teacher'">
+      <input type="checkbox" class="custom-control-input" id="customControlAutosizing" (change)="toggleAutoApproval()" [checked]="user.teacher_auto_approval_count">
+      <label class="custom-control-label" for="customControlAutosizing">Auto Approval enable for this user</label>
+    </div>
+
+    <button type="button" class="btn btn-outline-danger delete-user" (click)="deleteUser()">Delete</button>
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
+  </div>
+</app-modal>
