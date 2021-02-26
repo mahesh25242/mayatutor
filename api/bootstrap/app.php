@@ -130,6 +130,7 @@ $app->register(Irazasyed\Larasupport\Providers\ArtisanServiceProvider::class);
 
 $app->register(Lexx\ChatMessenger\ChatMessengerServiceProvider::class);
 
+$app->register(Kreait\Laravel\Firebase\ServiceProvider::class);
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes

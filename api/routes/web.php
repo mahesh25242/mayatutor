@@ -23,6 +23,8 @@ $router->get('/', function () use ($router) {
 
 $router->group(['prefix' => 'v1'], function () use ($router) {
 
+    $router->post('login','UsersController@login');
+    $router->post('reterievePassword','UsersController@reterievePassword');
     $router->get('countries','CountryController@countries');
     $router->get('states','StateController@states');
     $router->get('cities','CityController@cities');

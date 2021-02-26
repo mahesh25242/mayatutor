@@ -15,6 +15,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { SignInComponent } from './sign-in/sign-in.component';
+import { ForgotPasswordComponent } from './sign-in/forgot-password/forgot-password.component';
 import { HomeComponent } from './home/home.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { HowItWorksComponent } from './how-it-works/how-it-works.component';
@@ -40,6 +41,7 @@ var config = {
     HeaderComponent,
     FooterComponent,
     SignInComponent,
+    ForgotPasswordComponent,
     HomeComponent,
     AboutUsComponent,
     HowItWorksComponent,

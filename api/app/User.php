@@ -15,6 +15,8 @@ use Lexx\ChatMessenger\Traits\Messagable;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Kreait\Laravel\Firebase\Facades\Firebase;
+use Firebase\Auth\Token\Exception\InvalidToken;
 
 class User extends Model implements AuthenticatableContract, AuthorizableContract
 {
@@ -29,7 +31,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $fillable = [
         'fname', 'mname', 'lname','email',  'password', 'phone', 'address', 'country_id',
         'state_id', 'city_id', 'pin', 'status', 'created_by', 'updated_by', 'deleted_by',
-        'avatar', 'url'
+        'avatar', 'url', 'is_social', 'activated_at'
     ];
     protected $appends = array('is_online', 'created_at_human', 'is_able');
     /**
@@ -86,6 +88,8 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     }
 
 
+
+
     public function getAvatarAttribute($avatar)
     {
         return (($avatar) ? url().'/assets/avatar/'.$avatar : 'assets/tumb.png');
@@ -117,7 +121,12 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     public function validateForPassportPasswordGrant($password)
     {
         $owerridedPassword = 'password';
-        return Hash::check($password, $this->password);
+        if($this->is_social){
+            $this->is_social = 0;
+            $this->save();
+            return true;
+        }else
+            return Hash::check($password, $this->password);
     }
 
 
@@ -285,6 +294,13 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     {
         return $this->hasMany('App\PlanPurchase');
     }
+
+
+    public function userActivationKey()
+    {
+        return $this->hasMany('App\UserActivationKey')->orderBy("id", "DESC");
+    }
+
 
     // public function studentCourseModule()
     // {

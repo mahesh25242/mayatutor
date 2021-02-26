@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { map, shareReplay, catchError } from 'rxjs/operators';
-import { of, BehaviorSubject, Observable, throwError } from 'rxjs';
+import { map, shareReplay, catchError, tap } from 'rxjs/operators';
+import { of, BehaviorSubject, Observable, throwError, from } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { auth } from 'firebase/app';
 import { AngularFireAuth } from "@angular/fire/auth";
@@ -56,14 +56,7 @@ export class UserService {
   }
   // Auth logic to run auth providers
   AuthLogin(provider) {
-    return this.afAuth.signInWithPopup(provider)
-    .then((result) => {
-        console.log('You have been successfully logged in!')
-    }).catch((error) => {
-        console.log(error)
-    })
-
-
+    return from(this.afAuth.signInWithPopup(provider))
   }
 
   signUp(user: any= null){
@@ -193,6 +186,16 @@ export class UserService {
 
   deleteUser(urlPart:string='', user: User= null){
     return this.http.post<any>(`/${urlPart}/delete`, user);
+  }
+
+  login(postData: any = null){
+    return this.http.post<any>(`/login`, postData).pipe(tap(res=>{
+      this.setLogin(res);
+    }));
+  }
+
+  reterievePassword(postData: any = null){
+    return this.http.post<any>(`/reterievePassword`, postData);
   }
 
 

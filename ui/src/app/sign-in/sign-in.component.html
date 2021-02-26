@@ -1,70 +1,69 @@
 <form class="form-signin" [formGroup]="signInFrm"  (ngSubmit)="signIn()">
-<app-modal>
-  <div></div>
-  <div  body class="border-0">
-<div class="row">
-  <div class="col-6">
-    <a href="javascript:{}" (click)="signInWithFB()" class="btn btn-primary d-block mb-3">
-      <fa-icon [icon]="faFacebook"></fa-icon>Login with Facebook</a>
-    <a href="javascript:{}" (click)="signInWithGoogle()" class="btn btn-primary d-block">Login with Google</a>
-    <b class="d-block mt-3 mb-3 text-center">OR</b>
-    <a href="#" class="btn btn-outline-secondary d-block text-center mb-3 text-primary">Register Here</a>
-    <!-- <a  (click)="signInWithPhone()">sent otp</a> -->
-    <!-- <a  (click)="refreshToken()" href="javascript:{}">refresh token</a> --></div>
-  <div class="col-6 border-left">
-<h5>MEMBER LOGIN</h5>
-
-  <div id="recaptcha-container"></div>
-  <div class="text-danger" *ngIf="invalidlogin">Invalid login credentials</div>
-  <div class="form-group">
-      <label for="mobile" class="col-form-label d-none">Email / Mobile</label>
-      <div class="">
-
-          <input type="text" class="form-control"
-          [ngClass]="{'is-invalid': f.mobile.invalid && ((f.mobile.dirty || f.mobile.touched))}" id="mobile"
-          ngbAutofocus autocomplete="mobile"
-          required  placeholder="Email / Mobile"
-          formControlName="mobile"
-          />
-          <ng-container *ngIf="f.mobile.invalid && (f.mobile.dirty || f.mobile.touched)">
-            <div *ngIf="f.mobile.errors.required" class="invalid-feedback">
-              Name is required.
-            </div>
-          </ng-container>
-
-
-      </div>
-  </div>
-
-  <div class="form-group ">
-    <label for="password" class="col-form-label d-none">Password</label>
-    <div>
-        <input type="password" class="form-control" id="password"
-        [ngClass]="{'is-invalid': f.password.invalid && ((f.password.dirty || f.password.touched))}" id="mobile"
-        autocomplete="password"
-        required  placeholder="password"
-        formControlName="password"
-        />
-        <ng-container *ngIf="f.password.invalid && (f.password.dirty || f.password.touched)">
-          <div *ngIf="f.password.errors.required" class="invalid-feedback">
-            Password is required.
+  <app-modal>
+    <div></div>
+      <div  body class="border-0">
+        <div class="row ">
+          <div class="col-6 ">
+            <a href="javascript:{}" (click)="signInWithFB()" class="btn btn-primary d-block mb-3 animate__animated animate__flipInX">
+              <fa-icon [icon]="faFacebook"></fa-icon>Login with Facebook
+            </a>
+            <a href="javascript:{}" (click)="signInWithGoogle()" class="btn btn-primary d-block animate__animated animate__flipInX">Login with Google</a>
+            <b class="d-block mt-3 mb-3 text-center">OR</b>
+            <a href="#" class="btn btn-outline-secondary d-block text-center mb-3 text-primary animate__animated animate__flipInX">Register Here</a>
+            <!-- <a  (click)="signInWithPhone()">sent otp</a> -->
+            <!-- <a  (click)="refreshToken()" href="javascript:{}">refresh token</a> -->
           </div>
-        </ng-container>
+          <div *ngIf="!isForgot" class="col-6 border-left animate__animated " [ngClass]="{'animate__shakeX' : invalidlogin, 'animate__flipInY': isForgot !== null}">
+              <h5>MEMBER LOGIN</h5>
+              <div id="recaptcha-container"></div>
+              <div class="text-danger" *ngIf="invalidlogin">Invalid login credentials</div>
+              <div class="form-group">
+                <label for="mobile" class="col-form-label d-none">Email / Mobile</label>
+                <div class="">
+                  <input type="text" class="form-control"
+                  [ngClass]="{'is-invalid': f.mobile.invalid && ((f.mobile.dirty || f.mobile.touched))}" id="mobile"
+                  ngbAutofocus autocomplete="mobile"
+                  required  placeholder="Email / Mobile"
+                  formControlName="mobile"
+                  />
+                  <ng-container *ngIf="f.mobile.invalid && (f.mobile.dirty || f.mobile.touched)">
+                    <div *ngIf="f.mobile.errors.required" class="invalid-feedback">
+                      Name is required.
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
 
-    </div>
-</div>
+              <div class="form-group ">
+                <label for="password" class="col-form-label d-none">Password</label>
+                <div>
+                  <input type="password" class="form-control" id="password"
+                  [ngClass]="{'is-invalid': f.password.invalid && ((f.password.dirty || f.password.touched))}" id="mobile"
+                  autocomplete="password"
+                  required  placeholder="password"
+                  formControlName="password"
+                  />
+                  <ng-container *ngIf="f.password.invalid && (f.password.dirty || f.password.touched)">
+                    <div *ngIf="f.password.errors.required" class="invalid-feedback">
+                      Password is required.
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
 
-<div>
-  <button type="button" class="btn btn-outline-secondary mr-3 d-none" (click)="modal.dismiss('cancel click')">Cancel</button>
-  <button type="submit" class="btn btn-primary btn-block mt-4"  [disabled]="signInFrm.invalid">
-      LOGIN
-  </button>
+            <div>
+              <button type="button" class="btn btn-outline-secondary mr-3 d-none" (click)="modal.dismiss('cancel click')">Cancel</button>
+              <button type="submit" class="btn btn-primary btn-block mt-4"  [disabled]="signInFrm.invalid">
+                  LOGIN
+              </button>
+              <a href="javascript:{}" (click)="showForgotPass()" class="d-block text-center mt-4">Forgot Password?</a>
+            </div>
+          </div>
+          <div *ngIf="isForgot" class="col-6 border-left animate__animated animate__flipInY">
+            <app-forgot-password (showForgotPass)="showForgotPass()"></app-forgot-password>
+          </div>
 
-  <a href="#" class="d-block text-center mt-4">Forgot Password?</a>
 
-</div>
-
-</div>
 </div>
 
 

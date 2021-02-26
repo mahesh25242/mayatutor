@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Cookie;
 use Image;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
+use App\Mail\ActivationMail;
+use Mail;
 
 class UsersController extends Controller
 {
@@ -18,7 +20,6 @@ class UsersController extends Controller
 
     public function signUp(Request $request)
     {
-
 
         $return  = null;
         $recaptcha = new \ReCaptcha\ReCaptcha(env("RECAPTCHA_SECRET"));
@@ -104,6 +105,22 @@ class UsersController extends Controller
         $data['token'] =  $user->createToken('MayaTutorial')->accessToken;
         $data['name'] =  $user->fname;
 
+        $toEMail = $user->email;
+        if(env('APP_ENV') == 'local'){
+            $toEMail = env('DEVELOPER_MAIL');
+        }
+        $userActivationKey = new \App\UserActivationKey;
+        $userActivationKey->key = uniqid($user->id);
+        $userActivationKey->user_id = $user->id;
+        $userActivationKey->save();
+
+
+        try{
+            Mail::to($toEMail)->send(new ActivationMail($user));
+        }catch (\Swift_TransportException $e) {
+          //  echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
+
         return response(['data' => $data, 'message' => 'Account created successfully!', 'status' => true]);
     }
 
@@ -142,6 +159,9 @@ class UsersController extends Controller
         $userLogin->user_id = Auth::id();
         $userLogin->name = $request->input("action");
         $userLogin->save();
+
+
+
         return response([
             'message' => 'successfully saved!', 'status' => true
         ]);
@@ -406,5 +426,144 @@ class UsersController extends Controller
             })->where("fname", "LIKE", "%{$q}%")->paginate(40);
         }
         return response($users);
+    }
+
+    public function login(Request $request){
+        //$uid =  $request->input("uid",'');
+
+        $idToken =  $request->input("oauthIdToken", null);
+        $accessToken =  $request->input("oauthAccessToken",'');
+        $providerId =  $request->input("providerId",'');
+        $signInMethod =  $request->input("signInMethod",'');
+
+        $auth = app('firebase.auth');
+        //$signInResult = $auth->getUser($uid);;
+
+        try {
+            $verifiedIdToken = $auth->signInWithGoogleIdToken($idToken);
+        } catch (InvalidToken $e) {
+            echo 'The token is invalid: '.$e->getMessage();
+        } catch (\InvalidArgumentException $e) {
+            echo 'The token could not be parsed: '.$idToken.'=='.$e->getMessage();
+        }
+
+        $authUser = $auth->getUser($verifiedIdToken->firebaseUserId());
+
+        $user = User::where("email", $authUser->email)->get()->first();
+        $endpoint = url("v1/oauth/token");
+        $client = new \GuzzleHttp\Client();
+
+        if($user){
+
+
+
+
+            $user->fname = $authUser->displayName;
+
+            $user->is_social = 1;
+            $user->status = 1;
+            $user->save();
+            $postArr = [
+                'grant_type' => "password",
+                'client_id' => 2,
+                'client_secret' => 'gGns8qiSpmPTBhfWJfZfle2pQqFJB439zbgrHdqw',
+                'password' => $authUser->uid,
+                'username' => $authUser->email,
+                'scope' => "",
+                'recaptcha' => null
+            ];
+
+
+
+            $response = $client->post( $endpoint, ['form_params' => $postArr,
+            'headers' => [
+                'Accept' => 'application/json'
+            ]
+            ]);
+
+            // url will be: http://my.domain.com/test.php?key1=5&key2=ABC;
+
+            $statusCode = $response->getStatusCode();
+            return $content = $response->getBody();
+
+        }/*else{
+
+
+            $this->social = 1;
+            $request->request->add([
+                'name' => $authUser->displayName,
+                'email' => $authUser->email,
+                'password' => $authUser->uid,
+                ]);//displayName
+           $result =  $this->create($request);
+
+           $postArr = [
+                'grant_type' => "password",
+                'client_id' => 2,
+                'client_secret' => 'gGns8qiSpmPTBhfWJfZfle2pQqFJB439zbgrHdqw',
+                'password' => $authUser->uid,
+                'username' => $authUser->email,
+                'scope' => "",
+                'recaptcha' => null
+            ];
+
+           $response = $client->post($endpoint, ['form_params' => $postArr,
+           'headers' > [
+            'Accept' => 'application/json'
+            ]
+        ]);
+
+
+        $statusCode = $response->getStatusCode();
+        return $content = $response->getBody();
+            //return response(["error" => 1, "message" => "unauthorised aceess"] , 401);
+        }*/
+
+
+
+
+    }
+
+    public function reterievePassword(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'username' => ['required']
+        ],[],[
+            'username' => 'Email / Mobile'
+        ]);
+
+
+        if($validator->fails()){
+            return response(['message' => 'Validation errors', 'errors' =>  $validator->errors(), 'status' => false], 422);
+        }
+
+
+        $emailMobile = $request->input("username");
+        $user = User::where("email",$emailMobile)
+        ->orWhere("phone", $emailMobile)->get()->first();
+        if($user){
+            $toEMail = $user->email;
+            if(env('APP_ENV') == 'local'){
+                $toEMail = env('DEVELOPER_MAIL');
+            }
+            $userActivationKey = new \App\UserActivationKey;
+            $userActivationKey->key = uniqid($user->id);
+            $userActivationKey->user_id = $user->id;
+            $userActivationKey->save();
+
+
+            try{
+                Mail::to($toEMail)->send(new ActivationMail($user));
+            }catch (\Swift_TransportException $e) {
+            //  echo 'Caught exception: ',  $e->getMessage(), "\n";
+            }
+
+            return response([
+                'message' => 'successfully sent mail', 'status' => 1
+            ]);
+        }else{
+            return response(['message' => 'Validation errors', 'errors' =>  ["username" => 'user not exists'], 'status' => false], 422);
+        }
+
     }
 }

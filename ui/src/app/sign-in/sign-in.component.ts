@@ -4,9 +4,9 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ReCaptchaV3Service } from 'ngx-captcha';
 import { environment } from '../../environments/environment';
 import { UserService } from '../lib/services';
-import { Subscription } from 'rxjs';
+import { empty, Subscription } from 'rxjs';
 import Notiflix from "notiflix";
-import { mergeMap, map } from 'rxjs/operators';
+import { mergeMap, map, take, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import {faFacebook, faWhatsapp, faLinkedin, faTelegram } from '@fortawesome/free-brands-svg-icons';
 
@@ -20,6 +20,7 @@ export class SignInComponent implements OnInit, OnDestroy {
   invalidlogin:boolean = false;
   signInSubscription: Subscription;
   faFacebook = faFacebook;
+  isForgot:boolean = null;
   constructor(private formBuilder: FormBuilder,
     public modal: NgbActiveModal,
     private userService: UserService,
@@ -86,11 +87,63 @@ export class SignInComponent implements OnInit, OnDestroy {
   }
 
   signInWithGoogle(): void {
-      this.userService.GoogleAuth()
+      this.userService.GoogleAuth().pipe(
+        take(1),
+        catchError((error) => {
+          console.log(error.message)
+          return empty();
+        }),
+      ).pipe(mergeMap(res=>{
+        Notiflix.Loading.Pulse('Please Wait...');
+        return this.userService.login(res.credential.toJSON()).pipe(mergeMap(tkn=>{
+          return this.userService.authUser().pipe(mergeMap(user=>{
+            return this.userService.setUserLogin({action:'SignIn'}).pipe(map(sRes=>{
+              return user
+            }))
+          }))
+        }))
+
+      })).subscribe(
+        (response) =>{
+          this.modal.dismiss('cancel click')
+          Notiflix.Loading.Remove();
+        }, err=>{
+          Notiflix.Loading.Remove();
+        }
+
+      );
   }
 
   signInWithFB(): void {
-    this.userService.FBAuth();
+    this.userService.FBAuth().pipe(
+      take(1),
+      catchError((error) => {
+        console.log(error.message)
+        return empty();
+      }),
+    ).pipe(mergeMap(res=>{
+      Notiflix.Loading.Pulse('Please Wait...');
+      return this.userService.login(res.credential.toJSON()).pipe(mergeMap(tkn=>{
+        return this.userService.authUser().pipe(mergeMap(user=>{
+          return this.userService.setUserLogin({action:'SignIn'}).pipe(map(sRes=>{
+            return user
+          }))
+        }))
+      }))
+
+    })).subscribe(
+      (response) =>{
+        this.modal.dismiss('cancel click')
+        Notiflix.Loading.Remove();
+      }, err=>{
+        Notiflix.Loading.Remove();
+      }
+
+    );
+  }
+
+  showForgotPass(){
+    this.isForgot = !this.isForgot;
   }
 
   signInWithPhone():void{
