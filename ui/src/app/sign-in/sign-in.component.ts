@@ -8,7 +8,7 @@ import { Subscription } from 'rxjs';
 import Notiflix from "notiflix";
 import { mergeMap, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import {faFacebook, faWhatsapp, faLinkedin, faTelegram } from '@fortawesome/free-brands-svg-icons';
+import {faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
 
 @Component({
   selector: 'app-sign-in',
@@ -20,6 +20,7 @@ export class SignInComponent implements OnInit, OnDestroy {
   invalidlogin:boolean = false;
   signInSubscription: Subscription;
   faFacebook = faFacebook;
+  faGoogle = faGoogle;
   constructor(private formBuilder: FormBuilder,
     public modal: NgbActiveModal,
     private userService: UserService,
