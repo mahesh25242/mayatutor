@@ -1,0 +1,37 @@
+.card {
+    h4{
+        a{font-size: 0.9rem;}
+    }
+    .d-grid {
+        align-items: center;
+        p {margin-bottom: 0px;}
+        text-align: right;
+
+        &.grd-col-3 {
+           
+            grid-template-columns: 1fr 1fr 50px;
+            &:nth-child(1) {
+                text-align: left;
+            }
+            
+        }
+    }
+    .btn-custom {
+        border-radius: 25px;
+    padding: 12px 42px;
+    }
+    i {
+        width:75px;
+    height:75px;
+    background: #fff;
+    border:1px solid #ddd;
+    border-radius: 50px;
+    margin-top: -40px;
+    margin-left: auto;
+    margin-right: auto;
+    .ng-fa-icon {
+        font-size: 33px;
+    line-height: 63px;
+    }
+    }
+}

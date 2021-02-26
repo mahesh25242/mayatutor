@@ -13,7 +13,11 @@
       <div class="d-grid" [ngClass]="{ 'grd-col-2': type ==='student', 'grd-col-3': type ==='teacher'}">
         <h4 *ngIf="type ==='teacher'"><a routerLink="teacher/plans">SEE OUR PLANS</a></h4>
         <p>Already registered Please login here </p>
-        <h4><a href="javascript:{}" (click)="signIn()">LOGIN</a></h4>
+        <h4>
+          <app-login-link>
+            <a href="javascript:{}">LOGIN</a>
+          </app-login-link>
+        </h4>
       </div>
     </div>
   </div>

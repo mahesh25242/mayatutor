@@ -27,6 +27,7 @@ import { BreadCrumbsComponent } from './components/bread-crumbs/bread-crumbs.com
 import { ModuleLaunchComponent } from './components/module-launch/module-launch.component';
 import { BackButtonDirective } from './directives/back-button.directive';
 import { CollectDetailComponent } from './components/search/collect-detail/collect-detail.component';
+import { LoginLinkComponent } from './components/login-link/login-link.component';
 
 Notiflix.Confirm.Init({ borderRadius:"5px",titleColor:"#204486",okButtonBackground:"#204486",cancelButtonBackground:"#e2e2e2",cancelButtonColor:"#393939", });
 Notiflix.Notify.Init({ width:"390px", success: {background:"#d4edda",textColor:"#155724",}, failure: {background:"#f8d7da",textColor:"#721c24",}, warning: {background:"#fff3cd",textColor:"#856404",}, info: {background:"#cce5ff",textColor:"#004085",}, });
@@ -48,7 +49,8 @@ Notiflix.Block.Init({ svgColor:"#204486", });
     BreadCrumbsComponent,
     ModuleLaunchComponent,
     BackButtonDirective,
-    CollectDetailComponent
+    CollectDetailComponent,
+    LoginLinkComponent
   ],
   imports: [
     CommonModule,
@@ -83,7 +85,8 @@ Notiflix.Block.Init({ svgColor:"#204486", });
     BreadCrumbsComponent,
     ModuleLaunchComponent,
     PdfViewerModule,
-    BackButtonDirective
+    BackButtonDirective,
+    LoginLinkComponent
   ]
 })
 export class SharedModuleModule { }

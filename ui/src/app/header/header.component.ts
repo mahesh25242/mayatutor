@@ -1,6 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { SignInComponent } from '../sign-in/sign-in.component';
 import { UserService } from '../lib/services';
 import { Subscription, Observable } from 'rxjs';
 import { User } from '../lib/interfaces';
@@ -8,7 +6,6 @@ import { User } from '../lib/interfaces';
 import * as _ from 'lodash';
 import { map, mergeMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-header',
@@ -20,7 +17,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   signOutSubscription: Subscription;
   loggedUser$: Observable<User>;
 
-  constructor(private _modalService: NgbModal,
+  constructor(
     private userService: UserService,
     private router: Router) { }
 
@@ -29,13 +26,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.loggedSubScrioption = this.userService.authUser().subscribe(res=>{
       //_.find(res.role, (rl) => console.log(rl)); //check loaddash is working
     });
-  }
-
-  signIn(){
-    const activeModal = this._modalService.open(SignInComponent, {
-      size:'lg'
-    });
-    //activeModal.componentInstance.isEdit = false;
   }
 
   signOut(){
