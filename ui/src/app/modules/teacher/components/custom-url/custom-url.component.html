@@ -1,10 +1,10 @@
-<section class="search-container" *ngIf="(user$ | async) as user">
-  <div class="container pt-3 pb-3">
-    <div class="input-group mb-2 mr-sm-2">
+<section *ngIf="(user$ | async) as user">
+  <div class="pt-3 pb-3">
+    <div class=" mb-2 mr-sm-2">
       <input *ngIf="!shareOnly" class="form-control" type="text" placeholder="Readonly input here..."
        readonly [value]="custmUrl">
 
-     Share website to
+    <h5>Share website to</h5> 
      <share-button button="facebook" [size]="-1"
       [icon]="faFacebook" [url]="custmUrl"
       [title]="user.fname+' '+user.lname"

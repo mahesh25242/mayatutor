@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService, CourseService, TeacherService } from 'src/app/lib/services';
 import { Observable, of } from 'rxjs';
 import { User, Course, CourseWithPagination } from 'src/app/lib/interfaces';
-import { faEdit, faLock } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faLock,faTimes,faClock } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute } from '@angular/router';
 import { mergeMap, tap } from 'rxjs/operators';
 import Notiflix from "notiflix";
@@ -10,7 +10,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ContactTeacherComponent } from './contact-teacher/contact-teacher.component';
 import { SignInComponent } from 'src/app/sign-in/sign-in.component';
 import { BreadCrumbsService } from 'src/app/shared-module/components/bread-crumbs/bread-crumbs.component';
-
+import {faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 @Component({
   selector: 'app-dash-board',
   templateUrl: './dash-board.component.html',
@@ -19,6 +19,9 @@ import { BreadCrumbsService } from 'src/app/shared-module/components/bread-crumb
 export class DashBoardComponent implements OnInit {
   faEdit = faEdit;
   faLock = faLock;
+  faTimes = faTimes;
+  faClock = faClock;
+  faWhatsapp = faWhatsapp;
   user$: Observable<User>;
   courses$: Observable<CourseWithPagination>;
   isDashBoard: boolean = false;

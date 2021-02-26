@@ -1,4 +1,5 @@
-<div class="card" *ngIf="(user$ | async) as user">
+<div class="container">
+<div class="" *ngIf="(user$ | async) as user">
 <app-bread-crumbs [hide]="true"></app-bread-crumbs>
 
 <app-change-banner *ngIf="isDashBoard"></app-change-banner>
@@ -7,62 +8,71 @@
   <p>Make a Payment soon, Avoid account blocking</p>
   <a routerLink="plans" class="btn btn-primary">View Plans</a>
 </div>
-  <div class="card-body">
+
+<div class="row pt-5">
+  <div class="col-md-6 col-lg-6">
+<div class="row">
+  <div class="col-md-4 col-lg-4">
+    <img [src]="user.avatar" alt="avatar" class="img-thumbnail">
+  </div>
+  <div class="col-md-8 col-lg-8">
+<h4 class="text-capitalize">  {{ user.fname }} {{ user.lname }} </h4>
+<app-rating [rating]="user.rating" [readonly]="true"></app-rating>
+
+<p> <fa-icon [icon]="faClock" ></fa-icon> {{user.teacher_info?.time}}</p>
+<h5 class="mb-1">Location</h5>
+<p>{{ user.country?.name }}
+{{ user.state?.name }}
+{{ user.city?.name }} - {{ user.pin }}</p>
+<app-custom-url [shareOnly]="true"></app-custom-url>
+ </div>
+</div>    
+  </div>
+  <div class="col-md-6 col-lg-6">
     <div class="row">
       <div class="col-md-6">
-        <img [src]="user.avatar" alt="avatar" class="img-thumbnail">
-        <app-rating [rating]="user.rating" [readonly]="true"></app-rating>
-        <app-custom-url [shareOnly]="true"></app-custom-url>
-        {{ user.fname }} {{ user.lname }} <br/>
-        Time: {{user.teacher_info?.time}}
-       <div>
-        Location
-        {{ user.country?.name }}
-        {{ user.state?.name }}
-        {{ user.city?.name }} - {{ user.pin }}
-       </div>
+        <address>
+          <h5 class="mb-1">Address</h5>
+          {{ user.address }}
+          {{ user.country?.name }}
+          {{ user.state?.name }}
+          {{ user.city?.name }} - {{ user.pin }}
+        </address>
+
+        <div *ngIf="isDashBoard">Mobile: {{ user.phone }}</div>
       </div>
       <div class="col-md-6">
-        <div class="row">
-          <div class="col-md-6">
-            <address>
-              Address<br/>
-              {{ user.address }}
-              {{ user.country?.name }}
-              {{ user.state?.name }}
-              {{ user.city?.name }} - {{ user.pin }}
-            </address>
-
-            <div *ngIf="isDashBoard">Mobile: {{ user.phone }}</div>
-          </div>
-          <div class="col-md-6">
-            <div>Active From: {{ user.created_at | date:'medium' }}</div>
-            <div *ngIf="user.last_login?.created_at_human">Last Login: {{ user.last_login?.created_at_human }}</div>
-            <ng-container *ngIf="!isDashBoard">
-              <ng-container *ngIf="user.email" >
-                <button   class="btn btn-primary teacher-message-btn" (click)="contactTeacher(user)" placement="top" [ngbTooltip]="(user.email == '*') ? 'Only logged user can contact teacher' : ''">
-                  Message
-                  <fa-icon [icon]="faLock" *ngIf="user.email == '*'"></fa-icon>
-                </button>
-              </ng-container>
-              <ng-container *ngIf="user.phone" >
-                <button  class="btn btn-primary" *ngIf="user.phone == '*'"  (click)="contactTeacher(user)" placement="top" [ngbTooltip]="(user.email == '*') ? 'Only logged user can contact teacher' : ''">
-                  Mobile
-                  <fa-icon [icon]="faLock" *ngIf="user.phone == '*'"></fa-icon>
-                </button>
-                <ng-container *ngIf="user.phone && user.phone !== '*'">
-                  <a class="d-none d-sm-block btn btn-primary" target="_blank" [href]="'https://web.whatsapp.com/send?phone='+user.phone">Whats app</a>
-                  <a class="d-block d-sm-none btn btn-primary" target="_blank" [href]="'https://api.whatsapp.com/send?phone='+user.phone">Whats app</a>
-                </ng-container>
-              </ng-container>
+        <div class="mb-2">Active From: {{ user.created_at | date:'medium' }}</div>
+        <div *ngIf="user.last_login?.created_at_human">Last Login: {{ user.last_login?.created_at_human }}</div>
+        <ng-container *ngIf="!isDashBoard">
+          <ng-container *ngIf="user.email" >
+            <button   class="btn btn-primary teacher-message-btn mr-3 mb-2" (click)="contactTeacher(user)" placement="top" [ngbTooltip]="(user.email == '*') ? 'Only logged user can contact teacher' : ''">
+              Message
+              <fa-icon [icon]="faLock" *ngIf="user.email == '*'"></fa-icon>
+            </button>
+          </ng-container>
+          <ng-container *ngIf="user.phone" >
+            <button  class="btn btn-primary" *ngIf="user.phone == '*'"  (click)="contactTeacher(user)" placement="top" [ngbTooltip]="(user.email == '*') ? 'Only logged user can contact teacher' : ''">
+              Mobile
+              <fa-icon [icon]="faLock" *ngIf="user.phone == '*'"></fa-icon>
+            </button>
+            <ng-container *ngIf="user.phone && user.phone !== '*'">
+              <a class="d-none d-sm-block btn btn-primary" target="_blank" [href]="'https://web.whatsapp.com/send?phone='+user.phone"> <fa-icon [icon]="faWhatsapp" ></fa-icon> Whats app</a>
+              <a class="d-block d-sm-none btn btn-primary" target="_blank" [href]="'https://api.whatsapp.com/send?phone='+user.phone"> <fa-icon [icon]="faWhatsapp" ></fa-icon> Whats app</a>
             </ng-container>
-            <div *ngIf="isDashBoard">Email: <a [href]="'mailto:'+user.email">{{ user.email }}</a></div>
-          </div>
-        </div>
+          </ng-container>
+        </ng-container>
+        <div *ngIf="isDashBoard">Email: <a [href]="'mailto:'+user.email">{{ user.email }}</a></div>
       </div>
-    </div>
+  </div>
 
-    <div class="row">
+</div>
+</div>
+<hr/>
+
+  
+
+    <div class="row mb-3">
       <div class="col-md-4">
         <h5>Subject / Syllabus</h5>
         <span *ngFor="let subject of user.subject; let last = last">{{ subject.name }} <i *ngIf="!last">, </i> </span>
@@ -78,7 +88,7 @@
     </div>
     <a href="javascript:{}" routerLink="edit-profile" class="btn btn-outline-primary" *ngIf="isDashBoard"><fa-icon [icon]="faEdit" ></fa-icon> Edit</a>
 
-
+    <hr/>
     <ng-container *ngIf="(courses$ | async) as courses">
       <ngb-tabset type="pills" *ngIf="courses && courses?.data.length">
         <ngb-tab>
@@ -99,7 +109,6 @@
         </ngb-tab>
       </ngb-tabset>
     </ng-container>
-
 
   </div>
 </div>
