@@ -25,12 +25,14 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { DashBoardResolver } from './modules/teacher/dash-board/dash-board-resolver';
 
 var config = {
-  apiKey: "AIzaSyBbf4J9nchYp2WSNePGZcRoYOUCYdCUiI0",
-  authDomain: "mayatutor-f5748.firebaseapp.com",
+  apiKey: "AIzaSyAhzEi15mQe-KY7rhbmIi8MnvL2-KcL7uw",
+  authDomain: "mayatutor-6bf6d.firebaseapp.com",
   databaseURL: "https://mayatutor-f5748.firebaseio.com",
-  projectId: "mayatutor-f5748",
-  storageBucket: "mayatutor-f5748.appspot.com",
-  messagingSenderId: "552545840820"
+  projectId: "mayatutor-6bf6d",
+  storageBucket: "mayatutor-6bf6d.appspot.com",
+  messagingSenderId: "717157472041",
+  appId: "1:717157472041:web:ffedb70bff29fcd9390938",
+  measurementId: "G-JQHPN5ELGR"
 };
 
 
