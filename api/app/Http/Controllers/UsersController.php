@@ -440,7 +440,15 @@ class UsersController extends Controller
         //$signInResult = $auth->getUser($uid);;
 
         try {
-            $verifiedIdToken = $auth->signInWithGoogleIdToken($idToken);
+            switch($providerId){
+                case "google.com":
+                    $verifiedIdToken = $auth->signInWithIdpIdToken($providerId, $idToken);
+                break;
+                default:
+                    $verifiedIdToken = $auth->signInWithIdpAccessToken($providerId, $accessToken);
+                break;
+            }
+
         } catch (InvalidToken $e) {
             echo 'The token is invalid: '.$e->getMessage();
         } catch (\InvalidArgumentException $e) {
@@ -486,9 +494,9 @@ class UsersController extends Controller
             $statusCode = $response->getStatusCode();
             return $content = $response->getBody();
 
-        }/*else{
+        }else{
 
-
+/*
             $this->social = 1;
             $request->request->add([
                 'name' => $authUser->displayName,
@@ -515,9 +523,9 @@ class UsersController extends Controller
 
 
         $statusCode = $response->getStatusCode();
-        return $content = $response->getBody();
-            //return response(["error" => 1, "message" => "unauthorised aceess"] , 401);
-        }*/
+        return $content = $response->getBody();*/
+        return response(["error" => 1, "message" => "no user found"] , 401);
+        }
 
 
 
