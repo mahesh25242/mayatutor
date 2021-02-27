@@ -21,13 +21,13 @@ export class AppComponent {
     this.router.events.subscribe((event: Event) => {
       switch (true) {
         case event instanceof NavigationStart: {
-          Notiflix.Loading.Arrows();
+          Notiflix.Block.Hourglass('#innerConatiner');
           break;
         }
         case event instanceof NavigationEnd:
         case event instanceof NavigationCancel:
         case event instanceof NavigationError: {
-          Notiflix.Loading.Remove();
+          Notiflix.Block.Remove('#innerConatiner');
           break;
         }
         default: {

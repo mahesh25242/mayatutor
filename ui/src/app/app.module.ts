@@ -12,8 +12,8 @@ import {  SharedModuleModule } from './shared-module/shared-module.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
+import { HeaderComponent } from './lay-out/header/header.component';
+import { FooterComponent } from './lay-out/footer/footer.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { ForgotPasswordComponent } from './sign-in/forgot-password/forgot-password.component';
 import { HomeComponent } from './home/home.component';
@@ -23,6 +23,7 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 import { DashBoardResolver } from './modules/teacher/dash-board/dash-board-resolver';
+import { LayOutComponent } from './lay-out/lay-out.component';
 
 var config = {
   apiKey: "AIzaSyAhzEi15mQe-KY7rhbmIi8MnvL2-KcL7uw",
@@ -48,7 +49,8 @@ var config = {
     AboutUsComponent,
     HowItWorksComponent,
     ContactUsComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    LayOutComponent
   ],
   imports: [
     BrowserModule,

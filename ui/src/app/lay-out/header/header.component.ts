@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { UserService } from '../lib/services';
+import { UserService } from '../../lib/services';
 import { Subscription, Observable } from 'rxjs';
-import { User } from '../lib/interfaces';
+import { User } from '../../lib/interfaces';
 
 import * as _ from 'lodash';
 import { map, mergeMap } from 'rxjs/operators';
