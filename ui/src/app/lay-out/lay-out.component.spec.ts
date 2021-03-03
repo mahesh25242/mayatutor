@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { LayOutComponent } from './lay-out.component';
 
@@ -6,7 +6,7 @@ describe('LayOutComponent', () => {
   let component: LayOutComponent;
   let fixture: ComponentFixture<LayOutComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ LayOutComponent ]
     })

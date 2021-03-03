@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { RejectMessageComponent } from './reject-message.component';
 
@@ -6,7 +6,7 @@ describe('RejectMessageComponent', () => {
   let component: RejectMessageComponent;
   let fixture: ComponentFixture<RejectMessageComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ RejectMessageComponent ]
     })

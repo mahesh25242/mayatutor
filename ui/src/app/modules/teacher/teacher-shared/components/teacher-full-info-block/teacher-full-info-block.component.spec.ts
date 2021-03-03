@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { TeacherFullInfoBlockComponent } from './teacher-full-info-block.component';
 
@@ -6,7 +6,7 @@ describe('TeacherFullInfoBlockComponent', () => {
   let component: TeacherFullInfoBlockComponent;
   let fixture: ComponentFixture<TeacherFullInfoBlockComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ TeacherFullInfoBlockComponent ]
     })
