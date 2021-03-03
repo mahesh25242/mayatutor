@@ -18,9 +18,13 @@ export class AppComponent {
   title = 'mayaTutor';
 
   constructor(public router: Router) {
+
+
     this.router.events.subscribe((event: Event) => {
       switch (true) {
         case event instanceof NavigationStart: {
+
+
           Notiflix.Block.Hourglass('#innerConatiner');
           break;
         }
