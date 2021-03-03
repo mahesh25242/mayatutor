@@ -19,7 +19,6 @@ class PasswordChangedNotification extends Mailable
 
     public function build()
     {
-       $user =  (array) $this->user;
-        return $this->view('email/passwordChangedNotification', $user);
+        return $this->view('email/passwordChangedNotification', ["user" => $this->user]);
     }
 }

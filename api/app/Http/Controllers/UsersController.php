@@ -12,6 +12,7 @@ use Image;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 use App\Mail\ActivationMail;
+use App\Mail\PasswordChangedNotification;
 use Mail;
 
 class UsersController extends Controller
@@ -236,6 +237,19 @@ class UsersController extends Controller
             $user->password = Hash::make($request->input("password",null));
         }
         $user->save();
+        if($request->input("isChanegPassword", false)){
+            $toEMail = $user->email;
+            if(env('APP_ENV') == 'local'){
+                $toEMail = env('DEVELOPER_MAIL');
+            }
+
+            try{
+                Mail::to($toEMail)->send(new PasswordChangedNotification($user));
+            }catch (\Swift_TransportException $e) {
+            //  echo 'Caught exception: ',  $e->getMessage(), "\n";
+            }
+        }
+
         return response([
             'message' => 'successfully saved!', 'status' => true
         ]);
