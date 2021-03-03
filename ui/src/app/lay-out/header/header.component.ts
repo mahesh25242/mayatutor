@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   loggedSubScrioption: Subscription;
   signOutSubscription: Subscription;
   loggedUser$: Observable<User>;
-
+  showMenu:boolean = null;
   constructor(
     private userService: UserService,
     private router: Router) { }

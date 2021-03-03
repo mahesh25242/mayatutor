@@ -1,67 +1,69 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light ">
-  <a class="navbar-brand" routerLink="/">Maya Portal</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <a class="navbar-brand" routerLink="/" (click)="showMenu = null">Maya Portal</a>
+  <button class="navbar-toggler" type="button"
+  (click)="showMenu = !showMenu"
+   aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <div class=" navbar-collapse animate__animated" [ngClass]="{'collapse' : !showMenu, 'animate__zoomIn': showMenu}" id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
         <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
           true}">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/about-us" routerLinkActive="active">About Us</a>
+        <a class="nav-link" routerLink="/about-us" routerLinkActive="active" (click)="showMenu = null">About Us</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/contact-us" routerLinkActive="active">Contact Us</a>
+        <a class="nav-link" routerLink="/contact-us" routerLinkActive="active" (click)="showMenu = null">Contact Us</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/how-it-works" routerLinkActive="active">How It Works</a>
+        <a class="nav-link" routerLink="/how-it-works" routerLinkActive="active" (click)="showMenu = null">How It Works</a>
       </li>
       <ng-container *ngIf="!(loggedUser$ | async) as loggedUser">
         <li class="nav-item">
           <app-login-link>
-            <a class="nav-link"  href="javascript:{}" >Login</a>
+            <a class="nav-link"  href="javascript:{}" (click)="showMenu = null">Login</a>
           </app-login-link>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="student/register" routerLinkActive="active">student Register</a>
+          <a class="nav-link" routerLink="student/register" routerLinkActive="active" (click)="showMenu = null">student Register</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="teacher/register" routerLinkActive="active">Teacher Register</a>
+          <a class="nav-link" routerLink="teacher/register" routerLinkActive="active" (click)="showMenu = null">Teacher Register</a>
         </li>
       </ng-container>
       <ng-container *ngIf="(loggedUser$ | async) as loggedUser">
         <li class="nav-item">
-          <a [routerLink]="loggedUser?.role_url" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">My Home</a>
+          <a [routerLink]="loggedUser?.role_url" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="showMenu = null">My Home</a>
         </li>
 
         <li class="nav-item" *ngIf="loggedUser?.role_url == 'admin'">
-          <a [routerLink]="loggedUser?.role_url+'/teachers'" class="nav-link" routerLinkActive="active">Teachers</a>
+          <a [routerLink]="loggedUser?.role_url+'/teachers'" class="nav-link" routerLinkActive="active" (click)="showMenu = null">Teachers</a>
         </li>
         <li class="nav-item" *ngIf="loggedUser?.role_url != 'student'">
-          <a [routerLink]="loggedUser?.role_url+'/students'" class="nav-link" routerLinkActive="active">Students</a>
+          <a [routerLink]="loggedUser?.role_url+'/students'" class="nav-link" routerLinkActive="active" (click)="showMenu = null">Students</a>
         </li>
 
 
         <li class="nav-item" *ngIf="loggedUser?.role_url != 'student'">
-          <a [routerLink]="loggedUser?.role_url+'/courses'" class="nav-link" routerLinkActive="active">Courses</a>
+          <a [routerLink]="loggedUser?.role_url+'/courses'" class="nav-link" routerLinkActive="active" (click)="showMenu = null">Courses</a>
         </li>
 
         <li class="nav-item">
-          <a [routerLink]="loggedUser?.role_url+'/mail/inbox'" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Message</a>
+          <a [routerLink]="loggedUser?.role_url+'/mail/inbox'" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="showMenu = null">Message</a>
         </li>
 
         <li class="nav-item" *ngIf="loggedUser?.role_url == 'admin'">
-          <a [routerLink]="loggedUser?.role_url+'/coupons'" class="nav-link" routerLinkActive="active">Coupons</a>
+          <a [routerLink]="loggedUser?.role_url+'/coupons'" class="nav-link" routerLinkActive="active" (click)="showMenu = null">Coupons</a>
         </li>
 
         <li class="nav-item">
           <div ngbDropdown class="d-inline-block">
             <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{loggedUser.fname}}</button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-              <button ngbDropdownItem  (click)="signOut()">Sign Out</button>
+              <button ngbDropdownItem  (click)="signOut()" (click)="showMenu = null">Sign Out</button>
             </div>
           </div>
         </li>
