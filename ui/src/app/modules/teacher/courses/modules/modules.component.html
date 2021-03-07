@@ -1,3 +1,5 @@
+<div class="container-fluid pt-4">
+  <h3 class="mb-4">Create Module</h3>
 <app-bread-crumbs [hide]="true"></app-bread-crumbs>
 
 <app-add-module [course]="course$ | async" [module]="courseModule" (resetEdit)="editModule($event)"></app-add-module>
@@ -5,22 +7,22 @@
 
 
 
-<table class="table">
+<table class="table table-striped table-bordered mt-4">
   <thead>
     <tr>
-      <th>
+      <th width="80">
         Order
       </th>
       <th>
         Module Name
       </th>
-      <th>
+      <th width="80">
         PDF
       </th>
-      <th>
+      <th width="80">
         Videos
       </th>
-      <th>
+      <th width="100">
         Options
       </th>
     </tr>
@@ -41,14 +43,14 @@
         <td data-label="Module Name">
           {{ courseModule.name}}
         </td>
-        <td data-label="PDF">
+        <td data-label="PDF" align="center">
           <a [href]="courseModule.pdf" *ngIf="courseModule.pdf" target="_blank">
-            <fa-icon [icon]="faFilePdf"></fa-icon>
+            <fa-icon class="fa-icon-25" [icon]="faFilePdf"></fa-icon>
           </a>
         </td>
-        <td data-label="Video">
+        <td data-label="Video" align="center">
           <a href="javascript:{}" *ngIf="courseModule.video_url" (click)="playVideo(courseModule)">
-            <fa-icon [icon]="faPlay"></fa-icon>
+            <fa-icon class="fa-icon-25" [icon]="faPlay"></fa-icon>
           </a>
         </td>
         <td data-label="Option">
@@ -85,3 +87,4 @@
     </tr>
   </tbody>
 </table>
+</div>

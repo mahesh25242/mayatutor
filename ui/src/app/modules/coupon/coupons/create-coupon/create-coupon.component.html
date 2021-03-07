@@ -1,7 +1,8 @@
-<a appBackButton href="javascript:{}" class="btn btn-primary">Back</a>
+<a appBackButton href="javascript:{}" class="btn-sm mb-3 d-inline-block">  <fa-icon class="mr-2" [icon]="faAngleLeft"></fa-icon> Back</a>
+<h3 class="mb-3">Create Coupon</h3>
 <form [formGroup]="createCouponFrm" (ngSubmit)="saveCoupon()">
-
-  <div class="form-group">
+  <div class="row">
+  <div class="form-group col-md-4 col-lg-4">
     <label for="no_of_coupon">Number of Coupon</label>
     <input type="number" class="form-control" id="no_of_coupon"
     placeholder="Number of Coupon" formControlName="no_of_coupon" min="1"
@@ -11,8 +12,7 @@
     </div>
   </div>
 
-
-  <div class="form-group" *ngIf="f.no_of_coupon.value > 1">
+  <div class="form-group col-md-4 col-lg-4" *ngIf="f.no_of_coupon.value > 1">
     <label for="groupName">Name</label>
     <input type="text" class="form-control" id="groupName"
     placeholder="Name" formControlName="groupName"
@@ -21,7 +21,7 @@
       {{f.groupName.errors.error}}
     </div>
   </div>
-  <div class="form-group" *ngIf="f.no_of_coupon.value == 1">
+  <div class="form-group col-md-4 col-lg-4" *ngIf="f.no_of_coupon.value == 1">
     <label for="code">Coupon Code</label>
     <input type="text" class="form-control" id="code"
     placeholder="Coupon Code" formControlName="code"
@@ -31,7 +31,7 @@
     </div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group col-md-4 col-lg-4">
     <label for="description">Description</label>
     <textarea class="form-control" id="description"
     placeholder="Description" formControlName="description"
@@ -41,7 +41,7 @@
     </div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group col-md-4 col-lg-4">
     <label for="no_use">Number of use</label>
     <input type="number" class="form-control" id="no_use"
     placeholder="Number of use" formControlName="no_use" min="0"
@@ -51,7 +51,7 @@
     </div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group col-md-4 col-lg-4">
     <label for="type">Type</label>
     <select class="form-control" id="type"
     placeholder="Number of use" formControlName="type"
@@ -64,7 +64,7 @@
     </div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group col-md-4 col-lg-4">
     <label for="value">{{f.type.value}} Value</label>
     <input type="number" class="form-control" id="value"
     [placeholder]="f.type.value+' Value'" formControlName="value" min="0"
@@ -74,7 +74,7 @@
     </div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group col-md-4 col-lg-4">
     <label for="amount">Start Date</label>
     <div class="input-group">
       <input class="form-control" placeholder="dd/mm/yyyy"
@@ -87,7 +87,7 @@
     </div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group col-md-4 col-lg-4">
     <label for="amount">End Date</label>
     <div class="input-group">
       <input class="form-control" placeholder="dd/mm/yyyy"
@@ -101,7 +101,7 @@
     </div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group col-md-4 col-lg-4">
     <label for="status">Status</label>
     <select class="form-control" id="status"
     formControlName="status"
@@ -113,8 +113,9 @@
     <div *ngIf="f.status.errors && f.status.errors.error" class="invalid-feedback">
       {{f.status.errors.error}}
     </div>
+  
   </div>
-
+</div>
   <button class="btn btn-primary">Save</button>
 </form>
 

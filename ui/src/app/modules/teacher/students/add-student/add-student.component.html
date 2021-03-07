@@ -1,5 +1,6 @@
-<form class="form-inline" [formGroup]="addStudenttFrm" (ngSubmit)="addStudent()">
-  <div class="form-group">
+<form [formGroup]="addStudenttFrm" (ngSubmit)="addStudent()">
+  <div class="row">
+  <div class="form-group col-md-5 col-lg-5">
     <label for="phone">Mobile / Email</label>
     <ng-select [items]="students$ | async"
            bindLabel="email"
@@ -21,7 +22,7 @@
     </div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group col-md-4 col-lg-4">
     <label for="course">Course</label>
     <ng-select [items]="(courses$ | async)?.data"
         bindLabel="name"
@@ -34,7 +35,9 @@
           {{f.course.errors.error}}
         </div>
   </div>
-
-  <button type="submit" class="btn btn-primary my-1">Add Student</button>
-  <button type="button" class="btn btn-primary my-1" (click)="resetSearch()">Clear</button>
+  <div class="form-group col-md-3 col-lg-3">
+    <button type="submit" class="btn btn-primary mt-22">Add Student</button>
+    <button type="button" class="btn btn-outline-secondary ml-2 mt-22" (click)="resetSearch()">Clear</button>
+  </div>
+</div>
 </form>

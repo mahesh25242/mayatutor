@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot  } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CouponService } from '../../services';
+import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 @Injectable()
-export class CreateCouponResolver implements Resolve<any> {
+export class CreateCouponResolver implements Resolve<any> { 
 
   constructor(
     private couponService: CouponService) { }
@@ -13,4 +14,5 @@ export class CreateCouponResolver implements Resolve<any> {
     return this.couponService.getACoupon(id);
 
   }
+  faAngleLeft = faAngleLeft;
 }

@@ -1,6 +1,8 @@
+
 <form [formGroup]="addModuleFrm" (ngSubmit)="addModule()">
-  <div class="form-group">
-    <label for="name">Module Name</label>
+<div class="row">
+  <div class="form-group col-md-6 col-lg-6">
+    <label for="name">Module Name </label>
     <input type="text" class="form-control" id="name" aria-describedby="moduleNameHelp"
     placeholder="Module Name" formControlName="name"
     [ngClass]="{'is-invalid': (f.name.errors && f.name.errors.error) }" ngbAutofocus>
@@ -10,9 +12,9 @@
     <small id="moduleNameHelp" class="form-text text-muted">make sure spelling correct</small>
   </div>
 
-  <div class="form-group">
-    <label for="pdf">PDF</label>
-    <input #pdfBrowse type="file" class="form-control" id="pdf"
+  <div class="form-group col-md-6 col-lg-6">
+    <label class="d-block" for="pdf">PDF</label>
+    <input #pdfBrowse type="file" id="pdf"
       (change)="onFileInput($event.target.files)" accept="application/pdf"
       [ngClass]="{'is-invalid': (f.pdf.errors && f.pdf.errors.error) }">
       <div *ngIf="f.pdf.errors && f.pdf.errors.error" class="invalid-feedback">
@@ -21,7 +23,7 @@
       <a [href]="f.pdf_file.value" target="_blank" *ngIf="f.pdf_file.value">PDF</a>
   </div>
 
-  <div class="form-group">
+  <div class="form-group col-md-6 col-lg-6">
     <label for="pdf">Video From</label>
     <select class="form-control" formControlName="video_type">
       <option value="youtube">Youtube</option>
@@ -29,19 +31,23 @@
     </select>
   </div>
 
-  <div class="form-group">
+  <div class="col-md-6 col-lg-6">
     <label for="video_url">Video Link</label>
-    <input type="url" class="form-control" id="video_url" aria-describedby="videoLinkHelp"
+   <div class="d-flex ">
+    <input  type="url" class="form-control" id="video_url" aria-describedby="videoLinkHelp"
     placeholder="Video Link" formControlName="video_url"
     [ngClass]="{'is-invalid': (f.video_url.errors && f.video_url.errors.error) }">
-    <a href="javascript:{}" class="btn btn-primary" *ngIf="f.video_url.value" (click)="previewVideo()">Preview</a>
+
+    <div class="input-group-append"><a href="javascript:{}" class="btn btn-primary ml-3" *ngIf="f.video_url.value" (click)="previewVideo()">Preview</a></div>
+  </div>
     <div *ngIf="f.video_url.errors && f.video_url.errors.error" class="invalid-feedback">
       {{f.video_url.errors.error}}
     </div>
     <small id="videoLinkHelp" class="form-text text-muted">put youtube / vimeo link</small>
   </div>
-
-  <button class="btn btn-primary" type="submit">Save</button>
-  <button class="btn btn-primary" type="button" (click)="cancelEdit()" *ngIf="f.id.value">Cancel</button>
+</div>
+ <button class="btn btn-outline-secondary" type="button" (click)="cancelEdit()" *ngIf="f.id.value">Cancel</button>
+  <button class="btn btn-primary float-right" type="submit">Save</button>
+ <div class="clearfix"></div>
 
 </form>
