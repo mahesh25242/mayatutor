@@ -1,6 +1,11 @@
 
 <app-change-banner></app-change-banner>
-<app-custom-url></app-custom-url>
+<section class="blueContainer mb-5 p-4">
+  <div class="container">
+    <app-custom-url></app-custom-url>
+  </div>
+</section>
+
 <app-bread-crumbs [hide]="true"></app-bread-crumbs>
 <div class="container">
   <form [formGroup]="editProfileFrm" *ngIf="(loggedUser$ | async) as loggedUser" (ngSubmit)="updateProfile()">

@@ -1,6 +1,4 @@
-<section class="blueContainer mb-5 p-4" *ngIf="(user$ | async) as user">
-  <div class="container">
-    <div class="row">
+<div class="row"  *ngIf="(user$ | async) as user">
       <div class="col-md-6 col-lg-6" *ngIf="!shareOnly">
         <h6 >Copy website URL</h6>
         <input class="form-control" type="text" placeholder="Readonly input here..."
@@ -23,8 +21,5 @@
        placement="top" ngbTooltip="share in telegram"></share-button>
        <share-button button="copy" [icon]="faCopy" [url]="custmUrl"
        placement="top" ngbTooltip="copy to clipboard"></share-button>
-
       </div>
-    </div>
-  </div>
-</section>
+</div>

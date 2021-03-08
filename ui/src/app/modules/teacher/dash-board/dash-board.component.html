@@ -48,7 +48,7 @@
           {{ user.city?.name }} - {{ user.pin }}
         </address>
 
-        <div *ngIf="isDashBoard">Mobile: {{ user.phone }}</div>
+        <h6 *ngIf="isDashBoard">Mobile: {{ user.phone }}</h6>
       </div>
       <div class="col-md-6">
         <div class="mb-2">Active From: {{ user.created_at | date:'medium' }}</div>
@@ -86,10 +86,12 @@
             <a class="d-block d-sm-none btn btn-primary" target="_blank" [href]="'https://api.whatsapp.com/send?phone='+user.phone"> <fa-icon [icon]="faWhatsapp" ></fa-icon> Whats app</a>
           </ng-container>
         </ng-container>
-        <div *ngIf="isDashBoard">Email: <a [href]="'mailto:'+user.email">{{ user.email }}</a></div>
+        <h6 class="mt-3" *ngIf="isDashBoard">Email: <a [href]="'mailto:'+user.email">{{ user.email }}</a></h6>
       </div>
-  </div>
-
+  
+  
+    </div>
+    <a href="javascript:{}" routerLink="edit-profile" class="btn btn-outline-primary float-right mt-5" *ngIf="isDashBoard"><fa-icon [icon]="faEdit" ></fa-icon> Edit</a>
 </div>
 </div>
 <hr/>
@@ -110,16 +112,16 @@
         <p [innerHTML]="user.teacher_info?.education?.name"></p>
       </div>
     </div>
-    <a href="javascript:{}" routerLink="edit-profile" class="btn btn-outline-primary" *ngIf="isDashBoard"><fa-icon [icon]="faEdit" ></fa-icon> Edit</a>
+   
 
     <hr/>
     <ng-container *ngIf="(courses$ | async) as courses">
       <ngb-tabset type="pills" *ngIf="courses && courses?.data.length">
         <ngb-tab>
           <ng-template ngbTabTitle>All Courses</ng-template>
-          <ng-template ngbTabContent>
+          <ng-template ngbTabContent >
             <div *ngFor="let course of courses?.data">
-              <app-course-block [course]="course"></app-course-block>
+              <app-course-block [course]="course" class="row pt-4"></app-course-block>
             </div>
           </ng-template>
         </ngb-tab>
@@ -127,7 +129,7 @@
           <ng-template ngbTabTitle>New Courses</ng-template>
           <ng-template ngbTabContent>
             <div *ngFor="let course of courses?.data | slice:0:2">
-              <app-course-block [course]="course"></app-course-block>
+              <app-course-block [course]="course" class="row pt-4"></app-course-block>
             </div>
           </ng-template>
         </ngb-tab>

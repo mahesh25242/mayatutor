@@ -1,3 +1,8 @@
+@import '../../../../variables.scss';
 .clearfix {
     clear: both;
 }
+.blueContainer {
+    background-color:$primaryColor;
+    color:#fff;
+  }

@@ -43,12 +43,12 @@
   </div>
   <div class="col-md-4 col-lg-4"> <img [src]="f.qr_code1.value" class="avatar-img img-thumbnail" />
     <button type="button" (click)="fileInput.click()" class="btn btn-primary qr_code1-up-btn">
-      <span>Change QR Code</span>
+      <span>Change PayTM QR Code</span>
       <input #fileInput type="file" (change)="onFileInput($event.target.files, f.qr_code1, 'qr_code1')" accept="image/*" style="display:none;" />
     </button></div>
     <div class="col-md-4 col-lg-4"><img [src]="f.qr_code2.value" class="avatar-img img-thumbnail" />
       <button type="button" (click)="fileInput.click()" class="btn btn-primary qr_code2-up-btn">
-        <span>Change QR Code</span>
+        <span>Change G-PAY QR Code</span>
         <input #fileInput type="file" (change)="onFileInput($event.target.files, f.qr_code2, 'qr_code2')" accept="image/*" style="display:none;" />
       </button>
     </div>

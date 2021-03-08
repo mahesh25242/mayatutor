@@ -1,4 +1,5 @@
-<div class="card" style="width: 18rem;">
+<div class="col-md-4 col-lg-4">
+<div class="card">
   <img [src]="course.image" class="card-img-top" [alt]="course.name" [title]="course.name" *ngIf="course.image">
   <div class="card-body">
     <h5 class="card-title">{{course.name}}</h5>
@@ -8,7 +9,13 @@
     </p>
     <app-rating [rating]="course.user.rating" [readonly]="true"></app-rating>
     <p class="card-text">{{course.description}}</p>
-    <p *ngIf="course.price">Fees: {{ course.price }}</p>
-    <a href="javascript:{}" class="btn btn-primary">Detail</a>
+    <div class="d-flex">
+      
+      <h6 class="mb-0 mt-2" *ngIf="course.price">Fees: {{ course.price }}</h6>
+    <a href="javascript:{}" class="btn btn-primary btn-sm ml-auto">Detail</a>
+    
   </div>
+    
+  </div>
+</div>
 </div>
