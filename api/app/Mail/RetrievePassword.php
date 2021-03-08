@@ -10,16 +10,17 @@ class RetrievePassword extends Mailable
      * @return $this
      */
     public $user;
-    public function __construct(User $user)
+    public $siteAddress;
+    public function __construct(User $user, $siteAddress= null)
     {
         $this->user = $user;
+        $this->siteAddress = $siteAddress;
     }
 
 
 
     public function build()
     {
-       $user =  (array) $this->user;
-        return $this->view('email/retrievePassword', $user);
+        return $this->view('email/retrievePassword',  ["user" => $this->user, "siteAddress" => $this->siteAddress]);
     }
 }

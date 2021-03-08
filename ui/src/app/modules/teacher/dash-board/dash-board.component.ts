@@ -37,7 +37,7 @@ export class DashBoardComponent implements OnInit {
       return this.route.params.pipe(mergeMap(res=>{
 
         if(res && res.teacher){
-          if(lUser && (this.route.snapshot.data["user"]?.phone == '*' || this.route.snapshot.data["user"]?.email == '*')){
+          if(lUser && (!this.route.snapshot.data["user"]?.phone || !this.route.snapshot.data["user"]?.email)){
             return this.teacherService.getTeacher(res.teacher).pipe(tap(ther=>{
               this.breadCrumbsService.bcs$.next([
                 {
@@ -92,14 +92,10 @@ export class DashBoardComponent implements OnInit {
   }
 
   contactTeacher(user: User){
-    if(user.email != '*'){
-      const modalRef = this.modalService.open(ContactTeacherComponent, {
-        size: 'lg'
-      });
-      modalRef.componentInstance.user = user;
-    }else{
-      const activeModal = this.modalService.open(SignInComponent);
-    }
+    const modalRef = this.modalService.open(ContactTeacherComponent, {
+      size: 'lg'
+    });
+    modalRef.componentInstance.user = user;
   }
 
 }

@@ -24,6 +24,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 
 import { DashBoardResolver } from './modules/teacher/dash-board/dash-board-resolver';
 import { LayOutComponent } from './lay-out/lay-out.component';
+import { SetNewPasswordComponent } from './set-new-password/set-new-password.component';
+import { UserActivationComponent } from './user-activation/user-activation.component';
 
 var config = {
   apiKey: "AIzaSyAhzEi15mQe-KY7rhbmIi8MnvL2-KcL7uw",
@@ -50,7 +52,9 @@ var config = {
     HowItWorksComponent,
     ContactUsComponent,
     PageNotFoundComponent,
-    LayOutComponent
+    LayOutComponent,
+    SetNewPasswordComponent,
+    UserActivationComponent
   ],
   imports: [
     BrowserModule,

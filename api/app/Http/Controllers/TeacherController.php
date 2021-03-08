@@ -3,12 +3,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Resources\UserResource;
 use App\User;
 use Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Image;
 use Illuminate\Support\Facades\Storage;
+
+use App\Http\Resources\UserCollection;
 
 
 class TeacherController extends Controller
@@ -24,15 +27,20 @@ class TeacherController extends Controller
                 $qry->where("tag_name", 'like', "%{$q}%");
             });
         }
-        return response($user->paginate($perPage));
+
+
+        $paginator = $user->paginate($perPage);
+        //$paginator->setCollection($paginator->getCollection()->makeHidden(['email', 'phone']));
+        return response(new UserCollection($paginator));
     }
 
     public function teacher($url =''){
-        $user = \App\User::withCount("teacherStudent as student_count")->with(["rating", "teacherInfo", "subject", "city"])->whereHas("userRole", function ($qry){
+        $user = \App\User::withCount("teacherStudent as student_count")
+        ->with(["rating", "teacherInfo", "subject", "city"])->whereHas("userRole", function ($qry){
             $qry->where("role_id", 2);
         })->where("url", $url)->get()->first();
 
-        return response($user);
+        return response(new UserResource($user) );
     }
     public function changeBanner(Request $request){
         $status = false;

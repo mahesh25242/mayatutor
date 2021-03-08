@@ -26,7 +26,7 @@
 {{ user.city?.name }} - {{ user.pin }}</p>
 <app-custom-url [shareOnly]="true"></app-custom-url>
  </div>
-</div>    
+</div>
   </div>
   <div class="col-md-6 col-lg-6">
     <div class="row">
@@ -45,21 +45,36 @@
         <div class="mb-2">Active From: {{ user.created_at | date:'medium' }}</div>
         <div *ngIf="user.last_login?.created_at_human">Last Login: {{ user.last_login?.created_at_human }}</div>
         <ng-container *ngIf="!isDashBoard">
-          <ng-container *ngIf="user.email" >
-            <button   class="btn btn-primary teacher-message-btn mr-3 mb-2" (click)="contactTeacher(user)" placement="top" [ngbTooltip]="(user.email == '*') ? 'Only logged user can contact teacher' : ''">
+
+            <app-login-link *ngIf="!user.email">
+              <button class="btn btn-primary"
+              placement="top"
+              ngbTooltip="Only logged user can contact teacher">
+                Message
+                <fa-icon [icon]="faLock" *ngIf="!user.email"></fa-icon>
+              </button>
+            </app-login-link>
+
+            <button   class="btn btn-primary teacher-message-btn mr-3 mb-2"
+            (click)="contactTeacher(user)" *ngIf="user.email">
               Message
-              <fa-icon [icon]="faLock" *ngIf="user.email == '*'"></fa-icon>
             </button>
-          </ng-container>
-          <ng-container *ngIf="user.phone" >
-            <button  class="btn btn-primary" *ngIf="user.phone == '*'"  (click)="contactTeacher(user)" placement="top" [ngbTooltip]="(user.email == '*') ? 'Only logged user can contact teacher' : ''">
-              Mobile
-              <fa-icon [icon]="faLock" *ngIf="user.phone == '*'"></fa-icon>
-            </button>
-            <ng-container *ngIf="user.phone && user.phone !== '*'">
-              <a class="d-none d-sm-block btn btn-primary" target="_blank" [href]="'https://web.whatsapp.com/send?phone='+user.phone"> <fa-icon [icon]="faWhatsapp" ></fa-icon> Whats app</a>
-              <a class="d-block d-sm-none btn btn-primary" target="_blank" [href]="'https://api.whatsapp.com/send?phone='+user.phone"> <fa-icon [icon]="faWhatsapp" ></fa-icon> Whats app</a>
-            </ng-container>
+
+            <app-login-link *ngIf="!user.phone">
+              <button class="btn btn-primary ml-2"
+              placement="top"
+              ngbTooltip="Only logged user can contact teacher">
+              <fa-icon [icon]="faWhatsapp" ></fa-icon> Whats app
+                <fa-icon [icon]="faLock" *ngIf="!user.email"></fa-icon>
+              </button>
+            </app-login-link>
+
+
+
+
+          <ng-container *ngIf="user.phone">
+            <a class="d-none d-sm-block btn btn-primary" target="_blank" [href]="'https://web.whatsapp.com/send?phone='+user.phone"> <fa-icon [icon]="faWhatsapp" ></fa-icon> Whats app</a>
+            <a class="d-block d-sm-none btn btn-primary" target="_blank" [href]="'https://api.whatsapp.com/send?phone='+user.phone"> <fa-icon [icon]="faWhatsapp" ></fa-icon> Whats app</a>
           </ng-container>
         </ng-container>
         <div *ngIf="isDashBoard">Email: <a [href]="'mailto:'+user.email">{{ user.email }}</a></div>
@@ -70,7 +85,7 @@
 </div>
 <hr/>
 
-  
+
 
     <div class="row mb-3">
       <div class="col-md-4">
@@ -83,7 +98,7 @@
       </div>
       <div class="col-md-4">
         <h5>Education</h5>
-        <p [innerHTML]="user.teacher_info?.education.name"></p>
+        <p [innerHTML]="user.teacher_info?.education?.name"></p>
       </div>
     </div>
     <a href="javascript:{}" routerLink="edit-profile" class="btn btn-outline-primary" *ngIf="isDashBoard"><fa-icon [icon]="faEdit" ></fa-icon> Edit</a>

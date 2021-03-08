@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Dusterio\LumenPassport\LumenPassport;
-
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -18,4 +18,10 @@ class AppServiceProvider extends ServiceProvider
 //        LumenPassport::allowMultipleTokens();
 
     }
+
+    public function boot()
+    {
+        JsonResource::withoutWrapping();
+    }
+
 }

@@ -198,5 +198,13 @@ export class UserService {
     return this.http.post<any>(`/reterievePassword`, postData);
   }
 
+  setNewPassword(postData: any = null){
+    return this.http.post<any>(`/setNewPassword`, postData);
+  }
+
+  activateUser(postData: any = null){
+    return this.http.post<any>(`/activateUser`, postData);
+  }
+
 
 }

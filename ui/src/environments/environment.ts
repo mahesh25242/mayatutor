@@ -7,7 +7,7 @@ export const environment = {
   siteName: 'mayatutor',
   tinyMceApi: 'n6mryrdzt1pclqabsvpbvw6mtym3kj9gpwjguof89d2sv52q',
   baseUrl: 'http://localhost/mayatutor/api/public/v1',
-  recaptchaKey: '6Ld2McEZAAAAABDjGwyJ63pD3ETCQkWCiZqEH39C',
+  recaptchaKey: '6Lfpw3AaAAAAANItvyYpnSxgK9IPE__AWJ7nAOCO',
   lumenSecret: 'gGns8qiSpmPTBhfWJfZfle2pQqFJB439zbgrHdqw',
   siteAddress: 'http://localhost/mayatutor'
 };

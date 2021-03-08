@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\User;
+use App\UserActivationKey;
 use Validator;
 use Illuminate\Support\Facades\Auth;
 use GuzzleHttp\Client;
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 use App\Mail\ActivationMail;
 use App\Mail\PasswordChangedNotification;
+use App\Mail\RetrievePassword;
 use Mail;
 
 class UsersController extends Controller
@@ -110,7 +112,7 @@ class UsersController extends Controller
         if(env('APP_ENV') == 'local'){
             $toEMail = env('DEVELOPER_MAIL');
         }
-        $userActivationKey = new \App\UserActivationKey;
+        $userActivationKey = new UserActivationKey;
         $userActivationKey->key = uniqid($user->id);
         $userActivationKey->user_id = $user->id;
         $userActivationKey->save();
@@ -538,7 +540,7 @@ class UsersController extends Controller
 
         $statusCode = $response->getStatusCode();
         return $content = $response->getBody();*/
-        return response(["error" => 1, "message" => "no user found"] , 401);
+        return response(["error" => 1, "message" => "no user found for {$authUser->email}"] , 401);
         }
 
 
@@ -568,14 +570,14 @@ class UsersController extends Controller
             if(env('APP_ENV') == 'local'){
                 $toEMail = env('DEVELOPER_MAIL');
             }
-            $userActivationKey = new \App\UserActivationKey;
+            $userActivationKey = new UserActivationKey;
             $userActivationKey->key = uniqid($user->id);
             $userActivationKey->user_id = $user->id;
             $userActivationKey->save();
 
 
             try{
-                Mail::to($toEMail)->send(new ActivationMail($user));
+                Mail::to($toEMail)->send(new RetrievePassword($user, $request->header("From-Domain")));
             }catch (\Swift_TransportException $e) {
             //  echo 'Caught exception: ',  $e->getMessage(), "\n";
             }
@@ -587,5 +589,80 @@ class UsersController extends Controller
             return response(['message' => 'Validation errors', 'errors' =>  ["username" => 'user not exists'], 'status' => false], 422);
         }
 
+    }
+
+    public function setNewPassword(Request $request){
+        $validator = Validator::make($request->all(), [
+            'key' => ['required'],
+            'password' => ['required', 'string','min:6',  'max:255', 'confirmed'],
+            'password_confirmation' =>  [ 'required', 'string',  'max:255']
+        ],[],[
+            'key' => 'Key',
+            'password' => 'Password',
+            'password_confirmation' => 'Confirm Password',
+        ]);
+        $validationField["password"] = ['required', 'string','min:6',  'max:255', 'confirmed'];
+        $validationField["password_confirmation"] = [ 'required', 'string',  'max:255'];
+
+        if($validator->fails()){
+            return response(['message' => 'Validation errors', 'errors' =>  $validator->errors(), 'status' => false], 422);
+        }
+
+
+        $key = UserActivationKey::where("key", $request->input("key"))
+        ->get()->first();
+
+        if($key && $key->user){
+            $toEMail = $key->user->email;
+            if(env('APP_ENV') == 'local'){
+                $toEMail = env('DEVELOPER_MAIL');
+            }
+            if($request->input('password', null)){
+                $key->user->password = Hash::make($request->input('password', null));
+                $key->user->save();
+                try{
+                    Mail::to($toEMail)->send(new PasswordChangedNotification($key->user));
+                }catch (\Swift_TransportException $e) {
+                //  echo 'Caught exception: ',  $e->getMessage(), "\n";
+                }
+                $key->delete();
+                return response([
+                    'message' => 'successfully sent mail', 'status' => 1
+                ]);
+            }else{
+                return response(['message' => 'Validation errors', 'errors' =>  ["password" => 'no user found'], 'status' => false], 422);
+            }
+
+
+
+
+        }else{
+            return response(['message' => 'Validation errors', 'errors' =>  ["password" => 'user not exists'], 'status' => false], 422);
+        }
+    }
+
+    public function activateUser(Request $request){
+        $validator = Validator::make($request->all(), [
+            'key' => ['required', 'string']
+        ],[],[
+            'key' => 'Key',
+        ]);
+        if($validator->fails()){
+            return response(['message' => 'Validation errors', 'errors' =>  $validator->errors(), 'status' => false], 422);
+        }
+        $key = UserActivationKey::where("key", $request->input("key"))
+        ->get()->first();
+
+        if($key && $key->user){
+            $key->user->activated_at = Carbon::now();
+            $key->user->status = 1;
+            $key->user->save();
+            $key->delete();
+            return response([
+                'message' => 'activated account', 'status' => 1
+            ]);
+        }else{
+            return response(['message' => 'Validation errors', 'errors' =>  ["key" => 'user not exists'], 'status' => false], 422);
+        }
     }
 }

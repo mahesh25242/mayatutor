@@ -7,6 +7,8 @@ import { HowItWorksComponent } from './how-it-works/how-it-works.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { DashBoardComponent } from './modules/teacher/dash-board/dash-board.component';
 import { DashBoardResolver } from './modules/teacher/dash-board/dash-board-resolver';
+import { SetNewPasswordComponent } from './set-new-password/set-new-password.component';
+import { UserActivationComponent } from './user-activation/user-activation.component';
 
 const routes: Routes = [
   {
@@ -24,6 +26,14 @@ const routes: Routes = [
   {
     path: 'contact-us',
     component: ContactUsComponent
+  },
+  {
+    path: 'set-new-password/:key',
+    component: SetNewPasswordComponent
+  },
+  {
+    path: 'user-activation/:key',
+    component: UserActivationComponent
   },
   {
     path: 'student',

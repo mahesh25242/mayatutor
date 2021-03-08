@@ -1,3 +1,3 @@
-<p>Hello  <?php echo $user["userContact"]["fname"] ;?>,</p>
-<p>Your Username: <?php echo $user["email"] ;?></p>
-<p>Password: 123456</p>
+<p>Hello  <?php echo $user->fname ;?>,</p>
+<p>Your Email / Mobile: <?php echo $user->email.' / '.$user->phone ;?></p>
+<a href="<?php echo rtrim($siteAddress, '/');?>/set-new-password/<?php echo $user->userActivationKey->first()->key;?>">Click Here to Change password</a>

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Image;
 use Illuminate\Support\Facades\Storage;
-
+use App\Http\Resources\CourseCollection;
 
 class CourseController extends Controller
 {
@@ -29,7 +29,7 @@ class CourseController extends Controller
         if($q){
             $courses = $courses->where("name", "LIKE", "%{$q}%");
         }
-        return response($courses->paginate($perPage));
+        return response(new CourseCollection($courses->paginate($perPage)));
     }
 
     public function createCourse(Request $request){
