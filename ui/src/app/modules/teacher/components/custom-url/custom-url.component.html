@@ -1,13 +1,14 @@
 <section class="blueContainer mb-5 p-4" *ngIf="(user$ | async) as user">
   <div class="container">
     <div class="row">
-     <div class="col-md-6 col-lg-6">
-        <h6>Copy website URL</h6> 
-        <input *ngIf="!shareOnly" class="form-control" type="text" placeholder="Readonly input here..."
+      <div class="col-md-6 col-lg-6" *ngIf="!shareOnly">
+        <h6 >Copy website URL</h6>
+        <input class="form-control" type="text" placeholder="Readonly input here..."
          readonly [value]="custmUrl">
-        </div>
-        <div class="col-md-6 col-lg-6">
-      <h6>Share website to</h6> 
+      </div>
+      <div
+      [ngClass]="{'col-md-12 col-lg-12': shareOnly, 'col-md-6 col-lg-6': !shareOnly}">
+      <h6>Share website to</h6>
        <share-button button="facebook" [size]="-1"
         [icon]="faFacebook" [url]="custmUrl"
         [title]="user.fname+' '+user.lname"
@@ -21,8 +22,8 @@
        <share-button button="telegram" [icon]="faTelegram" [url]="custmUrl"
        placement="top" ngbTooltip="share in telegram"></share-button>
        <share-button button="copy" [icon]="faCopy" [url]="custmUrl"
-       placement="top" ngbTooltip="copy to clipboard"></share-button>  
-    
+       placement="top" ngbTooltip="copy to clipboard"></share-button>
+
       </div>
     </div>
   </div>
