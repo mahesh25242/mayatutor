@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { State, Course, CourseModule, CourseWithPagination } from '../interfaces';
+import { Course, CourseModule, CourseWithPagination } from '../interfaces';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 

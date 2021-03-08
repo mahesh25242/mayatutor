@@ -4,7 +4,7 @@ import { Subscription, Observable } from 'rxjs';
 import { User } from '../../lib/interfaces';
 import Notiflix from "notiflix";
 import * as _ from 'lodash';
-import { map, mergeMap } from 'rxjs/operators';
+import { mergeMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 @Component({

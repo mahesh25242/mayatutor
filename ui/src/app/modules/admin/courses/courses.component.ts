@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { Course, CourseWithPagination } from 'src/app/lib/interfaces';
+import { CourseWithPagination } from 'src/app/lib/interfaces';
 import { CourseService } from 'src/app/lib/services';
 import Notiflix from "notiflix";
 import { BreadCrumbsService } from 'src/app/shared-module/components/bread-crumbs/bread-crumbs.component';

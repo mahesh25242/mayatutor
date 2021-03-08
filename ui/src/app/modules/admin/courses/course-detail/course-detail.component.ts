@@ -1,8 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Course, CourseModule } from 'src/app/lib/interfaces';
+import { Course } from 'src/app/lib/interfaces';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ModuleLaunchComponent } from 'src/app/shared-module/components/module-launch/module-launch.component';
 import { BreadCrumbsService } from 'src/app/shared-module/components/bread-crumbs/bread-crumbs.component';
 import Notiflix from "notiflix";
 import { Subscription } from 'rxjs';

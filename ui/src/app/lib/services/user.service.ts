@@ -4,7 +4,7 @@ import { of, BehaviorSubject, Observable, throwError, from } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { auth } from 'firebase/app';
 import { AngularFireAuth } from "@angular/fire/auth";
-import { Pagination, User, UserWithPagination } from '../interfaces';
+import { User, UserWithPagination } from '../interfaces';
 import { environment } from '../../../environments/environment';
 import * as _ from 'lodash';
 

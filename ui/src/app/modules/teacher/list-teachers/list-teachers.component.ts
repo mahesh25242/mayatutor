@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map, mergeMap } from 'rxjs/operators';
-import { User, UserWithPagination } from 'src/app/lib/interfaces';
+import { mergeMap } from 'rxjs/operators';
+import { UserWithPagination } from 'src/app/lib/interfaces';
 import { TeacherService } from 'src/app/lib/services';
 
 

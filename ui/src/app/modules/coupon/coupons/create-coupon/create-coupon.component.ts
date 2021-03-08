@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { CouponService } from '../../services';
 import Notiflix from "notiflix";
-import { mergeMap } from 'rxjs/operators';
 import { faCalendar, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDateINParserFormatter } from '../../../../lib/providers/ngb-date-in-parser-formatter';

@@ -4,8 +4,7 @@ import {faFacebook, faWhatsapp, faLinkedin, faTelegram } from '@fortawesome/free
 import { UserService, TeacherService } from 'src/app/lib/services';
 import { Observable, of } from 'rxjs';
 import { User } from 'src/app/lib/interfaces';
-import { map, mergeMap } from 'rxjs/operators';
-import { environment }  from '../../../../environments/environment';
+import { mergeMap } from 'rxjs/operators';
 import Notiflix from "notiflix";
 
 @Component({

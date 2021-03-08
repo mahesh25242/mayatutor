@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Observable, of, Subscription } from 'rxjs';
-import { mergeMap, tap } from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { CourseWithPagination, User, UserPayment } from 'src/app/lib/interfaces';
 import { StudentPaymentService, TeacherService } from 'src/app/lib/services';
 import Notiflix from "notiflix";

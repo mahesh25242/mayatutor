@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup, ControlContainer, FormGroupName } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, ControlContainer } from '@angular/forms';
 import { EducationService, SubjectService } from 'src/app/lib/services';
 import { Subject as TeachSubject, Education } from 'src/app/lib/interfaces';
 import { Observable } from 'rxjs';

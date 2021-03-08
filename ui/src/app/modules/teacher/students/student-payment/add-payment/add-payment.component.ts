@@ -8,7 +8,6 @@ import { StudentPaymentService } from 'src/app/lib/services';
 import { Subscription } from 'rxjs';
 import Notiflix from "notiflix";
 import { Course, User } from 'src/app/lib/interfaces';
-import { map, mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-payment',

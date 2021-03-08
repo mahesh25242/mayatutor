@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CouponService } from './services';
-import { Observable } from 'rxjs';
-import { User } from '../../lib/interfaces';
-import {faEdit } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

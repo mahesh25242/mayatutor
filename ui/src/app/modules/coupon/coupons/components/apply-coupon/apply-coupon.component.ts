@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { CouponService } from '../../../services';
 import Notiflix from "notiflix";
-import { Coupon, CouponWithPagination } from '../../../interfaces';
+import { Coupon } from '../../../interfaces';
 
 @Component({
   selector: 'app-apply-coupon',

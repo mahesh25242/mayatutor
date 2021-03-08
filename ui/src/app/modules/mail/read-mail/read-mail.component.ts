@@ -3,7 +3,6 @@ import { Thread } from '../interfaces';
 import { Observable } from 'rxjs';
 import { MailService } from '../services/mail.service';
 import { ActivatedRoute, Data } from '@angular/router';
-import { mergeMap } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ReplyMailComponent } from '../reply-mail/reply-mail.component';
 

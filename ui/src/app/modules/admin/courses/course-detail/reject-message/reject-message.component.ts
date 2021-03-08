@@ -4,7 +4,6 @@ import { Course } from 'src/app/lib/interfaces';
 import Notiflix from "notiflix";
 import { Subscription } from 'rxjs';
 import { CourseService } from 'src/app/lib/services';
-import { mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-reject-message',

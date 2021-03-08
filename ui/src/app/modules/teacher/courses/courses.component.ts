@@ -6,7 +6,7 @@ import { Course, CourseWithPagination } from 'src/app/lib/interfaces';
 import {  CourseService, TeacherService } from 'src/app/lib/services';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import Notiflix from "notiflix";
-import { mergeMap, map } from 'rxjs/operators';
+import { mergeMap } from 'rxjs/operators';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { BreadCrumbsService } from 'src/app/shared-module/components/bread-crumbs/bread-crumbs.component';
 

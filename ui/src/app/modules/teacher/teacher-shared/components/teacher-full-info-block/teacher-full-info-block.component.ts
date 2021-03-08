@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Course, User } from 'src/app/lib/interfaces';
+import { User } from 'src/app/lib/interfaces';
 import { faEdit, faLock } from '@fortawesome/free-solid-svg-icons';
 
 @Component({

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanDeactivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
-import { dirtyCheck } from './dirty-check';
 
 
 export interface SampleComponentCanDeactivate {

@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService, CourseService, TeacherService } from 'src/app/lib/services';
-import { Observable, of } from 'rxjs';
-import { User, Course, CourseWithPagination } from 'src/app/lib/interfaces';
+import { UserService, TeacherService } from 'src/app/lib/services';
+import { Observable } from 'rxjs';
+import { User, CourseWithPagination } from 'src/app/lib/interfaces';
 import { faEdit, faLock,faTimes,faClock } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute } from '@angular/router';
 import { mergeMap, tap } from 'rxjs/operators';
-import Notiflix from "notiflix";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ContactTeacherComponent } from './contact-teacher/contact-teacher.component';
-import { SignInComponent } from 'src/app/sign-in/sign-in.component';
 import { BreadCrumbsService } from 'src/app/shared-module/components/bread-crumbs/bread-crumbs.component';
 import {faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 @Component({
