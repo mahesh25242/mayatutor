@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { faCopy } from '@fortawesome/free-solid-svg-icons';
 import {faFacebook, faWhatsapp, faLinkedin, faTelegram } from '@fortawesome/free-brands-svg-icons';
 import { UserService, TeacherService } from 'src/app/lib/services';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { User } from 'src/app/lib/interfaces';
 import { map, mergeMap } from 'rxjs/operators';
 import { environment }  from '../../../../environments/environment';
@@ -14,7 +14,7 @@ import Notiflix from "notiflix";
   styleUrls: ['./change-banner.component.scss']
 })
 export class ChangeBannerComponent implements OnInit {
-  @Input() isDashBoard: boolean;
+  @Input() teacher: User;
   faWhatsapp = faWhatsapp;
   faFacebook  = faFacebook;
   faLinkedin  = faLinkedin;
@@ -27,7 +27,10 @@ export class ChangeBannerComponent implements OnInit {
     private teacherService: TeacherService) { }
 
   ngOnInit(): void {
-    this.user$ = this.userService.getloggedUser;
+    if(this.teacher)
+      this.user$ = of(this.teacher);
+    else
+      this.user$ = this.userService.getloggedUser;
   }
 
   changeBanner(files: FileList){

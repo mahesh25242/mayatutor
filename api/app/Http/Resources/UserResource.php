@@ -44,6 +44,7 @@ class UserResource extends JsonResource
             'student_count' => $this->student_count,
             'subject' => $this->subject,
             'teacher_info' => $this->teacherInfo,
+            'teacher_banner' => $this->teacherBanner,
 
             'created_at' => $this->created_at,
             'created_at_human' => $this->created_at_human,
