@@ -117,6 +117,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
         });
         Notiflix.Notify.Success(`successfully registered as ${this.f.type.value}`);
       }, error=>{
+
         Notiflix.Loading.Remove();
         for(let result in this.registerFrm.controls){
           if(error.error.errors[result]){

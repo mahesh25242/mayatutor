@@ -16,9 +16,14 @@ export class ApiUrlInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const url = environment.baseUrl;
     if(!request.url.includes('http')){
+
       request = request.clone({
-        url: url + request.url
+        url: url + request.url,
+        setHeaders: {
+          'From-Domain': `${environment.siteAddress}`
+        }
       });
+
     }
     return next.handle(request);
   }

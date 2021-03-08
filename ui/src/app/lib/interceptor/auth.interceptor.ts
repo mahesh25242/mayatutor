@@ -96,8 +96,7 @@ export class AuthInterceptor implements HttpInterceptor {
       return request.clone({
         setHeaders: {
           'Authorization': `${token.token_type} ${token.access_token}`,
-          'X-Authorization': `${token.token_type} ${token.access_token}`,
-          'From-Domain': `${environment.siteAddress}`
+          'X-Authorization': `${token.token_type} ${token.access_token}`
         }
       });
     } else{
