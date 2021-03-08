@@ -26,6 +26,8 @@ import { DashBoardResolver } from './modules/teacher/dash-board/dash-board-resol
 import { LayOutComponent } from './lay-out/lay-out.component';
 import { SetNewPasswordComponent } from './set-new-password/set-new-password.component';
 import { UserActivationComponent } from './user-activation/user-activation.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 var config = {
   apiKey: "AIzaSyAhzEi15mQe-KY7rhbmIi8MnvL2-KcL7uw",
@@ -64,7 +66,8 @@ var config = {
     HttpClientModule,
     HttpClientXsrfModule.disable(),
     AngularFireModule.initializeApp(config),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     httpInterceptorProviders,
