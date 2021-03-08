@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { faCopy } from '@fortawesome/free-solid-svg-icons';
 import {faFacebook, faWhatsapp, faLinkedin, faTelegram } from '@fortawesome/free-brands-svg-icons';
 import { UserService, TeacherService } from 'src/app/lib/services';
@@ -14,12 +14,14 @@ import Notiflix from "notiflix";
   styleUrls: ['./change-banner.component.scss']
 })
 export class ChangeBannerComponent implements OnInit {
+  @Input() isDashBoard: boolean;
   faWhatsapp = faWhatsapp;
   faFacebook  = faFacebook;
   faLinkedin  = faLinkedin;
   faTelegram  = faTelegram;
   faCopy =faCopy;
   user$: Observable<User>;
+
 
   constructor(private userService: UserService,
     private teacherService: TeacherService) { }
