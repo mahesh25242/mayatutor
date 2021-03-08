@@ -55,11 +55,13 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
     this.countries$ = this.countryService.countries();
     this.countrySubscription = this.f.country_id.valueChanges.subscribe(res=>{
-      this.states$ = this.stateService.states(res.id);
+      if(res?.id)
+        this.states$ = this.stateService.states(res?.id);
     });
 
     this.stateSubscription = this.f.state_id.valueChanges.subscribe(res=>{
-      this.cities$ = this.cityService.cities(res.id);
+      if(res?.id)
+        this.cities$ = this.cityService.cities(res.id);
     });
 
     this.regTypeSubscription = this.route.data.subscribe(res=>{
