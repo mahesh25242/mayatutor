@@ -36,7 +36,7 @@
             </div>
             <div class="col-md-4">
               <h5>Education</h5>
-              <p [innerHTML]="usr.teacher_info?.education.name"></p>
+              <p [innerHTML]="usr.teacher_info?.education?.name"></p>
             </div>
           </div>
         </ng-container>
@@ -51,6 +51,7 @@
     </div>
 
     <button type="button" class="btn btn-outline-danger delete-user" (click)="deleteUser()">Delete</button>
+    <button type="button" class="btn btn-outline-danger resent-mail" (click)="resetActivationMail()">Re-sent Activation Mail</button>
     <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
   </div>
 </app-modal>

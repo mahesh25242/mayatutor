@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserService } from '../../lib/services';
 import { Subscription, Observable } from 'rxjs';
 import { User } from '../../lib/interfaces';
-
+import Notiflix from "notiflix";
 import * as _ from 'lodash';
 import { map, mergeMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -29,14 +29,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   signOut(){
+    Notiflix.Loading.Hourglass('please wait...');
     this.signOutSubscription = this.userService.setUserLogin({action:'SignOut'}).pipe(mergeMap(sRes=>{
       return this.userService.signOut().pipe(mergeMap(res=>{
         localStorage.removeItem('token');
         return this.userService.authUser();
       }))
     })).subscribe(res=>{
-
+      Notiflix.Loading.Remove();
     }, err=>{
+      Notiflix.Loading.Remove();
       this.router.navigate(['/']);
     });
 

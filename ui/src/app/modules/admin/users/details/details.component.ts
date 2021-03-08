@@ -1,10 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, Subscription } from 'rxjs';
 import { User } from 'src/app/lib/interfaces';
 import { UserService, TeacherService } from 'src/app/lib/services';
 import Notiflix from "notiflix";
-import { mergeMap } from 'rxjs/internal/operators/mergeMap';
 import { map } from 'rxjs/operators';
 
 
@@ -13,12 +12,13 @@ import { map } from 'rxjs/operators';
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.scss']
 })
-export class DetailsComponent implements OnInit {
+export class DetailsComponent implements OnInit, OnDestroy {
   @Input() user: User;
   user$: Observable<User>;
   @Output() public loadUser = new EventEmitter();
 
   deletUserSubScr: Subscription;
+  resentActivationMailSubScr: Subscription;
   constructor(private userService: UserService,
     public modal: NgbActiveModal,
     private teacherService: TeacherService,) { }
@@ -58,11 +58,38 @@ export class DetailsComponent implements OnInit {
 
     }
 
+    resetActivationMail(){
+
+      Notiflix.Block.Merge({svgSize:'20px',});
+      Notiflix.Block.Dots(`.resent-mail`);
+
+      Notiflix.Confirm.Show('Delete?', "Are you sure you want to delete?", 'Yes', 'No', () => {
+        this.resentActivationMailSubScr = this.userService.resentActivationMail(this.user)
+        .subscribe(res=>{
+          Notiflix.Block.Remove(`.resent-mail`);
+          Notiflix.Notify.Success(`successfully resnt activation mail`);
+        }, error=>{
+          Notiflix.Block.Remove(`.resent-mail`);
+          Notiflix.Notify.Failure(`Sorry unexpected error occur`);
+        });
+
+      }, () => {
+        Notiflix.Block.Remove(`.resent-mail`);
+      } )
+
+
+    }
+
   ngOnInit(): void {
     this.user$ = this.userService.getUser(`${this.user.id}`, `admin/${this.user.role_url}`).pipe(map(res=>{
       this.user.teacher_auto_approval_count = res?.teacher_auto_approval_count;
       return res;
     }));
+  }
+
+  ngOnDestroy(){
+    this.resentActivationMailSubScr && this.resentActivationMailSubScr.unsubscribe()
+    this.deletUserSubScr && this.deletUserSubScr.unsubscribe()
   }
 
 }

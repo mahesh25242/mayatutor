@@ -76,6 +76,9 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
                 $router->post('delete','UsersController@delete');
             });
 
+
+
+
         });
 
 
@@ -127,6 +130,8 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
                     $router->post('/','CourseController@listTeacherCourses');
                 });
             });
+
+            $router->post('resentActivationMail','UsersController@resentActivationMail');
 
         });
 

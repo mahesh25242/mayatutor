@@ -119,12 +119,32 @@ class UsersController extends Controller
 
 
         try{
-            Mail::to($toEMail)->send(new ActivationMail($user));
+            Mail::to($toEMail)->send(new ActivationMail($user,  $request->header("From-Domain")));
         }catch (\Swift_TransportException $e) {
           //  echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
 
         return response(['data' => $data, 'message' => 'Account created successfully!', 'status' => true]);
+    }
+
+    public function resentActivationMail(Request $request){
+        $user = User::find($request->input("id", 0));
+        $toEMail = $user->email;
+        if(env('APP_ENV') == 'local'){
+            $toEMail = env('DEVELOPER_MAIL');
+        }
+        $userActivationKey = new UserActivationKey;
+        $userActivationKey->key = uniqid($user->id);
+        $userActivationKey->user_id = $user->id;
+        $userActivationKey->save();
+
+
+        try{
+            Mail::to($toEMail)->send(new ActivationMail($user,  $request->header("From-Domain")));
+        }catch (\Swift_TransportException $e) {
+          //  echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
+        return response([ 'message' => 'Successfully sent the mail!', 'status' => true]);
     }
 
     public function authUser(Request $request){

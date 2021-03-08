@@ -206,5 +206,9 @@ export class UserService {
     return this.http.post<any>(`/activateUser`, postData);
   }
 
+  resentActivationMail(postData: any = null){
+    return this.http.post<any>(`/resentActivationMail`, postData);
+  }
+
 
 }

@@ -2,13 +2,11 @@ import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/cor
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ReCaptchaV3Service } from 'ngx-captcha';
-import { environment } from '../../../environments/environment';
 import { UserService } from '../../lib/services';
-import { empty, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import Notiflix from "notiflix";
-import { mergeMap, map, take, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import {faFacebook, faWhatsapp, faLinkedin, faTelegram } from '@fortawesome/free-brands-svg-icons';
+import {faFacebook } from '@fortawesome/free-brands-svg-icons';
 
 @Component({
   selector: 'app-forgot-password',

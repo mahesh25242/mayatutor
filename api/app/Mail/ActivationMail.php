@@ -10,15 +10,17 @@ class ActivationMail extends Mailable
      * @return $this
      */
     public $user;
-    public function __construct(User $user)
+    public $siteAddress;
+    public function __construct(User $user, $siteAddress= null)
     {
         $this->user = $user;
+        $this->siteAddress = $siteAddress;
     }
 
 
 
     public function build()
     {
-        return $this->view('email/activationMail', ["user" => $this->user]);
+        return $this->view('email/activationMail', ["user" => $this->user, "siteAddress" => $this->siteAddress]);
     }
 }

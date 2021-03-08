@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BehaviorSubject, empty, Observable, of, Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
 import { User, UserWithPagination } from 'src/app/lib/interfaces';
 import { UserService } from 'src/app/lib/services';
