@@ -1,6 +1,6 @@
-<div [formGroup]="teacherInfoFormGroup">
-  <div class="form-group">
-    <label for="subject">Subject</label>
+<div class="row" [formGroup]="teacherInfoFormGroup">
+  <div class="form-group col-md-4 col-lg-4">
+    <h5 class="mb-4" for="subject">Subject</h5>
     <ng-select [items]="(subjects$ | async)"
            [addTag]="addTagFn"
            [hideSelected]="true"
@@ -13,8 +13,8 @@
       </div>
   </div>
 
-  <div class="form-group">
-    <label for="expieriance">Expieriance</label>
+  <div class="form-group col-md-4 col-lg-4">
+    <h5 class="mb-4" for="expieriance">Expieriance </h5>
     <input type="text" class="form-control" id="expieriance"
     [ngClass]="{'is-invalid': (f.expieriance.errors && f.expieriance.errors.error) }"
      placeholder="Expieriance" formControlName="expieriance" >
@@ -23,8 +23,8 @@
       </div>
   </div>
 
-  <div class="form-group">
-    <label for="subject">Education</label>
+  <div class="form-group col-md-4 col-lg-4">
+    <h5 class="mb-4" for="subject">Education</h5>
     <ng-select [items]="(educations$ | async)"
            [addTag]="addTagFn"
            [hideSelected]="true"
@@ -38,7 +38,7 @@
   </div>
 
 
-  <div class="form-group">
+  <div class="form-group col-md-4 col-lg-4">
     <label for="time">Time</label>
     <ng-select [items]="['Full Time', 'Part Time']"
         formControlName="time">
@@ -48,7 +48,7 @@
       </div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group col-md-4 col-lg-4">
     <label for="fees">Fees</label>
     <input type="text" class="form-control" id="fees"
     [ngClass]="{'is-invalid': (f.fees.errors && f.fees.errors.error) }"
@@ -58,7 +58,7 @@
       </div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group col-md-4 col-lg-4">
     <label for="other">Other</label>
     <textarea  class="form-control" id="other"
     [ngClass]="{'is-invalid': (f.other.errors && f.other.errors.error) }"

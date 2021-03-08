@@ -1,6 +1,7 @@
 <div [formGroup]="paymentFormGroup">
-  <h3>Payment Method</h3>
-  <div class="form-group">
+  <h3 class="mb-3">Payment Method</h3>
+  <div class="row">
+  <div class="form-group col-md-4 col-lg-4">
     <label for="account_name">Account Name</label>
     <input type="text" class="form-control" id="account_name"
     [ngClass]="{'is-invalid': (f.account_name.errors && f.account_name.errors.error) }"
@@ -10,7 +11,7 @@
       </div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group col-md-4 col-lg-4">
     <label for="account_number">Account Number</label>
     <input type="text" class="form-control" id="account_number"
     [ngClass]="{'is-invalid': (f.account_number.errors && f.account_number.errors.error) }"
@@ -21,7 +22,7 @@
   </div>
 
 
-  <div class="form-group">
+  <div class="form-group col-md-4 col-lg-4">
     <label for="ifsc_code">IFSC Code</label>
     <input type="text" class="form-control" id="ifsc_code"
     [ngClass]="{'is-invalid': (f.ifsc_code.errors && f.ifsc_code.errors.error) }"
@@ -31,7 +32,7 @@
       </div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group col-md-4 col-lg-4">
     <label for="bank_name">Bank Name</label>
     <input type="text" class="form-control" id="bank_name"
     [ngClass]="{'is-invalid': (f.bank_name.errors && f.bank_name.errors.error) }"
@@ -40,18 +41,17 @@
         {{f.bank_name.errors.error}}
       </div>
   </div>
-
-
-  <img [src]="f.qr_code1.value" class="avatar-img img-thumbnail" />
-  <button type="button" (click)="fileInput.click()" class="btn btn-primary qr_code1-up-btn">
-    <span>Change QR Code</span>
-    <input #fileInput type="file" (change)="onFileInput($event.target.files, f.qr_code1, 'qr_code1')" accept="image/*" style="display:none;" />
-  </button>
-
-  <img [src]="f.qr_code2.value" class="avatar-img img-thumbnail" />
-  <button type="button" (click)="fileInput.click()" class="btn btn-primary qr_code2-up-btn">
-    <span>Change QR Code</span>
-    <input #fileInput type="file" (change)="onFileInput($event.target.files, f.qr_code2, 'qr_code2')" accept="image/*" style="display:none;" />
-  </button>
+  <div class="col-md-4 col-lg-4"> <img [src]="f.qr_code1.value" class="avatar-img img-thumbnail" />
+    <button type="button" (click)="fileInput.click()" class="btn btn-primary qr_code1-up-btn">
+      <span>Change QR Code</span>
+      <input #fileInput type="file" (change)="onFileInput($event.target.files, f.qr_code1, 'qr_code1')" accept="image/*" style="display:none;" />
+    </button></div>
+    <div class="col-md-4 col-lg-4"><img [src]="f.qr_code2.value" class="avatar-img img-thumbnail" />
+      <button type="button" (click)="fileInput.click()" class="btn btn-primary qr_code2-up-btn">
+        <span>Change QR Code</span>
+        <input #fileInput type="file" (change)="onFileInput($event.target.files, f.qr_code2, 'qr_code2')" accept="image/*" style="display:none;" />
+      </button>
+    </div>
+</div>
 
 </div>

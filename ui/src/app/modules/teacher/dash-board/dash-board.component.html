@@ -1,19 +1,28 @@
-<div class="container">
+
 <div class="" *ngIf="(user$ | async) as user">
 <app-bread-crumbs [hide]="true"></app-bread-crumbs>
 
 <app-change-banner *ngIf="isDashBoard"></app-change-banner>
-<div class="alert alert-danger" *ngIf="isDashBoard && (!user.current_user_plan || user.current_user_plan?.remaining_days < 10)">
-  <h3>Your {{user.current_user_plan.plan.name}} Remaining {{ (user.current_user_plan) ?  user.current_user_plan.remaining_days : '0'}} Days</h3>
-  <p>Make a Payment soon, Avoid account blocking</p>
-  <a routerLink="plans" class="btn btn-primary">View Plans</a>
+<div class="alert alert-danger no-radius" *ngIf="isDashBoard && (!user.current_user_plan || user.current_user_plan?.remaining_days < 10)">
+  <div class="container">
+    <div class="d-flex">
+      <div class="flex-1">
+        <h2>Your Free trail Remaining 20 days</h2>
+        <h3>Your {{user.current_user_plan.plan.name}} Remaining {{ (user.current_user_plan) ?  user.current_user_plan.remaining_days : '0'}} Days</h3>
+        <p>Make a Payment soon, Avoid account blocking</p>
+      </div>
+      <div class="align-self-center"><a routerLink="plans" class="btn btn-primary text-nowrap">View Plans</a></div>
+    </div>
+  </div>
 </div>
-
+<div class="container">
 <div class="row pt-5">
   <div class="col-md-6 col-lg-6">
 <div class="row">
   <div class="col-md-4 col-lg-4">
-    <img [src]="user.avatar" alt="avatar" class="img-thumbnail">
+    <figure>
+      <img [src]="user.avatar" alt="avatar" width="230" class="img-thumbnail">
+    </figure>
   </div>
   <div class="col-md-8 col-lg-8">
 <h4 class="text-capitalize">  {{ user.fname }} {{ user.lname }} </h4>
@@ -124,6 +133,6 @@
         </ngb-tab>
       </ngb-tabset>
     </ng-container>
-
   </div>
-</div>
+  </div>
+

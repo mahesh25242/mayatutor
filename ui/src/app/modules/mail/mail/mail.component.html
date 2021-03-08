@@ -1,10 +1,15 @@
-<a routerLink="compose" class="btn btn-primary" routerLinkActive="active">Compose</a>
-<a routerLink="inbox" class="btn btn-primary" routerLinkActive="active">Inbox
+<div class="container-fluid pt-4">
+  <h3 class="mb-3">Message</h3>
+  <div class="pb-4">
+<a routerLink="compose" class="btn btn-primary mr-2" routerLinkActive="active">Compose</a>
+<a routerLink="inbox" class="btn btn-outline-primary mr-2" routerLinkActive="active">Inbox
   <ng-container *ngIf="(this.unreadMsgCount$ | async) as unreadMsgCount">
     <span *ngIf="unreadMsgCount && unreadMsgCount.msg_count">
      ( {{unreadMsgCount.msg_count}} )
     </span>
   </ng-container>
 </a>
-<a routerLink="sent-item" class="btn btn-primary" routerLinkActive="active">Sent Item</a>
+<a routerLink="sent-item" class="btn btn-outline-secondary" routerLinkActive="active">Sent Item</a>
+</div>
 <router-outlet></router-outlet>
+</div>

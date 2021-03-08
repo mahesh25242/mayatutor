@@ -16,7 +16,9 @@
           <small id="courseNameHelp" class="form-text text-muted">make sure spelling correct</small>
         </div>
 
-        <div class="form-group">
+        <div class="row">
+         
+        <div class="form-group col-md-6 col-lg-6">
           <label for="tag_name">Tag</label>
           <ng-select [items]="tags"
               bindLabel="tag_name"
@@ -33,7 +35,7 @@
               </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group col-md-6 col-lg-6">
           <label for="price">Price</label>
           <input type="number" class="form-control" id="price"
           placeholder="Price" formControlName="price"
@@ -43,7 +45,7 @@
           </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group col-md-6 col-lg-6">
           <label for="demo_video_url">Course Demo Video URL</label>
           <input type="text" class="form-control" id="demo_video_url"
           placeholder="Course Demo Video URL" formControlName="demo_video_url"
@@ -53,15 +55,17 @@
           </div>
         </div>
 
-        <div class="form-group">
-          <label for="image">Upload Image</label>
-          <input type="file" class="form-control" id="image"
+        <div class="form-group col-md-6 col-lg-6">
+          <label class="d-block" for="image">Upload Image</label>
+          <input type="file"  id="image"
             (change)="onFileInput($event.target.files)" accept="image/*"
             [ngClass]="{'is-invalid': (f.image.errors && f.image.errors.error) }">
             <div *ngIf="f.image.errors && f.image.errors.error" class="invalid-feedback">
               {{f.image.errors.error}}
             </div>
         </div>
+        </div>
+
 
         <div class="form-group">
           <label for="description">Description</label>
@@ -106,9 +110,9 @@
 
 
     </div>
-    <div footer>
+    <div footer class="w-100">
       <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
-      <button type="submit" class="btn btn-primary"  >
+      <button type="submit" class="btn btn-primary float-right"  >
           Save
       </button>
     </div>

@@ -1,25 +1,29 @@
-<section *ngIf="(user$ | async) as user">
-  <div class="pt-3 pb-3">
-    <div class=" mb-2 mr-sm-2">
-      <input *ngIf="!shareOnly" class="form-control" type="text" placeholder="Readonly input here..."
-       readonly [value]="custmUrl">
-
-    <h5>Share website to</h5> 
-     <share-button button="facebook" [size]="-1"
-      [icon]="faFacebook" [url]="custmUrl"
-      [title]="user.fname+' '+user.lname"
-      [description]="'as'"
-      [image]="user.avatar"
-      [tags]="'asasas'" placement="top" ngbTooltip="share in facebook"></share-button>
-     <share-button button="linkedin" [icon]="faLinkedin" [url]="custmUrl"
-     placement="top" ngbTooltip="share in linkedin"></share-button>
-     <share-button button="whatsapp" [icon]="faWhatsapp" [url]="custmUrl"
-     placement="top" ngbTooltip="share in whatsapp"></share-button>
-     <share-button button="telegram" [icon]="faTelegram" [url]="custmUrl"
-     placement="top" ngbTooltip="share in telegram"></share-button>
-     <share-button button="copy" [icon]="faCopy" [url]="custmUrl"
-     placement="top" ngbTooltip="copy to clipboard"></share-button>
-
+<section class="blueContainer mb-5 p-4" *ngIf="(user$ | async) as user">
+  <div class="container">
+    <div class="row">
+     <div class="col-md-6 col-lg-6">
+        <h6>Copy website URL</h6> 
+        <input *ngIf="!shareOnly" class="form-control" type="text" placeholder="Readonly input here..."
+         readonly [value]="custmUrl">
+        </div>
+        <div class="col-md-6 col-lg-6">
+      <h6>Share website to</h6> 
+       <share-button button="facebook" [size]="-1"
+        [icon]="faFacebook" [url]="custmUrl"
+        [title]="user.fname+' '+user.lname"
+        [description]="'as'"
+        [image]="user.avatar"
+        [tags]="'asasas'" placement="top" ngbTooltip="share in facebook"></share-button>
+       <share-button button="linkedin" [icon]="faLinkedin" [url]="custmUrl"
+       placement="top" ngbTooltip="share in linkedin"></share-button>
+       <share-button button="whatsapp" [icon]="faWhatsapp" [url]="custmUrl"
+       placement="top" ngbTooltip="share in whatsapp"></share-button>
+       <share-button button="telegram" [icon]="faTelegram" [url]="custmUrl"
+       placement="top" ngbTooltip="share in telegram"></share-button>
+       <share-button button="copy" [icon]="faCopy" [url]="custmUrl"
+       placement="top" ngbTooltip="copy to clipboard"></share-button>  
+    
+      </div>
     </div>
   </div>
 </section>
