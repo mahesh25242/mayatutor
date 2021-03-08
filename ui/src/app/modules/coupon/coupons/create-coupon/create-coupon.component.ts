@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { CouponService } from '../../services';
 import Notiflix from "notiflix";
 import { mergeMap } from 'rxjs/operators';
-import { faCalendar } from '@fortawesome/free-solid-svg-icons';
+import { faCalendar, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDateINParserFormatter } from '../../../../lib/providers/ngb-date-in-parser-formatter';
 import { DatePipe } from '@angular/common';
@@ -19,6 +19,7 @@ import { Coupon } from '../../interfaces';
 })
 export class CreateCouponComponent implements OnInit, OnDestroy {
   faCalendar = faCalendar;
+  faAngleLeft = faAngleLeft;
   createCouponFrm: FormGroup;
   saveCouponSubScr: Subscription;
   constructor(private formBuilder: FormBuilder,
