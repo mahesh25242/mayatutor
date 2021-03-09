@@ -5,8 +5,8 @@ import Notiflix from "notiflix";
 import { mergeMap } from 'rxjs/operators';
 
 @Component({
-  //selector: 'app-payment-method',
-  selector: '[formGroup] app-payment-method,[formGroupName] app-payment-method',
+  selector: 'app-payment-method',
+  //selector: '[formGroup] app-payment-method,[formGroupName] app-payment-method',
   templateUrl: './payment-method.component.html',
   styleUrls: ['./payment-method.component.scss']
 })

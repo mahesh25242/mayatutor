@@ -25,6 +25,7 @@ class UserResource extends JsonResource
             $this->mergeWhen(Auth::check(), [
                 'email' => $this->email,
                 'phone' => $this->phone,
+                'teacher_payment_info' => $this->teacherPaymentInfo
             ]),
             'pin' => $this->pin,
             'address' => $this->address,

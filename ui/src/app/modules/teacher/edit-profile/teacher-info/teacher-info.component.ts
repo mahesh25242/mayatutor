@@ -5,8 +5,8 @@ import { Subject as TeachSubject, Education } from 'src/app/lib/interfaces';
 import { Observable } from 'rxjs';
 
 @Component({
-  //selector: 'app-payment-method',
-  selector: '[formGroup] app-teacher-info,[formGroupName] app-teacher-info',
+  selector: 'app-teacher-info',
+  //selector: '[formGroup] app-teacher-info,[formGroupName] app-teacher-info',
   templateUrl: './teacher-info.component.html',
   styleUrls: ['./teacher-info.component.scss']
 })

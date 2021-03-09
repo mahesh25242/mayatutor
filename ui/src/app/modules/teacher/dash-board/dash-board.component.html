@@ -60,7 +60,7 @@
               placement="top"
               ngbTooltip="Only logged user can contact teacher">
                 Message
-                <fa-icon [icon]="faLock" *ngIf="!user.email"></fa-icon>
+                <fa-icon [icon]="faLock" *ngIf="!user.email && !user.phone"></fa-icon>
               </button>
             </app-login-link>
 
@@ -74,9 +74,19 @@
               placement="top"
               ngbTooltip="Only logged user can contact teacher">
               <fa-icon [icon]="faWhatsapp" ></fa-icon> Whats app
-                <fa-icon [icon]="faLock" *ngIf="!user.email"></fa-icon>
+                <fa-icon [icon]="faLock" *ngIf="!user.email && !user.phone"></fa-icon>
               </button>
             </app-login-link>
+
+            <app-login-link *ngIf="!user.phone">
+              <button class="btn btn-primary ml-2"
+              placement="top"
+              ngbTooltip="Only logged user can contact teacher">
+                Payment
+                <fa-icon [icon]="faLock" *ngIf="!user.email && !user.phone"></fa-icon>
+              </button>
+            </app-login-link>
+
 
 
 
@@ -91,6 +101,24 @@
 
 
     </div>
+    <div *ngIf="user.email && user.phone && user?.teacher_payment_info">
+      <div class="row">
+        <div class="col">
+            <ul>
+              <li>Account Name: {{ user?.teacher_payment_info?.account_name }}</li>
+              <li>Bank Name: {{ user?.teacher_payment_info?.bank_name }}</li>
+              <li>Account Number: {{ user?.teacher_payment_info?.account_number }}</li>
+              <li>IFSC Code: {{ user?.teacher_payment_info?.ifsc_code }}</li>
+            </ul>
+        </div>
+        <div class="col" *ngIf="user?.teacher_payment_info?.qr_code1">
+          <img [src]="user?.teacher_payment_info?.qr_code1" />
+        </div>
+        <div class="col" *ngIf="user?.teacher_payment_info?.qr_code1">
+          <img [src]="user?.teacher_payment_info?.qr_code1" />
+        </div>
+      </div>
+  </div>
     <a href="javascript:{}" routerLink="edit-profile" class="btn btn-outline-primary float-right mt-5" *ngIf="isDashBoard"><fa-icon [icon]="faEdit" ></fa-icon> Edit</a>
 </div>
 </div>
