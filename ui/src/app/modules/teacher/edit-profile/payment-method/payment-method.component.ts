@@ -39,7 +39,7 @@ export class PaymentMethodComponent implements OnInit {
     this.teacherService.updatePaymentQRCode(formData).pipe(mergeMap(res=>{
       return this.userService.authUser();
     })).subscribe(res=>{
-      Notiflix.Notify.Success(`Successfully changed qrcode `);
+      Notiflix.Notify.Success(`Successfully changed qrcode`);
       Notiflix.Block.Remove(`.${flName}-up-btn`);
     }, error=>{
       Notiflix.Notify.Failure(`Sorry qr code can't updated `);

@@ -10,6 +10,7 @@ use Laravel\Lumen\Auth\Authorizable;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
 class CourseModule extends Model implements AuthenticatableContract, AuthorizableContract
 {
@@ -60,11 +61,15 @@ class CourseModule extends Model implements AuthenticatableContract, Authorizabl
             case 'vimeo':
                 if(preg_match("/(https?:\/\/)?(www\.)?(player\.)?vimeo\.com\/([a-z]*\/)*([0-9]{6,11})[?]?.*/", $this->video_url, $match)) {
                     if(isset($match) && isset($match[5])){
-                        $data = file_get_contents("http://vimeo.com/api/v2/video/{$match[5]}.json");
-                        if(isset( $data) &&  $data){
-                            $data = json_decode($data, true);
-                            $url = (isset($data[0]) && isset($data[0]["thumbnail_medium"])) ? $data[0]["thumbnail_medium"] : '';
+                        $response = Http::get("http://vimeo.com/api/v2/video/{$match[5]}.json");
+                        if($response->successful()){
+                            $data = file_get_contents("http://vimeo.com/api/v2/video/{$match[5]}.json");
+                            if(isset( $data) &&  $data){
+                                $data = json_decode($data, true);
+                                $url = (isset($data[0]) && isset($data[0]["thumbnail_medium"])) ? $data[0]["thumbnail_medium"] : '';
+                            }
                         }
+
                     }
                 }
 

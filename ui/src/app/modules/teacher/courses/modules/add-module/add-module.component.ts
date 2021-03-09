@@ -70,6 +70,9 @@ myInputVariable: ElementRef;
         Notiflix.Notify.Success(`Successfully saved ${this.f.name.value} `);
 
         this.addModuleFrm.reset();
+        this.addModuleFrm.patchValue({
+          video_type: 'youtube'
+        });
 
       Notiflix.Block.Remove('app-add-module form');
     }, error=>{

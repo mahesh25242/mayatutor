@@ -105,6 +105,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return $this->created_at->diffForHumans();
     }
 
+    public function getPhoneAttribute($phone)
+    {
+        return ($this->country && $this->country->phonecode) ? '+'.$this->country->phonecode.$phone : $phone;
+    }
+
 
     public function findForPassport($username)
     {
