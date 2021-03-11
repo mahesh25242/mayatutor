@@ -5,8 +5,7 @@ import { StudentAuthGuard, NegateAuthGuard } from '../../lib/guard';
 import { RegisterComponent } from 'src/app/shared-module/components/register/register.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { StudentHomeComponent } from './student-home.component';
-import { CourseComponent } from './course/course.component';
-import { CourseResolver } from './course/course-resolver';
+
 import { LaunchModuleComponent } from './launch-module/launch-module.component';
 import { LaunchModuleResolver } from './launch-module/launch-module.resolver';
 
@@ -26,20 +25,12 @@ const routes: Routes = [
         component: EditProfileComponent,
       },
       {
-        path: 'course/:id',
-        component: CourseComponent,
-        resolve:{
-          course: CourseResolver
-        },
+        path: 'course',
+        loadChildren: () => import('./student-shared/student-shared.module').then(m => m.StudentSharedModule)
       },
-      {
-        path:'course/:id/launch/:moduleId',
-        component: LaunchModuleComponent,
-        canActivate: [StudentAuthGuard],
-        resolve:{
-          module: LaunchModuleResolver
-        }
-      },
+
+
+
     ]
   },
 

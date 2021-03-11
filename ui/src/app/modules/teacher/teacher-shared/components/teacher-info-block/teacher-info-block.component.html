@@ -5,9 +5,30 @@
         <img [src]="teacher.avatar" [alt]="teacher.fname">
         New Messages 25
         {{ teacher.fname }} {{ teacher.lname}}
-        Status: <span class="text-success">PAID</span>
-        <button class="btn btn-primary">Mobile</button>
-        <button class="btn btn-primary">Message</button>
+        <ng-container *ngIf="user$ | async else login">
+          Status: <span class="text-success">PAID</span>
+          <button class="btn btn-primary">Whats app</button>
+          <button class="btn btn-primary">Message</button>
+        </ng-container>
+        <ng-template #login>
+          <app-login-link >
+            <button class="btn btn-primary ml-2"
+            placement="top"
+            ngbTooltip="Only logged user can contact teacher">
+              <fa-icon [icon]="faWhatsapp" ></fa-icon> Whats app
+              <fa-icon [icon]="faLock" ></fa-icon>
+            </button>
+
+            <button class="btn btn-primary ml-2"
+            placement="top"
+            ngbTooltip="Only logged user can contact teacher">
+              Message
+              <fa-icon [icon]="faLock" ></fa-icon>
+            </button>
+
+          </app-login-link>
+        </ng-template>
+
       </ng-container>
 
 

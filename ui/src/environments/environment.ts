@@ -9,7 +9,7 @@ export const environment = {
   baseUrl: 'http://localhost/mayatutor/api/public/v1',
   recaptchaKey: '6Lfpw3AaAAAAANItvyYpnSxgK9IPE__AWJ7nAOCO',
   lumenSecret: 'gGns8qiSpmPTBhfWJfZfle2pQqFJB439zbgrHdqw',
-  siteAddress: 'http://localhost/mayatutor'
+  siteAddress: 'http://localhost.com/mayatutor'
 };
 
 /*

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Cookie;
 use Image;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Resources\CourseCollection;
+use App\Http\Resources\CourseResource;
 
 class CourseController extends Controller
 {
@@ -126,7 +127,7 @@ class CourseController extends Controller
         $course = \App\Course::with(["courseTag", "courseModule", "user" => function($query){
             $query->withCount(["teacherAutoApproval"]);
         }, "latestCourseApprovalRequest"])->find($courseId);
-        return response($course);
+        return response(new CourseResource($course));
     }
 
     public function deleteCourse(Request $request){

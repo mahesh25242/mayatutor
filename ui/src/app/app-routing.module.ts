@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
+
 import { HomeComponent } from './home/home.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
@@ -9,6 +10,7 @@ import { DashBoardComponent } from './modules/teacher/dash-board/dash-board.comp
 import { DashBoardResolver } from './modules/teacher/dash-board/dash-board-resolver';
 import { SetNewPasswordComponent } from './set-new-password/set-new-password.component';
 import { UserActivationComponent } from './user-activation/user-activation.component';
+
 
 const routes: Routes = [
   {
@@ -54,6 +56,12 @@ const routes: Routes = [
       user: DashBoardResolver
     }
   },
+  {
+    path: ':teacher/course',
+    loadChildren: () => import('./modules/student/student-shared/student-shared.module').then(m => m.StudentSharedModule)
+
+
+  },
   { path: '**', component: PageNotFoundComponent }
 ];
 
@@ -62,7 +70,8 @@ const routes: Routes = [
     {
     scrollPositionRestoration: 'top',
     preloadingStrategy: PreloadAllModules,
-    relativeLinkResolution: 'legacy'
+    relativeLinkResolution: 'legacy',
+    enableTracing: true
 })],
   exports: [RouterModule]
 })

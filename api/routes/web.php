@@ -44,6 +44,8 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
         $router->group(['prefix' => 'teacherCourses'], function () use ($router) {
             $router->post('/','CourseController@listTeacherCourses');
         });
+
+        $router->get('course/{courseId}','CourseController@course');
     });
 
 
@@ -117,7 +119,7 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
                     $router->post('createCourse','CourseController@createCourse');
                     $router->post('deleteCourse','CourseController@deleteCourse');
 
-                    $router->get('{courseId}','CourseController@course');
+
 
                     $router->group(['prefix' => '{courseId}/module'], function () use ($router) {
                         $router->post('modules','CourseModuleController@listModules');

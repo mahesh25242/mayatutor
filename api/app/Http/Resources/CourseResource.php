@@ -2,6 +2,7 @@
 namespace App\Http\Resources;
 
 use App\Http\Resources\UserResource;
+use App\Http\Resources\CourseModuleResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,9 +29,15 @@ class CourseResource extends JsonResource
             'live_class' => $this->live_class,
             'name' => $this->name,
 
-            $this->mergeWhen(Auth::check(), [
+            $this->mergeWhen(Auth::check() &&
+            ((Auth::user()->isStudent() &&
+            Auth::user()->studentCourse()->where("course_id", $this->id)->exists())
+            || !Auth::user()->isStudent())
+            , [
                 'live_class_url' => $this->live_class_url,
             ]),
+            'course_module' => CourseModuleResource::collection($this->whenLoaded('courseModule')),
+            'course_tag' => $this->courseTag,
             'news' => $this->news,
             'user' => $this->news,
             'price' => $this->price,

@@ -10,12 +10,13 @@
     <app-rating [rating]="course.user.rating" [readonly]="true"></app-rating>
     <p class="card-text">{{course.description}}</p>
     <div class="d-flex">
-      
+
       <h6 class="mb-0 mt-2" *ngIf="course.price">Fees: {{ course.price }}</h6>
-    <a href="javascript:{}" class="btn btn-primary btn-sm ml-auto">Detail</a>
-    
+    <a href="javascript:{}" class="btn btn-primary btn-sm ml-auto"
+    [routerLink]="['course', course.id]" routerLinkActive="router-link-active" >Detail</a>
+
   </div>
-    
+
   </div>
 </div>
 </div>

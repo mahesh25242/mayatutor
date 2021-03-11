@@ -1,0 +1,26 @@
+<div class="card">
+  <img [src]="course_module.thumb_image" *ngIf="course_module.thumb_image" class="card-img-top" [alt]="course_module.name">
+  <div class="card-body">
+    <h3 class="card-title" [innerHTML]="course_module.name"></h3>
+    <ng-container *ngIf="(user$ | async) else login">
+      <a [routerLink]="'launch/'+course_module.id" class="btn btn-primary" *ngIf="course_module.id else askAssign">Continue</a>
+    </ng-container>
+
+    <ng-template #askAssign>
+      <div class="alert alert-info">This course is not assigned to you please contact teacher for assign this course</div>
+    </ng-template>
+    <ng-template #login>
+      <app-login-link >
+        <button class="btn btn-primary ml-2"
+        placement="top"
+        ngbTooltip="Only logged user can start contnue">
+          Continue
+          <fa-icon [icon]="faLock" ></fa-icon>
+        </button>
+
+      </app-login-link>
+    </ng-template>
+
+
+  </div>
+</div>

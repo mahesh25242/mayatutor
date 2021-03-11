@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot  } from '@angular/router';
 import { empty, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { CourseService } from '../../../lib/services';
+import { CourseService } from '../../../../lib/services';
 
 @Injectable()
 export class CourseResolver implements Resolve<any> {
 
   constructor(
-    private courseService: CourseService) { }
+    private courseService: CourseService) {
+    }
 
   resolve(route: ActivatedRouteSnapshot): Observable<any> {
 
