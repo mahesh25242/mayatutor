@@ -7,6 +7,8 @@ import { TeacherInfoBlockComponent } from './components/teacher-info-block/teach
 import { TeacherFullInfoBlockComponent } from './components/teacher-full-info-block/teacher-full-info-block.component';
 import { SendMessageToTeacherComponent } from './components/send-message-to-teacher/send-message-to-teacher.component';
 import { ContactTeacherComponent } from './components/contact-teacher/contact-teacher.component';
+import { MailModule } from '../../mail/mail.module';
+
 @NgModule({
   declarations: [
   TeacherInfoBlockComponent,
@@ -17,7 +19,8 @@ import { ContactTeacherComponent } from './components/contact-teacher/contact-te
   imports: [
     CommonModule,
     PlayerModuleModule,
-    SharedModuleModule
+    SharedModuleModule,
+    MailModule
   ],
   exports:[
     TeacherInfoBlockComponent,

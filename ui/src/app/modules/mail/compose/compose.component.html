@@ -1,6 +1,6 @@
 <form [formGroup]="composeFrm" (ngSubmit)="sentMessage()">
 
-  <div class="form-group" *ngIf="!reply">
+  <div class="form-group" *ngIf="!reply && !toMessage">
     <label for="phone">To</label>
     <ng-select [items]="users$ | async"
            bindLabel="email"
@@ -35,7 +35,7 @@
     <label for="subject">Subject</label>
     <input type="text" class="form-control" id="subject"
     [ngClass]="{'is-invalid': (f.subject.errors && f.subject.errors.error) }"
-    formControlName="subject">
+    formControlName="subject" placeholder="Subject" autocomplete="subject" name="subject">
     <div *ngIf="f.subject.errors && f.subject.errors.error" class="invalid-feedback">
       {{f.subject.errors.error}}
     </div>
@@ -49,5 +49,9 @@
       {{f.message.errors.error}}
     </div>
   </div>
-  <button type="submit" class="btn btn-primary" *ngIf="!reply">Sent</button>
+  <button type="submit" class="btn btn-primary" *ngIf="!reply">
+    <ng-content select="[sent]"></ng-content>
+    {{ !toMessage ? 'Sent' : '' }}
+  </button>
+  <ng-content select="[cancel]"></ng-content>
 </form>

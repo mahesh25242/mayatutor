@@ -15,6 +15,7 @@ import { UserService } from 'src/app/lib/services';
 })
 export class ComposeComponent implements OnInit {
   @Input() reply:boolean;
+  @Input() toMessage:User;
   composeFrm:FormGroup;
   users$: Observable<UserWithPagination>;
   userInput$ = new Subject<string>();
@@ -36,7 +37,8 @@ export class ComposeComponent implements OnInit {
     this.mailService.send(postData).subscribe(res=>{
       Notiflix.Loading.Remove();
       Notiflix.Notify.Success(`successfully sent message`);
-      this.router.navigate(['../inbox'], {relativeTo: this.route});
+      if(!this.toMessage)
+        this.router.navigate(['../inbox'], {relativeTo: this.route});
     }, error=>{
       Notiflix.Loading.Remove();
       for(let result in this.composeFrm.controls){
@@ -75,10 +77,14 @@ export class ComposeComponent implements OnInit {
 
   ngOnInit(): void {
     this.composeFrm = this.formBuilder.group({
-      recipients: [null, [ Validators.required]],
+      recipients: [ null , [ Validators.required]],
       subject: [null, [ Validators.required]],
       message: [null, [ Validators.required]],
     });
+
+    if(this.toMessage){
+      this.composeFrm.controls.recipients.setValue([this.toMessage]);
+    }
 
     this.loadUsers();
   }

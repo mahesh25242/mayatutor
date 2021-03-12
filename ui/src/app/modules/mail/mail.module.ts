@@ -21,6 +21,8 @@ import { ReplyMailComponent } from './reply-mail/reply-mail.component';
   providers:[
     InboxResolver,
     ReadMailResolver
+  ], exports:[
+    ComposeComponent
   ]
 })
 export class MailModule { }

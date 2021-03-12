@@ -2,20 +2,13 @@
   <app-modal>
     <div header>Contact to <b class="text-primary text-capitalize">{{ user.fname }} {{ user.lname}}</b></div>
     <div  body>
-        <div class="form-group" *ngIf="!user.email">
-          <label for="email">Email address</label>
-          <input type="email" class="form-control" id="email" placeholder="Email">
-        </div>
-        <div class="form-group">
-          <h5 for="message">Message</h5>
-          <textarea class="form-control" id="message" placeholder="Message"></textarea>
-        </div>
+        <app-compose [toMessage]="user">
+            <span sent>Sent</span>
+            <button type="button" class="btn btn-outline-secondary mr-auto float-right"
+            (click)="modal.dismiss('cancel click')" cancel>Cancel</button>
+        </app-compose>
+
     </div>
-    <ng-container footer>
-      <button type="button" class="btn btn-outline-secondary mr-auto" (click)="modal.dismiss('cancel click')">Cancel</button>
-      <button type="submit" class="btn btn-primary"  >
-          Save
-      </button>
-    </ng-container>
+
   </app-modal>
 </form>
