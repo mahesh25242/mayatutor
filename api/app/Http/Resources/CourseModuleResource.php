@@ -28,11 +28,10 @@ class CourseModuleResource extends JsonResource
             'course' => new CourseResource($this->course),
 
             //'course' => CourseResource::collection($this->whenLoaded('course')),
-
             $this->mergeWhen(Auth::check() &&
-            ((Auth::user()->isStudent() &&
+            ((Auth::user()->isStudent()->exists() &&
             Auth::user()->studentCourse()->where("course_id", $this->course_id)->exists())
-            || !Auth::user()->isStudent())
+            || !Auth::user()->isStudent()->exists())
             , [
                 'id' => $this->id,
                 'thumb_image' => $this->thumb_image,

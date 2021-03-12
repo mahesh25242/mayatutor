@@ -7,8 +7,19 @@
         {{ teacher.fname }} {{ teacher.lname}}
         <ng-container *ngIf="user$ | async else login">
           Status: <span class="text-success">PAID</span>
-          <button class="btn btn-primary">Whats app</button>
-          <button class="btn btn-primary">Message</button>
+          <ng-container *ngIf="teacher.phone">
+            <a class="d-none d-sm-block btn btn-primary" target="_blank" [href]="'https://web.whatsapp.com/send?phone='+teacher.phone"> <fa-icon [icon]="faWhatsapp" ></fa-icon> Whats app</a>
+            <a class="d-block d-sm-none btn btn-primary" target="_blank" [href]="'https://api.whatsapp.com/send?phone='+teacher.phone"> <fa-icon [icon]="faWhatsapp" ></fa-icon> Whats app</a>
+          </ng-container>
+
+          <app-send-message-to-teacher
+            class="teacher-message-btn mr-3 mb-2"
+            *ngIf="teacher.email" [user]="teacher">
+              Message
+            </app-send-message-to-teacher>
+
+
+
         </ng-container>
         <ng-template #login>
           <app-login-link >

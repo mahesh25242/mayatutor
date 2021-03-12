@@ -7,6 +7,7 @@ import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 import { SharedModuleModule } from '../../shared-module/shared-module.module';
 import { PlayerModuleModule } from '../../shared-module/player-module.module';
 import { CouponModule } from '../coupon/coupon.module';
+import { TeacherSharedModule } from './teacher-shared/teacher-shared.module';
 
 import { TeacherRoutingModule } from './teacher-routing.module';
 import { TeacherHomeComponent } from './teacher-home.component';
@@ -27,7 +28,7 @@ import { PlansComponent } from './plans/plans.component';
 import { PlanPurchaseComponent } from './plan-purchase/plan-purchase.component';
 import { ListTeachersComponent } from './list-teachers/list-teachers.component';
 import {ListTeachersResolver} from './list-teachers/list-teachers-resolver';
-import { ContactTeacherComponent } from './dash-board/contact-teacher/contact-teacher.component';
+
 import { StudentsComponent } from './students/students.component';
 import { StudentsResolver } from './students/students-resolver';
 import { DetailsComponent } from './students/details/details.component';
@@ -53,7 +54,6 @@ import { AddPaymentComponent } from './students/student-payment/add-payment/add-
     PlansComponent,
     PlanPurchaseComponent,
     ListTeachersComponent,
-    ContactTeacherComponent,
     StudentsComponent,
     DetailsComponent,
     AddStudentComponent,
@@ -67,7 +67,8 @@ import { AddPaymentComponent } from './students/student-payment/add-payment/add-
     ShareButtonsModule,
     ShareIconsModule,
     PlayerModuleModule,
-    CouponModule
+    CouponModule,
+    TeacherSharedModule
   ],
   providers:[
     CoursesResolver,

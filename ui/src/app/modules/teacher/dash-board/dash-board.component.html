@@ -64,10 +64,11 @@
               </button>
             </app-login-link>
 
-            <button   class="btn btn-primary teacher-message-btn mr-3 mb-2"
-            (click)="contactTeacher(user)" *ngIf="user.email">
+            <app-send-message-to-teacher
+            class="teacher-message-btn mr-3 mb-2"
+            *ngIf="user.email" [user]="user">
               Message
-            </button>
+            </app-send-message-to-teacher>
 
             <app-login-link *ngIf="!user.phone">
               <button class="btn btn-primary ml-2"

@@ -6,7 +6,7 @@ import { faEdit, faLock,faTimes,faClock } from '@fortawesome/free-solid-svg-icon
 import { ActivatedRoute } from '@angular/router';
 import { mergeMap, tap } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ContactTeacherComponent } from './contact-teacher/contact-teacher.component';
+
 import { BreadCrumbsService } from 'src/app/shared-module/components/bread-crumbs/bread-crumbs.component';
 import {faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 @Component({
@@ -89,11 +89,6 @@ export class DashBoardComponent implements OnInit {
     }));
   }
 
-  contactTeacher(user: User){
-    const modalRef = this.modalService.open(ContactTeacherComponent, {
-      size: 'lg'
-    });
-    modalRef.componentInstance.user = user;
-  }
+
 
 }
