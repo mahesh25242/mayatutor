@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import {faUser,faClock } from '@fortawesome/free-solid-svg-icons';
 import { User, Course, CourseModule } from 'src/app/lib/interfaces';
 
@@ -12,8 +13,8 @@ export class ModuleLaunchComponent implements OnInit {
   @Input() courseModule: CourseModule;
 
   video: any = null;
-  pdfSrc: string =null;
-  constructor() { }
+  pdfSrc: any =null;
+  constructor(private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     this.video = {
@@ -25,7 +26,10 @@ export class ModuleLaunchComponent implements OnInit {
       ]
     };
     //this.courseModule.pdf = 'https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf';
-    this.pdfSrc =  this.courseModule.pdf
+    //this.pdfSrc =  this.courseModule.pdf;
+
+    this.pdfSrc = this.sanitizer.bypassSecurityTrustResourceUrl(this.courseModule.pdf);
+
   }
 
   onPdfError(error: any) {

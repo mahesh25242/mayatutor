@@ -35,7 +35,7 @@ class CourseModuleController extends Controller
             'name' => ['required', 'string'],
             'video_type' => ['required', 'string'],
             'video_url' => ['required_without:pdf', 'string'],
-            'pdf' => ['required_without:video_url', 'mimes:pdf'],
+            'pdf' => ['required_without:video_url'], //mimes:pdf
         ]);
 
 
@@ -45,13 +45,13 @@ class CourseModuleController extends Controller
 
 
 
-        $modulePdf = null;
-        if ($request->hasFile('pdf')) {
-            $status = true;
-            $modulePdf = sprintf("%s.%s",time(), $request->file('pdf')->extension());
-            $destinationPath = "assets/course/".$request->input("course_id", 0);
-            $request->file('pdf')->move($destinationPath, $modulePdf);
-        }
+        $modulePdf = $request->input("pdf", null);
+        // if ($request->hasFile('pdf')) {
+        //     $status = true;
+        //     $modulePdf = sprintf("%s.%s",time(), $request->file('pdf')->extension());
+        //     $destinationPath = "assets/course/".$request->input("course_id", 0);
+        //     $request->file('pdf')->move($destinationPath, $modulePdf);
+        // }
 
         $createUpdateArr = [
             "course_id" => $request->input("course_id", 0),

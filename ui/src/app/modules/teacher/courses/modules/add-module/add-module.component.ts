@@ -109,6 +109,7 @@ myInputVariable: ElementRef;
       id: this.module?.id,
       name: this.module?.name,
       pdf_file: this.module?.pdf,
+      pdf: this.module?.pdf,
       video_url: this.module?.video_url,
       video_type: (this.module?.video_type) ? this.module?.video_type: 'youtube'
     });

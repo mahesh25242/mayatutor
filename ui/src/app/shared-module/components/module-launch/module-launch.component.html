@@ -3,11 +3,16 @@
     <app-player [videoSources]="video"></app-player>
   </div>
   <div class="col pdf-container" *ngIf="pdfSrc">
-    <pdf-viewer [src]="pdfSrc"
+    <!-- <pdf-viewer [src]="pdfSrc"
         [render-text]="true"
         [fit-to-page]="true"
         [original-size]="true"
         (error)="onPdfError($event)"
-    ></pdf-viewer>
+    ></pdf-viewer> -->
+    <iframe frameborder="0" scrolling="no"
+    width="640" height="480"
+    [src]="pdfSrc">
+ </iframe>
+
   </div>
 </div>

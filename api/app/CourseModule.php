@@ -44,7 +44,10 @@ class CourseModule extends Model implements AuthenticatableContract, Authorizabl
 
     public function getPdfAttribute($pdf)
     {
-        return (($pdf) ? url("/assets/course/{$this->course_id}/{$pdf}") : '');
+        if ($pdf && !preg_match("~^(?:f|ht)tps?://~i", $pdf)) {
+            $pdf = url("/assets/course/{$this->course_id}/{$pdf}");
+        }
+        return $pdf;
     }
 
 

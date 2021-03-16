@@ -13,14 +13,16 @@
   </div>
 
   <div class="form-group col-md-6 col-lg-6">
-    <label class="d-block" for="pdf">PDF</label>
-    <input #pdfBrowse type="file" id="pdf"
+    <label class="d-block" for="pdf">External PDF Link</label>
+      <input type="text" id="pdf" placeholder="External PDF Link" formControlName="pdf"
+      [ngClass]="{'is-invalid': (f.pdf.errors && f.pdf.errors.error) }" class="form-control" />
+    <!-- <input #pdfBrowse type="file" id="pdf"
       (change)="onFileInput($event.target.files)" accept="application/pdf"
-      [ngClass]="{'is-invalid': (f.pdf.errors && f.pdf.errors.error) }">
+      [ngClass]="{'is-invalid': (f.pdf.errors && f.pdf.errors.error) }"> -->
       <div *ngIf="f.pdf.errors && f.pdf.errors.error" class="invalid-feedback">
         {{f.pdf.errors.error}}
       </div>
-      <a [href]="f.pdf_file.value" target="_blank" *ngIf="f.pdf_file.value">PDF</a>
+      <a [href]="f.pdf.value" target="_blank" *ngIf="f.pdf.value">PDF</a>
   </div>
 
   <div class="form-group col-md-6 col-lg-6">
