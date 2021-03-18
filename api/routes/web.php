@@ -135,6 +135,9 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
 
             $router->post('resentActivationMail','UsersController@resentActivationMail');
 
+            $router->get('course/{id}/module/{moduleId}/isLaunchable','CourseModuleController@isLaunchable');
+
+
         });
 
 

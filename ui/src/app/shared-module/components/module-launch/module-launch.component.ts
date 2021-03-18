@@ -28,7 +28,8 @@ export class ModuleLaunchComponent implements OnInit {
     //this.courseModule.pdf = 'https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf';
     //this.pdfSrc =  this.courseModule.pdf;
 
-    this.pdfSrc = this.sanitizer.bypassSecurityTrustResourceUrl(this.courseModule.pdf);
+    if(this.courseModule.pdf)
+      this.pdfSrc = this.sanitizer.bypassSecurityTrustResourceUrl(this.courseModule.pdf);
 
   }
 

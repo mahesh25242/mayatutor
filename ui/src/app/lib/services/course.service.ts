@@ -70,5 +70,7 @@ export class CourseService {
     return this.http.post(`/teacher/course/${courseId}/module/orderCourseModule`, postData);
   }
 
-
+  isLaunchable(courseId:number =0, moduleId:number = 0){
+    return this.http.get(`/course/${courseId}/module/${moduleId}/isLaunchable`);
+  }
 }

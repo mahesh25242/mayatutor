@@ -124,4 +124,17 @@ class CourseModuleController extends Controller
         return response($module);
 
     }
+
+    public function isLaunchable($id=0, $moduleId = 0){
+        $module = \App\CourseModule::whereHas("course", function($q){
+            $q->where(function($query) {
+                $query->orWhere("user_id", Auth::id())
+                ->orWhereHas("studentCourse", function($qry){
+                    $qry->where("user_id", Auth::id());
+                });
+            });
+
+        })->find($id);
+        return $module;
+    }
 }

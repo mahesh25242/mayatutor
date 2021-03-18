@@ -71,7 +71,7 @@ const routes: Routes = [
     scrollPositionRestoration: 'top',
     preloadingStrategy: PreloadAllModules,
     relativeLinkResolution: 'legacy',
-    enableTracing: true
+  //  enableTracing: true
 })],
   exports: [RouterModule]
 })

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { StudentAuthGuard } from 'src/app/lib/guard';
+import {LaunchModuleGuard } from 'src/app/lib/guard';
 import { LaunchModuleComponent } from '../launch-module/launch-module.component';
 import { LaunchModuleResolver } from '../launch-module/launch-module.resolver';
 import { CourseResolver } from './course/course-resolver';
@@ -18,7 +18,7 @@ const routes: Routes = [
   {
     path:':id/launch/:moduleId',
     component: LaunchModuleComponent,
-    canActivate: [StudentAuthGuard],
+    canActivate: [LaunchModuleGuard],
     resolve:{
       module: LaunchModuleResolver
     }
