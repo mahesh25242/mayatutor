@@ -8,7 +8,7 @@
     <div class="d-flex">
       <div class="flex-1">
         <h2>Your Free trail Remaining 20 days</h2>
-        <h3>Your {{user.current_user_plan.plan.name}} Remaining {{ (user.current_user_plan) ?  user.current_user_plan.remaining_days : '0'}} Days</h3>
+        <h3>Your {{user.current_user_plan?.plan?.name}} Remaining {{ (user.current_user_plan) ?  user.current_user_plan.remaining_days : '0'}} Days</h3>
         <p>Make a Payment soon, Avoid account blocking</p>
       </div>
       <div class="align-self-center"><a routerLink="plans" class="btn btn-primary text-nowrap">View Plans</a></div>

@@ -135,6 +135,13 @@ class CourseModuleController extends Controller
             });
 
         })->find($id);
-        return $module;
+
+        if($module){
+            return $module;
+        }else{
+            return response(['message' => 'Validation errors', 'status' => false], 422);
+        }
+
+
     }
 }

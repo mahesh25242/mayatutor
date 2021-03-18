@@ -3,8 +3,8 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Rout
 import { Observable, throwError } from 'rxjs';
 import { CourseService, SettingService } from '../services';
 import { map, take, catchError } from 'rxjs/operators';
-import { User } from '../interfaces';
-
+import { CourseModule, User } from '../interfaces';
+import Notiflix from "notiflix";
 
 @Injectable({
   providedIn: 'root'
@@ -18,15 +18,18 @@ export class LaunchModuleGuard implements CanActivate {
 //      console.log(next.params.moduleId)
       return this.courseService.isLaunchable(next.params.id, next.params.moduleId).pipe(
         take(1),
-        map((user: User) => {
+        map((module: CourseModule) => {
 
-          if (user) {
+          if (module) {
             return true;
           }
+          Notiflix.Notify.Failure('Sorry you cant access it');
+
           this.router.navigate([`/`]);
           return false;
         }),
         catchError(x => {
+          Notiflix.Notify.Failure('Sorry you cant access it');
           return throwError(x);
         })
       );
