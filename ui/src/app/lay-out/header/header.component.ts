@@ -6,6 +6,7 @@ import Notiflix from "notiflix";
 import * as _ from 'lodash';
 import { mergeMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import {faUser } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-header',
@@ -13,6 +14,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit, OnDestroy {
+  faUser = faUser;
   loggedSubScrioption: Subscription;
   signOutSubscription: Subscription;
   loggedUser$: Observable<User>;

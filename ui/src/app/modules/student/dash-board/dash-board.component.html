@@ -1,38 +1,67 @@
-<div class="card" *ngIf="(user$ | async) as user">
+<div class="container pt-3"  *ngIf="(user$ | async) as user">
   <app-bread-crumbs [hide]="true"></app-bread-crumbs>
-
-  <ng-container *ngIf="(studentCourses$ | async) as studentCourses">
-    <app-assigned-course-block *ngFor="let studentCourse of studentCourses" [studentCourse]="studentCourse"></app-assigned-course-block>
-  </ng-container>
-  <ng-container *ngIf="(courseStat$ | async) as courseStat">
-    <div *ngIf="courseStat">
-      <h3>Total Course: {{ courseStat?.course }}</h3>
-      <h3>Started: {{ courseStat?.startedCourse }}</h3>
-      <h3>Not Started: {{ courseStat?.notStartedCourse }}</h3>
-      <h3>Completed: {{ courseStat?.completedCourseCourse}}</h3>
+<div class="row">
+  <div class="col-md-6 col-lg-6">
+    <div class="row"> 
+    <ng-container *ngIf="(studentCourses$ | async) as studentCourses">
+      <app-assigned-course-block class="col-md-6 col-lg-6" *ngFor="let studentCourse of studentCourses" [studentCourse]="studentCourse"></app-assigned-course-block>
+    </ng-container>
+  </div>
+  </div>
+  <div class="col-md-6 col-lg-6">
+<div class="p-4 bg-white shadow-sm">
+  <div class="row">
+    <div class="col-md-5 col-lg-5"><img [src]="user.avatar" class="avatar-img img-fluid" /></div>
+    <div class="col-md-7 col-lg-7">
+      <h6>{{ user.fname }} {{ user.lname }}</h6>
+      <address class="mb-2">
+        {{ user.address }}
+      </address>
+      {{ user.country.name }}
+      {{ user.state.name }}
+      {{ user.city.name }} - {{ user.pin }}
+      <b class="d-block mt-3">Mobile:</b>
+      <p> {{ user.phone }}</p>
+      <b class="d-block">Email:</b>
+    <p>{{ user.email }}</p>
     </div>
-  </ng-container>
+  </div>
+  <div class="d-flex"> 
+    <ngb-rating [(rate)]="currentRate"  [readonly]="true" [max]="5">
+      <ng-template let-fill="fill" let-index="index">
+        <span class="star" [class.filled]="fill === 100" >&#9733;</span>
+      </ng-template>
+    </ngb-rating>
 
+    <a href="javascript:{}" routerLink="edit-profile" class="ml-auto btn text-primary">Edit <fa-icon [icon]="faEdit" ></fa-icon> </a>
+  </div>
+  <hr>
+    <ng-container *ngIf="(courseStat$ | async) as courseStat">
+      <div *ngIf="courseStat" class="row m-0">
+<div class="col-md-6 col-lg-6 text-center">
+  <label class="text-uppercase text-primary ">Total Course</label>
+  <h3>{{ courseStat?.course }}</h3>
+</div>
+<div class="col-md-6 col-lg-6 text-center">
+  <label class="text-uppercase text-primary ">Started</label>
+  <h3 class="text-success"> {{ courseStat?.startedCourse }}</h3>
+</div>
+<hr class="col-12 p-0">
+<div class="col-md-6 col-lg-6 text-center">
+  <label class="text-uppercase text-primary">Not Started</label>
+  <h3 class="text-warning">{{ courseStat?.notStartedCourse }}</h3>
+</div>
+<div class="col-md-6 col-lg-6 text-center">
+  <label class="text-uppercase text-primary ">Completed</label>
+  <h3  class="text-info">{{ courseStat?.completedCourseCourse}}</h3>
+</div>  
+      </div>
+    </ng-container>
 
-  <div class="card-body">
-    <img [src]="user.avatar" class="avatar-img img-thumbnail" />
-    {{ user.fname }} {{ user.lname }}
-    <address>
-      {{ user.address }}
-    </address>
-    {{ user.country.name }}
-    {{ user.state.name }}
-    {{ user.city.name }} - {{ user.pin }}
+</div>
 
-    <div>Mobile: {{ user.phone }}</div>
-    <div>Email: {{ user.email }}</div>
-    <a href="javascript:{}" routerLink="edit-profile" class="btn btn-outline-primary"><fa-icon [icon]="faEdit" ></fa-icon> Edit</a>
   </div>
 
-  <ngb-rating [(rate)]="currentRate"  [readonly]="true" [max]="5">
-    <ng-template let-fill="fill" let-index="index">
-      <span class="star" [class.filled]="fill === 100" >&#9733;</span>
-    </ng-template>
-  </ngb-rating>
+</div>
 
 </div>

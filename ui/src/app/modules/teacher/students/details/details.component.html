@@ -1,28 +1,32 @@
 <app-modal>
-  <div header>
-  Student - {{ user.fname}} {{ user.lname}}
+  <div header class="text-primary ">
+  Student Details
   </div>
   <div  body>
-    <div>
-      <img [src]="user.avatar" />
-        <div>
-          {{user.address}}<br/>
-          {{ user.city?.name }} - {{ user.pin }}
-        </div>
+
+    <div class="row">
+      <div class="col-md-3 col-lg-3"> <img [src]="user.avatar" /></div>
+      <div class="col-md-6 col-lg-6">
+        <h6>{{ user.fname}} {{ user.lname}}</h6>
+        <p>
+          {{user.address}} {{ user.city?.name }} - {{ user.pin }}
+        </p>
         <ng-container *ngIf="user.role_url == 'teacher'">
           Courses: {{ user.course_count }}
         </ng-container>
+<b class="text-uppercase">Contact Number</b>
+       <p>{{ user.phone}}</p>
+       <b class="text-uppercase">Email</b>
+        <p>{{ user.email}}</p>
+      </div>
+<div class="col-md-3 col-lg-3">
+  <a [href]="'tel://'+user.phone" class="btn btn-sm btn-primary">Call</a>
+  <a class="d-none  btn btn-primary btn-sm" target="_blank" [href]="'https://web.whatsapp.com/send?phone='+user.phone">Message</a>
+  <a class="btn btn-primary btn-sm ml-2" target="_blank" [href]="'https://api.whatsapp.com/send?phone='+user.phone">Message</a>
+</div>
+    </div>
 
-
-        <a [href]="'tel://'+user.phone" class="btn btn-primary">Call</a>
-        <a class="d-none d-sm-block btn btn-primary" target="_blank" [href]="'https://web.whatsapp.com/send?phone='+user.phone">Message</a>
-        <a class="d-block d-sm-none btn btn-primary" target="_blank" [href]="'https://api.whatsapp.com/send?phone='+user.phone">Message</a>
-
-
-        Contact Number: {{ user.phone}}
-        Email: {{ user.email}}
-
-        <table class="table">
+        <table class="table mt-3">
           <thead>
             <tr>
               <th>
@@ -31,10 +35,10 @@
               <th>
                 Assigned
               </th>
-              <th>
+              <th width="80">
                 Status
               </th>
-              <th>
+              <th width="80">
                 Delete
               </th>
             </tr>
@@ -62,12 +66,11 @@
           </tbody>
         </table>
 
-    </div>
   </div>
-  <div  footer>
+  <div  footer class="w-100">
 
 
     <button type="button" class="btn btn-outline-danger delete-user" (click)="deleteUser()">Delete</button>
-    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
+    <button type="button" class="btn btn-outline-secondary float-right" (click)="modal.dismiss('cancel click')">Cancel</button>
   </div>
 </app-modal>

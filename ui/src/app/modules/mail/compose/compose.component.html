@@ -49,9 +49,10 @@
       {{f.message.errors.error}}
     </div>
   </div>
-  <button type="submit" class="btn btn-primary" *ngIf="!reply">
+  
+  <ng-content select="[cancel]"></ng-content>
+  <button type="submit" class="btn btn-primary float-right " *ngIf="!reply">
     <ng-content select="[sent]"></ng-content>
     {{ !toMessage ? 'Sent' : '' }}
   </button>
-  <ng-content select="[cancel]"></ng-content>
 </form>

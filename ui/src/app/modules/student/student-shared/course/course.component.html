@@ -1,4 +1,5 @@
-<app-bread-crumbs></app-bread-crumbs>
+<div class="container pt-3"> 
+  <app-bread-crumbs></app-bread-crumbs>
 <app-teacher-info-block [teacher]="course.user">
   <span *ngIf="course" course_price>
     Fees: {{ course.price }}
@@ -12,27 +13,27 @@
     </ng-container>
   </div>
 </app-teacher-info-block>
-<div class="card">
-  <div class="card-body">
-    <h5 class="card-title">NEWS UPDATES</h5>
-    <p [innerHTML]="course.news"></p>
-  </div>
-</div>
-
-<h4>{{course.name}}</h4>
+<h4 class="mt-3">{{course.name}}</h4>
 <ng-container *ngIf="course.course_tag && course.course_tag.length">
   <span *ngFor="let course_tag of course.course_tag">
     {{course_tag.tag_name}}
   </span>
 </ng-container>
 <p [innerHTML]="course.description"></p>
-
+<div class="card mt-4 mb-4">
+  <div class="card-body">
+    <h6 class="card-title">NEWS UPDATES</h6>
+    <p [innerHTML]="course.news"></p>
+  </div>
+</div>
 <ng-container *ngIf="course.course_module && course.course_module.length">
 
   <div *ngIf="!course.user.is_able" class="alert alert-warning">Sorry teacher plan was expired</div>
+  <h4>Modules</h4>
   <div class="row" *ngIf="course.user.is_able">
 
-    <app-course-module class="col" *ngFor="let course_module of course.course_module" [course_module]="course_module"></app-course-module>
+    <app-course-module class="col-md-3 col-lg-3" *ngFor="let course_module of course.course_module" [course_module]="course_module"></app-course-module>
   </div>
 </ng-container>
 
+</div>

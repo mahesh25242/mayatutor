@@ -1,5 +1,6 @@
 <form [formGroup]="addPaymentFrm" (ngSubmit)="savePayment()">
-  <div class="form-group">
+  <div class="row">
+  <div class="form-group col-md-6 col-lg-6">
     <label for="amount">Payment</label>
     <input type="number" class="form-control" id="amount"
     [ngClass]="{'is-invalid': (f.amount.errors && f.amount.errors.error)}"
@@ -9,7 +10,7 @@
     </div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group col-md-6 col-lg-6">
     <label for="amount">Start Date</label>
     <div class="input-group">
       <input class="form-control" placeholder="dd/mm/yyyy"
@@ -22,7 +23,7 @@
     </div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group col-md-6 col-lg-6">
     <label for="amount">End Date</label>
     <div class="input-group">
       <input class="form-control" placeholder="dd/mm/yyyy"
@@ -36,7 +37,7 @@
     </div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group col-md-6 col-lg-6">
     <label for="method">Method</label>
     <input type="text" class="form-control" id="method"
     [ngClass]="{'is-invalid': (f.method.errors && f.method.errors.error)}"
@@ -45,6 +46,6 @@
       {{f.method.errors.error}}
     </div>
   </div>
-
-  <button type="submit" class="btn btn-primary">Save</button>
+</div>
+  <button type="submit" class="btn btn-primary mb-3">Save</button>
 </form>

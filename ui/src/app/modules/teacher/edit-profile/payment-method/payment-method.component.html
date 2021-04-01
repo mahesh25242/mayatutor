@@ -1,7 +1,9 @@
 <div [formGroup]="paymentFormGroup">
   <h3 class="mb-3">Payment Method</h3>
   <div class="row">
-  <div class="form-group col-md-4 col-lg-4">
+    <div class="col-md-8 col-lg-8"> 
+      <div class="row">
+  <div class="form-group col-md-6 col-lg-6">
     <label for="account_name">Account Name</label>
     <input type="text" class="form-control" id="account_name"
     [ngClass]="{'is-invalid': (f.account_name.errors && f.account_name.errors.error) }"
@@ -10,8 +12,7 @@
         {{f.account_name.errors.error}}
       </div>
   </div>
-
-  <div class="form-group col-md-4 col-lg-4">
+  <div class="form-group col-md-6 col-lg-6">
     <label for="account_number">Account Number</label>
     <input type="text" class="form-control" id="account_number"
     [ngClass]="{'is-invalid': (f.account_number.errors && f.account_number.errors.error) }"
@@ -20,9 +21,7 @@
         {{f.account_number.errors.error}}
       </div>
   </div>
-
-
-  <div class="form-group col-md-4 col-lg-4">
+  <div class="form-group col-md-6 col-lg-6">
     <label for="ifsc_code">IFSC Code</label>
     <input type="text" class="form-control" id="ifsc_code"
     [ngClass]="{'is-invalid': (f.ifsc_code.errors && f.ifsc_code.errors.error) }"
@@ -32,7 +31,7 @@
       </div>
   </div>
 
-  <div class="form-group col-md-4 col-lg-4">
+  <div class="form-group col-md-6 col-lg-6">
     <label for="bank_name">Bank Name</label>
     <input type="text" class="form-control" id="bank_name"
     [ngClass]="{'is-invalid': (f.bank_name.errors && f.bank_name.errors.error) }"
@@ -41,17 +40,27 @@
         {{f.bank_name.errors.error}}
       </div>
   </div>
-  <div class="col-md-4 col-lg-4"> <img [src]="f.qr_code1.value" class="avatar-img img-thumbnail" *ngIf="f.qr_code1.value" />
-    <button type="button" (click)="paytmQr.click()" class="btn btn-primary qr_code1-up-btn">
-      <span>Change PayTM QR Code</span>
+</div>
+</div>
+  <div class="col-md-4 col-lg-4">
+    <div class="row">
+      <div class="col-6">
+    <img [src]="f.qr_code1.value" class="avatar-img img-thumbnail d-block" *ngIf="f.qr_code1.value" />
+    <button type="button" (click)="paytmQr.click()" class="btn btn-sm btn-primary mt-2 qr_code1-up-btn">
+      <span>PayTM QR Code</span>
       <input #paytmQr type="file" (change)="onFileInput($event.target.files, f.qr_code1, 'qr_code1')" accept="image/*" style="display:none;" />
-    </button></div>
-    <div class="col-md-4 col-lg-4"><img [src]="f.qr_code2.value" class="avatar-img img-thumbnail" *ngIf="f.qr_code2.value" />
-      <button type="button" (click)="gpayQr.click()" class="btn btn-primary qr_code2-up-btn">
-        <span>Change G-PAY QR Code</span>
-        <input #gpayQr type="file" (change)="onFileInput($event.target.files, f.qr_code2, 'qr_code2')" accept="image/*" style="display:none;" />
-      </button>
+    </button>
+  </div>
+  <div class="col-6">
+    <img [src]="f.qr_code2.value" class="avatar-img img-thumbnail d-block" *ngIf="f.qr_code2.value" />
+    <button type="button" (click)="gpayQr.click()" class="btn mt-2 btn-sm btn-primary qr_code2-up-btn">
+      <span>G-PAY QR Code</span>
+      <input #gpayQr type="file" (change)="onFileInput($event.target.files, f.qr_code2, 'qr_code2')" accept="image/*" style="display:none;" />
+    </button>
     </div>
+    </div>
+  </div>
+   
 </div>
 
 </div>

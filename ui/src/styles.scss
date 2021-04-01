@@ -37,6 +37,7 @@
       font-family: $fontFmily;
       color:$text-color;
       font-size: 0.7rem;
+      background-color: #fbfbfb;
   }
   h1 {font-size:$fontsize-2;}
   .well-bg-header{
@@ -51,4 +52,8 @@
   }
   .clearfix {
     clear: both;
+  }
+  .sb-wrapper {
+    min-width: 25px;
+    height: 25px;
   }

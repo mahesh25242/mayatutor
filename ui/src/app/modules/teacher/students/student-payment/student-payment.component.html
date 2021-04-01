@@ -14,7 +14,7 @@
       </div>
       <div *ngIf="f.course.value?.id">
         <app-add-payment [user]="user" [course]="f.course.value" (changeCourse)="changeCourse(f.course.value)"></app-add-payment>
-        <h3>{{ f.course.value.name }}</h3>
+        <h6>{{ f.course.value.name }}</h6>
         <table class="table">
           <thead>
             <tr>

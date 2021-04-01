@@ -1,4 +1,4 @@
-
+<div class="container pt-3">
 <app-bread-crumbs></app-bread-crumbs>
 <h3>{{module.name}}</h3>
 <ng-container *ngIf="module.course.course_tag && module.course.course_tag.length">
@@ -8,5 +8,10 @@
 </ng-container>
 <div *ngIf="!module.course.user.is_able" class="alert alert-warning">Sorry teacher plan was expired</div>
 <app-module-launch [courseModule]="module" *ngIf="module.course.user.is_able"></app-module-launch>
-<button class="btn btn-primary" appBackButton>Back</button>
-<button class="btn btn-primary" (click)="markAsFinished()" *ngIf="module.course.user.is_able">Finished</button>
+<hr>
+<div class="d-flex pt-3">
+  <button class="btn btn-outline-secondary" appBackButton>Back</button>
+<button class="btn btn-primary ml-auto" (click)="markAsFinished()" *ngIf="module.course.user.is_able">Finished</button>
+</div>
+
+</div>

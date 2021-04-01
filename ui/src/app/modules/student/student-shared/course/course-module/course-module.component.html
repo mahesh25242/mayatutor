@@ -1,7 +1,7 @@
 <div class="card">
   <img [src]="course_module.thumb_image" *ngIf="course_module.thumb_image" class="card-img-top" [alt]="course_module.name">
-  <div class="card-body">
-    <h3 class="card-title" [innerHTML]="course_module.name"></h3>
+  <div align="center" class="card-body min-height">
+    <h6 class="card-title" [innerHTML]="course_module.name"></h6>
     <ng-container *ngIf="(user$ | async) else login">
       <a [routerLink]="'launch/'+course_module.id" class="btn btn-primary" *ngIf="course_module.id else askAssign">Continue</a>
     </ng-container>
