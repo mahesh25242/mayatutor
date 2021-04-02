@@ -57,3 +57,12 @@
     min-width: 25px;
     height: 25px;
   }
+  .breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0.10rem 0;
+    margin-bottom: 0.5rem;
+    list-style: none;
+    background-color:transparent;
+    border-radius:0;
+}
