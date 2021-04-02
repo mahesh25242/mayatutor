@@ -65,4 +65,7 @@ class StudentCourse extends Model implements AuthenticatableContract, Authorizab
         return $this->belongsTo('App\CourseModule', 'course_id', 'course_id');
     }
 
+
+
+
 }

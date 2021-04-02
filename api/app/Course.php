@@ -87,6 +87,23 @@ class Course extends Model implements AuthenticatableContract, AuthorizableContr
         return $this->hasMany('App\StudentCourse');
     }
 
+    public function studentCourseChekCompletion()
+    {
+        return $this->hasMany('App\StudentCourse');
+    }
+
+    public function isCourseCompleted()
+    {
+        return $this->hasOneThrough(
+            'App\StudentCourseTrack',
+            'App\StudentCourse',
+            'course_id', // Foreign key on the StudentCourse table...
+            'student_course_id',  // Foreign key on the StudentCourseTrack table...
+            'id', // Local key on the Course table...
+            'id' // Local key on StudentCourse table...
+        );
+    }
+
     // public function studentCourseModule()
     // {
     //     return $this->hasMany('App\StudentCourseModule');

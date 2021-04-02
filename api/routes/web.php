@@ -153,6 +153,7 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
             $router->group(['prefix' => 'course'], function () use ($router) {
                 $router->post('launchModule','StudentCourseTrackController@launchModule');
                 $router->post('markAsFinished','StudentCourseTrackController@markAsFinished');
+                $router->post('fetchNextModule','StudentCourseTrackController@fetchNextModule');
             });
         });
 
