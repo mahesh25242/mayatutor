@@ -37,8 +37,8 @@
           {{ course.name}}
         </td>
         <td data-label="Status">
-          <span [class]="'status-'+course.latest_course_approval_request.status" placement="top"
-          [ngbTooltip]="(course.latest_course_approval_request.message) ? course.latest_course_approval_request.message : ''">{{course.latest_course_approval_request.status_text}}</span>
+          <span [class]="'status-'+course?.latest_course_approval_request?.status" placement="top"
+          [ngbTooltip]="(course.latest_course_approval_request?.message) ? course.latest_course_approval_request.message : ''">{{course.latest_course_approval_request?.status_text}}</span>
         </td>
         <td data-label="Module#">
           {{course.course_module_count}}
