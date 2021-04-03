@@ -1,5 +1,6 @@
-<h3>Course Details</h3>
+<div class="container">
 <app-bread-crumbs></app-bread-crumbs>
+<h3 class="mb-3">Course Details</h3>
 <app-teacher-full-info-block [user]="course.user">
   <span *ngIf="course" course_price>
     Fees: {{ course.price }}
@@ -7,34 +8,41 @@
 
 </app-teacher-full-info-block>
 <div class="alert alert-warning" *ngIf="course.latest_course_approval_request.message" [innerHTML]="course.latest_course_approval_request.message"></div>
-<div class="card" >
-  <ng-container *ngIf="!course.latest_course_approval_request.status && !course.user.teacher_auto_approval_count">
-    <button class="btn btn-default" (click)="rejectIt()">Reject</button>
-    <button class="btn btn-primary" *ngIf="course.latest_course_approval_request.status != 1" (click)="approveIt()">Accept</button>
-  </ng-container>
-
-  <div class="custom-control custom-checkbox mr-sm-2 auto-approval">
+<div class="blueStrip p-3 mb-4" >
+ <div class="row m-0"> 
+  <div class="custom-control custom-checkbox auto-approval col-sm-9 col-lg-9 pt-2">
     <input type="checkbox" class="custom-control-input" id="customControlAutosizing" (change)="toggleAutoApproval()" [checked]="course.user.teacher_auto_approval_count">
-    <label class="custom-control-label" for="customControlAutosizing">Auto Approval enable for this user</label>
+    <label class="custom-control-label pt-1" for="customControlAutosizing">Auto Approval enable for this user</label>
   </div>
-
+  <div class="col-sm-3 col-lg-3"> 
+    <ng-container *ngIf="!course.latest_course_approval_request.status && !course.user.teacher_auto_approval_count">
+      <button class="btn btn-outline-dark btn-lg mr-3" (click)="rejectIt()">Reject</button>
+      <button class="btn btn-primary btn-lg" *ngIf="course.latest_course_approval_request.status != 1" (click)="approveIt()">Accept</button>
+    </ng-container>
+  </div>
+</div>
 
 </div>
 
 <ng-container *ngIf="course.course_tag">
-  <span class="badge" *ngFor="let course_tag of course.course_tag">{{course_tag.tag_name}}</span>
+  <p class="badge" *ngFor="let course_tag of course.course_tag">{{course_tag.tag_name}}</p>
 </ng-container>
 
 <p [innerHTML]="course.description"></p>
 
-<ng-container *ngIf="course.course_module">
-  <div class="card" *ngFor="let course_module of course.course_module">
+<div class="row">
+<ng-container *ngIf="course.course_module" >
+  <div class="col-md-4 col-lg-4" *ngFor="let course_module of course.course_module">
+    <div class="card">
     <div class="card-body">
       <a *ngIf="course_module.video_url" href="javascript:{}" [routerLink]="course_module.id+'/launch'">
-        <img [src]="course_module.thumb_image" />
+        <img class="img-fluid" [src]="course_module.thumb_image" />
       </a>
-      <h5 class="card-title" [innerHTML]="course_module.name"></h5>
+      <h5 class="card-title mt-3" [innerHTML]="course_module.name"></h5>
       <!-- <app-player [videoSources]="videoResourse(course_module)"></app-player> -->
     </div>
   </div>
+  </div>
 </ng-container>
+</div>
+</div>

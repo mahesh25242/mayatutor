@@ -1,6 +1,6 @@
 <section class="container">
   <form [formGroup]="editProfileFrm" *ngIf="(loggedUser$ | async) as loggedUser" (ngSubmit)="updateProfile()">
-    
+    <div class="bg-white p-4 shadow-sm mb-4">
     <div class="row">
       <div class="col-md-3 col-lg-3">
         <figure>
@@ -116,9 +116,9 @@
       </div>
   
     </div>
-
-    <hr>
-    
+  </div>
+ 
+  <div class="bg-white p-4 shadow-sm mb-4">
     <div class="custom-control custom-checkbox">
       <input type="checkbox" class="custom-control-input" id="changePass" formControlName="isChanegPassword">
       <label class="custom-control-label" for="changePass">Change Password</label>
@@ -144,7 +144,7 @@
         </div>
       </div>
     </div>
-  <hr>
+  </div>
   
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>

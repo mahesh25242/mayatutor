@@ -1,42 +1,52 @@
 <app-modal>
   <div header>
-    {{ (user.role_url == 'teacher' && 'Teacher') || (user.role_url == 'student' && 'Student') }} - {{ user.fname}} {{ user.lname}}
+    Details
   </div>
   <div  body>
     <div *ngIf="user$ | async as usr">
-      <img [src]="usr.avatar" />
-        <div>
-          {{usr.address}}<br/>
-          {{ user.city?.name }} - {{ user.pin }}
-        </div>
+<div class="row">
+  <div class="col-lg-3 col-md-3"><img [src]="usr.avatar" /></div>
+  <div class="col-lg-9 col-md-9">
+<h6 class="text-uppercase">
+  {{ (user.role_url == 'teacher' && '(Teacher)') || (user.role_url == 'student' && '(Student)') }} - {{ user.fname}} {{ user.lname}}
+</h6>
+<p>{{usr.address}} {{ user.city?.name }} - {{ user.pin }}</p>
+<div class="table-row">
+  <div class="d-flex pt-1"><ng-container *ngIf="user.role_url == 'teacher'">
+    <h6>Courses:<span class="text-primary"> {{ usr.course_count }}</span></h6>  <h6 class="ml-3"> Plan: <span class="text-primary">Trial</span></h6>
+  </ng-container></div>
+
+<div> <a [href]="'tel://'+usr.phone" class="btn btn-primary btn-sm btn-block">Call</a></div>
+<div><a class=" btn btn-primary btn-sm btn-block" target="_blank" [href]="'https://web.whatsapp.com/send?phone='+usr.phone">Message</a>
+  <a class=" btn btn-primary d-none btn-block" target="_blank" [href]="'https://api.whatsapp.com/send?phone='+usr.phone">Message</a></div>
+</div>
+
+<div class="table-row">
+  <div ><b class="d-block ">Contact Number:</b><p>{{ usr.phone}}</p></div>
+  <div class="border-right border-left pr-3 pl-3"><b class="d-block">Email:</b><p>{{ usr.email}}</p></div>  
+  <div><b class="d-block">Status:</b><p>ACTIVE</p></div>  
+</div>
+
+
+  </div>
+
+</div>
+
         <ng-container *ngIf="user.role_url == 'teacher'">
-          Courses: {{ usr.course_count }}
-        </ng-container>
+          
 
-
-        <a [href]="'tel://'+usr.phone" class="btn btn-primary">Call</a>
-        <a class="d-none d-sm-block btn btn-primary" target="_blank" [href]="'https://web.whatsapp.com/send?phone='+usr.phone">Message</a>
-        <a class="d-block d-sm-none btn btn-primary" target="_blank" [href]="'https://api.whatsapp.com/send?phone='+usr.phone">Message</a>
-
-
-        Contact Number: {{ usr.phone}}
-        Email: {{ usr.email}}
-        Status:
-        <ng-container *ngIf="user.role_url == 'teacher'">
-          Plan: Trial
-
-          <div class="row">
-            <div class="col-md-4">
-              <h5>Subject / Syllabus</h5>
-              <span *ngFor="let subject of usr.subject; let last = last">{{ subject.name }} <i *ngIf="!last">, </i> </span>
+          <div class="row border-top border-bottom">
+            <div class="col-md-4 pt-3 pb-3">
+              <b class="mb-2 d-block">Subject / Syllabus</b>
+              <h6 *ngFor="let subject of usr.subject; let last = last">{{ subject.name }} <i *ngIf="!last">, </i> </h6>
             </div>
-            <div class="col-md-4">
-              <h5>Experiance</h5>
-              <p [innerHTML]="usr.teacher_info?.experiance"></p>
+            <div class="col-md-4 border-right border-left pt-4">
+              <b class="mb-2 d-block">Experiance</b>
+              <h6 [innerHTML]="usr.teacher_info?.experiance"></h6>
             </div>
-            <div class="col-md-4">
-              <h5>Education</h5>
-              <p [innerHTML]="usr.teacher_info?.education?.name"></p>
+            <div class="col-md-4 pt-4">
+              <b class="mb-2 d-block">Education</b>
+              <h6 [innerHTML]="usr.teacher_info?.education?.name"></h6>
             </div>
           </div>
         </ng-container>
@@ -44,14 +54,14 @@
 
     </div>
   </div>
-  <div  footer>
-    <div class="custom-control custom-checkbox mr-sm-2 auto-approval" *ngIf="user.role_url == 'teacher'">
+  <div  footer class="w-100 d-flex">
+    <div class="custom-control custom-checkbox mr-auto auto-approval" *ngIf="user.role_url == 'teacher'">
       <input type="checkbox" class="custom-control-input" id="customControlAutosizing" (change)="toggleAutoApproval()" [checked]="user.teacher_auto_approval_count">
-      <label class="custom-control-label" for="customControlAutosizing">Auto Approval enable for this user</label>
+      <label class="custom-control-label pt-1" for="customControlAutosizing">Auto Approval enable for this user</label>
     </div>
 
-    <button type="button" class="btn btn-outline-danger delete-user" (click)="deleteUser()">Delete</button>
-    <button type="button" class="btn btn-outline-danger resent-mail" (click)="resetActivationMail()">Re-sent Activation Mail</button>
-    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
+    <button type="button" class="btn btn-outline-danger btn-sm delete-user" (click)="deleteUser()">Delete</button>
+    <button type="button" class="btn btn-outline-danger  btn-sm resent-mail ml-2" (click)="resetActivationMail()">Re-sent Activation Mail</button>
+    <button type="button" class="btn btn-outline-secondary  btn-sm ml-2" (click)="modal.dismiss('cancel click')">Cancel</button>
   </div>
 </app-modal>
