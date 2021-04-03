@@ -27,6 +27,8 @@ class UserResource extends JsonResource
                 'phone' => $this->phone,
                 'teacher_payment_info' => $this->teacherPaymentInfo
             ]),
+            'plan_purchase' => $this->planPurchase,
+            'current_user_plan' => $this->currentUserPlan,
             'pin' => $this->pin,
             'address' => $this->address,
             'country_id' => $this->country_id,

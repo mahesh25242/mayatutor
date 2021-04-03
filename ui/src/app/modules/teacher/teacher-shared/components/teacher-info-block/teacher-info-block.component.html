@@ -12,7 +12,7 @@
                 <label>Status:</label>
                 <h6 class="text-success">PAID</h6>
                 <label class="price-list mt-3"><ng-content select="[course_price]"></ng-content></label>
-                
+
               </div>
             </div>
           </div>
@@ -25,24 +25,26 @@
                 *ngIf="teacher.email" [user]="teacher">
                   Message
                 </app-send-message-to-teacher>
-                
+
                 <ng-container *ngIf="teacher.phone">
                 <a class="d-none btn btn-sm btn-primary" target="_blank" [href]="'https://web.whatsapp.com/send?phone='+teacher.phone"> <fa-icon [icon]="faWhatsapp" ></fa-icon> Whats app</a>
                 <a class=" btn btn-primary btn-sm" target="_blank" [href]="'https://api.whatsapp.com/send?phone='+teacher.phone"> <fa-icon [icon]="faWhatsapp" ></fa-icon> Whats app</a>
               </ng-container>
-             
+
             </div>
-              <div class="col-6 pt-3 border-right">
+
+              <!-- <div class="col-6 pt-3 border-right">
                 <p class="text-primary">New Messages</p>
-                <h6>25</h6></div>
-              <div class="col-6 pt-3 pl-4">
+                <h6>25</h6>
+              </div> -->
+              <div class="col-6 pt-3 pl-4" *ngIf="teacher?.current_user_plan?.remaining_days">
                 <p class="text-primary">Expire after </p>
-                <h6>25 Days</h6></div>
+                <h6>{{teacher?.current_user_plan?.remaining_days}} Days</h6></div>
             </div>
           </div>
 
         </div>
-        
+
  </ng-container>
 
         <ng-template #login>
@@ -67,7 +69,7 @@
       </ng-container>
 
 
-     
+
     </div>
 
     <ng-content select="[live_class]"></ng-content>
