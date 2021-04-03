@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { of, Subscription } from 'rxjs';
 import { CourseModule } from 'src/app/lib/interfaces';
 import { StudentCourseService } from 'src/app/lib/services';
 import { BreadCrumbsService } from 'src/app/shared-module/components/bread-crumbs/bread-crumbs.component';
@@ -21,6 +21,9 @@ export class LaunchModuleComponent implements OnInit, OnDestroy {
     private breadCrumbsService: BreadCrumbsService,
     private studentCourseService: StudentCourseService,
     private router: Router,) {
+      this.router.routeReuseStrategy.shouldReuseRoute = function () {
+        return false;
+      };
 
      }
 
@@ -45,30 +48,25 @@ export class LaunchModuleComponent implements OnInit, OnDestroy {
       }, () => {
       } );
     }
+
   ngOnInit(): void {
-    this.launch = this.route.params.pipe(mergeMap(res=>{
+    this.module = this.route.snapshot.data["module"];
 
-      this.module = this.route.snapshot.data["module"];
+    this.breadCrumbsService.bcs$.next([
+      {
+        url: '/',
+        name: 'Home',
+      },
+      {
+        url:`/student/course/${this.module.course_id}`,
+        name: `${this.module.course.name}`,
+      },
+      {
+        name: this.module.name
+      }
+    ]);
 
-      this.breadCrumbsService.bcs$.next([
-        {
-          url: '/',
-          name: 'Home',
-        },
-        {
-          url:`/student/course/${this.module.course_id}`,
-          name: `${this.module.course.name}`,
-        },
-        {
-          name: this.module.name
-        }
-      ]);
-
-      return this.studentCourseService.launchModule({id: this.module.logged_student_course.id, module_id: this.module.id});
-    }));
-
-
-
+    this.launch =  this.studentCourseService.launchModule({id: this.module.logged_student_course.id, module_id: this.module.id});
 
   }
 

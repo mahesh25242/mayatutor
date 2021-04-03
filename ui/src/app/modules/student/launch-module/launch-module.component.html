@@ -1,4 +1,4 @@
-<div class="container pt-3" *ngIf="(launch | async)">
+<div class="container pt-3" >
 <app-bread-crumbs></app-bread-crumbs>
 <h3>{{module.name}}</h3>
 <ng-container *ngIf="module.course.course_tag && module.course.course_tag.length">
@@ -10,7 +10,9 @@
 <app-module-launch [courseModule]="module" *ngIf="module.course.user.is_able"></app-module-launch>
 <hr>
 <div class="d-flex pt-3">
-  <button class="btn btn-outline-secondary" appBackButton>Back</button>
+
+
+  <button class="btn btn-outline-secondary" appBackButton>Go Back</button>
 <button class="btn btn-primary ml-auto" (click)="markAsFinished()" *ngIf="module.course.user.is_able && !module.is_module_completed_count">Finished</button>
 <span class="text-success" *ngIf="module.is_module_completed_count">Completed</span>
 </div>
