@@ -97,5 +97,12 @@ class CourseModule extends Model implements AuthenticatableContract, Authorizabl
         return $this->hasMany('App\StudentCourseModuleTrack');
     }
 
+    public function isModuleCompleted($userId = null)
+    {
+        $userId = $userId ?? Auth::id();
+        return $this->studentCourseModuleTrack()->whereHas("studentCourseTrack.studentCourse", function($q) use($userId) {
+            $q->where("user_id", $userId);
+        })->where("status", 1);
+    }
 
 }

@@ -2,6 +2,7 @@ import { courseApprovalRequest } from './courseApprovalRequest';
 import { CourseTag } from './courseTag';
 import { Pagination } from './pagination';
 import { StudentCourse } from './student-course';
+import { StudentCourseModuleTrack } from './student-course-module-track';
 import { User } from './user';
 
 export interface Course {
@@ -36,7 +37,9 @@ export interface CourseModule {
   course?: Course,
   video_type?: string,
   thumb_image?: string,
-  logged_student_course?: StudentCourse
+  logged_student_course?: StudentCourse,
+  is_module_completed_count?: number,
+  is_module_completed?: StudentCourseModuleTrack
 }
 
 export interface CourseWithPagination extends Pagination {

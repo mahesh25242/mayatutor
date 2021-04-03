@@ -38,6 +38,7 @@ class CourseResource extends JsonResource
             ]),
             'course_module' => CourseModuleResource::collection($this->whenLoaded('courseModule')),
             'course_tag' => $this->courseTag,
+            'isCourseCompleted' => $this->isCourseCompleted,
             'news' => $this->news,
             'user' => $this->news,
             'price' => $this->price,

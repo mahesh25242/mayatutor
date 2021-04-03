@@ -40,6 +40,8 @@ class CourseModuleResource extends JsonResource
                 'video_url' => $this->video_url,
                 'logged_student_course' => $this->loggedStudentCourse,
                 'student_course_module_track' => $this->studentCourseModuleTrack,
+                'is_module_completed' => $this->isModuleCompleted,
+                'is_module_completed_count' => $this->is_module_completed_count,
             ]),
 
 

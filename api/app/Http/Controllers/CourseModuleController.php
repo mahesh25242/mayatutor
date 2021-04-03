@@ -120,9 +120,10 @@ class CourseModuleController extends Controller
     }
 
     public function getAModule($courseId =0,$id = 0){
-        $module = \App\CourseModule::with(["course.user", "course.courseTag", "loggedStudentCourse.studentCourseTrack.studentCourseModuleTrack" ])->find($id);
+        $module = \App\CourseModule::with(["course.user", "course.courseTag",
+         "loggedStudentCourse.studentCourseTrack.studentCourseModuleTrack",
+         "isModuleCompleted" ])->withCount("isModuleCompleted")->find($id);
         return response($module);
-
     }
 
     public function isLaunchable($id=0, $moduleId = 0){
@@ -134,7 +135,7 @@ class CourseModuleController extends Controller
                 });
             });
 
-        })->find($id);
+        })->find($moduleId);
 
         if($module){
             return $module;
