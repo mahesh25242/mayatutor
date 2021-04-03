@@ -3,6 +3,7 @@ import { CourseTag } from './courseTag';
 import { Pagination } from './pagination';
 import { StudentCourse } from './student-course';
 import { StudentCourseModuleTrack } from './student-course-module-track';
+import { StudentCourseTrack } from './student-course-track';
 import { User } from './user';
 
 export interface Course {
@@ -21,7 +22,8 @@ export interface Course {
   course_module_count?: number,
   course_tag?: CourseTag[],
   latest_course_approval_request?: courseApprovalRequest,
-  course_module?: CourseModule[]
+  course_module?: CourseModule[],
+  is_course_completed: StudentCourseTrack
 }
 
 

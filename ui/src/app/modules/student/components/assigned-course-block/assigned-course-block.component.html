@@ -8,8 +8,10 @@
     <app-rating [rating]="studentCourse.course.user.rating" [readonly]="true"></app-rating>
     <p class="card-text">{{studentCourse.course.description}}</p>
     <span placement="top" [ngbTooltip]="(studentCourse.course.latest_course_approval_request.status != 1) ? 'Course is under approvel' :''">
-      <button href="javascript:{}" class="btn btn-primary"
-      [disabled]="studentCourse.course.latest_course_approval_request.status != 1" [routerLink]="'course/'+studentCourse.course.id">Continue</button>
+      <button href="javascript:{}" class="btn "
+      [disabled]="studentCourse.course.latest_course_approval_request.status != 1"
+       [routerLink]="'course/'+studentCourse.course.id"
+       [ngClass]="{'btn-warning': studentCourse.course.is_course_completed, 'btn-primary': !studentCourse.course.is_course_completed}">Continue</button>
     </span>
   </div>
 </div>

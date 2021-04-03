@@ -39,7 +39,10 @@ class StudentCourseController extends Controller
     public function allMyCourses(Request $request){
         $studentCourse = \App\StudentCourse::with(["course.user",
         "course.latestCourseApprovalRequest",
-         "course.isCourseCompleted"])
+         "course.isCourseCompleted" => function($q){
+             $q->where("student_courses.user_id", Auth::id())
+             ->where("student_course_tracks.status", 1);
+         }])
         ->whereHas("course.latestCourseApprovalRequest", function($query){
             $query->where("status", 1);
         })
