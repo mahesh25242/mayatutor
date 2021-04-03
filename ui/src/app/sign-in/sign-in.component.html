@@ -3,16 +3,16 @@
     <div></div>
     <div  body class="border-0">
       <div class="row">
-        <div class="col-6">
+        <div class="col-6 p-5">
           <a href="javascript:{}" (click)="signInWithFB()" class="btn btn-primary d-block mb-3 animate__animated animate__flipInX">
-          Login with Facebook <fa-icon [icon]="faFacebook"></fa-icon></a>
-          <a href="javascript:{}" (click)="signInWithGoogle()" class="btn btn-primary d-block animate__animated animate__flipInX">Login with Google <fa-icon [icon]="faGoogle"></fa-icon></a>
+          Login with Facebook <fa-icon class="float-right" [icon]="faFacebook"></fa-icon></a>
+          <a href="javascript:{}" (click)="signInWithGoogle()" class="btn btn-primary d-block animate__animated animate__flipInX">Login with Google <fa-icon class="float-right" [icon]="faGoogle"></fa-icon></a>
 
           <!-- <a  (click)="signInWithPhone()">sent otp</a> -->
           <!-- <a  (click)="refreshToken()" href="javascript:{}">refresh token</a> -->
         </div>
-        <div *ngIf="!isForgot" class="col-6 border-left animate__animated " [ngClass]="{'animate__shakeX' : invalidlogin, 'animate__flipInY': isForgot !== null}">
-          <h5>MEMBER LOGIN</h5>
+        <div *ngIf="!isForgot" class="col-6 p-5 border-left animate__animated " [ngClass]="{'animate__shakeX' : invalidlogin, 'animate__flipInY': isForgot !== null}">
+          <h5 class="mb-3">MEMBER LOGIN</h5>
           <div id="recaptcha-container"></div>
           <div class="text-danger" *ngIf="invalidlogin">Invalid login credentials</div>
           <div class="form-group">

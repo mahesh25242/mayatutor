@@ -10,6 +10,7 @@
 <div class="container">
   <form [formGroup]="editProfileFrm" *ngIf="(loggedUser$ | async) as loggedUser" (ngSubmit)="updateProfile()">
     <!-- common profile secion -->
+    <div class="bg-white p-4 shadow-sm mb-4">
 <div class="row">
   <div class="col-md-3 col-lg-3">
     <figure>
@@ -126,18 +127,21 @@
   </div>
 
 </div>
-<hr class="mb-4">
+</div>
     
-    <!-- common profile secion ends -->
+<div class="bg-white p-4 shadow-sm mb-4"> <!-- common profile secion ends -->
     <app-teacher-info formGroupName="info"></app-teacher-info>
-    <hr class="mb-4">
+</div>
+<div class="bg-white p-4 shadow-sm mb-4">
     <app-payment-method formGroupName="payment"></app-payment-method>
-    <hr class="mb-4">
+  </div>
     <!-- Password chaing portion starts -->
-    <div class="custom-control custom-checkbox mb-4">
+    <div class="bg-white p-4 shadow-sm mb-4">
+    <div class="custom-control custom-checkbox mb-3">
       <input type="checkbox" class="custom-control-input" id="changePass" formControlName="isChanegPassword">
-      <label class="custom-control-label" for="changePass">Change Password</label>
+      <label class="custom-control-label pt-1" for="changePass">Change Password</label>
     </div>
+    <hr class="mt-0 pt-0">
     <div class="row">
   
       <div class="form-group col-md-6 col-lg-6">
@@ -160,8 +164,9 @@
         </div>
       </div>
     </div>
+    </div>
   <!-- Password chaing portion ends -->
-  <hr>
+
     <button type="submit" class="btn btn-primary float-right">SAVE</button>
     <div class="clearfix"></div>
   </form>
