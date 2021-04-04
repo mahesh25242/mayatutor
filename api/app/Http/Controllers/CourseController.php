@@ -125,7 +125,8 @@ class CourseController extends Controller
 
     public function course($courseId = 0){
         $course = \App\Course::with(["courseTag", "courseModule" => function($q){
-            $q->withCount("isModuleCompleted");
+            if(Auth::check())
+                $q->withCount("isModuleCompleted");
         }, "user" => function($query){
             $query->with(["currentUserPlan"])->withCount(["teacherAutoApproval"]);
         }, "latestCourseApprovalRequest"])->find($courseId);

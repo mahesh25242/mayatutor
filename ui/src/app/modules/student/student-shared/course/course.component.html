@@ -26,6 +26,8 @@
     <p [innerHTML]="course.news"></p>
   </div>
 </div>
+
+<div *ngIf="!course?.latest_course_approval_request?.status" class="alert alert-warning">Course is under approval</div>
 <ng-container *ngIf="course.course_module && course.course_module.length">
 
   <div *ngIf="!course.user.is_able" class="alert alert-warning">Sorry teacher plan was expired</div>

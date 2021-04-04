@@ -30,13 +30,19 @@ class CourseResource extends JsonResource
             'name' => $this->name,
 
             $this->mergeWhen(Auth::check() &&
-            ((Auth::user()->isStudent() &&
+            ((Auth::user()->isStudent()->exists() &&
             Auth::user()->studentCourse()->where("course_id", $this->id)->exists())
-            || !Auth::user()->isStudent())
+            || !Auth::user()->isStudent()->exists())
             , [
                 'live_class_url' => $this->live_class_url,
             ]),
-            'course_module' => CourseModuleResource::collection($this->whenLoaded('courseModule')),
+            $this->mergeWhen(
+                ($this->latestCourseApprovalRequest->status == 1 ||
+                (Auth::user()->isAdmin()->exists() || $this->created_by == Auth::user()->id) ),
+                [
+                    'course_module' => CourseModuleResource::collection($this->whenLoaded('courseModule')),
+                ]
+            ),
             'course_tag' => $this->courseTag,
             'isCourseCompleted' => $this->isCourseCompleted,
             'news' => $this->news,
