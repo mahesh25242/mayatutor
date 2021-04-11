@@ -4,8 +4,9 @@
   </span>
 </ng-template>
 
-<ngb-rating *ngIf="currentRate" [(rate)]="currentRate" [starTemplate]="t" [readonly]="readonly" [max]="5">
+<ngb-rating *ngIf="currentRate || !readonly" (rateChange)="setRating($event)"  [(rate)]="currentRate" [starTemplate]="t" [readonly]="readonly" [max]="5">
   <ng-template let-fill="fill" let-index="index">
     <span class="star" [class.filled]="fill === 100" >&#9733;</span>
   </ng-template>
 </ngb-rating>
+<span *ngIf="rating">( {{ rating.tot_users}} )</span>

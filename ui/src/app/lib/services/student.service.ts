@@ -22,5 +22,7 @@ export class StudentService {
     return this.http.post("/student/toggleStatus", postData);
   }
 
-
+  setRating(postData: any = null){
+    return this.http.post("/student/setRating", postData);
+  }
 }

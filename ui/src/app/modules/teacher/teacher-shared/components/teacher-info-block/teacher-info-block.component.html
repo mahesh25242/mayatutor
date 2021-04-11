@@ -12,6 +12,10 @@
                 <label>Status:</label>
                 <h6 class="text-success">PAID</h6>
                 <label class="price-list mt-3"><ng-content select="[course_price]"></ng-content></label>
+                <!-- [readonly]="teacher.rating.myrating_tran" -->
+                <app-rating [rating]="teacher.rating" [teacherId]="teacher.id"></app-rating>
+
+
 
               </div>
             </div>

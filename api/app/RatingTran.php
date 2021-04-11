@@ -9,9 +9,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Lumen\Auth\Authorizable;
 use Laravel\Passport\HasApiTokens;
-use Illuminate\Support\Facades\Auth;
 
-class Rating extends Model implements AuthenticatableContract, AuthorizableContract
+class RatingTran extends Model implements AuthenticatableContract, AuthorizableContract
 {
 
     use HasApiTokens, Authenticatable, Authorizable, SoftDeletes;
@@ -22,7 +21,7 @@ class Rating extends Model implements AuthenticatableContract, AuthorizableContr
      * @var array
      */
     protected $fillable = [
-        'rate', 'user_id', 'created_by', 'updated_by', 'deleted_by', 'tot_users'
+        'rate', 'user_id', 'rating_id'
     ];
 
 
@@ -32,19 +31,10 @@ class Rating extends Model implements AuthenticatableContract, AuthorizableContr
         return $this->belongsTo('App\User');
     }
 
-
-    public function createdBy()
+    public function rating()
     {
-        return $this->belongsTo('App\User', 'created_by');
+        return $this->belongsTo('App\Rating');
     }
 
-    public function ratingTran()
-    {
-        return $this->hasMany('App\RatingTran');
-    }
 
-    public function MyratingTran()
-    {
-        return $this->hasOne('App\RatingTran')->where("user_id", Auth::id());
-    }
 }

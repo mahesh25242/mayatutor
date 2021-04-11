@@ -128,7 +128,7 @@ class CourseController extends Controller
             if(Auth::check())
                 $q->withCount("isModuleCompleted");
         }, "user" => function($query){
-            $query->with(["currentUserPlan"])->withCount(["teacherAutoApproval"]);
+            $query->with(["currentUserPlan", "rating.MyratingTran"])->withCount(["teacherAutoApproval"]);
         }, "latestCourseApprovalRequest"])->find($courseId);
         return response(new CourseResource($course));
     }

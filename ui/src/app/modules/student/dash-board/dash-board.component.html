@@ -27,7 +27,7 @@
         </div>
       </div>
       <div class="d-flex">
-        <ngb-rating [(rate)]="currentRate"  [readonly]="true" [max]="5">
+        <ngb-rating [(rate)]="currentRate"  [readonly]="true" [max]="5" *ngIf="user?.role_url == 'teacher'">
           <ng-template let-fill="fill" let-index="index">
             <span class="star" [class.filled]="fill === 100" >&#9733;</span>
           </ng-template>

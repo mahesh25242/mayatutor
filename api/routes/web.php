@@ -21,6 +21,8 @@ $router->get('/', function () use ($router) {
 
 //$router->get('/{sitemap}','SiteMapController@index');
 
+$router->get('test','UsersController@test');
+
 $router->group(['prefix' => 'v1'], function () use ($router) {
 
     $router->post('login','UsersController@login');
@@ -76,6 +78,7 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
                 $router->get('fetch/{id}','UsersController@fetchStudent');
                 $router->post('toggleStatus','UsersController@toggleStatus');
                 $router->post('delete','UsersController@delete');
+
             });
 
 
@@ -154,7 +157,9 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
                 $router->post('launchModule','StudentCourseTrackController@launchModule');
                 $router->post('markAsFinished','StudentCourseTrackController@markAsFinished');
                 $router->post('fetchNextModule','StudentCourseTrackController@fetchNextModule');
+
             });
+            $router->post('setRating','UsersController@setRating');
         });
 
 

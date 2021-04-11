@@ -16,10 +16,17 @@ use App\Mail\ActivationMail;
 use App\Mail\PasswordChangedNotification;
 use App\Mail\RetrievePassword;
 use Mail;
+use Cache;
 
 class UsersController extends Controller
 {
 
+
+    public function test(Request $request){
+        Cache::flush();
+        $user = User::find(9);
+           Mail::to("mahesh25242@gmail.com")->send(new ActivationMail($user,  $request->header("From-Domain")));
+    }
 
     public function signUp(Request $request)
     {
@@ -684,5 +691,37 @@ class UsersController extends Controller
         }else{
             return response(['message' => 'Validation errors', 'errors' =>  ["key" => 'user not exists'], 'status' => false], 422);
         }
+    }
+
+    public function setRating(Request $request){
+        $user_id = $request->input("user_id", 0);
+        $rate = $request->input("rate", 0);
+        $rating = \App\Rating::where("user_id", $user_id)->get()->first();
+        if($rating){
+            $rating->rate = $rating->rate - $rating->MyratingTran->rate;
+            $rating->rate += (float) $rate ;
+            if(!$rating->MyratingTran)
+                ++$rating->tot_users ;
+        }else{
+            $rating = new \App\Rating;
+            $rating->rate = (float) $rate ;
+            $rating->user_id = $user_id ;
+            $rating->created_by = Auth::id() ;
+            $rating->updated_by = Auth::id() ;
+            $rating->tot_users = 1 ;
+        }
+        $rating->save();
+        \App\RatingTran::updateOrCreate(
+            [
+                "user_id" => Auth::id() ,
+                "rating_id" => $rating->id ,
+            ],
+            [
+                "rate" =>(float) $rate
+            ]
+        );
+
+        $rating->MyratingTran;
+        return response($rating);
     }
 }

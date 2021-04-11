@@ -10,5 +10,17 @@ export interface Rating {
   rate?: number,
   tot_users?: number,
   updated_at?: string,
-  user?: User
+  user?: User,
+  rating_tran?: RatingTran[],
+  myrating_tran?: RatingTran
+}
+
+export interface RatingTran {
+  id?: number,
+  rating_id?: number,
+  user_id?: number,
+  rate?: number,
+  updated_at?: string,
+  user?: User,
+  rating?: Rating
 }
