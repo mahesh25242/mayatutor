@@ -10,9 +10,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Image;
 use Illuminate\Support\Facades\Storage;
-
+use App\Mail\ReportAbuseMail;
 use App\Http\Resources\UserCollection;
-
+use Mail;
 
 class TeacherController extends Controller
 {
@@ -230,6 +230,19 @@ class TeacherController extends Controller
         $reportAbuse->reported_by = (Auth::id()) ? Auth::id() : 0;
         $reportAbuse->reported_by_name = $request->input("name", '');
         $reportAbuse->save();
+
+        $user = User::find($request->input("user_id", 0));
+        $dtails = [
+            "reportedBy" => $request->input("name", ''),
+            "info" => $request->input("info", '')
+        ];
+
+        $settings = \App\Setting::where("name", "contactMail")->get()->first();
+        if($settings && $settings->value){
+             Mail::to($settings->value)->send(new ReportAbuseMail($user,  $dtails));
+        }
+
+
         return response([
             'message' => 'successfully reported!', 'status' => 1
         ]);
