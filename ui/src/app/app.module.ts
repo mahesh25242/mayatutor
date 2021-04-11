@@ -13,6 +13,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { HeaderComponent } from './lay-out/header/header.component';
+import { AdminHeaderComponent } from './lay-out/header/admin-header/admin-header.component';
+
 import { FooterComponent } from './lay-out/footer/footer.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { ForgotPasswordComponent } from './sign-in/forgot-password/forgot-password.component';
@@ -46,6 +48,7 @@ var config = {
   declarations: [
     AppComponent,
     HeaderComponent,
+    AdminHeaderComponent,
     FooterComponent,
     SignInComponent,
     ForgotPasswordComponent,

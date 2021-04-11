@@ -212,4 +212,27 @@ class TeacherController extends Controller
         }
 
     }
+
+    public function reportAbuse(Request $request){
+        $validator = Validator::make($request->all(), [
+            'name' => ['required', 'string'],
+            'info' =>  ['required', 'string']
+        ]);
+
+
+        if($validator->fails()){
+            return response(['message' => 'Validation errors', 'errors' =>  $validator->errors(), 'status' => false], 422);
+        }
+
+        $reportAbuse = new \App\ReportAbuse;
+        $reportAbuse->user_id = $request->input("user_id", 0);
+        $reportAbuse->info = $request->input("info", '');
+        $reportAbuse->reported_by = (Auth::id()) ? Auth::id() : 0;
+        $reportAbuse->reported_by_name = $request->input("name", '');
+        $reportAbuse->save();
+        return response([
+            'message' => 'successfully reported!', 'status' => 1
+        ]);
+    }
 }
+

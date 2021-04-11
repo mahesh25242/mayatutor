@@ -34,7 +34,7 @@
                 <a class="d-none btn btn-sm btn-primary" target="_blank" [href]="'https://web.whatsapp.com/send?phone='+teacher.phone"> <fa-icon [icon]="faWhatsapp" ></fa-icon> Whats app</a>
                 <a class=" btn btn-primary btn-sm" target="_blank" [href]="'https://api.whatsapp.com/send?phone='+teacher.phone"> <fa-icon [icon]="faWhatsapp" ></fa-icon> Whats app</a>
               </ng-container>
-
+              <app-teacher-report-abuse [user]="teacher"></app-teacher-report-abuse>
             </div>
 
               <!-- <div class="col-6 pt-3 border-right">

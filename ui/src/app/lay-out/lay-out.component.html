@@ -1,4 +1,5 @@
-<app-header></app-header>
+<app-header *ngIf="!(isAdminRoute$ | async)"></app-header>
+<app-admin-header *ngIf="(isAdminRoute$ | async)"></app-admin-header>
 <div id="innerConatiner" class="animate__animated">
   <ng-content></ng-content>
 </div>

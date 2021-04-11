@@ -74,4 +74,7 @@ export class TeacherService {
     return this.http.post<any>(`/admin/teacher/toggleAutoApproval`, user);
   }
 
+  reportAbuse(postData: any = null){
+    return this.http.post<any>(`/teacher/reportAbuse`, postData);
+  }
 }

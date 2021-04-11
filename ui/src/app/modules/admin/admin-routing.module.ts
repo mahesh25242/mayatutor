@@ -78,15 +78,16 @@ const routes: Routes = [
           url: 'admin'
         },
       },
+      {
+        path: 'mail',
+        loadChildren: () => import('../mail/mail.module').then(m => m.MailModule),
+        canActivate: [AdminAuthGuard],
+      },
     ]
   },
 
 
-  {
-    path: 'mail',
-    loadChildren: () => import('../mail/mail.module').then(m => m.MailModule),
-    canActivate: [AdminAuthGuard],
-  },
+
 
 
 

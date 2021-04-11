@@ -1,0 +1,35 @@
+<button type="button" class="btn btn-danger" (click)="open(content)">Report</button>
+<ng-template #content let-modal>
+  <form [formGroup]="reportFrm" (submit)="sent(modal)">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Report about {{user.fname}}</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body" id="report-abuse-body">
+
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input type="text" class="form-control" id="name" formControlName="name"
+          [ngClass]="{'is-invalid': (f.name.errors && f.name.errors.error) }" ngbAutofocus>
+          <div *ngIf="f.name.errors && f.name.errors.error" class="invalid-feedback">
+            {{f.name.errors.error}}
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="name" class="form-label">More Information</label>
+          <textarea class="form-control" id="info" rows="7" formControlName="info"
+          [ngClass]="{'is-invalid': (f.info.errors && f.info.errors.error) }"></textarea>
+          <div *ngIf="f.info.errors && f.info.errors.error" class="invalid-feedback">
+            {{f.info.errors.error}}
+          </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
+      <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+  </form>
+</ng-template>

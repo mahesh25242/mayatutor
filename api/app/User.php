@@ -320,4 +320,9 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     {
         return $this->hasMany('App\RatingTran');
     }
+
+    public function ReportAbuse()
+    {
+        return $this->hasMany('App\ReportAbuse');
+    }
 }

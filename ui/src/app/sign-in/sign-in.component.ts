@@ -67,7 +67,10 @@ export class SignInComponent implements OnInit, OnDestroy {
 
       this.modal.dismiss('cancel click')
       Notiflix.Loading.Remove();
-      //this.router.navigate([`/${res.role_url}`]);
+      if(res?.role_url == 'admin'){
+        this.router.navigate([`/${res.role_url}`]);
+      }
+
     }, error=>{
       Notiflix.Loading.Remove();
         this.invalidlogin = true;

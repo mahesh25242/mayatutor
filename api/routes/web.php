@@ -48,6 +48,7 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
         });
 
         $router->get('course/{courseId}','CourseController@course');
+        $router->post('reportAbuse','TeacherController@reportAbuse');
     });
 
 

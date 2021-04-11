@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Event, NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
+import {  Event, NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { GeneralService } from '../lib/services';
 
 @Component({
   selector: 'app-lay-out',
@@ -7,10 +9,13 @@ import { Event, NavigationCancel, NavigationEnd, NavigationError, NavigationStar
   styleUrls: ['./lay-out.component.scss']
 })
 export class LayOutComponent implements OnInit {
+  isAdminRoute$: Observable<boolean>;
 
-  constructor(public router: Router) {
+  constructor(public router: Router,
+    private generalService: GeneralService
+) {
 
-
+    this.isAdminRoute$ = this.generalService.isAdminRoute$.asObservable();
 
     //
    }
