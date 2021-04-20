@@ -7,17 +7,18 @@
 </section>
 
 <app-bread-crumbs [hide]="true"></app-bread-crumbs>
-<div class="container">
+<div class="container position-relative">
+  <p class="demo-url">Demo video <a href="#"><fa-icon class="fa-icon-you" [icon]="faYoutube"></fa-icon> </a> </p>
   <form [formGroup]="editProfileFrm" *ngIf="(loggedUser$ | async) as loggedUser" (ngSubmit)="updateProfile()">
     <!-- common profile secion -->
     <div class="bg-white p-4 shadow-sm mb-4">
 <div class="row">
   <div class="col-md-3 col-lg-3">
-    <figure>
-    <img [src]="loggedUser.avatar" class="avatar-img img-thumbnail" />
+    <figure class="avathar-image" [style.background-image]="'url('+loggedUser.avatar+')'">
+   
   </figure>
     <button type="button" (click)="fileInput.click()" class="btn btn-primary avatar-up-btn mb-4">
-      <span>Change Photo</span>
+      <span>Change Photo </span>
       <input #fileInput type="file" (change)="onFileInput($event.target.files)" accept="image/*" style="display:none;" />
     </button>
     <p>Created At: {{ loggedUser.created_at |  date:'dd/MM/yy'}}</p>

@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-danger" (click)="open(content)">Report</button>
+<button type="button" class="btn btn-link btn-sm text-danger pl-0 " (click)="open(content)">click here to report</button>
 <ng-template #content let-modal>
   <form [formGroup]="reportFrm" (submit)="sent(modal)">
     <div class="modal-header">

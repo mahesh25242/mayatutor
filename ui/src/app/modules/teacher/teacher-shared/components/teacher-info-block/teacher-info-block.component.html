@@ -5,9 +5,10 @@
         <ng-container *ngIf="user$ | async else login">
         <div class="row">
           <div class="col-md-6 col-lg-6 border-right">
-            <div class="row">
-              <div class="col-6"><img [src]="teacher.avatar" [alt]="teacher.fname"></div>
-              <div class="col-6">
+            <div class="row m-0">
+              <div class="col-4 avathar-user" [style.background-image]="'url('+teacher.avatar+')'">
+              </div>
+              <div class="col-8">
                 <h5> {{ teacher.fname }} {{ teacher.lname}}</h5>
                 <label>Status:</label>
                 <h6 class="text-success">PAID</h6>
@@ -23,7 +24,7 @@
           <div class="col-md-6 col-lg-6 pl-4">
             <div class="row">
               <div class="col-12 pb-3">
-                <h6 class="d-block">Connect with</h6>
+                <h6 class="d-block mb-3">Connect with</h6>
                 <app-send-message-to-teacher
                 class="teacher-message-btn mr-2 mb-2"
                 *ngIf="teacher.email" [user]="teacher">
@@ -34,7 +35,9 @@
                 <a class="d-none btn btn-sm btn-primary" target="_blank" [href]="'https://web.whatsapp.com/send?phone='+teacher.phone"> <fa-icon [icon]="faWhatsapp" ></fa-icon> Whats app</a>
                 <a class=" btn btn-primary btn-sm" target="_blank" [href]="'https://api.whatsapp.com/send?phone='+teacher.phone"> <fa-icon [icon]="faWhatsapp" ></fa-icon> Whats app</a>
               </ng-container>
-              <app-teacher-report-abuse [user]="teacher"></app-teacher-report-abuse>
+              <hr>
+              <p class="mt-4">If you have any complaint regarding video, content, contact details, etc. against this User please <app-teacher-report-abuse [user]="teacher"></app-teacher-report-abuse> to us.</p>
+              
             </div>
 
               <!-- <div class="col-6 pt-3 border-right">

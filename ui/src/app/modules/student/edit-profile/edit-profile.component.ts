@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
 import Notiflix from "notiflix";
 import { BreadCrumbsService } from 'src/app/shared-module/components/bread-crumbs/bread-crumbs.component';
+import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 
 
 @Component({
@@ -17,6 +18,7 @@ import { BreadCrumbsService } from 'src/app/shared-module/components/bread-crumb
 export class EditProfileComponent implements OnInit, OnDestroy {
   loggedUser$: Observable<User>;
   editProfileFrm: FormGroup;
+  faYoutube = faYoutube;
   countries$:Observable<Country[]>;
   states$:Observable<State[]>;
   cities$:Observable<City[]>;

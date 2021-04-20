@@ -1,6 +1,8 @@
-<div *ngIf="(plans$ | async) as plans" class="row">
+<div *ngIf="(plans$ | async) as plans">
+
+  <!-- Mahesh's code -->
   <app-bread-crumbs [hide]="true"></app-bread-crumbs>
-  <div class="col" *ngFor="let plan of plans">
+  <div class="col  d-none" *ngFor="let plan of plans">
     <h3>{{plan.name}}</h3>
     <ng-container *ngIf="plan.features && plan.features.length">
       <p *ngFor="let feature of plan.features">
@@ -13,4 +15,74 @@
     </a>
     <span *ngIf="plan.my_user_plan" class="badge badge-primary">Current Plan</span>
   </div>
+
+<!-- Paraveen's code -->
+
+<section class="pricing p-0">
+  <div class="row m-0"> 
+  <div class="col-lg-4 grayBG pt-5 pl-4 pr-4">
+    <h4 class="mb-4">DEMO VIDEO</h4>
+    <iframe style="width: 100%; min-height: 402px;" src="https://www.youtube.com/embed/IyR_uYsRdPs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p class="mt-5">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, </p>
+<p class="mt-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, </p>
+  </div>
+  <div class="col-lg-8 pt-5">
+    <div class="row col-lg-8 pt-5 m-auto">
+      <!-- Free Tier -->
+      <div class="col-lg-5 mb-5">
+        <div class="card over-flow-hidden">
+          <div class="card-header warning-clr">
+            <h5 class="card-title text-uppercase text-center text-white">Free</h5>
+          </div>
+
+          <div class="card-body">
+            
+            <h2 class="card-price text-center"><span class="period">INR / USD</span> 0<span class="period">/Month</span></h2>
+            <hr>
+            <ul class="fa-ul">
+              <li><span class="fa-li"><fa-icon class="fa-icon-you" [icon]="faCheck"></fa-icon></span>Single User</li>
+              <li><span class="fa-li"><fa-icon class="fa-icon-you" [icon]="faCheck"></fa-icon></span>5GB Storage</li>
+              <li><span class="fa-li"><fa-icon class="fa-icon-you" [icon]="faCheck"></fa-icon></span>Unlimited Public Projects</li>
+              <li><span class="fa-li"><fa-icon class="fa-icon-you" [icon]="faCheck"></fa-icon></span>Community Access</li>
+              <li class="text-muted"><span class="fa-li"><fa-icon class="fa-icon-you" [icon]="faCheck"></fa-icon></span>Unlimited Private Projects</li>
+              <li class="text-muted"><span class="fa-li"><fa-icon class="fa-icon-you" [icon]="faCheck"></fa-icon></span>Dedicated Phone Support</li>
+              <li class="text-muted"><span class="fa-li"><fa-icon class="fa-icon-you" [icon]="faCheck"></fa-icon></span>Free Subdomain</li>
+              <li class="text-muted"><span class="fa-li"><fa-icon class="fa-icon-you" [icon]="faCheck"></fa-icon></span>Monthly Status Reports</li>
+            </ul>
+            <a href="#" class="btn btn-block btn-warning text-uppercase">GET IT FREE</a>
+          </div>
+        </div>
+      </div>
+      <!-- Plus Tier -->
+      
+      <!-- Pro Tier -->
+      <div class="col-lg-7">
+        <div class="card over-flow-hidden">
+          <div class="card-header blue-clr">
+            <h5 class="card-title text-uppercase text-center text-white">Pro</h5>
+          </div>
+          <div class="card-body">
+          
+            <h2 class="card-price text-center"><span class="period">INR</span> 49 <span class="period mr-3">/Year</span> <span class="period">( USD</span> 0.55 <span class="period">/Year )</span> </h2>
+            <hr>
+            <ul class="fa-ul">
+              <li><span class="fa-li"><fa-icon class="fa-icon-you" [icon]="faCheck"></fa-icon></span><strong>Unlimited Users</strong></li>
+              <li><span class="fa-li"><fa-icon class="fa-icon-you" [icon]="faCheck"></fa-icon></span>150GB Storage</li>
+              <li><span class="fa-li"><fa-icon class="fa-icon-you" [icon]="faCheck"></fa-icon></span>Unlimited Public Projects</li>
+              <li><span class="fa-li"><fa-icon class="fa-icon-you" [icon]="faCheck"></fa-icon></span>Community Access</li>
+              <li><span class="fa-li"><fa-icon class="fa-icon-you" [icon]="faCheck"></fa-icon></span>Unlimited Private Projects</li>
+              <li><span class="fa-li"><fa-icon class="fa-icon-you" [icon]="faCheck"></fa-icon></span>Dedicated Phone Support</li>
+              <li><span class="fa-li"><fa-icon class="fa-icon-you" [icon]="faCheck"></fa-icon></span><strong>Unlimited</strong> Free Subdomains</li>
+              <li><span class="fa-li"><fa-icon class="fa-icon-you" [icon]="faCheck"></fa-icon></span>Monthly Status Reports</li>
+            </ul>
+            <a href="#" class="btn btn-block btn-primary text-uppercase">Buy</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+
 </div>

@@ -1,10 +1,14 @@
 <div class="container pt-3">
+  <p class="demo-url">Demo video <a href="#"><fa-icon class="fa-icon-you" [icon]="faYoutube"></fa-icon> </a> </p>
+  <div class="clearFix"></div>
   <app-bread-crumbs [hide]="true"></app-bread-crumbs>
   <form [formGroup]="editProfileFrm" *ngIf="(loggedUser$ | async) as loggedUser" (ngSubmit)="updateProfile()">
     <div class="p-4 bg-white shadow-sm mb-4">
   <div class="row">
     <div class="col-md-3 col-lg-3 border-right">
-      <img [src]="loggedUser.avatar" class="avatar-img img-thumbnail" />
+      <figure class="student-avathar" [style.background-image]="'url('+loggedUser.avatar+')'">
+
+      </figure>
       <button type="button" (click)="fileInput.click()" class="btn btn-primary avatar-up-btn mt-3 mb-3">
         <span>Change Photo</span>
         <input #fileInput type="file" (change)="onFileInput($event.target.files)" accept="image/*" style="display:none;" />

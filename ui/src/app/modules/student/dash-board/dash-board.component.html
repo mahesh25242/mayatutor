@@ -1,31 +1,26 @@
 <div class="container pt-3"  *ngIf="(user$ | async) as user">
   <app-bread-crumbs [hide]="true"></app-bread-crumbs>
 <div class="row" *ngIf="(studentCourses$ | async) as studentCourses">
-  <div class="col-md-6 col-lg-6" *ngIf="studentCourses.length">
-    <div class="row">
-      <ng-container >
-        <app-assigned-course-block class="col-md-6 col-lg-6" *ngFor="let studentCourse of studentCourses" [studentCourse]="studentCourse"></app-assigned-course-block>
-      </ng-container>
-    </div>
-  </div>
-  <div [ngClass]="{'col-md-12 col-lg-12' : !studentCourses.length, 'col-md-6 col-lg-6' : studentCourses.length}">
-    <div class="p-4 bg-white shadow-sm">
-      <div class="row">
-        <div class="col-md-5 col-lg-5"><img [src]="user.avatar" class="avatar-img img-fluid" /></div>
-        <div class="col-md-7 col-lg-7">
-          <h6>{{ user.fname }} {{ user.lname }}</h6>
-          <address class="mb-2">
-            {{ user.address }}
-          </address>
-          {{ user.country.name }}
-          {{ user.state.name }}
-          {{ user.city.name }} - {{ user.pin }}
-          <b class="d-block mt-3">Mobile:</b>
-          <p> {{ user.phone }}</p>
-          <b class="d-block">Email:</b>
-        <p>{{ user.email }}</p>
-        </div>
+  <div [ngClass]="{'col-md-12 col-lg-12' : !studentCourses.length, 'col-md-12 col-lg-12' : studentCourses.length}">
+    <div class="p-4 bg-white shadow-sm mb-5">
+<div class="row">
+  <div class="col-md-8 col-lg-8">
+    <div class="row m-0">
+      <div class="col-md-4 col-lg-4 user-avathar" [style.background-image]="'url('+user.avatar+')'">
+       
       </div>
+      <div class="col-md-8 col-lg-8 pl-4">
+        <h6>{{ user.fname }} {{ user.lname }}</h6>
+        <address class="mb-2">
+          {{ user.address }}
+        </address>
+        {{ user.country.name }}
+        {{ user.state.name }}
+        {{ user.city.name }} - {{ user.pin }}
+        <b class="d-block mt-3">Mobile:</b>
+        <p> {{ user.phone }}</p>
+        <b class="d-block">Email:</b>
+      <p>{{ user.email }}</p>
       <div class="d-flex">
         <ngb-rating [(rate)]="currentRate"  [readonly]="true" [max]="5" *ngIf="user?.role_url == 'teacher'">
           <ng-template let-fill="fill" let-index="index">
@@ -35,31 +30,46 @@
 
         <a href="javascript:{}" routerLink="edit-profile" class="ml-auto btn text-primary">Edit <fa-icon [icon]="faEdit" ></fa-icon> </a>
       </div>
-      <hr />
-      <ng-container *ngIf="(courseStat$ | async) as courseStat">
-        <div *ngIf="courseStat" class="row m-0">
-          <div class="col-md-6 col-lg-6 text-center">
-            <label class="text-uppercase text-primary ">Total Course</label>
-            <h3>{{ courseStat?.course }}</h3>
-          </div>
-          <div class="col-md-6 col-lg-6 text-center">
-            <label class="text-uppercase text-primary ">Started</label>
-            <h3 class="text-success"> {{ courseStat?.startedCourse }}</h3>
-          </div>
-          <hr class="col-12 p-0">
-          <div class="col-md-6 col-lg-6 text-center">
-            <label class="text-uppercase text-primary">Not Started</label>
-            <h3 class="text-warning">{{ courseStat?.notStartedCourse }}</h3>
-          </div>
-          <div class="col-md-6 col-lg-6 text-center">
-            <label class="text-uppercase text-primary ">Completed</label>
-            <h3  class="text-info">{{ courseStat?.completedCourseCourse}}</h3>
-          </div>
-        </div>
-      </ng-container>
-
+      </div>
     </div>
   </div>
+  <div class="col-md-4 col-lg-4 border-left">
+    <ng-container *ngIf="(courseStat$ | async) as courseStat">
+      <div *ngIf="courseStat" class="row m-0">
+        <div class="col-md-6 col-lg-6 text-center">
+          <label class="text-uppercase text-primary ">Total Course</label>
+          <h3 class="mt-3">{{ courseStat?.course }}</h3>
+        </div>
+        <div class="col-md-6 col-lg-6 text-center">
+          <label class="text-uppercase text-primary ">Started</label>
+          <h3 class="text-success mt-3"> {{ courseStat?.startedCourse }}</h3>
+        </div>
+        <hr class="col-12 p-0 mb-4">
+        <div class="col-md-6 col-lg-6 text-center">
+          <label class="text-uppercase text-primary">Not Started</label>
+          <h3 class="text-warning mt-3">{{ courseStat?.notStartedCourse }}</h3>
+        </div>
+        <div class="col-md-6 col-lg-6 text-center">
+          <label class="text-uppercase text-primary ">Completed</label>
+          <h3  class="text-info mt-3">{{ courseStat?.completedCourseCourse}}</h3>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+ 
+</div>
+      
+    </div>
+  </div>
+  <div class="col-md-12 col-lg-12" *ngIf="studentCourses.length">
+    <h4 class="mb-4">My Courses</h4>
+    <div class="row">
+      <ng-container >
+        <app-assigned-course-block class="col-md-4 col-lg-4 mb-3" *ngFor="let studentCourse of studentCourses" [studentCourse]="studentCourse"></app-assigned-course-block>
+      </ng-container>
+    </div>
+  </div>
+  
 
 </div>
 

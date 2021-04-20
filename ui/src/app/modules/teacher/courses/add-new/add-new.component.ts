@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {  CourseService, TeacherService } from 'src/app/lib/services';
+import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import Notiflix from "notiflix";
 import { mergeMap, map } from 'rxjs/operators';
@@ -14,6 +15,7 @@ import { Course } from 'src/app/lib/interfaces';
 export class AddNewComponent implements OnInit {
   @Input() course: Course;
   searchFrm: FormGroup;
+  faYoutube = faYoutube;
   createCourseFrm: FormGroup;
   constructor(public modal: NgbActiveModal,
     private courseService: CourseService,

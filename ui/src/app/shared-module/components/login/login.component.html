@@ -1,10 +1,10 @@
-<div class="card shadow-sm">
+<div class="card shadow-sm mt-5">
     <i>
       <fa-icon [icon]="faUserGraduate" *ngIf="(type ==='student')"></fa-icon>
       <fa-icon [icon]="faUser" *ngIf="(type ==='teacher')"></fa-icon>
     </i>
     <div class="card-body">
-      <h3>
+      <h3 class="text-uppercase">
         {{ (type ==='student' ) ? 'Student' : 'Teacher'}}
       </h3>
       <a class="btn btn-primary btn-custom" [routerLink]="type+'/register'" >Register</a>
@@ -12,7 +12,7 @@
     <div class="card-footer">
       <div class="d-grid" [ngClass]="{ 'grd-col-2': type ==='student', 'grd-col-3': type ==='teacher'}">
         <h4 *ngIf="type ==='teacher'"><a routerLink="teacher/plans">SEE OUR PLANS</a></h4>
-        <p>Already registered Please login here </p>
+        <p class="text-left">Already registered Please login here </p>
         <h4>
           <app-login-link>
             <a href="javascript:{}">LOGIN</a>

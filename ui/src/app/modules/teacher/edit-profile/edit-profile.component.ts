@@ -3,6 +3,7 @@ import { CountryService, StateService, CityService, UserService } from 'src/app/
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/internal/Observable';
 import { Country, State, City, User } from 'src/app/lib/interfaces';
+import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { Subscription } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
 import Notiflix from "notiflix";
@@ -20,7 +21,7 @@ export class EditProfileComponent implements OnInit, OnDestroy {
   countries$:Observable<Country[]>;
   states$:Observable<State[]>;
   cities$:Observable<City[]>;
-
+  faYoutube = faYoutube;
 
 
   countrySubscription: Subscription;

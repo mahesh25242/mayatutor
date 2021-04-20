@@ -4,6 +4,8 @@
 <hr>
 <app-add-student></app-add-student>
 <hr>
+<p class="demo-url">Demo video <a href="#"><fa-icon class="fa-icon-you" [icon]="faYoutube"></fa-icon> </a> </p>
+
 <form class="form-inline mt-4" [formGroup]="searchFrm" (ngSubmit)="search()">
   <input type="text" class="form-control my-1 mr-sm-2" placeholder="Search" formControlName="q" />
   <button type="submit" class="btn btn-primary my-1">Search</button>

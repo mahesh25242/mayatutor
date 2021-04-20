@@ -1,3 +1,21 @@
 .card-body {
-    img { width:100%;}
+    h5 {
+        overflow: hidden;
+   /* display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    max-height: 52px;
+    min-height: 52px;*/
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    }
+}
+.card-header {
+    background-color: transparent;
+    max-height: 186px ;
+    overflow: hidden;
+    min-height: 186px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }

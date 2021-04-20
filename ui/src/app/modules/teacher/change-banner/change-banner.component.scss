@@ -1,9 +1,32 @@
-.banner{
-  min-height: 300px;
-  position:relative;
-  .btn-primary {
-    position: absolute;
-    bottom:30px;
-    right:30px;
+
+
+@media only screen and (max-width:780px) {
+  .banner{
+    min-height:120px;
+    position:relative;
+    position:relative;
+    background-repeat: no-repeat;
+    background-size:100%;
+    .btn-primary {
+      position: absolute;
+      bottom:30px;
+      right:30px;
+    }
   }
+  
+}
+
+@media only screen and (min-width:780px) {
+  .banner{
+    min-height:300px;
+    position:relative;
+    background-repeat: no-repeat;
+    background-size:100%;
+    .btn-primary {
+      position: absolute;
+      bottom:30px;
+      right:30px;
+    }
+  }
+  
 }

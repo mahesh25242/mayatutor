@@ -1,3 +1,12 @@
 .card-body {
     img { width:100%;}
 }
+.card-header{
+    background-color: transparent;
+    max-height: 186px;
+    overflow: hidden;
+    min-height: 186px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+ }

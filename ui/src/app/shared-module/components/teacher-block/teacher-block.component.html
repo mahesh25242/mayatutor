@@ -2,10 +2,10 @@
   <div class="card-body">
     <div class="row">
       <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
-        <img [src]="teacher.avatar" alt="avathar">
+        <div class="avathar-teacher" [style.background-image]="'url('+teacher.avatar+')'"></div>       
       </div>
       <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12">
-        <h5 class="text-left">{{ teacher.fname }} {{ teacher.lname }}</h5>
+        <h5 class="text-left overflowtext">{{ teacher.fname }} {{ teacher.lname }}</h5>
         <div class="d-grid grd-col-2 text-left">
           <div>Tutor</div>
           <div *ngIf="teacher.subject && teacher.subject.length">Sub: <span *ngFor="let subject of teacher.subject; let last = last">{{ subject.name }} <i *ngIf="!last">, </i> </span></div>
