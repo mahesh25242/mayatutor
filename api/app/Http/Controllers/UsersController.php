@@ -698,7 +698,8 @@ class UsersController extends Controller
         $rate = $request->input("rate", 0);
         $rating = \App\Rating::where("user_id", $user_id)->get()->first();
         if($rating){
-            $rating->rate = $rating->rate - $rating->MyratingTran->rate;
+            if($rating->MyratingTran)
+                $rating->rate = $rating->rate - $rating->MyratingTran->rate;
             $rating->rate += (float) $rate ;
             if(!$rating->MyratingTran)
                 ++$rating->tot_users ;
