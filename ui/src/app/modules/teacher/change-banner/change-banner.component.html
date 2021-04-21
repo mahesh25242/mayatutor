@@ -1,4 +1,4 @@
-<section  *ngIf="(user$ | async) as user" class="banner"  [style.background]="'url(' + user.teacher_banner?.img + ')'">
+<section  *ngIf="(user$ | async) as user" class="banner"  [style.background-image]="'url(' + user.teacher_banner?.img + ')'">
 
   <button type="button" (click)="fileInput.click()" class="btn btn-primary mt-5 float-right" *ngIf="!teacher">
     <span>Change Banner</span>

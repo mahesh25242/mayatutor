@@ -16,15 +16,14 @@
   </div>
 </div>
 <div class="container">
-<div class="row m-0 pt-3 bg-white shadow-sm mt-3 pb-3">
+<div class="row m-0 pt-3 profile-bg shadow-sm mt-3 pb-3">
   <div class="col-md-6 col-lg-6">
 <div class="row">
-  <div class="col-md-4 col-lg-4">
-    <figure>
-      <img [src]="user.avatar" alt="avatar" width="230" class="img-thumbnail">
+  <div class="col-md-5 col-lg-5">
+    <figure class="user-avathar" [style.background-image]="'url('+user.avatar+')'">      
     </figure>
   </div>
-  <div class="col-md-8 col-lg-8">
+  <div class="col-md-7 col-lg-7">
 <h4 class="text-capitalize">  {{ user.fname }} {{ user.lname }} </h4>
 <app-rating [rating]="user.rating" [readonly]="true"></app-rating>
 
@@ -34,83 +33,36 @@
 {{ user.state?.name }}
 {{ user.city?.name }} - {{ user.pin }}</p>
 <app-custom-url [shareOnly]="true"></app-custom-url>
+<div class="mb-2">Active From: {{ user.created_at | date:'medium' }}</div>
+<div *ngIf="user.last_login?.created_at_human">Last Login: {{ user.last_login?.created_at_human }}</div>
  </div>
 </div>
   </div>
   <div class="col-md-6 col-lg-6">
-    <div class="row">
-      <div class="col-md-6">
-        <address>
-          <h5 class="mb-1">Address</h5>
-          {{ user.address }}
-          {{ user.country?.name }}
-          {{ user.state?.name }}
-          {{ user.city?.name }} - {{ user.pin }}
-        </address>
-
-        <h6 *ngIf="isDashBoard">Mobile: {{ user.phone }}</h6>
-      </div>
-      <div class="col-md-6">
-        <div class="mb-2">Active From: {{ user.created_at | date:'medium' }}</div>
-        <div *ngIf="user.last_login?.created_at_human">Last Login: {{ user.last_login?.created_at_human }}</div>
-        <ng-container *ngIf="!isDashBoard">
-
-            <app-login-link *ngIf="!user.email">
-              <button class="btn btn-sm btn-primary"
-              placement="top"
-              ngbTooltip="Only logged user can contact teacher">
-                Message
-                <fa-icon [icon]="faLock" *ngIf="!user.email && !user.phone"></fa-icon>
-              </button>
-            </app-login-link>
-
-            <app-send-message-to-teacher
-            class="teacher-message-btn  btn-sm mr-3 mb-2"
-            *ngIf="user.email" [user]="user">
-              Message
-            </app-send-message-to-teacher>
-
-            <app-login-link *ngIf="!user.phone">
-              <button class="btn btn-sm btn-primary ml-2"
-              placement="top"
-              ngbTooltip="Only logged user can contact teacher">
-              <fa-icon [icon]="faWhatsapp" ></fa-icon> Whats app
-                <fa-icon [icon]="faLock" *ngIf="!user.email && !user.phone"></fa-icon>
-              </button>
-            </app-login-link>
-
-            <app-login-link *ngIf="!user.phone">
-              <button class="btn btn-sm btn-primary mt-2"
-              placement="top"
-              ngbTooltip="Only logged user can contact teacher">
-                Payment
-                <fa-icon [icon]="faLock" *ngIf="!user.email && !user.phone"></fa-icon>
-              </button>
-            </app-login-link>
-
-
-
-
-
-          <ng-container *ngIf="user.phone">
-            <a class="d-none btn btn-sm btn-primary" target="_blank" [href]="'https://web.whatsapp.com/send?phone='+user.phone"> <fa-icon [icon]="faWhatsapp" ></fa-icon> Whats app</a>
-            <a class="btn btn-sm btn-primary" target="_blank" [href]="'https://api.whatsapp.com/send?phone='+user.phone"> <fa-icon [icon]="faWhatsapp" ></fa-icon> Whats app</a>
-          </ng-container>
-        </ng-container>
-        <h6 class="mt-3" *ngIf="isDashBoard">Email: <a [href]="'mailto:'+user.email">{{ user.email }}</a></h6>
-      </div>
-
-
-    </div>
+ 
     <div *ngIf="user.email && user.phone && user?.teacher_payment_info">
       <div class="row">
         <div class="col">
+          <address>
+            <h5 class="mb-1">Address</h5>
+            {{ user.address }}
+            {{ user.country?.name }}
+            {{ user.state?.name }}
+            {{ user.city?.name }} - {{ user.pin }}
+          </address>
+  
+          <h6 *ngIf="isDashBoard">Mobile: {{ user.phone }}</h6>
+          <h6 class="mt-3" *ngIf="isDashBoard">Email: <a [href]="'mailto:'+user.email">{{ user.email }}</a></h6>
+          <h5>Account Details</h5>
             <ul class="account-details pt-2">
               <li>Account Name: {{ user?.teacher_payment_info?.account_name }}</li>
               <li>Bank Name: {{ user?.teacher_payment_info?.bank_name }}</li>
               <li>Account Number: {{ user?.teacher_payment_info?.account_number }}</li>
               <li>IFSC Code: {{ user?.teacher_payment_info?.ifsc_code }}</li>
             </ul>
+           
+
+        
         </div>
         <div class="col">
           <div class="d-flex"> 
@@ -131,17 +83,64 @@
 </div>
 
     <div class="row m-0 pt-3 bg-white shadow-sm mt-3 pb-3 mb-5">
-      <div class="col-md-4">
-        <h5>Subject / Syllabus</h5>
-        <span *ngFor="let subject of user.subject; let last = last">{{ subject.name }} <i *ngIf="!last">, </i> </span>
+      <div class="col-md-3">
+        <label>Subject / Syllabus</label>
+        <h5 *ngFor="let subject of user.subject; let last = last">{{ subject.name }} <i *ngIf="!last">, </i> </h5>
+      </div>
+      <div class="col-md-2">
+        <label>Experiance</label>
+        <h5 [innerHTML]="user.teacher_info?.experiance"></h5>
+      </div>
+      <div class="col-md-3">
+        <label>Education</label>
+        <h5 [innerHTML]="user.teacher_info?.education?.name"></h5>        
       </div>
       <div class="col-md-4">
-        <h5>Experiance</h5>
-        <p [innerHTML]="user.teacher_info?.experiance"></p>
-      </div>
-      <div class="col-md-4">
-        <h5>Education</h5>
-        <p [innerHTML]="user.teacher_info?.education?.name"></p>
+        <label class="d-block">Contact to Tutor</label>
+        <ng-container *ngIf="!isDashBoard">
+
+          <app-login-link *ngIf="!user.email">
+            <button class="btn btn-sm btn-primary"
+            placement="top"
+            ngbTooltip="Only logged user can contact teacher">
+              Message
+              <fa-icon [icon]="faLock" *ngIf="!user.email && !user.phone"></fa-icon>
+            </button>
+          </app-login-link>
+
+          <app-send-message-to-teacher
+          class="teacher-message-btn  btn-sm mb-2"
+          *ngIf="user.email" [user]="user">
+            Message
+          </app-send-message-to-teacher>
+
+          <app-login-link *ngIf="!user.phone">
+            <button class="btn btn-sm btn-primary ml-2"
+            placement="top"
+            ngbTooltip="Only logged user can contact teacher">
+            <fa-icon [icon]="faWhatsapp" ></fa-icon> Whats app
+              <fa-icon [icon]="faLock" *ngIf="!user.email && !user.phone"></fa-icon>
+            </button>
+          </app-login-link>
+
+          <app-login-link *ngIf="!user.phone">
+            <button class="btn btn-sm btn-primary ml-2"
+            placement="top"
+            ngbTooltip="Only logged user can contact teacher">
+              Payment
+              <fa-icon [icon]="faLock" *ngIf="!user.email && !user.phone"></fa-icon>
+            </button>
+          </app-login-link>
+
+
+
+
+
+        <ng-container *ngIf="user.phone">
+          <a class="d-none btn btn-sm btn-primary" target="_blank" [href]="'https://web.whatsapp.com/send?phone='+user.phone"> <fa-icon [icon]="faWhatsapp" ></fa-icon> Whats app</a>
+          <a class="btn btn-sm btn-primary" target="_blank" [href]="'https://api.whatsapp.com/send?phone='+user.phone"> <fa-icon [icon]="faWhatsapp" ></fa-icon> Whats app</a>
+        </ng-container>
+      </ng-container>
       </div>
     </div>
 
@@ -152,16 +151,16 @@
         <ngb-tab>
           <ng-template ngbTabTitle>All Courses</ng-template>
           <ng-template ngbTabContent >
-            <div *ngFor="let course of courses?.data">
-              <app-course-block [course]="course" class="row pt-4"></app-course-block>
+            <div class="row pt-5" >
+              <app-course-block class="col-md-4 col-lg-4 mb-3" *ngFor="let course of courses?.data" [course]="course"></app-course-block>
             </div>
           </ng-template>
         </ngb-tab>
         <ngb-tab>
           <ng-template ngbTabTitle>New Courses</ng-template>
           <ng-template ngbTabContent>
-            <div *ngFor="let course of courses?.data | slice:0:2">
-              <app-course-block [course]="course" class="row pt-4"></app-course-block>
+            <div class="row pt-5" >
+              <app-course-block class="col-md-4 col-lg-4 mb-3" *ngFor="let course of courses?.data | slice:0:2" [course]="course" ></app-course-block>
             </div>
           </ng-template>
         </ngb-tab>

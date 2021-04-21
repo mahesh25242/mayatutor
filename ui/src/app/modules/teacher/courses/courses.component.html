@@ -1,6 +1,8 @@
 <div class="container-fluid pt-4">
-<h3 class="mb-4">Courses</h3>
+  <p class="demo-url">Demo video <a href="#"><fa-icon class="fa-icon-you" [icon]="faYoutube"></fa-icon> </a> </p>
 
+<h3 class="mb-4">Courses</h3>
+<div class="clearFix"></div>
 <app-bread-crumbs [hide]="true"></app-bread-crumbs>
 <button class="btn btn-primary float-right mb-3" (click)="addNew()">Add New</button>
 <form class="form-inline" [formGroup]="searchFrm" (ngSubmit)="searchCourse()">

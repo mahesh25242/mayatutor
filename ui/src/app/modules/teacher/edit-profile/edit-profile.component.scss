@@ -6,3 +6,26 @@
     background-color:$primaryColor;
     color:#fff;
   }
+  .demo-url {
+    position: absolute;
+    right: 20px;
+    top: -57px;
+    font-size: 18px;
+    color: #007bff;
+}
+::ng-deep {
+.fa-icon-you {
+    color: red;
+    font-size: 34px;
+    margin-left: 15px;
+    position: relative;
+    top: 7px;
+}
+}
+.avathar-image {
+    background-repeat: no-repeat;
+    min-height:240px;
+    border-radius: 5px;
+    background-size: cover;
+    background-position: center;
+}

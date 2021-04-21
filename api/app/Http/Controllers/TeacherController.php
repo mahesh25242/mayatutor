@@ -36,7 +36,7 @@ class TeacherController extends Controller
 
     public function teacher($url =''){
         $user = \App\User::withCount("teacherStudent as student_count")
-        ->with(["rating", "teacherInfo", "subject", "city", "teacherBanner","teacherPaymentInfo"])->whereHas("userRole", function ($qry){
+        ->with(["rating", "teacherInfo", "subject", "city", "country", "state", "teacherBanner","teacherPaymentInfo"])->whereHas("userRole", function ($qry){
             $qry->where("role_id", 2);
         })->where("url", $url)->get()->first();
 
@@ -90,6 +90,7 @@ class TeacherController extends Controller
         if($request->hasFile('qr_code1')){
             $postFlName = 'qr_code1';
             $validator = Validator::make($request->all(), [
+                'qr_code1' => 'max:1024',
                // 'qr_code1' => ['dimensions:max_width=100,max_height=200', 'image'],
             ],[],[
                 'qr_code1' => 'QR Code 1',
@@ -103,6 +104,7 @@ class TeacherController extends Controller
         }else if($request->hasFile('qr_code2')){
             $postFlName = 'qr_code2';
             $validator = Validator::make($request->all(), [
+                'qr_code2' => 'max:1024',
               //  'qr_code2' => ['dimensions:max_width=100,max_height=200', 'image'],
             ],[],[
                 'qr_code2' => 'QR Code 2',
@@ -122,14 +124,20 @@ class TeacherController extends Controller
             $request->file($postFlName)->move($destinationPath, $qrCodeImg);
 
 
-            $img = Image::make($destinationPath.'/'.$qrCodeImg);//->resize(1700, 200);
-            $img->save($destinationPath.'/'.$qrCodeImg, 60);
+            //$img = Image::make($destinationPath.'/'.$qrCodeImg);//->resize(1700, 200);
+            //$img->save($destinationPath.'/'.$qrCodeImg, 60);
+
+            if($request->input("id", null) && Auth::user()->isAdmin()->exists()){
+                $userId = ($request->input("id", null)) ? $request->input("id", null) : Auth::id();
+            }else{
+                $userId = Auth::id();
+            }
             $teacherPaymentInfo = \App\TeacherPaymentInfo::updateOrCreate(
                 [
-                    "user_id" => Auth::id(),
+                    "user_id" => $userId,
                 ],
                 [
-                    "user_id" => Auth::id(),
+                    "user_id" => $userId,
                     $postFlName => $qrCodeImg
                 ]
             );

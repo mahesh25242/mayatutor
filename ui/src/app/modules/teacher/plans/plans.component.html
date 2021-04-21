@@ -1,6 +1,8 @@
-<div *ngIf="(plans$ | async) as plans" class="row">
+<div *ngIf="(plans$ | async) as plans">
+
+  <!-- Mahesh's code -->
   <app-bread-crumbs [hide]="true"></app-bread-crumbs>
-  <div class="col" *ngFor="let plan of plans">
+  <div class="col  d-none" *ngFor="let plan of plans">
     <h3>{{plan.name}}</h3>
     <ng-container *ngIf="plan.features && plan.features.length">
       <p *ngFor="let feature of plan.features">
@@ -13,4 +15,46 @@
     </a>
     <span *ngIf="plan.my_user_plan" class="badge badge-primary">Current Plan</span>
   </div>
+
+<!-- Paraveen's code -->
+
+<section class="pricing p-0">
+  <div class="row m-0">
+  <div class="col-lg-4 grayBG pt-5 pl-4 pr-4">
+    <h4 class="mb-4">DEMO VIDEO</h4>
+    <app-player [videoSources]="video"></app-player>
+<p class="mt-5">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, </p>
+<p class="mt-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, </p>
+  </div>
+  <div class="col-lg-8 pt-5">
+    <div class="row col-lg-8 pt-5 m-auto">
+      <!-- Free Tier -->
+      <div class="" [ngClass]="{'col-lg-5 mb-5': !plan.price, 'col-lg-7 mb-7': plan.price}" *ngFor="let plan of plans">
+        <div class="card over-flow-hidden">
+          <div class="card-header " [ngClass]="{'warning-clr': !plan.price, 'blue-clr': plan.price}">
+            <h5 class="card-title text-uppercase text-center text-white">{{plan.name}}</h5>
+          </div>
+
+          <div class="card-body">
+
+            <h2 class="card-price text-center"><span class="period">INR / USD</span> {{plan.price}}<span class="period">/Month</span></h2>
+            <hr>
+            <ul class="fa-ul" *ngIf="plan.features && plan.features.length">
+              <li *ngFor="let feature of plan.features"><span class="fa-li"><fa-icon class="fa-icon-you" [icon]="faCheck"></fa-icon></span>{{feature}}</li>
+            </ul>
+              <a [routerLink]="plan.id" class="btn btn-block text-uppercase"
+               *ngIf="!plan.my_user_plan" [ngClass]="{'btn-primary': plan.price, 'btn-warning': !plan.price}">
+              {{ plan.price > 0 ? 'Buy' : 'GET IT FREE'}}
+              </a>
+          </div>
+        </div>
+      </div>
+      <!-- Plus Tier -->
+
+    </div>
+  </div>
+</div>
+</section>
+
+
 </div>

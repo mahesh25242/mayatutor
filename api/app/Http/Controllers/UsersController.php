@@ -227,8 +227,12 @@ class UsersController extends Controller
             return response(['message' => 'Validation errors', 'errors' =>  $validator->errors(), 'status' => false], 422);
         }
 
+        if($request->input("id", null) && Auth::user()->isAdmin()->exists()){
+            $user = \App\User::find($request->input("id", null));
+        }else{
+            $user = \App\User::find(Auth::id());
+        }
 
-        $user = \App\User::find(Auth::id());
         $user->fname = $request->input("fname", '');
         $user->lname = $request->input("lname",'');
         $user->email = $request->input("email",'');
@@ -363,15 +367,29 @@ class UsersController extends Controller
     public function updateAvatar(Request $request){
         $status = false;
         if ($request->hasFile('avatharImg')) {
+            $validator = Validator::make($request->all(), [
+                'avatharImg' => 'max:1024', //5MB
+            ]);
+
+            if($validator->fails()){
+                return response(['message' => 'Validation errors', 'errors' =>  $validator->errors(), 'status' => false], 422);
+            }
+
             $status = true;
             $avatharName = sprintf("%s.%s",time(), $request->file('avatharImg')->extension());
             $destinationPath = "assets/avatar";
             $request->file('avatharImg')->move($destinationPath, $avatharName);
 
 
-            $img = Image::make($destinationPath.'/'.$avatharName)->resize(126, 139);
+            $img = Image::make($destinationPath.'/'.$avatharName);//->resize(126, 139);
             $img->save($destinationPath.'/'.$avatharName, 60);
-            $user = \App\User::find(Auth::id());
+            if($request->input("id", null) && Auth::user()->isAdmin()->exists()){
+                $user = \App\User::find($request->input("id", null));
+            }else{
+                $user = \App\User::find(Auth::id());
+            }
+
+
             $user->avatar = $avatharName;
             $user->save();
             return response([
@@ -701,7 +719,8 @@ class UsersController extends Controller
         $rate = $request->input("rate", 0);
         $rating = \App\Rating::where("user_id", $user_id)->get()->first();
         if($rating){
-            $rating->rate = $rating->rate - $rating->MyratingTran->rate;
+            if($rating->MyratingTran)
+                $rating->rate = $rating->rate - $rating->MyratingTran->rate;
             $rating->rate += (float) $rate ;
             if(!$rating->MyratingTran)
                 ++$rating->tot_users ;

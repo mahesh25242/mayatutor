@@ -7,3 +7,19 @@
     border-radius: $rdius;
     padding:7px 20px;
 }
+.avathar-teacher {
+    width: 100%;
+    min-height:160px;
+    display: block;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-height: 110px;
+    border-radius: 5px;
+}
+.overflowtext {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    white-space: nowrap;
+}

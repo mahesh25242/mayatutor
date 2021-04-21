@@ -13,16 +13,16 @@
     </ng-container>
   </div>
 </app-teacher-info-block>
-<h4 class="mt-3">{{course.name}}</h4>
+<h4 class="mt-5">{{course.name}}</h4>
 <ng-container *ngIf="course.course_tag && course.course_tag.length">
-  <span *ngFor="let course_tag of course.course_tag">
+  <i *ngFor="let course_tag of course.course_tag">
     {{course_tag.tag_name}}
-  </span>
+  </i>
 </ng-container>
-<p [innerHTML]="course.description"></p>
-<div class="card mt-4 mb-4">
+<p class="mt-3" [innerHTML]="course.description"></p>
+<div class="card mt-5 mb-4 alert alert-success">
   <div class="card-body">
-    <h6 class="card-title">NEWS UPDATES</h6>
+    <h6 class="card-title">NEWS / NOTICE BOARD</h6>
     <p [innerHTML]="course.news"></p>
   </div>
 </div>

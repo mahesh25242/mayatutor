@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, Subscription } from 'rxjs';
 import { User, UserWithPagination } from 'src/app/lib/interfaces';
@@ -19,6 +20,7 @@ import { StudentPaymentComponent } from './student-payment/student-payment.compo
 })
 export class StudentsComponent implements OnInit, OnDestroy {
   faTrash = faTrash;
+  faYoutube = faYoutube;
   searchFrm: FormGroup;
   users$: Observable<UserWithPagination>;
 

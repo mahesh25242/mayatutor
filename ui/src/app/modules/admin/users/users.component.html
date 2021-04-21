@@ -30,7 +30,7 @@
           <th *ngIf="type=='teacher'">
             Students
           </th>
-          <th>
+          <th *ngIf="type=='teacher'">
             Details
           </th>
           <th>
@@ -64,7 +64,7 @@
             <td *ngIf="type=='teacher'" data-label="Students">
               {{ item.student_count }}
             </td>
-            <td data-label="Details">
+            <td data-label="Details" *ngIf="type=='teacher'">
               <a href="javascript:{}" target="_blank" [routerLink]="['/'+type+'/edit-profile/']"  [queryParams]="{ id: item.id, type:type  }">Edit</a>
             </td>
             <td data-label="Delete">

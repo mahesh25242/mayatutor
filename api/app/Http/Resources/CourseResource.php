@@ -38,7 +38,7 @@ class CourseResource extends JsonResource
             ]),
             $this->mergeWhen(
                 ($this->latestCourseApprovalRequest->status == 1 ||
-                (Auth::user()->isAdmin()->exists() || $this->created_by == Auth::user()->id) ),
+                (Auth::check() && (Auth::user()->isAdmin()->exists() || $this->created_by == Auth::user()->id)) ),
                 [
                     'course_module' => CourseModuleResource::collection($this->whenLoaded('courseModule')),
                 ]

@@ -5,6 +5,7 @@ import { Observable, Subscription } from 'rxjs';
 import { Course, CourseWithPagination } from 'src/app/lib/interfaces';
 import {  CourseService, TeacherService } from 'src/app/lib/services';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 import Notiflix from "notiflix";
 import { mergeMap } from 'rxjs/operators';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -18,6 +19,7 @@ import { BreadCrumbsService } from 'src/app/shared-module/components/bread-crumb
 export class CoursesComponent implements OnInit, OnDestroy {
   faEdit = faEdit;
   faTrash = faTrash;
+  faYoutube = faYoutube;
   courses$: Observable<CourseWithPagination>;
   deleteCouseSuScr: Subscription;
 

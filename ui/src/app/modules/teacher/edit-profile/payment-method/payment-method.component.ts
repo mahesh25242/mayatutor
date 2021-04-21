@@ -5,8 +5,8 @@ import Notiflix from "notiflix";
 import { mergeMap } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-payment-method',
-  //selector: '[formGroup] app-payment-method,[formGroupName] app-payment-method',
+  //selector: 'app-payment-method',
+  selector: '[formGroup] app-payment-method,[formGroupName] app-payment-method',
   templateUrl: './payment-method.component.html',
   styleUrls: ['./payment-method.component.scss']
 })
@@ -35,6 +35,7 @@ export class PaymentMethodComponent implements OnInit {
 
     const formData = new FormData();
     formData.append(`${flName}`, files.item(0));
+    formData.append(`id`, this.f.user_id.value);
     //avatar-img
     this.teacherService.updatePaymentQRCode(formData).pipe(mergeMap(res=>{
       return this.userService.authUser();

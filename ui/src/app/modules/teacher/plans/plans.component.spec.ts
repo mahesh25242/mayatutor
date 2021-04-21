@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
+import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { PlansComponent } from './plans.component';
 
 describe('PlansComponent', () => {
@@ -23,3 +23,7 @@ describe('PlansComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+export class AppComponent {
+  faCheck = faCheck;
+  faTimes = faTimes;
+}
