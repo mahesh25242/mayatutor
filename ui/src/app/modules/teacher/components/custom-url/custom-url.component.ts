@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { faCopy } from '@fortawesome/free-solid-svg-icons';
 import {faFacebook, faWhatsapp, faLinkedin, faTelegram } from '@fortawesome/free-brands-svg-icons';
 import { UserService } from 'src/app/lib/services';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { User } from 'src/app/lib/interfaces';
 import { map } from 'rxjs/operators';
 import { environment }  from '../../../../../environments/environment';
@@ -14,6 +14,7 @@ import { environment }  from '../../../../../environments/environment';
 })
 export class CustomUrlComponent implements OnInit {
   @Input() shareOnly:boolean;
+  @Input() user:Observable<User>;
   faWhatsapp = faWhatsapp;
   faFacebook  = faFacebook;
   faLinkedin  = faLinkedin;
@@ -24,11 +25,20 @@ export class CustomUrlComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    this.user$ = this.userService.getloggedUser.pipe(map(res=>{
-      if(res && res?.url)
-        this.custmUrl  = `${environment.siteAddress}/${res.url}`;
-      return res;
-    }));
+    if(this.user){
+      this.user$ = this.user.pipe(map(res=>{
+        if(res && res?.url)
+          this.custmUrl  = `${environment.siteAddress}/${res.url}`;
+        return res;
+      }));
+    }else{
+      this.user$ = this.userService.getloggedUser.pipe(map(res=>{
+        if(res && res?.url)
+          this.custmUrl  = `${environment.siteAddress}/${res.url}`;
+        return res;
+      }));
+    }
+
   }
 
 }

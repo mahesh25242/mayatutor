@@ -12,6 +12,8 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { CoursesComponent } from './courses/courses.component';
 import { CoursesResolver } from './courses/courses-resolver';
 import { UsersComponent } from './users/users.component';
+
+
 import { UsersResolver } from './users/users-resolver';
 import { DetailsComponent } from './users/details/details.component';
 import { CourseDetailComponent } from './courses/course-detail/course-detail.component';
@@ -21,8 +23,12 @@ import { LaunchModuleResolver } from './courses/course-detail/launch-module/laun
 import { RejectMessageComponent } from './courses/course-detail/reject-message/reject-message.component';
 
 
+
 @NgModule({
-  declarations: [AdminHomeComponent, DashBoardComponent, EditProfileComponent, CoursesComponent, UsersComponent, DetailsComponent, CourseDetailComponent, LaunchModuleComponent, RejectMessageComponent],
+  declarations: [AdminHomeComponent, DashBoardComponent,
+    EditProfileComponent, CoursesComponent, UsersComponent,
+    DetailsComponent, CourseDetailComponent,
+    LaunchModuleComponent, RejectMessageComponent ],
   imports: [
     CommonModule,
     SharedModuleModule,

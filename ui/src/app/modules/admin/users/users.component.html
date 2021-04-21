@@ -7,6 +7,7 @@
     <button type="button" class="btn btn-outline-secondary my-1" (click)="resetSearch()">Clear</button>
   </form>
 
+
   <ng-container  *ngIf="(users$ | async ) as users">
     <table class="table table-striped">
       <thead>
@@ -44,7 +45,7 @@
               {{ i+1 }}
             </td>
             <td data-label="Name">
-              {{ item.fname }} {{ item.lname }}
+              <a href="javascript:{}" (click)="details(item)">{{ item.fname }} {{ item.lname }}</a>
             </td>
             <td data-label="Invoice">
                 <a href="javascript:{}">View</a>
@@ -64,7 +65,7 @@
               {{ item.student_count }}
             </td>
             <td data-label="Details">
-              <a href="javascript:{}" (click)="details(item)">Details</a>
+              <a href="javascript:{}" target="_blank" [routerLink]="['/'+type+'/edit-profile/']"  [queryParams]="{ id: item.id, type:type  }">Edit</a>
             </td>
             <td data-label="Delete">
               <a href="javascript:{}" (click)="deleteUser(item)"

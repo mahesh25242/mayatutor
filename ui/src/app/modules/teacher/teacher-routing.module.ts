@@ -15,12 +15,13 @@ import { ListTeachersResolver } from './list-teachers/list-teachers-resolver';
 import { StudentsResolver } from './students/students-resolver';
 import { StudentsComponent } from './students/students.component';
 import { PlanPurchaseComponent } from './plan-purchase/plan-purchase.component';
+import { AdminOrTeacherAuthGuard } from 'src/app/lib/guard/adminOrTeacherAuth.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: TeacherHomeComponent,
-    canActivate: [TeacherAuthGuard],
+    canActivate: [AdminOrTeacherAuthGuard],
     children:[
       {
         path: '',

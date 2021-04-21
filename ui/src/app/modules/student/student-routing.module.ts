@@ -8,13 +8,14 @@ import { StudentHomeComponent } from './student-home.component';
 
 import { LaunchModuleComponent } from './launch-module/launch-module.component';
 import { LaunchModuleResolver } from './launch-module/launch-module.resolver';
+import { AdminOrStudentAuthGuard } from 'src/app/lib/guard/adminOrStudentAuth.guard';
 
 
 const routes: Routes = [
   {
     path: '',
     component: StudentHomeComponent,
-    canActivate: [StudentAuthGuard],
+    canActivate: [AdminOrStudentAuthGuard],
     children:[
       {
         path: '',

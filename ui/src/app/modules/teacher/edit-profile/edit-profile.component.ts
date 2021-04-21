@@ -3,10 +3,11 @@ import { CountryService, StateService, CityService, UserService } from 'src/app/
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/internal/Observable';
 import { Country, State, City, User } from 'src/app/lib/interfaces';
-import { Subscription } from 'rxjs';
+import { of, Subscription } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
 import Notiflix from "notiflix";
 import { BreadCrumbsService } from 'src/app/shared-module/components/bread-crumbs/bread-crumbs.component';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -31,7 +32,8 @@ export class EditProfileComponent implements OnInit, OnDestroy {
     private cityService: CityService,
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private breadCrumbsService: BreadCrumbsService) { }
+    private breadCrumbsService: BreadCrumbsService,
+    private route : ActivatedRoute) { }
 
     get f() { return this.editProfileFrm.controls; }
   ngOnInit(): void {
@@ -77,7 +79,8 @@ export class EditProfileComponent implements OnInit, OnDestroy {
     });
 
     this.stateSubscription = this.f.state_id.valueChanges.subscribe(res=>{
-      this.cities$ = this.cityService.cities(res.id);
+      if(res?.id)
+        this.cities$ = this.cityService.cities(res?.id);
     });
 
     this.changePassCheckSubScr = this.f.isChanegPassword.valueChanges.subscribe(res=>{
@@ -91,8 +94,19 @@ export class EditProfileComponent implements OnInit, OnDestroy {
 
     })
 
-    this.loggedUser$ = this.userService.getloggedUser.pipe(map(res=>{
+    this.loggedUser$ = this.userService.getloggedUser.pipe(mergeMap(res=>{
+
+      if(res?.role_url == 'admin')
+        return this.route.queryParams.pipe(mergeMap(qp=>{
+          return this.userService.getUser(qp?.id, `admin/${qp?.type}`);
+        }));
+      else
+        return of(res);
+    }),map(res=>{
+
       if(res){
+
+
         this.breadCrumbsService.bcs$.next([
           {
             url: '/',
@@ -102,7 +116,6 @@ export class EditProfileComponent implements OnInit, OnDestroy {
             name: `Edit ${ res.fname } Profile`,
           }
         ]);
-
         this.editProfileFrm.patchValue({
           fname: res.fname,
           lname: res.lname,
@@ -130,6 +143,7 @@ export class EditProfileComponent implements OnInit, OnDestroy {
             other: res.teacher_info?.other
           }
         });
+
       }
 
       return res;

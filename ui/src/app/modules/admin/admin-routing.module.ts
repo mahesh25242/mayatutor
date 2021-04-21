@@ -58,7 +58,7 @@ const routes: Routes = [
         },
         resolve:{
           users: UsersResolver
-        }
+        },
       },
       {
         path: 'students',

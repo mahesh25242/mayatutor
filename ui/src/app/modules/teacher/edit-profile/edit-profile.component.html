@@ -1,15 +1,17 @@
 
-<app-change-banner></app-change-banner>
+<app-change-banner  [teacher]="loggedUser$"></app-change-banner>
 <section class="blueContainer mb-5 p-4">
   <div class="container">
-    <app-custom-url></app-custom-url>
+    <app-custom-url [user]="loggedUser$"></app-custom-url>
   </div>
+
 </section>
 
 <app-bread-crumbs [hide]="true"></app-bread-crumbs>
 <div class="container">
   <form [formGroup]="editProfileFrm" *ngIf="(loggedUser$ | async) as loggedUser" (ngSubmit)="updateProfile()">
     <!-- common profile secion -->
+
     <div class="bg-white p-4 shadow-sm mb-4">
 <div class="row">
   <div class="col-md-3 col-lg-3">
@@ -21,7 +23,7 @@
       <input #fileInput type="file" (change)="onFileInput($event.target.files)" accept="image/*" style="display:none;" />
     </button>
     <p>Created At: {{ loggedUser.created_at |  date:'dd/MM/yy'}}</p>
-    <p> Last Login: {{ loggedUser.last_login.created_at  |  date:'dd/MM/yy'}}</p>
+    <p> Last Login: {{ loggedUser?.last_login?.created_at  |  date:'dd/MM/yy'}}</p>
   </div>
 
   <div class="col-md-9 col-lg-9">
@@ -128,7 +130,7 @@
 
 </div>
 </div>
-    
+
 <div class="bg-white p-4 shadow-sm mb-4"> <!-- common profile secion ends -->
     <app-teacher-info formGroupName="info"></app-teacher-info>
 </div>
@@ -143,7 +145,7 @@
     </div>
     <hr class="mt-0 pt-0">
     <div class="row">
-  
+
       <div class="form-group col-md-6 col-lg-6">
         <label for="password">Password</label>
         <input type="password" class="form-control" id="password" placeholder="Password"

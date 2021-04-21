@@ -13,7 +13,8 @@ import Notiflix from "notiflix";
   styleUrls: ['./change-banner.component.scss']
 })
 export class ChangeBannerComponent implements OnInit {
-  @Input() teacher: User;
+  @Input() teacher: any;
+
   faWhatsapp = faWhatsapp;
   faFacebook  = faFacebook;
   faLinkedin  = faLinkedin;
@@ -26,8 +27,12 @@ export class ChangeBannerComponent implements OnInit {
     private teacherService: TeacherService) { }
 
   ngOnInit(): void {
-    if(this.teacher)
+
+
+    if(!(this.teacher instanceof Observable))
       this.user$ = of(this.teacher);
+    else if(this.teacher instanceof Observable)
+      this.user$ = this.teacher;
     else
       this.user$ = this.userService.getloggedUser;
   }
