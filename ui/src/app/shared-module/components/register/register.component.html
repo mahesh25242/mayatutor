@@ -135,8 +135,19 @@
       {{f.password_confirmation.errors.error}}
     </div>
   </div>
+
+  <div class="form-group col-md-6 col-lg-6 col-xl-6">
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input" id="accept-terms" formControlName="accept_terms">
+      <label class="custom-control-label" for="accept-terms">
+        Accept Terms
+      </label>
+    </div>
+  </div>
+
   <div class="col-12 text-right border-top pt-3 mt-3"> <div id="recaptcha-container"></div>
-  <button type="submit" class="btn btn-outline-secondary mr-3">Cancel</button> <button type="submit" class="btn btn-primary ml-auto">Register</button></div>
+  <button type="submit" class="btn btn-outline-secondary mr-3">Cancel</button>
+  <button type="submit" class="btn btn-primary ml-auto" [disabled]="!f.accept_terms.value">Register</button></div>
 </div>
 
 </section>

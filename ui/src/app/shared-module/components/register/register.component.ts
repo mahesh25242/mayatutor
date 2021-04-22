@@ -50,7 +50,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
       state_id: [null, [Validators.required]],
       city_id: [null, [Validators.required]],
       pin: [null, [Validators.required]],
-      type: [null, []]
+      type: [null, []],
+      accept_terms: [false, []],
     });
 
     this.countries$ = this.countryService.countries();
@@ -96,7 +97,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
       password: this.f.password.value,
       password_confirmation: this.f.password_confirmation.value,
       recaptcha: '',
-      type: this.f.type.value
+      type: this.f.type.value,
+      accept_terms: this.f.accept_terms.value,
     }
     this.reCaptchaV3Service.execute(environment.recaptchaKey, 'SignUp', (token) => {
       postData.recaptcha = token;
@@ -113,7 +115,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
           country_id: null,
           state_id: null,
           city_id: null,
-          pin: null
+          pin: null,
+          accept_terms: null,
         });
         Notiflix.Notify.Success(`successfully registered as ${this.f.type.value}`);
       }, error=>{
