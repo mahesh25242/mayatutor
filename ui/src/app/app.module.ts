@@ -30,6 +30,9 @@ import { SetNewPasswordComponent } from './set-new-password/set-new-password.com
 import { UserActivationComponent } from './user-activation/user-activation.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
+import { CookiesPolicyComponent } from './cookies-policy/cookies-policy.component';
 
 var config = {
   apiKey: "AIzaSyAhzEi15mQe-KY7rhbmIi8MnvL2-KcL7uw",
@@ -59,7 +62,10 @@ var config = {
     PageNotFoundComponent,
     LayOutComponent,
     SetNewPasswordComponent,
-    UserActivationComponent
+    UserActivationComponent,
+    PrivacyPolicyComponent,
+    TermsAndConditionsComponent,
+    CookiesPolicyComponent
   ],
   imports: [
     BrowserModule,

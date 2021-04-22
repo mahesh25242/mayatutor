@@ -8,22 +8,28 @@
     <div class="col-md">
     <ul class="list-unstyled nav-links">
     <li><a routerLink="/">Home</a></li>
-    <li> <a routerLink="/about-us" >About Us</a></li>    
+    <li> <a routerLink="/about-us" >About Us</a></li>
     <li><a routerLink="/contact-us" >Contact Us</a></li>
     </ul>
     </div>
     <div class="col-md">
     <ul class="list-unstyled nav-links">
     <li><a routerLink="student/register">Students Register</a></li>
-    <li><a routerLink="teacher/register">Teacher Register</a></li> 
-    <li><a href="#">Login</a></li>    
+    <li><a routerLink="teacher/register">Teacher Register</a></li>
+    <li>
+      <app-login-link>
+        Login
+      </app-login-link>
+    </li>
+
+
     </ul>
     </div>
     <div class="col-md">
     <ul class="list-unstyled nav-links">
-    <li><a href="#">Privacy Policy</a></li>
-    <li><a href="#">Terms &amp; Conditions</a></li>
-    <li><a href="#">Cookies Policy</a></li>
+    <li><a routerLink="privacy-policy">Privacy Policy</a></li>
+    <li><a routerLink="terms-and-conditions">Terms &amp; Conditions</a></li>
+    <li><a routerLink="cookies-policy">Cookies Policy</a></li>
     </ul>
     </div>
     <div class="col-md text-md-center">

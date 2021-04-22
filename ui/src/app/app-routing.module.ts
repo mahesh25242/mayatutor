@@ -10,6 +10,9 @@ import { DashBoardComponent } from './modules/teacher/dash-board/dash-board.comp
 import { DashBoardResolver } from './modules/teacher/dash-board/dash-board-resolver';
 import { SetNewPasswordComponent } from './set-new-password/set-new-password.component';
 import { UserActivationComponent } from './user-activation/user-activation.component';
+import { CookiesPolicyComponent } from './cookies-policy/cookies-policy.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
 
 
 const routes: Routes = [
@@ -28,6 +31,18 @@ const routes: Routes = [
   {
     path: 'contact-us',
     component: ContactUsComponent
+  },
+  {
+    path: 'cookies-policy',
+    component: CookiesPolicyComponent
+  },
+  {
+    path: 'privacy-policy',
+    component: PrivacyPolicyComponent
+  },
+  {
+    path: 'terms-and-conditions',
+    component: TermsAndConditionsComponent
   },
   {
     path: 'set-new-password/:key',
