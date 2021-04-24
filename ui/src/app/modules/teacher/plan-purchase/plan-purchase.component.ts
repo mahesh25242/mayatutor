@@ -7,6 +7,8 @@ import { TeacherService } from 'src/app/lib/services';
 import { BreadCrumbsService } from 'src/app/shared-module/components/bread-crumbs/bread-crumbs.component';
 import { Plan } from '../../../lib/interfaces';
 import { Coupon } from '../../coupon/interfaces';
+import Notiflix from "notiflix";
+
 @Component({
   selector: 'app-plan-purchase',
   templateUrl: './plan-purchase.component.html',
@@ -34,6 +36,8 @@ export class PlanPurchaseComponent implements OnInit {
         });
       })).subscribe(res=>{
 
+      }, err=>{
+        Notiflix.Notify.Failure(err.error?.message);
       })
     }
   ngOnInit(): void {

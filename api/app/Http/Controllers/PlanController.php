@@ -42,6 +42,12 @@ class PlanController extends Controller
             $plan = \App\Plan::find($plan);
         }
 
+        if(!$plan || $plan->basic){
+            return response([
+                "success" => false,
+                "message" => 'You can\'t purchase basic plan again'
+            ], 422);
+        }
 
         if(!Auth::user()->currentUserPlan || (Auth::user()->currentUserPlan && Auth::user()->currentUserPlan->remaining_days <= 5)){
 

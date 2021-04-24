@@ -62,6 +62,7 @@ export interface User {
   teacher_banner?: TeacherBannerImg,
   rating?: Rating,
   current_user_plan?: UserPlan,
+  next_user_plan?: UserPlan,
   student_count?: number,
   created_at_human?: string,
   course_count?: number,

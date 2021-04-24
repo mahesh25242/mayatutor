@@ -1,7 +1,7 @@
 <section  *ngIf="(user$ | async) as user" class="banner"  [style.background-image]="'url(' + user.teacher_banner?.img + ')'">
 
-  <button type="button" (click)="fileInput.click()" class="btn btn-primary mt-5 float-right" *ngIf="!teacher">
+  <button type="button" (click)="fileInput.click()" class="btn btn-primary mt-5 float-right" *ngIf="isChangeable">
     <span>Change Banner</span>
-    <input #fileInput type="file" (change)="changeBanner($event.target.files)" accept="image/*" style="display:none;" />
+    <input #fileInput type="file" (change)="changeBanner($event.target.files, user)" accept="image/*" style="display:none;" />
   </button>
 </section>

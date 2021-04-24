@@ -43,7 +43,7 @@
               <li *ngFor="let feature of plan.features"><span class="fa-li"><fa-icon class="fa-icon-you" [icon]="faCheck"></fa-icon></span>{{feature}}</li>
             </ul>
               <a [routerLink]="plan.id" class="btn btn-block text-uppercase"
-               *ngIf="!plan.my_user_plan" [ngClass]="{'btn-primary': plan.price, 'btn-warning': !plan.price}">
+               [ngClass]="{'btn-primary': plan.price, 'btn-warning': !plan.price}">
               {{ plan.price > 0 ? 'Buy' : 'GET IT FREE'}}
               </a>
           </div>

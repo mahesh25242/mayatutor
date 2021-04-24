@@ -53,12 +53,19 @@ class TeacherController extends Controller
 
             $img = Image::make($destinationPath.'/'.$bannerName);//->resize(1700, 200);
             $img->save($destinationPath.'/'.$bannerName, 60);
+
+            $userId = 0;
+            if($request->input("id", null) && Auth::user()->isAdmin()->exists()){
+                $userId = ($request->input("id", null)) ? $request->input("id", null) : Auth::id();
+            }else{
+                $userId = Auth::id();
+            }
             $teacherBanner = \App\TeacherBanner::updateOrCreate(
                 [
-                    "user_id" => Auth::id(),
+                    "user_id" => $userId,
                 ],
                 [
-                    "user_id" => Auth::id(),
+                    "user_id" => $userId,
                     "img" => $bannerName
                 ]
             );
@@ -254,6 +261,18 @@ class TeacherController extends Controller
         return response([
             'message' => 'successfully reported!', 'status' => 1
         ]);
+    }
+    public function invoices($userId = 0){
+        return response(\App\UserPlan::with(["plan"])->where("user_id", $userId)->get());
+    }
+
+    public function downloadInvoice($invId = 0){
+        if(file_exists(public_path("assets/invoices/{$invId}.pdf"))){
+            return response()->download(public_path("assets/invoices/{$invId}.pdf"));
+        }
+        return response([
+            'message' => '404', 'status' => 0
+        ], 404);
     }
 }
 

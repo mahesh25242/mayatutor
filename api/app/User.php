@@ -267,6 +267,12 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         ->orderBy("end_date", "ASC")->take(1);;
     }
 
+    public function nextUserPlan()
+    {
+        return $this->hasOne('App\UserPlan')->where("end_date", ">", new Carbon)
+        ->orderBy("end_date", "ASC")->take(1)->skip(1);
+    }
+
     public function subject()
     {
         return $this->hasManyThrough(

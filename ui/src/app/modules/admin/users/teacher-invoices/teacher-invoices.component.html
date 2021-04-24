@@ -1,0 +1,46 @@
+<app-modal>
+  <div header>
+    Invoices
+  </div>
+  <div  body>
+   <table class="table">
+     <thead>
+       <tr>
+         <th>
+           Order Date
+         </th>
+         <th>
+           Pacakge Start Date
+         </th>
+         <th>
+           Package End Date
+         </th>
+         <th>
+          Plan
+         </th>
+       </tr>
+     </thead>
+     <tbody>
+       <ng-container *ngIf="userplans$ | async as userplans">
+          <tr *ngFor="let userPlan of userplans">
+            <td>
+              <a href="javascript:{}" (click)="download(userPlan)">{{userPlan.created_at | date:'medium'}}</a>
+            </td>
+            <td>
+              {{userPlan.start_date  | date:'medium'}}
+            </td>
+            <td>
+              {{userPlan.end_date  | date:'medium'}}
+            </td>
+            <td>
+              {{userPlan.plan.name}}
+            </td>
+          </tr>
+       </ng-container>
+     </tbody>
+   </table>
+  </div>
+  <div  footer class="w-100 d-flex">
+    <button type="button" class="btn btn-outline-secondary  btn-sm ml-2" (click)="modal.dismiss('cancel click')">Cancel</button>
+  </div>
+</app-modal>

@@ -21,14 +21,15 @@ import { CourseDetailResolver } from './courses/course-detail/course-detail-reso
 import { LaunchModuleComponent } from './courses/course-detail/launch-module/launch-module.component';
 import { LaunchModuleResolver } from './courses/course-detail/launch-module/launch-module.resolver';
 import { RejectMessageComponent } from './courses/course-detail/reject-message/reject-message.component';
-
+import { TeacherInvoicesComponent } from './users/teacher-invoices/teacher-invoices.component';
 
 
 @NgModule({
   declarations: [AdminHomeComponent, DashBoardComponent,
     EditProfileComponent, CoursesComponent, UsersComponent,
     DetailsComponent, CourseDetailComponent,
-    LaunchModuleComponent, RejectMessageComponent ],
+    LaunchModuleComponent, RejectMessageComponent,
+    TeacherInvoicesComponent ],
   imports: [
     CommonModule,
     SharedModuleModule,

@@ -18,8 +18,8 @@
           <th>
             Name
           </th>
-          <th>
-            Invoice
+          <th *ngIf="type=='teacher'">
+            Invoices
           </th>
           <th>
             Status
@@ -47,8 +47,8 @@
             <td data-label="Name">
               <a href="javascript:{}" (click)="details(item)">{{ item.fname }} {{ item.lname }}</a>
             </td>
-            <td data-label="Invoice">
-                <a href="javascript:{}">View</a>
+            <td data-label="Invoice" *ngIf="type=='teacher'">
+                <a href="javascript:{}" (click)="invoices(item)">View</a>
             </td>
             <td data-label="Status">
               <a href="javascript:{}"

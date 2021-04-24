@@ -17,15 +17,19 @@ use App\Mail\PasswordChangedNotification;
 use App\Mail\RetrievePassword;
 use Mail;
 use Cache;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class UsersController extends Controller
 {
 
 
     public function test(Request $request){
-        Cache::flush();
-        $user = User::find(9);
-           Mail::to("mahesh25242@gmail.com")->send(new ActivationMail($user,  $request->header("From-Domain")));
+        $pdf = PDF::loadView('PDF.teacherInvoice');
+        $pdf->save(public_path('assets/invoices/export.pdf'));
+
+        // Cache::flush();
+        // $user = User::find(9);
+        //    Mail::to("mahesh25242@gmail.com")->send(new ActivationMail($user,  $request->header("From-Domain")));
     }
 
     public function signUp(Request $request)
@@ -156,7 +160,7 @@ class UsersController extends Controller
 
     public function authUser(Request $request){
         $user = \App\User::with(["country", "state", "city", "role", "lastLogin",
-        "teacherPaymentInfo", "subject", "teacherInfo.education", "teacherBanner", "rating", "currentUserPlan.plan"])->find(Auth::id());
+        "teacherPaymentInfo", "subject", "teacherInfo.education", "teacherBanner", "rating", "currentUserPlan.plan", "nextUserPlan.plan"])->find(Auth::id());
         return response($user);
     }
 

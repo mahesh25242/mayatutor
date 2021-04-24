@@ -72,6 +72,8 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
                 $router->post('toggleStatus','UsersController@toggleStatus');
                 $router->post('delete','UsersController@delete');
                 $router->post('toggleAutoApproval','TeacherController@toggleAutoApproval');
+                $router->get('invoices/{userId}','TeacherController@invoices');
+                $router->get('downloadInvoice/{invId}','TeacherController@downloadInvoice');
             });
 
             $router->group(['prefix' => 'student'], function () use ($router) {

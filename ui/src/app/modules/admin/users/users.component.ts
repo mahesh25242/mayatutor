@@ -10,6 +10,7 @@ import { DetailsComponent } from './details/details.component';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { BreadCrumbsService } from 'src/app/shared-module/components/bread-crumbs/bread-crumbs.component';
+import { TeacherInvoicesComponent } from './teacher-invoices/teacher-invoices.component';
 
 @Component({
   selector: 'app-users',
@@ -71,6 +72,14 @@ export class UsersComponent implements OnInit, OnDestroy {
       Notiflix.Block.Remove(`.delete-user-${user.id}`);
     } )
 
+
+  }
+
+  invoices(user:User=null){
+    const activeModal = this._modalService.open(TeacherInvoicesComponent,{ size: 'lg'});
+
+    user.role_url = this.type;
+    activeModal.componentInstance.user = user;
 
   }
 

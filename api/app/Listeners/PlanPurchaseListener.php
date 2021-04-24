@@ -5,6 +5,7 @@ namespace App\Listeners;
 use App\Events\PlanPurchaseEvent;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class PlanPurchaseListener
 {
@@ -71,14 +72,21 @@ class PlanPurchaseListener
                 $planPurchase->save();
 
                 if($planPurchase->id && $planPurchase->status){
-                    $toDate = $fromDate->addDays($event->plan->days);
+                    $toDate = clone $fromDate;
                     $userPlan = new \App\UserPlan;
                     $userPlan->user_id = $planPurchase->user_id;
                     $userPlan->plan_id = $planPurchase->plan_id;
                     $userPlan->start_date = $fromDate;
-                    $userPlan->end_date = $toDate;
+                    $userPlan->end_date = $toDate->addDays($event->plan->days);
                     $userPlan->save();
                 }
+                $pdf = PDF::loadView('PDF.teacherInvoice', array(
+                    "user" => $event->user,
+                    "plan" => $event->plan,
+                    "userPlan" => $userPlan,
+                ));
+                $pdf->save(public_path("assets/invoices/{$userPlan->id}.pdf"));
+
 
             }
 
