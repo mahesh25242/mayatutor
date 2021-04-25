@@ -95,7 +95,7 @@ class PlanPurchaseListener
                 }
 
                 try{
-                    Mail::to($toEMail)->send(new InvoiceMail($event->user,  $request->header("From-Domain")));
+                    Mail::to($toEMail)->send(new InvoiceMail($event->user, $userPlan));
                 }catch (\Swift_TransportException $e) {
                   //  echo 'Caught exception: ',  $e->getMessage(), "\n";
                 }

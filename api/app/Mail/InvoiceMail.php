@@ -10,12 +10,10 @@ class InvoiceMail extends Mailable
      * @return $this
      */
     public $user;
-    public $siteAddress;
     public $userPlan;
-    public function __construct(User $user, $siteAddress= null, $userPlan = null)
+    public function __construct(User $user,  $userPlan = null)
     {
         $this->user = $user;
-        $this->siteAddress = $siteAddress;
         $this->userPlan = $userPlan;
     }
 
@@ -23,7 +21,7 @@ class InvoiceMail extends Mailable
 
     public function build()
     {
-        return $this->view('email/InvoiceMail', ["user" => $this->user, "siteAddress" => $this->siteAddress])
+        return $this->view('email/InvoiceMail', ["user" => $this->user])
         ->attach(public_path("assets/invoices/{$this->userPlan->id}.pdf"));
     }
 }
