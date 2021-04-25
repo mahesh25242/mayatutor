@@ -23,3 +23,9 @@
     display: block;
     white-space: nowrap;
 }
+@media only screen and (max-width: 768px) {
+    .avathar-teacher {
+        min-height: 253px;
+        margin-bottom: 15px;
+    }
+  }

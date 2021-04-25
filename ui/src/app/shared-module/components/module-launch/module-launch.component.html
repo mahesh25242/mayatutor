@@ -5,8 +5,9 @@
     <app-player [videoSources]="video"></app-player>
   </div>
   <div *ngIf="pdfSrc">
-  <h6 class="mt-3 text-primary">PDF</h6>
+  <h6 class="mt-3 text-primary"></h6>
   <div class="pdf-container" >
+    <div class="righticon"><fa-icon [icon]="faFilePdf"></fa-icon></div>
     
     <!-- <pdf-viewer [src]="pdfSrc"
         [render-text]="true"

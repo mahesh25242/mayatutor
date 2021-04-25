@@ -1,23 +1,23 @@
-<div class="card shadow-sm mt-5">
+<div class="card shadow mt-5">
     <i>
       <fa-icon [icon]="faUserGraduate" *ngIf="(type ==='student')"></fa-icon>
       <fa-icon [icon]="faUser" *ngIf="(type ==='teacher')"></fa-icon>
     </i>
-    <div class="card-body">
+    <div class="card-body mb-3">
       <h3 class="text-uppercase">
-        {{ (type ==='student' ) ? 'Student' : 'Teacher'}}
+       Are you a {{ (type ==='student' ) ? 'Student' : 'Teacher'}} ?
       </h3>
-      <a class="btn btn-primary btn-custom" [routerLink]="type+'/register'" >Register</a>
+      <a class="btn btn-primary btn-custom" [routerLink]="type+'/register'" >Register Here</a>
     </div>
     <div class="card-footer">
       <div class="d-grid" [ngClass]="{ 'grd-col-2': type ==='student', 'grd-col-3': type ==='teacher'}">
-        <h4 *ngIf="type ==='teacher'"><a routerLink="teacher/plans">SEE OUR PLANS</a></h4>
+        <h3 class="font-22" *ngIf="type ==='teacher'"><a routerLink="teacher/plans">SEE OUR PLANS</a></h3>
         <p class="text-left">Already registered Please login here </p>
-        <h4>
+        <h3 class="font-22">
           <app-login-link>
             <a href="javascript:{}">LOGIN</a>
           </app-login-link>
-        </h4>
+        </h3>
       </div>
     </div>
   </div>

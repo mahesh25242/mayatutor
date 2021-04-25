@@ -3,15 +3,17 @@
     <div></div>
     <div  body class="border-0">
       <div class="row">
-        <div class="col-6 p-5">
+        <div class="col-lg-6 col-md-6 p-5 visible-web">
           <a href="javascript:{}" (click)="signInWithFB()" class="btn btn-primary d-block mb-3 animate__animated animate__flipInX">
           Login with Facebook <fa-icon class="float-right" [icon]="faFacebook"></fa-icon></a>
           <a href="javascript:{}" (click)="signInWithGoogle()" class="btn btn-primary d-block animate__animated animate__flipInX">Login with Google <fa-icon class="float-right" [icon]="faGoogle"></fa-icon></a>
-
+<hr class="mt-5"/>
+        <span class="or-divide">OR</span> 
           <!-- <a  (click)="signInWithPhone()">sent otp</a> -->
-          <!-- <a  (click)="refreshToken()" href="javascript:{}">refresh token</a> -->
+          <!-- <a  (click)="refreshToken()" href="j avascript:{}">refresh token</a> -->
+       <div class="grid-reg-btn"> <a routerLink="student/register" class="btn btn-sm btn-outline-primary">Students Register</a> <a routerLink="teacher/register" class="btn btn-sm btn-outline-primary">Teacher/Tutor Register</a></div>  
         </div>
-        <div *ngIf="!isForgot" class="col-6 p-5 border-left animate__animated " [ngClass]="{'animate__shakeX' : invalidlogin, 'animate__flipInY': isForgot !== null}">
+        <div *ngIf="!isForgot" class="col-lg-6 col-md-6 p-5 border-left animate__animated " [ngClass]="{'animate__shakeX' : invalidlogin, 'animate__flipInY': isForgot !== null}">
           <h5 class="mb-3">MEMBER LOGIN</h5>
           <div id="recaptcha-container"></div>
           <div class="text-danger" *ngIf="invalidlogin">Invalid login credentials</div>
@@ -56,9 +58,21 @@
             <a href="javascript:{}" class="d-block text-center mt-4" (click)="showForgotPass()">Forgot Password?</a>
           </div>
         </div>
+ <div class="col-lg-6 col-md-6 p-5 visible-mobile">
+          <a href="javascript:{}" (click)="signInWithFB()" class="btn btn-primary d-block mb-3 animate__animated animate__flipInX">
+          Login with Facebook <fa-icon class="float-right" [icon]="faFacebook"></fa-icon></a>
+          <a href="javascript:{}" (click)="signInWithGoogle()" class="btn btn-primary d-block animate__animated animate__flipInX">Login with Google <fa-icon class="float-right" [icon]="faGoogle"></fa-icon></a>
+<hr class="mt-5"/>
+        <span class="or-divide">OR</span> 
+          <!-- <a  (click)="signInWithPhone()">sent otp</a> -->
+          <!-- <a  (click)="refreshToken()" href="j avascript:{}">refresh token</a> -->
+       <div class="grid-reg-btn"> <a routerLink="student/register" class="btn btn-sm btn-outline-primary">Students Register</a> <a routerLink="teacher/register" class="btn btn-sm btn-outline-primary">Teacher/Tutor Register</a></div>  
+        </div>
+
         <div *ngIf="isForgot" class="col-6 border-left animate__animated animate__flipInY">
           <app-forgot-password (showForgotPass)="showForgotPass()"></app-forgot-password>
         </div>
+        
       </div>
     </div>
   </app-modal>

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import {faUser,faClock } from '@fortawesome/free-solid-svg-icons';
+import {faFilePdf } from '@fortawesome/free-solid-svg-icons';
 import { User, Course, CourseModule } from 'src/app/lib/interfaces';
 
 
@@ -11,7 +11,7 @@ import { User, Course, CourseModule } from 'src/app/lib/interfaces';
 })
 export class ModuleLaunchComponent implements OnInit {
   @Input() courseModule: CourseModule;
-
+  faFilePdf = faFilePdf;
   video: any = null;
   pdfSrc: any =null;
   constructor(private sanitizer: DomSanitizer) { }

@@ -1,19 +1,55 @@
 
-<a routerLink="../../" class="btn btn-primary">Back</a>
 
 <div *ngIf="(mail$ | async) as mail">
-  <a href="javascript:{}" class="btn btn-primary" (click)="replayMsg(mail)" *ngIf="(mailTp$ | async)?.type == 'inbox'">Reply</a>
-  <h4 [innerHTML]="mail.subject"></h4>
-  <ng-container *ngFor="let participant of mail.participants">
-    <span class="badge badge-secondary" *ngIf="mail.creator.id != participant.user.id">{{participant.user.fname }}</span>
-  </ng-container>
+  
+  <div *ngFor="let item of mail.messages" >    
+    <div class="p-4 bg-white shadow mb-4">
+      <div class="grid-mail-profile">
+      <div>
+        <div class="d-flex">
+          <div class="flex-1 avathar" [style.background-image]="'url('+item.user.avatar+')'"> </div>
+          <div class="flex-1 pl-3">
+            <small  class="d-block mb-2">Assigned Course:</small>
+            <p>Computer Science, English</p>
+          </div>
+        </div>
+        <hr>
+        <h4 class="mt-3">{{item.user.fname}} {{ item.user.lname}}</h4>
+    <ng-container *ngFor="let participant of mail.participants">
+      <span class="badge badge-secondary p-1" *ngIf="mail.creator.id != participant.user.id">{{participant.user.fname }}</span>
+    </ng-container>
+    <hr>
+    <small class="d-block">Contact Number:</small>
+    <h6>91 999 534 6400</h6>
+    <hr>
+    <small>Email ID:</small>
+    <h6>Test@test.com</h6>
+    
+      </div>
+      <div class="border-left pl-4 pb-5 position-relative">
+        <div class="d-flex">
+          <a routerLink="../../" class="btn btn-sm btn-outline-secondary"> <fa-icon [icon]="faArrowLeft"></fa-icon> Back</a>
+          <a href="javascript:{}" class="btn btn-sm btn-outline-secondary ml-auto" (click)="replayMsg(mail)" *ngIf="(mailTp$ | async)?.type == 'inbox'"><fa-icon class="mr-2" [icon]="faReply"></fa-icon>Reply</a>
+          </div>
+          <hr>
+          <small class="mb-2 d-block">Subject:</small>
+        <h4 [innerHTML]="mail.subject"></h4>
+        <p>{{item.created_at | date:'medium'}}</p>
+        <hr>
+        <small class="mb-2 d-block">Message:</small>
+        <p class="text-dark mb-5" [innerHTML]="item.body"></p>
+        <div class="footer-position">
+        <hr>
+        <a href="javascript:{}" class="btn btn-sm btn-outline-secondary ml-auto" (click)="replayMsg(mail)" *ngIf="(mailTp$ | async)?.type == 'inbox'"><fa-icon class="mr-2" [icon]="faReply"></fa-icon>Reply</a>
+       <button class="btn float-right"> <fa-icon  [icon]="faTrash"></fa-icon></button>
 
-
-  <div *ngFor="let item of mail.messages" >
-    <small>{{item.created_at | date:'medium'}}</small>
-    <img [src]="item.user.avatar" class="img-thumbnail" loading="lazy">
-    <span>{{item.user.fname}} {{ item.user.lname}}</span>
-    <p [innerHTML]="item.body"></p>
+      </div>
+      </div>
+     
+    </div>
+    
+  </div>
+  
   </div>
 </div>
 

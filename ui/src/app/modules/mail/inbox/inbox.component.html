@@ -1,30 +1,29 @@
 <form [formGroup]="inboxFrm">
-  <table class="table table-striped table-bordered">
+  <table class="table table-striped">
     <thead>
       <tr>
-        <!-- <th>
+        <th width="40">
           <div class="custom-control custom-checkbox">
             <input type="checkbox" class="custom-control-input" id="selected">
             <label class="custom-control-label" for="selected">&nbsp;</label>
           </div>
-        </th> -->
+        </th>
         <th>
           Subject
         </th>
-        <th width="180">
-          Option
+        <th width="40">          
         </th>
       </tr>
     </thead>
     <tbody formArrayName="mailArr">
       <ng-container *ngIf="(mails$ | async) as mails">
         <tr *ngFor="let mail of mailArr.controls; let i=index; let last = last" [formGroupName]="i">
-          <!-- <td>
+         <td>
             <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input" [id]="'checkbox'+getControls(mail).id.value" formControlName="selected">
               <label class="custom-control-label" [for]="'checkbox'+getControls(mail).id.value">&nbsp;</label>
             </div>
-          </td> -->
+          </td>
           <td>
             <a href="javascript:{}" [innerHTML]="getControls(mail).subject.value"
             [ngClass]="{'font-weight-bold' : getControls(mail).unread_count.value}" [routerLink]="'read/'+getControls(mail).id.value"></a>
@@ -33,7 +32,7 @@
             </span>
           </td>
           <td>
-            <span [ngClass]="'del-'+getControls(mail).id.value"><a href="javascript:{}" (click)="deleteMail(getControls(mail))" class="btn btn btn-sm btn-outline-danger" ><fa-icon [icon]="faTrash"></fa-icon> Delete</a></span>
+            <span [ngClass]="'del-'+getControls(mail).id.value"><a href="javascript:{}" (click)="deleteMail(getControls(mail))" class="btn btn btn-sm text-danger" ><fa-icon [icon]="faTrash"></fa-icon></a></span>
           </td>
         </tr>
       </ng-container>
