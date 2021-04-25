@@ -6,6 +6,8 @@ use App\Events\PlanPurchaseEvent;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Barryvdh\DomPDF\Facade as PDF;
+use App\Mail\InvoiceMail;
+use Mail;
 
 class PlanPurchaseListener
 {
@@ -86,6 +88,17 @@ class PlanPurchaseListener
                     "userPlan" => $userPlan,
                 ));
                 $pdf->save(public_path("assets/invoices/{$userPlan->id}.pdf"));
+
+                $toEMail = $event->user->email;
+                if(env('APP_ENV') == 'local'){
+                    $toEMail = env('DEVELOPER_MAIL');
+                }
+
+                try{
+                    Mail::to($toEMail)->send(new InvoiceMail($event->user,  $request->header("From-Domain")));
+                }catch (\Swift_TransportException $e) {
+                  //  echo 'Caught exception: ',  $e->getMessage(), "\n";
+                }
 
 
             }
