@@ -92,7 +92,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     public function getAvatarAttribute($avatar)
     {
-        return (($avatar) ? url().'/assets/avatar/'.$avatar : 'assets/tumb.png');
+        return (($avatar) ? url().'/assets/avatar/'.$avatar : 'assets/profile-default.jpg');
     }
 
     public function getisOnlineAttribute()

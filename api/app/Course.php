@@ -46,7 +46,7 @@ class Course extends Model implements AuthenticatableContract, AuthorizableContr
 
     public function getImageAttribute($image)
     {
-        return (($image) ? url().'/assets/course/'.$image : 'assets/tumb.png');
+        return (($image) ? url().'/assets/course/'.$image : 'assets/course-banner-default.jpg');
     }
 
     public function user()

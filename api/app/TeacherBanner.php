@@ -32,6 +32,6 @@ class TeacherBanner extends Model implements AuthenticatableContract, Authorizab
 
     public function getImgAttribute($banner)
     {
-        return (($banner) ? url().'/assets/banner/'.$banner : 'assets/tumb.png');
+        return (($banner) ? url().'/assets/banner/'.$banner : 'assets/banner-default.jpg');
     }
 }
