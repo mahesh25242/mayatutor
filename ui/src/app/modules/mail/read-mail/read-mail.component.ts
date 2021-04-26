@@ -5,6 +5,7 @@ import { MailService } from '../services/mail.service';
 import { ActivatedRoute, Data } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ReplyMailComponent } from '../reply-mail/reply-mail.component';
+import { faReply,faArrowLeft, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-read-mail',
@@ -14,6 +15,9 @@ import { ReplyMailComponent } from '../reply-mail/reply-mail.component';
 export class ReadMailComponent implements OnInit {
   mailTp$: Observable<Data>;
   mail$: Observable<Thread>;
+  faReply = faReply;
+  faArrowLeft = faArrowLeft;
+  faTrash = faTrash;
   constructor(private mailService: MailService,
     private route:ActivatedRoute,
     private _modalService: NgbModal) { }

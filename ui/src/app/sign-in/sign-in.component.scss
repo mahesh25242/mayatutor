@@ -9,4 +9,42 @@
 input[type='text'], input[type='password'] {
     border-radius: $rdius;
 }
-
+.or-divide {
+    position: relative;
+    top: -32px;
+    display: inline-block;
+    left: 50%;
+    width: 30px;
+    height: 30px;
+    background: #fff;
+    border: 1px solid #ddd;  
+    text-align: center;
+    line-height: 30px;
+    border-radius: 50%;
+    margin-left: -15px;
+}
+.grid-reg-btn {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 30px;
+}
+.btn-sm {
+    font-size: 0.7rem;
+}
+@media only screen and (max-width:768px) {
+    .visible-mobile {
+        display: block;
+        padding-top: 0!important;
+    }
+    .visible-web {
+        display:none;
+    }
+  }
+  @media only screen and (min-width:768px) {
+    .visible-mobile {
+        display:none;
+    }
+    .visible-web {
+        display:block;
+    }
+  }

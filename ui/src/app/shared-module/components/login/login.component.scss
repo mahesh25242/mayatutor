@@ -1,6 +1,7 @@
 .card {
-    h4{
-        a{font-size: 0.9rem;}
+    .font-22{
+        font-size:22px;
+        a{font-size:22px;}
     }
     .d-grid {
         align-items: center;
@@ -9,7 +10,7 @@
 
         &.grd-col-3 {
            
-            grid-template-columns: 1fr 1fr 50px;
+            grid-template-columns: 1fr 1fr 67px;
             &:nth-child(1) {
                 text-align: left;
             }

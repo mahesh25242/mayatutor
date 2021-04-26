@@ -93,7 +93,7 @@
   <ng-container *ngIf="topRatedTeachers.length">
     <h1 class="mt-5 mb-4 text-uppercase">TOP RATING TEACHERS</h1>
     <div class="row">
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mt-2" *ngFor="let teacher of topRatedTeachers">
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3" *ngFor="let teacher of topRatedTeachers">
           <app-teacher-block [teacher]="teacher.user"></app-teacher-block>
         </div>
     </div>

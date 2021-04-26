@@ -1,5 +1,5 @@
 <form [formGroup]="composeFrm" (ngSubmit)="sentMessage()">
-
+<div class="bg-white p-4 shadow">
   <div class="form-group" *ngIf="!reply && !toMessage">
     <label for="phone">To</label>
     <ng-select [items]="users$ | async"
@@ -51,8 +51,11 @@
   </div>
   
   <ng-content select="[cancel]"></ng-content>
+  <div class="clearfix"></div>
   <button type="submit" class="btn btn-primary float-right " *ngIf="!reply">
     <ng-content select="[sent]"></ng-content>
     {{ !toMessage ? 'Sent' : '' }}
   </button>
+  <div class="clearfix"></div>
+</div>
 </form>
