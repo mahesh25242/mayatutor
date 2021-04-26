@@ -22,13 +22,24 @@ class UserResource extends JsonResource
             'fname' => $this->fname,
             'mname' => $this->mname,
             'lname' => $this->lname,
-            $this->mergeWhen(Auth::check(), [
+            $this->mergeWhen(
+                (
+                    Auth::check() && (
+                        (
+                            $this->isTeacher()->exists() && $this->currentUserPlan()->exists()
+                        ) ||
+                        (
+                            !$this->isTeacher()->exists()
+                        )
+                    )
+                ), [
                 'email' => $this->email,
                 'phone' => $this->phone,
-                'teacher_payment_info' => $this->teacherPaymentInfo
+                'teacher_payment_info' => $this->whenLoaded('teacherPaymentInfo')
             ]),
-            'plan_purchase' => $this->planPurchase,
-            'current_user_plan' => $this->currentUserPlan,
+            'plan_purchase' => $this->whenLoaded('planPurchase'),
+          //  'plan_purchase' => $this->planPurchase,
+            'current_user_plan' => $this->whenLoaded('currentUserPlan'),
             'pin' => $this->pin,
             'address' => $this->address,
             'country_id' => $this->country_id,
@@ -48,8 +59,8 @@ class UserResource extends JsonResource
             'status' => $this->status,
             'student_count' => $this->student_count,
             'subject' => $this->subject,
-            'teacher_info' => $this->teacherInfo,
-            'teacher_banner' => $this->teacherBanner,
+            'teacher_info' => $this->whenLoaded('teacherInfo'),
+            'teacher_banner' => $this->whenLoaded('teacherBanner'),
 
             'created_at' => $this->created_at,
             'created_at_human' => $this->created_at_human,

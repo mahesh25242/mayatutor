@@ -97,7 +97,8 @@
       </div>
       <div class="col-md-4">
         <label class="d-block">Contact to Tutor</label>
-        <ng-container *ngIf="!isDashBoard">
+        <div class="alert alert-warning" *ngIf="user.current_user_plan === null">Plan is expired</div>
+        <ng-container *ngIf="!isDashBoard && user.current_user_plan">
 
           <app-login-link *ngIf="!user.email">
             <button class="btn btn-sm btn-primary"
