@@ -19,7 +19,7 @@
   <div class="card-footer">
     <div class="d-grid grd-col-2 text-left">
 <div>
-      <app-rating [rating]="teacher.rating" [readonly]="true" *ngIf="teacher.rating"></app-rating>
+      <app-rating class="mt-2 d-block" [rating]="teacher.rating" [readonly]="true" *ngIf="teacher.rating"></app-rating>
     </div>
       <div>
         <a class="btn btn-primary float-right" [routerLink]="'/'+teacher.url">

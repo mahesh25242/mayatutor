@@ -5,8 +5,8 @@
     Fees: {{ course.price }}
   </span>
 
-  <div live_class class="col" *ngIf="course && course.live_class && course.live_class_url">
-    <h5>Live Class</h5>
+  <div live_class class="bg-dark p-4 shadow liveclass" *ngIf="course && course.live_class && course.live_class_url">
+    <h5 class="bg-primary p-3 text-white mb-0">Live Class</h5>
     <div *ngIf="!course.user.is_able" class="alert alert-warning">Sorry teacher plan was expired</div>
     <ng-container *ngIf="course.user.is_able">
       <app-player [videoSources]="video"></app-player>
@@ -31,10 +31,10 @@
 <ng-container *ngIf="course.course_module && course.course_module.length">
 
   <div *ngIf="!course.user.is_able" class="alert alert-warning">Sorry teacher plan was expired</div>
-  <h4>Modules</h4>
+  
   <div class="row" *ngIf="course.user.is_able">
 
-    <app-course-module class="col-md-3 col-lg-3" *ngFor="let course_module of course.course_module" [course_module]="course_module"></app-course-module>
+    <app-course-module class="col-md-3 col-lg-3 mb-4" *ngFor="let course_module of course.course_module" [course_module]="course_module"></app-course-module>
   </div>
 </ng-container>
 

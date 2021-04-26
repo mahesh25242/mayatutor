@@ -14,3 +14,27 @@
     clear: both;
     display: flex;
 }
+
+@media only screen and (max-width:768px) {
+    .mobile-flex {
+        display: flex;
+    }
+    .whitenowrap {
+        white-space: nowrap;
+    }
+.mob-hide {
+    display: none;
+}
+.demo-url {
+    position: relative;
+    top:-16px;
+    font-size:12px;
+}
+}
+
+@media only screen and (min-width:768px) {
+    .mob-on {
+        display: none;
+    }
+    
+}

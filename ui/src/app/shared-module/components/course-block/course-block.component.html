@@ -4,15 +4,19 @@
     
   </div>
   <div class="card-body">
+    <small>Course Name</small>
     <h5 class="card-title">{{course.name}}</h5>
-    <p class="mb-2">{{ course.user.fname }} {{ course.user.lname }}</p>
-    <p class="card-title mb-2" *ngIf="course.course_module_count">
-        {{ (course.course_module_count > 1) ? course.course_module_count+' modules' : 'only '+course.course_module_count+' module' }}
-    </p>
-    <app-rating [rating]="course.user.rating" [readonly]="true"></app-rating>    
+    <small>Tutor</small>
+    <h6 class="mb-2 tutorname">{{ course.user.fname }} {{ course.user.lname }}</h6>
+    <div class="d-flex module-fix">
+    <app-rating [rating]="course.user.rating" [readonly]="true"></app-rating>   
+    <div class="card-title ml-auto" *ngIf="course.course_module_count">
+     <label>Modules: </label> <span class="text-primary font-15"> {{ (course.course_module_count > 1) ? course.course_module_count+'' : 'only '+course.course_module_count+' module' }}</span> 
+    </div>
+  </div>
     <div class="d-flex">
 
-      <h6 class="mb-0 mt-2" *ngIf="course.price">Fees: {{ course.price }}</h6>
+      <h5 class="mb-0 mt-2 text-primary" *ngIf="course.price">Fees: {{ course.price }}</h5>
     <a href="javascript:{}" class="btn btn-primary btn-sm ml-auto"
     [routerLink]="['course', course.id]" routerLinkActive="router-link-active" >Detail</a>
 

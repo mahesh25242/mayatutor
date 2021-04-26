@@ -6,4 +6,14 @@
     background-repeat: no-repeat;
     background-size: cover;
     min-height: 168px;
+    border-radius: 5px;
+}
+::ng-deep {
+    .star {
+        font-size:15px!important;
+    }
+   
+}
+.liveclass {
+   
 }

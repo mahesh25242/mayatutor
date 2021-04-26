@@ -7,3 +7,15 @@
     background-position: center;
     border-radius: 5px;
 }
+
+@media only screen and (min-width:768px) {
+    .border-left-mob{
+        border-left: 1px solid #dee2e6 !important;
+    }
+}
+@media only screen and (max-width:768px) {
+.margin-mob {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+}

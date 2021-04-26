@@ -1,12 +1,27 @@
-.demo-url {
-    float: right;
-    font-size: 18px;
-    color: #007bff;
-}
+
 .fa-icon-you {
     color: red;
     font-size: 34px;
     margin-left: 15px;
     position: relative;
     top: 7px;
+}
+@media only screen and (max-width:768px) {
+    .demo-url {
+        position: absolute;
+        top:64px;
+        right: 30px;        
+        font-size: 14px;
+        color: #007bff;
+    }
+    .fa-icon-you {
+        margin-left:5px;
+    }
+}
+@media only screen and (min-width:768px) {
+    .demo-url {
+        float: right;
+        font-size: 18px;
+        color: #007bff;
+    }
 }

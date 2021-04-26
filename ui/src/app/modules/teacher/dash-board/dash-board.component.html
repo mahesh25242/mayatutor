@@ -15,8 +15,8 @@
     </div>
   </div>
 </div>
-<div class="container">
-<div class="row m-0 pt-3 profile-bg shadow-sm mt-3 pb-3">
+<div class="">
+<div class="row pt-3 profile-bg shadow pb-3">
   <div class="col-md-6 col-lg-6">
 <div class="row">
   <div class="col-md-5 col-lg-5">
@@ -24,7 +24,7 @@
     </figure>
   </div>
   <div class="col-md-7 col-lg-7">
-<h4 class="text-capitalize">  {{ user.fname }} {{ user.lname }} </h4>
+<h4 class="text-capitalize mt-sm-05">  {{ user.fname }} {{ user.lname }} </h4>
 <app-rating [rating]="user.rating" [readonly]="true"></app-rating>
 
 <p> <fa-icon [icon]="faClock" ></fa-icon> {{user.teacher_info?.time}}</p>
@@ -38,7 +38,7 @@
  </div>
 </div>
   </div>
-  <div class="col-md-6 col-lg-6">
+  <div class="col-md-6 col-lg-6 mt-sm-05">
 
     <div *ngIf="user.email && user.phone && user?.teacher_payment_info">
       <div class="row">
@@ -53,7 +53,7 @@
 
           <h6 >Mobile: {{ user.phone }}</h6>
           <h6 class="mt-3" >Email: <a [href]="'mailto:'+user.email">{{ user.email }}</a></h6>
-          <h5>Account Details</h5>
+          <h5 class="mt-sm-05">Account Details</h5>
             <ul class="account-details pt-2">
               <li>Account Name: {{ user?.teacher_payment_info?.account_name }}</li>
               <li>Bank Name: {{ user?.teacher_payment_info?.bank_name }}</li>
@@ -81,7 +81,9 @@
     <a href="javascript:{}" routerLink="edit-profile" class="btn btn-outline-primary btn-sm float-right mt-1" *ngIf="isDashBoard"><fa-icon [icon]="faEdit" ></fa-icon> Edit</a>
 </div>
 </div>
+</div>
 
+<div class="container">
     <div class="row m-0 pt-3 bg-white shadow-sm mt-3 pb-3 mb-5">
       <div class="col-md-3">
         <label>Subject / Syllabus</label>
@@ -144,8 +146,6 @@
       </ng-container>
       </div>
     </div>
-
-
 
     <ng-container *ngIf="(courses$ | async) as courses">
       <ngb-tabset type="pills" *ngIf="courses && courses?.data.length">

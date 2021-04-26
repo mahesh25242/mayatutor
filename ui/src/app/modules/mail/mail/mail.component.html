@@ -1,6 +1,7 @@
 <div class="container-fluid pt-4">
   <h3 class="mb-3">Message</h3>
   <div class="pb-4">
+    <div class="mobile-flex">
 <a routerLink="compose" class="btn btn-primary btn-sm mr-2" routerLinkActive="active">Compose</a>
 <a routerLink="inbox" class="btn  btn-sm btn-outline-primary mr-2" routerLinkActive="active">Inbox
   <ng-container *ngIf="(this.unreadMsgCount$ | async) as unreadMsgCount">
@@ -10,6 +11,7 @@
   </ng-container>
 </a>
 <a routerLink="sent-item" class="btn btn-sm btn-outline-secondary" routerLinkActive="active">Sent Item</a>
+</div>
 </div>
 <router-outlet></router-outlet>
 </div>

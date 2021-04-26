@@ -12,18 +12,14 @@
 .user-avathar {
     width: 100%;
     display: block;
-    min-height:218px;
+    min-height:246px;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     border-radius: 5px;
+    margin: 0px;
 }
-.profile-bg {
-    background: #ebedf1;
-    border: 1px solid #017bff;
-    border-radius: 6px;
-    border-bottom-width: 4px;
-}
+
 ::ng-deep {
     .nav-pills {
         border-bottom: 4px solid rgba(0, 0, 0, 0.125);
@@ -48,3 +44,30 @@
     }
     }
 }
+
+@media only screen and (max-width:768px) {
+   
+    .profile-bg {
+        background: #cecece26;
+        border-bottom: 4px solid #017bff;
+        max-width: 1250px;
+        margin:0px auto 50px auto;
+        border-top: 4px solid #017bff;
+    
+    }
+    .mt-sm-05 {
+        margin-top: 30px;
+    }
+
+  }
+
+  @media only screen and (min-width:768px) {
+    .profile-bg {
+        background: #cecece26;
+        border-bottom: 4px solid #017bff;
+        max-width: 1250px;
+        margin:34px auto 50px auto;
+        border-top: 4px solid #017bff;
+    
+    }
+  }

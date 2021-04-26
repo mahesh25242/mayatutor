@@ -14,11 +14,25 @@
 }
 .register-sec {
     text-align: center;
+    .min-176 {
+        min-height:182px;
+    }
     .card-body {
         h1 {
-            font-size:$fontsize-2;
+            font-size: 26px;
+            color: #578AF7;
             color:$primaryColor;
         }
+        .mb-2px {
+            margin-bottom: 2px;
+        }
+        .font-20 {
+            font-size: 20px;
+        }
+        .mt-33px {
+            margin-top:33px;
+        }
+        
     }
     .card-footer {
         h2 {

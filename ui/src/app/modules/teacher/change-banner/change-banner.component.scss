@@ -2,11 +2,11 @@
 
 @media only screen and (max-width:780px) {
   .banner{
-    min-height:120px;
-    position:relative;
-    position:relative;
+    min-height: 110px;
+    position: relative;    
     background-repeat: no-repeat;
-    background-size:100%;
+    background-size: cover;
+    background-position: center;
     .btn-primary {
       position: absolute;
       bottom:30px;
@@ -18,10 +18,13 @@
 
 @media only screen and (min-width:780px) {
   .banner{
-    min-height:300px;
+    min-height:250px;
     position:relative;
     background-repeat: no-repeat;
-    background-size:100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
     .btn-primary {
       position: absolute;
       bottom:30px;

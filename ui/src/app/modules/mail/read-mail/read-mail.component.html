@@ -7,8 +7,8 @@
       <div class="grid-mail-profile">
       <div>
         <div class="d-flex">
-          <div class="flex-1 avathar" [style.background-image]="'url('+item.user.avatar+')'"> </div>
-          <div class="flex-1 pl-3">
+          <div class="custom-flex-1 avathar" [style.background-image]="'url('+item.user.avatar+')'"> </div>
+          <div class="custom-flex-1 pl-3">
             <small  class="d-block mb-2">Assigned Course:</small>
             <p>Computer Science, English</p>
           </div>
@@ -26,7 +26,7 @@
     <h6>Test@test.com</h6>
     
       </div>
-      <div class="border-left pl-4 pb-5 position-relative">
+      <div class="border-padding pb-5 position-relative">
         <div class="d-flex">
           <a routerLink="../../" class="btn btn-sm btn-outline-secondary"> <fa-icon [icon]="faArrowLeft"></fa-icon> Back</a>
           <a href="javascript:{}" class="btn btn-sm btn-outline-secondary ml-auto" (click)="replayMsg(mail)" *ngIf="(mailTp$ | async)?.type == 'inbox'"><fa-icon class="mr-2" [icon]="faReply"></fa-icon>Reply</a>

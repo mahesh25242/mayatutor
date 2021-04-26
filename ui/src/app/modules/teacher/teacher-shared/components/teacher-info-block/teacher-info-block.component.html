@@ -1,4 +1,8 @@
-<div class="bg-white p-4 shadow-sm">
+
+
+  <ng-content select="[live_class]"></ng-content>
+ 
+<div class="bg-white p-4 shadow">
   <div class="row">
     <div class="col">
       <ng-container *ngIf="teacher?.id">
@@ -10,20 +14,22 @@
               </div>
               <div class="col-8">
                 <h5> {{ teacher.fname }} {{ teacher.lname}}</h5>
-                <label>Status:</label>
-                <h6 class="text-success">PAID</h6>
-                <label class="price-list mt-3"><ng-content select="[course_price]"></ng-content></label>
-                <!-- [readonly]="teacher.rating.myrating_tran" -->
-                <app-rating [rating]="teacher.rating" [teacherId]="teacher.id"></app-rating>
+                <app-rating [rating]="teacher.rating" [teacherId]="teacher.id"></app-rating>               
+                <h3 class="price-list mt-5 d-block"><ng-content select="[course_price]"></ng-content></h3>
 
+                <!-- [readonly]="teacher.rating.myrating_tran" -->
+                
+                <div class="d-none"  *ngIf="teacher?.current_user_plan?.remaining_days">
+                  <p class="text-primary">Expire after </p>
+                  <h6>{{teacher?.current_user_plan?.remaining_days}} Days</h6></div>
 
 
               </div>
             </div>
           </div>
           <div class="col-md-6 col-lg-6 pl-4">
-            <div class="row">
-              <div class="col-12 pb-3">
+           
+              <div >
                 <h6 class="d-block mb-3">Connect with</h6>
                 <app-send-message-to-teacher
                 class="teacher-message-btn mr-2 mb-2"
@@ -44,10 +50,8 @@
                 <p class="text-primary">New Messages</p>
                 <h6>25</h6>
               </div> -->
-              <div class="col-6 pt-3 pl-4" *ngIf="teacher?.current_user_plan?.remaining_days">
-                <p class="text-primary">Expire after </p>
-                <h6>{{teacher?.current_user_plan?.remaining_days}} Days</h6></div>
-            </div>
+              
+           
           </div>
 
         </div>
@@ -79,7 +83,7 @@
 
     </div>
 
-    <ng-content select="[live_class]"></ng-content>
+   
 
   </div>
 

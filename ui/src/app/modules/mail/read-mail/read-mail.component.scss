@@ -1,20 +1,53 @@
-.grid-mail-profile {
-    display: grid;
-    grid-template-columns: 350px 1fr;
-}
+
 .flex-1 {
     flex: 1;
 }
-.avathar {
-    min-height:167px;
-    background-repeat: no-repeat;
-    background-position:center;
-    background-size: cover;
-    border-radius: 5px;
+
+
+@media only screen and (max-width:768px) {
+    .footer-position {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+    .grid-mail-profile {
+        display: grid;
+        
+    }
+    .avathar {
+        min-height:67px;
+        background-repeat: no-repeat;
+        background-position:center;
+        background-size: cover;
+        border-radius: 5px;
+        width: 70px;
+    }
 }
-.footer-position {
-    position: absolute;
-    bottom: 0;
-    left: 1.5rem;
-    width: calc(100% - 1.5rem);
+
+@media only screen and (min-width:768px) {
+    .footer-position {
+        position: absolute;
+        bottom: 0;
+        left: 1.5rem;
+        width: calc(100% - 1.5rem);
+    }
+.border-padding {
+    padding-left: 1.5rem;
+    border-left: 1px solid #dee2e6;
+}
+
+    .custom-flex-1 {
+        flex: 1;
+    }
+    .grid-mail-profile {
+        display: grid;
+        grid-template-columns: 350px 1fr;
+    }
+    .avathar {
+        min-height:167px;
+        background-repeat: no-repeat;
+        background-position:center;
+        background-size: cover;
+        border-radius: 5px;
+    }
 }
