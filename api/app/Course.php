@@ -67,7 +67,7 @@ class Course extends Model implements AuthenticatableContract, AuthorizableContr
 
     public function courseModule()
     {
-        return $this->hasMany('App\CourseModule');
+        return $this->hasMany('App\CourseModule')->orderBy("sort_order", "ASC");
     }
 
     public function courseTag()
