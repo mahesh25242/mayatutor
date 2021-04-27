@@ -89,6 +89,7 @@
     <ng-select [items]="(countries$ | async)"
         bindLabel="name"
         id="country_id"
+        [readonly]="true"
         [ngClass]="{'is-invalid': ( f.country_id.errors && f.country_id.errors.error)}"
         placeholder="select Country"
         formControlName="country_id">
