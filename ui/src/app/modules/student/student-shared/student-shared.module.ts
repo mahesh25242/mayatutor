@@ -8,8 +8,8 @@ import { PlayerModuleModule } from '../../../shared-module/player-module.module'
 import { TeacherSharedModule } from '../../teacher/teacher-shared/teacher-shared.module';
 import { StudentSharedRoutingModule} from './student-shared-routing.module';
 
-import { LaunchModuleResolver } from '../launch-module/launch-module.resolver';
-import { LaunchModuleComponent } from '../launch-module/launch-module.component';
+import { LaunchModuleResolver } from './launch-module/launch-module.resolver';
+import { LaunchModuleComponent } from './launch-module/launch-module.component';
 @NgModule({
   declarations: [
     CourseComponent,

@@ -21,9 +21,9 @@ export class LaunchModuleComponent implements OnInit, OnDestroy {
     private breadCrumbsService: BreadCrumbsService,
     private studentCourseService: StudentCourseService,
     private router: Router,) {
-      this.router.routeReuseStrategy.shouldReuseRoute = function () {
-        return false;
-      };
+      // this.router.routeReuseStrategy.shouldReuseRoute = function () {
+      //   return false;
+      // };
 
      }
 
@@ -36,11 +36,11 @@ export class LaunchModuleComponent implements OnInit, OnDestroy {
           return this.studentCourseService.fetchNextModule({module_id: this.module.id});
         })).subscribe((res: any)=>{
           Notiflix.Loading.Remove();
-          if(!res){
+          //if(!res){
             this.router.navigate(['../../'], {relativeTo: this.route});
-          }else{
-            this.router.navigate([`../${res.id}`], {relativeTo: this.route});
-          }
+         // }else{
+          //  this.router.navigate([`../${res.id}`], {relativeTo: this.route});
+         // }
       }, err=>{
         Notiflix.Loading.Remove();
       });

@@ -1,11 +1,11 @@
 <div class="p-4 bg-white shadow-sm mb-4">
 <div class="row m-0">
-  <div class="col-md-2 col-lg-2 avathar" [style.background-image]="'url('+user.avatar+')'">   
+  <div class="col-md-2 col-lg-2 avathar" [style.background-image]="'url('+user.avatar+')'">
   </div>
-  <div class="col-md-4 col-lg-4  border-right">   
-  <h6>{{ user.fname }} {{ user.lname }}</h6>  
+  <div class="col-md-4 col-lg-4  border-right">
+  <h6>{{ user.fname }} {{ user.lname }}</h6>
     <app-rating [rating]="user.rating" [readonly]="true"></app-rating>
-    
+
 
     Time: {{user.teacher_info?.time}}
     <div>
@@ -15,7 +15,7 @@
      </div>
   </div>
   <div class="col-md-3 col-lg-3 border-right">
-  
+
       <address>
         <b class="d-block mb-2">Address</b>
         {{ user.address }}
@@ -27,36 +27,36 @@
       <div>
         <b class="d-block mb-2">Mobile</b>
        <p>{{ user.phone }}</p> </div>
-       
+
         <b class="d-block mb-2"> Email</b>
           <a [href]="'mailto:'+user.email">{{ user.email }}</a>
   </div>
   <div class="col-md-3 col-lg-3">
-    
+
       <p>Active From: {{ user.created_at | date:'medium' }}</p>
       <div *ngIf="user.last_login?.created_at_human">Last Login: {{ user.last_login?.created_at_human }}</div>
       <ng-container>
         <ng-container *ngIf="user.email" >
-          <button   class="btn btn-primary btn-sm teacher-message-btn" placement="top" [ngbTooltip]="(user.email == '*') ? 'Only logged user can contact teacher' : ''">
+          <app-send-message-to-teacher
+          class="teacher-message-btn mr-2 mb-2"
+          *ngIf="user.email" [user]="user">
             Message
-            <fa-icon [icon]="faLock" *ngIf="user.email == '*'"></fa-icon>
-          </button>
+          </app-send-message-to-teacher>
         </ng-container>
         <ng-container *ngIf="user.phone" >
           <button  class="btn btn-primary btn-sm" *ngIf="user.phone == '*'"   placement="top" [ngbTooltip]="(user.email == '*') ? 'Only logged user can contact teacher' : ''">
             Mobile
             <fa-icon [icon]="faLock" *ngIf="user.phone == '*'"></fa-icon>
           </button>
-          
+
           <ng-container *ngIf="user.phone && user.phone !== '*'">
             <a class="btn btn-primary btn-sm ml-2" target="_blank" [href]="'https://web.whatsapp.com/send?phone='+user.phone">Whats app</a>
             <a class="d-sm-none btn btn-primary btn-sm" target="_blank" [href]="'https://api.whatsapp.com/send?phone='+user.phone">Whats app</a>
           </ng-container>
         </ng-container>
       </ng-container>
-      
-      <a href="javascript:{}" class="btn btn-primary btn-sm ml-2">Share</a>
-    
+
+
   </div>
 </div>
 </div>

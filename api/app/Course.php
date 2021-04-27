@@ -36,11 +36,22 @@ class Course extends Model implements AuthenticatableContract, AuthorizableContr
         });
 
         static::created(function ($course) {
-            \App\CourseApprovalRequest::create(["status" => 0, "course_id" => $course->id]);
+            if($course->teacherAutoApproval()->exists()){
+                \App\CourseApprovalRequest::create(["status" => 1, "course_id" => $course->id]);
+            }else{
+                \App\CourseApprovalRequest::create(["status" => 0, "course_id" => $course->id]);
+            }
+
+
         });
 
         static::updated(function ($course) {
-            $course->courseApprovalRequest()->update(["status" => 0]);
+            if($course->teacherAutoApproval()->exists()){
+                \App\CourseApprovalRequest::create(["status" => 1, "course_id" => $course->id]);
+            }else{
+                \App\CourseApprovalRequest::create(["status" => 0, "course_id" => $course->id]);
+            }
+
         });
     }
 
@@ -72,6 +83,11 @@ class Course extends Model implements AuthenticatableContract, AuthorizableContr
     public function latestCourseApprovalRequest()
     {
         return $this->hasOne('App\CourseApprovalRequest')->latest();
+    }
+
+    public function teacherAutoApproval()
+    {
+        return $this->hasOne('App\TeacherAutoApproval','user_id', 'user_id')->latest();
     }
 
     public function scopeApproved($query)

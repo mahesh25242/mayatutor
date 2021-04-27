@@ -61,6 +61,7 @@ class UserResource extends JsonResource
             'subject' => $this->subject,
             'teacher_info' => $this->whenLoaded('teacherInfo'),
             'teacher_banner' => $this->whenLoaded('teacherBanner'),
+            'teacher_auto_approval_count' => $this->teacher_auto_approval_count,
 
             'created_at' => $this->created_at,
             'created_at_human' => $this->created_at_human,

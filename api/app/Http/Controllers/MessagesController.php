@@ -67,8 +67,13 @@ class MessagesController extends Controller
      */
     public function show($id)
     {
+        $userId = Auth::id();
         try {
-            $thread = Thread::with(["messages.user", "participants.user"])->findOrFail($id);
+            $thread = Thread::findOrFail($id);
+
+            $thread = Thread::with(["messages.user.studentCourse.course" =>  function ($q) use($thread, $userId) {
+                $q->whereIn("user_id",  $thread->participantsUserIds($userId));
+            }, "participants.user"])->findOrFail($id);
         } catch (ModelNotFoundException $e) {
 
             return response(['message' => 'no message found',  'status' => false], 422);
@@ -78,12 +83,14 @@ class MessagesController extends Controller
         // $users = User::whereNotIn('id', $thread->participantsUserIds())->get();
 
         // don't show the current user in list
-        $userId = Auth::id();
-        $users = User::whereNotIn('id', $thread->participantsUserIds($userId))->get();
+
+        // $users = User::whereNotIn('id', $thread->participantsUserIds($userId))->get();
 
         $thread->markAsRead($userId);
 
         $thread->creator = $thread->creator();
+
+        //$thread->creator = User;
         return response($thread);
         //return view('messenger.show', compact('thread', 'users'));
     }

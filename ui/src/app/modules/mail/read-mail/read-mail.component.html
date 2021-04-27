@@ -1,8 +1,8 @@
 
 
 <div *ngIf="(mail$ | async) as mail">
-  
-  <div *ngFor="let item of mail.messages" >    
+
+  <div *ngFor="let item of mail.messages" >
     <div class="p-4 bg-white shadow mb-4">
       <div class="grid-mail-profile">
       <div>
@@ -10,7 +10,16 @@
           <div class="custom-flex-1 avathar" [style.background-image]="'url('+item.user.avatar+')'"> </div>
           <div class="custom-flex-1 pl-3">
             <small  class="d-block mb-2">Assigned Course:</small>
-            <p>Computer Science, English</p>
+            <ng-container *ngIf="item.user.student_course">
+              <p>
+                <ng-container *ngFor="let student_course of item.user.student_course; let isLast=last">
+                  <span *ngIf="student_course?.course?.name">
+                    {{student_course?.course?.name}} {{isLast ? '' : ', '}}
+                  </span>
+                </ng-container>
+              </p>
+            </ng-container>
+
           </div>
         </div>
         <hr>
@@ -20,11 +29,11 @@
     </ng-container>
     <hr>
     <small class="d-block">Contact Number:</small>
-    <h6>91 999 534 6400</h6>
+    <h6>{{mail.creator.phone}}</h6>
     <hr>
     <small>Email ID:</small>
-    <h6>Test@test.com</h6>
-    
+    <h6>{{mail.creator.email}}</h6>
+
       </div>
       <div class="border-padding pb-5 position-relative">
         <div class="d-flex">
@@ -41,15 +50,15 @@
         <div class="footer-position">
         <hr>
         <a href="javascript:{}" class="btn btn-sm btn-outline-secondary ml-auto" (click)="replayMsg(mail)" *ngIf="(mailTp$ | async)?.type == 'inbox'"><fa-icon class="mr-2" [icon]="faReply"></fa-icon>Reply</a>
-       <button class="btn float-right"> <fa-icon  [icon]="faTrash"></fa-icon></button>
+       <!-- <button class="btn float-right"> <fa-icon  [icon]="faTrash"></fa-icon></button> -->
 
       </div>
       </div>
-     
+
     </div>
-    
+
   </div>
-  
+
   </div>
 </div>
 

@@ -31,4 +31,9 @@ class TeacherAutoApproval extends Model implements AuthenticatableContract, Auth
     {
         return $this->belongsTo('App\User');
     }
+
+    public function course()
+    {
+        return $this->belongsTo('App\Course','user_id', 'user_id');
+    }
 }

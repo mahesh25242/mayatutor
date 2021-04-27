@@ -28,6 +28,7 @@ import { ModuleLaunchComponent } from './components/module-launch/module-launch.
 import { BackButtonDirective } from './directives/back-button.directive';
 import { CollectDetailComponent } from './components/search/collect-detail/collect-detail.component';
 import { LoginLinkComponent } from './components/login-link/login-link.component';
+import { HelpVideoComponent } from './components/help-video/help-video.component';
 
 Notiflix.Confirm.Init({ borderRadius:"5px",titleColor:"#204486",okButtonBackground:"#204486",cancelButtonBackground:"#e2e2e2",cancelButtonColor:"#393939", });
 Notiflix.Notify.Init({ width:"390px", success: {background:"#d4edda",textColor:"#155724",}, failure: {background:"#f8d7da",textColor:"#721c24",}, warning: {background:"#fff3cd",textColor:"#856404",}, info: {background:"#cce5ff",textColor:"#004085",}, });
@@ -50,7 +51,8 @@ Notiflix.Block.Init({ svgColor:"#204486", });
     ModuleLaunchComponent,
     BackButtonDirective,
     CollectDetailComponent,
-    LoginLinkComponent
+    LoginLinkComponent,
+    HelpVideoComponent
   ],
   imports: [
     CommonModule,
@@ -86,7 +88,8 @@ Notiflix.Block.Init({ svgColor:"#204486", });
     ModuleLaunchComponent,
     PdfViewerModule,
     BackButtonDirective,
-    LoginLinkComponent
+    LoginLinkComponent,
+    HelpVideoComponent
   ]
 })
 export class SharedModuleModule { }

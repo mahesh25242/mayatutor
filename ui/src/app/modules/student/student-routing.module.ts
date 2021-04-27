@@ -6,8 +6,6 @@ import { RegisterComponent } from 'src/app/shared-module/components/register/reg
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { StudentHomeComponent } from './student-home.component';
 
-import { LaunchModuleComponent } from './launch-module/launch-module.component';
-import { LaunchModuleResolver } from './launch-module/launch-module.resolver';
 import { AdminOrStudentAuthGuard } from 'src/app/lib/guard/adminOrStudentAuth.guard';
 
 

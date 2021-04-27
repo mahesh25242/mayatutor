@@ -15,7 +15,7 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="teacher/plans" routerLinkActive="active" (click)="showMenu = null">Price</a>
       </li>
-      
+
       <ng-container *ngIf="!(loggedUser$ | async) as loggedUser">
         <li class="nav-item">
           <app-login-link>

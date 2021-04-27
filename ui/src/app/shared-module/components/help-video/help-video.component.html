@@ -1,0 +1,17 @@
+
+<a href="javascript:{}" (click)="open(content)"><fa-icon class="fa-icon-you" [icon]="faYoutube"></fa-icon></a>
+<ng-template #content let-modal>
+  <div class="modal-header" *ngIf="title">
+    <h4 class="modal-title" id="modal-basic-title">{{title}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-player [videoSources]="video"></app-player>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Cancel')">Cancel</button>
+  </div>
+</ng-template>
+
