@@ -78,6 +78,7 @@
           <label for="country_id">Country</label>
           <ng-select [items]="(countries$ | async)"
               bindLabel="name"
+              [readonly]="true"
               id="country_id"
               [ngClass]="{'is-invalid': ( f.country_id.errors && f.country_id.errors.error)}"
               placeholder="select Country"
@@ -87,7 +88,7 @@
                 {{f.country_id.errors.error}}
               </div>
         </div>
-      
+
         <div class="form-group col-md-6 col-lg-6">
           <label for="state_id">State</label>
           <ng-select [items]="(states$ | async)"
@@ -101,7 +102,7 @@
               {{f.state_id.errors.error}}
             </div>
         </div>
-      
+
         <div class="form-group col-md-6 col-lg-6">
           <label for="city_id">City</label>
           <ng-select [items]="(cities$ | async)"
@@ -115,8 +116,8 @@
                 {{f.city_id.errors.error}}
               </div>
         </div>
-       
-   
+
+
     </div>
 
   </div>

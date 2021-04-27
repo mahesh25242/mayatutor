@@ -12,6 +12,7 @@ export class HelpVideoComponent implements OnInit {
   faYoutube = faYoutube;
   @Input() url:string;
   @Input() title:string;
+  @Input() isPromo:boolean;
   video: any = null;
   constructor(private modalService: NgbModal) { }
 

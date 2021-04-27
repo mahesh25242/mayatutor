@@ -1,5 +1,8 @@
 
-<a href="javascript:{}" (click)="open(content)"><fa-icon class="fa-icon-you" [icon]="faYoutube"></fa-icon></a>
+<a href="javascript:{}" (click)="open(content)">
+  <fa-icon [ngClass]="{'fa-icon-you': isPromo, 'fa-icon-help-you':!isPromo}"
+  class="" [icon]="faYoutube"></fa-icon>
+</a>
 <ng-template #content let-modal>
   <div class="modal-header" *ngIf="title">
     <h4 class="modal-title" id="modal-basic-title">{{title}}</h4>
