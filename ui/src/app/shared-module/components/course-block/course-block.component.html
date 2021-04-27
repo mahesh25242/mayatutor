@@ -14,7 +14,7 @@
      <label>Modules: </label> <span class="text-primary font-15"> {{ (course.course_module_count > 1) ? course.course_module_count+'' : 'only '+course.course_module_count+' module' }}</span>
     </div>
   </div>
-    <div class="d-flex">
+    <div class="d-flex align-items-center">
 
       <h5 class="mb-0 mt-2 text-primary" *ngIf="course.price">Fees: {{ course.price }}</h5>
     <a href="javascript:{}" class="btn btn-primary btn-sm ml-auto"
