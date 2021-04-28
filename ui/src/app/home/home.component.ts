@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {faUserGraduate,faUser,faClock,faStar,faStarHalfAlt,faSearch } from '@fortawesome/free-solid-svg-icons';
 import { UserService, TeacherService } from '../lib/services';
 import { Observable } from 'rxjs';
 import { User, Rating } from '../lib/interfaces';
 import { BreadCrumbsService } from '../shared-module/components/bread-crumbs/bread-crumbs.component';
 
+declare var _smartsupp:any;
+declare var smartsupp:any;
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   faUserGraduate = faUserGraduate;
   faUser = faUser;
   faClock = faClock;
@@ -35,6 +37,12 @@ export class HomeComponent implements OnInit {
 
     this.topRatedTeachers$ = this.teacherService.topRatedTeacher();
 
+    smartsupp('chat:show');
+
   }
 
+  ngOnDestroy(){
+    smartsupp('chat:hide');
+
+  }
 }
