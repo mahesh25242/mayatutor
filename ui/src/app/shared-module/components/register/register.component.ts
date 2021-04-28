@@ -9,6 +9,8 @@ import { ReCaptchaV3Service } from 'ngx-captcha';
 import { environment } from '../../../../environments/environment';
 import Notiflix from "notiflix";
 import { BreadCrumbsService } from '../bread-crumbs/bread-crumbs.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { RegisterTermsComponent } from '../register-terms/register-terms.component';
 
 @Component({
   selector: 'app-register',
@@ -33,9 +35,17 @@ export class RegisterComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private reCaptchaV3Service: ReCaptchaV3Service,
-    private breadCrumbsService: BreadCrumbsService) { }
+    private breadCrumbsService: BreadCrumbsService,
+    private _modalService: NgbModal) { }
 
   get f() { return this.registerFrm.controls; }
+
+  viewTerms(){
+    const activeModal = this._modalService.open(RegisterTermsComponent,{
+      size:'lg'
+    });
+  }
+
   ngOnInit(): void {
 
     this.registerFrm = this.formBuilder.group({
