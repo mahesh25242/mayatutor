@@ -24,8 +24,16 @@ class UsersController extends Controller
 
 
     public function test(Request $request){
-        $pdf = PDF::loadView('PDF.teacherInvoice');
+        $user = User::find(11);
+        $pdf = PDF::loadView('PDF.teacherInvoice',
+        [ "user" => $user,
+        "userPlan" => $user->currentUserPlan,
+        "plan" => $user->currentUserPlan->plan]);
         $pdf->save(public_path('assets/invoices/export.pdf'));
+
+        if(file_exists(public_path("assets/invoices/export.pdf"))){
+            return response()->download(public_path("assets/invoices/export.pdf"));
+        }
 
         // Cache::flush();
         // $user = User::find(9);
