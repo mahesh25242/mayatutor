@@ -66,13 +66,13 @@
         </div>
         <div class="col">
           <div class="d-flex">
-        <div class="flex-1" *ngIf="user?.teacher_payment_info?.qr_code1">
+        <div class="flex-1 pr-2" *ngIf="user?.teacher_payment_info?.qr_code1">
           <img class="img-fluid" [src]="user?.teacher_payment_info?.qr_code1" />
-          <p class="text-center">Paytm</p>
+          <h5 class="text-center mt-3">Paytm</h5>
         </div>
-        <div class="flex-1" *ngIf="user?.teacher_payment_info?.qr_code2">
+        <div class="flex-1 pl-2" *ngIf="user?.teacher_payment_info?.qr_code2">
           <img class="img-fluid" [src]="user?.teacher_payment_info?.qr_code2" />
-          <p class="text-center">G-Pay</p>
+          <h5 class="text-center mt-3">G-Pay</h5>
         </div>
       </div>
       </div>
