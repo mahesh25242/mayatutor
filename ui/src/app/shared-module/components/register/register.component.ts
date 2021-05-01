@@ -27,6 +27,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   stateSubscription: Subscription;
   regTypeSubscription: Subscription;
   signUpSubscription: Subscription;
+  acceptTrmPopSubScr: Subscription;
 
   constructor(private route:ActivatedRoute,
     private countryService: CountryService,
@@ -74,6 +75,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
       if(res?.id)
         this.cities$ = this.cityService.cities(res.id);
     });
+
 
     this.regTypeSubscription = this.route.data.subscribe(res=>{
       this.breadCrumbsService.bcs$.next([
@@ -150,18 +152,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(){
-    if(this.countrySubscription){
-      this.countrySubscription.unsubscribe();
-    }
-    if(this.stateSubscription){
-      this.stateSubscription.unsubscribe();
-    }
-    if(this.regTypeSubscription){
-      this.regTypeSubscription.unsubscribe();
-    }
-    if(this.signUpSubscription){
-      this.signUpSubscription.unsubscribe();
-    }
+    this.countrySubscription &&  this.countrySubscription.unsubscribe();
+    this.stateSubscription && this.stateSubscription.unsubscribe();
+    this.regTypeSubscription &&  this.regTypeSubscription.unsubscribe();
+    this.signUpSubscription && this.signUpSubscription.unsubscribe();
+    this.acceptTrmPopSubScr && this.acceptTrmPopSubScr.unsubscribe();
   }
 
 }
