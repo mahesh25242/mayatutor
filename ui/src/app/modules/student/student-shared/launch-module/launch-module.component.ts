@@ -66,7 +66,7 @@ export class LaunchModuleComponent implements OnInit, OnDestroy {
       }
     ]);
 
-    this.launch =  this.studentCourseService.launchModule({id: this.module.logged_student_course.id, module_id: this.module.id});
+    this.launch =  this.studentCourseService.launchModule({id: this.module?.logged_student_course?.id, module_id: this.module.id});
 
   }
 

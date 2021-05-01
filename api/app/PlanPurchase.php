@@ -24,7 +24,7 @@ class PlanPurchase extends Model implements AuthenticatableContract, Authorizabl
      */
     protected $fillable = [
         'user_id', 'plan_id', 'amount', 'discount', 'status',
-         'tran_no', 'log'
+         'tran_no', 'log', 'tax', 'gateway_request', 'gateway_response'
     ];
 
     public function getLogAttribute($value)
@@ -42,6 +42,9 @@ class PlanPurchase extends Model implements AuthenticatableContract, Authorizabl
         return $this->belongsTo('App\Plan');
     }
 
-
+    public function userPlan()
+    {
+        return $this->hasOne('App\UserPlan');
+    }
 
 }

@@ -16,6 +16,8 @@ import { StudentsResolver } from './students/students-resolver';
 import { StudentsComponent } from './students/students.component';
 import { PlanPurchaseComponent } from './plan-purchase/plan-purchase.component';
 import { AdminOrTeacherAuthGuard } from 'src/app/lib/guard/adminOrTeacherAuth.guard';
+import { MyInvoicesComponent } from './my-invoices/my-invoices.component';
+import { MyInvoicesResolver } from './my-invoices/my-invoices-resolver';
 
 const routes: Routes = [
   {
@@ -30,6 +32,13 @@ const routes: Routes = [
       {
         path: 'edit-profile',
         component: EditProfileComponent,
+      },
+      {
+        path: 'my-invoices',
+        component: MyInvoicesComponent,
+        resolve:{
+          invoices: MyInvoicesResolver
+        }
       },
     ]
   },

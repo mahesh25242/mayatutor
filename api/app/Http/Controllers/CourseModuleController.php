@@ -58,6 +58,8 @@ class CourseModuleController extends Controller
             "name" => $request->input("name", ""),
             "video_url" => $request->input("video_url", ''),
             "video_type" => $request->input("video_type", ''),
+            "file1" => $request->input("file1", ''),
+            "file2" => $request->input("file2", ''),
             "status" => 0
         ];
 

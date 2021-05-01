@@ -13,6 +13,7 @@ import { UserActivationComponent } from './user-activation/user-activation.compo
 import { CookiesPolicyComponent } from './cookies-policy/cookies-policy.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
+import { PurchaseLandingComponent } from './purchase-landing/purchase-landing.component';
 
 
 const routes: Routes = [
@@ -74,8 +75,14 @@ const routes: Routes = [
   {
     path: ':teacher/course',
     loadChildren: () => import('./modules/student/student-shared/student-shared.module').then(m => m.StudentSharedModule)
-
-
+  },
+  {
+    path: 'purchase/success/:id',
+    component: PurchaseLandingComponent,
+  },
+  {
+    path: 'purchase/failer',
+    component: PurchaseLandingComponent,
   },
   { path: '**', component: PageNotFoundComponent }
 ];

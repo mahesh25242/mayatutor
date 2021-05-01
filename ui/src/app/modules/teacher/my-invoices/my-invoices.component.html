@@ -1,0 +1,48 @@
+<div class="container-fluid pt-4">
+  <h3 class="mb-3">Invoices</h3>
+<app-bread-crumbs [hide]="true"></app-bread-crumbs>
+<hr>
+  <div class="table-responsive">
+  <table class="table table-striped table-bordered mt-3">
+    <thead>
+      <tr>
+        <th width="50">
+          Sl
+        </th>
+        <th>
+          Plan Name
+        </th>
+        <th>
+          Purchase Date
+        </th>
+        <th>
+          Plan Start
+        </th>
+        <th>
+          Plan End
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of invoices; let i= index;">
+          <td data-label="SL">
+            {{ i+1 }}
+          </td>
+          <td data-label="Plan Name">
+            <a href="javascript:{}" (click)="download(item)">{{ item.plan.name }}</a>
+          </td>
+          <td data-label="Purchase Date">
+            {{ item.created_at| date:'medium'  }}
+          </td>
+          <td data-label="Plan Start">
+            {{ item.start_date| date:'medium' }}
+          </td>
+          <td data-label="Plan End">
+            {{ item.end_date| date:'medium' }}
+          </td>
+        </tr>
+    </tbody>
+  </table>
+</div>
+
+</div>

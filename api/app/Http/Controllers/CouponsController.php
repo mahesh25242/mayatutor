@@ -139,7 +139,7 @@ class CouponsController extends Controller
             ->orWhereDate('end_date', '<=',  \Carbon\Carbon::now());
         })
         ->havingRaw('coupon_track_count < no_use')->get()->first();
-        if($coupon->count()){
+        if($coupon && $coupon->count()){
             return response($coupon);
         }else{
             return response(['message' => 'Invalid Coupon', 'status' => false], 422);

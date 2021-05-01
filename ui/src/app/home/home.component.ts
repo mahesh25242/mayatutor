@@ -20,6 +20,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   faStarHalfAlt = faStarHalfAlt;
   faSearch = faSearch;
 
+
+
   topRatedTeachers$: Observable<Rating[]>;
 
   loggedUser$: Observable<User>;

@@ -264,6 +264,7 @@ class TeacherController extends Controller
         ]);
     }
     public function invoices($userId = 0){
+        $userId = ($userId) ? $userId : Auth::id();
         return response(\App\UserPlan::with(["plan"])->where("user_id", $userId)->get());
     }
 

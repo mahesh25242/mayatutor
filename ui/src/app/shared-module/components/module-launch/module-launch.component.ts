@@ -17,14 +17,19 @@ export class ModuleLaunchComponent implements OnInit {
   constructor(private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
-    this.video = {
-      source : [
-        {
-          src: `${this.courseModule.video_url}&modestbranding=1&showinfo=0&rel=0`,
-          provider: this.courseModule.video_type,
-        },
-      ]
-    };
+    if(["youtube", "vimeo"].includes(this.courseModule.video_type)){
+      this.video = {
+        source : [
+          {
+            src: `${this.courseModule.video_url}&modestbranding=1&showinfo=0&rel=0`,
+            provider: this.courseModule.video_type,
+          },
+        ]
+      };
+    }else{
+      this.video = this.sanitizer.bypassSecurityTrustResourceUrl(this.courseModule.video_url);
+    }
+
     //this.courseModule.pdf = 'https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf';
     //this.pdfSrc =  this.courseModule.pdf;
 

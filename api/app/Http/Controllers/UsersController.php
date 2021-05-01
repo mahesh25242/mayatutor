@@ -380,7 +380,7 @@ class UsersController extends Controller
         $status = false;
         if ($request->hasFile('avatharImg')) {
             $validator = Validator::make($request->all(), [
-                'avatharImg' => 'max:1024', //5MB
+                'avatharImg' => ['mimes:jpeg,png,bmp,tiff', 'max:1024'], //5MB
             ]);
 
             if($validator->fails()){

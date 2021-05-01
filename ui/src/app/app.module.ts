@@ -8,6 +8,7 @@ import { AngularFireAuthModule } from "@angular/fire/auth";
 
 import { httpInterceptorProviders } from './lib/interceptor'
 import {  SharedModuleModule } from './shared-module/shared-module.module';
+import {  PlayerModuleModule } from './shared-module/player-module.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -33,6 +34,9 @@ import { environment } from '../environments/environment';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
 import { CookiesPolicyComponent } from './cookies-policy/cookies-policy.component';
+import { HomeBannerComponent } from './home/home-banner/home-banner.component';
+import { HomeMiddleComponent } from './home/home-middle/home-middle.component';
+import { PurchaseLandingComponent } from './purchase-landing/purchase-landing.component';
 
 var config = {
   apiKey: "AIzaSyAhzEi15mQe-KY7rhbmIi8MnvL2-KcL7uw",
@@ -65,13 +69,17 @@ var config = {
     UserActivationComponent,
     PrivacyPolicyComponent,
     TermsAndConditionsComponent,
-    CookiesPolicyComponent
+    CookiesPolicyComponent,
+    HomeBannerComponent,
+    HomeMiddleComponent,
+    PurchaseLandingComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     SharedModuleModule,
+    PlayerModuleModule,
     HttpClientModule,
     HttpClientXsrfModule.disable(),
     AngularFireModule.initializeApp(config),

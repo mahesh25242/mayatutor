@@ -39,6 +39,8 @@ export interface CourseModule {
   course?: Course,
   video_type?: string,
   thumb_image?: string,
+  file1?: string,
+  file2?: string,
   logged_student_course?: StudentCourse,
   is_module_completed_count?: number,
   is_module_completed?: StudentCourseModuleTrack

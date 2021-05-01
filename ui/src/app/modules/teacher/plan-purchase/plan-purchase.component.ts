@@ -29,15 +29,18 @@ export class PlanPurchaseComponent implements OnInit {
     }
 
     goToPurchase(plan: Plan = null){
+      Notiflix.Loading.Dots();
       this.coupon$.asObservable().pipe(mergeMap(coupon=>{
         return this.teacherService.purchasePlan({
           plan: plan?.id,
           coupon:coupon?.id
         });
       })).subscribe(res=>{
-
+        Notiflix.Loading.Remove();
+        window.location.href = res?.paymentLink;
       }, err=>{
-        Notiflix.Notify.Failure(err.error?.message);
+        Notiflix.Loading.Remove();
+        Notiflix.Notify.Failure('unexpected error occur');
       })
     }
   ngOnInit(): void {

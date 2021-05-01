@@ -1,0 +1,22 @@
+<form [formGroup]="homeVideoFrm" (submit)="save()">
+  <app-modal>
+    <div header>
+      Edit Video
+    </div>
+    <div body>
+      <div class="form-group">
+        <label for="value">Youtube Link</label>
+        <textarea  class="form-control" id="file_path"
+        [ngClass]="{'is-invalid': (f.file_path.errors && f.file_path.errors.error) }"
+        placeholder="Youtube Link" formControlName="file_path" ></textarea>
+        <div *ngIf="f.file_path.errors && f.file_path.errors.error" class="invalid-feedback">
+          {{f.file_path.errors.error}}
+        </div>
+      </div>
+    </div>
+    <div footer>
+      <button type="submit" class="btn btn-primary btn-sm ml-2">Save</button>
+      <button type="button" class="btn btn-outline-secondary  btn-sm ml-2" (click)="modal.dismiss('cancel click')">Cancel</button>
+    </div>
+  </app-modal>
+</form>

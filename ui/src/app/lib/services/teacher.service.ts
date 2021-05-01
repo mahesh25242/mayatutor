@@ -46,7 +46,7 @@ export class TeacherService {
   }
 
   purchasePlan(postData:any =null){
-    return this.http.post(`/teacher/plan/${postData.plan}/purchase`, postData);
+    return this.http.post<any>(`/teacher/plan/${postData.plan}/purchase`, postData);
   }
 
   listCourses(page:number = 1,postData: any = null, url='course'):Observable<CourseWithPagination>{
@@ -79,12 +79,16 @@ export class TeacherService {
   }
 
   invoices(userId: number = 0){
-    return this.http.get<any>(`/admin/teacher/invoices/${userId}`);
+    return this.http.get<any>(`/teacher/invoices/${userId}`);
   }
 
   downloadInvoice(invId:number = 0){
     let headers = new HttpHeaders();
     headers = headers.set('Accept', 'application/pdf');
     return this.http.get(`/admin/teacher/downloadInvoice/${invId}`, { headers: headers, responseType: 'blob' });
+  }
+
+  payemntSuccess(id: number = 0){
+    return this.http.get<any>(`/teacher/payment/${id}`);
   }
 }

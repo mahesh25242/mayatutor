@@ -1,0 +1,36 @@
+<h1 class="mt-5 mb-4 text-uppercase">1000 + CATEGORIES</h1>
+<div class="row">
+  <ng-container *ngIf="videos$ | async as videos">
+    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-3" *ngFor="let item of videos">
+        <div class="card shadow-sm ">
+            <div class="card-body p-2">
+              <app-player [videoSources]="item.video"></app-player>
+            </div>
+        </div>
+    </div>
+  </ng-container>
+
+    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-3">
+        <div class="card shadow-sm ">
+            <div class="card-body">
+              <h6>WORLD WIDE</h6>
+              <h1 class="mt-3">25000</h1>
+              <p class="mb-2px">Verified Tutors & Institutes</p>
+            </div>
+            <div class="card-footer">
+                <h2>FIND FOR FREE</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-3">
+        <div class="card shadow-sm ">
+            <div class="card-body min-176">
+              <h6 class="text-uppercase">Thousands of<br/> Syllabus</h6>
+              <h1 class="font-20 mt-33px">LIVE & ROBOTICS RECORDED CLASSES</h1>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>

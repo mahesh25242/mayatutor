@@ -30,77 +30,54 @@ class PlanPurchaseListener
     public function handle(PlanPurchaseEvent $event)
     {
 
-        if($event->user->isTeacher()->exists()){
+        $fromDate = null;
 
+        if($event->planPurchase->user->currentUserPlan ){
+            $fromDate = \Carbon\Carbon::parse($event->planPurchase->user->currentUserPlan->end_date);
+        }else{
+            $fromDate = \Carbon\Carbon::now();
+        }
 
-            $fromDate = null;
+        $userPlan = null;
+        if($event->planPurchase->id && $event->planPurchase->status){
+            $toDate = clone $fromDate;
+            $userPlan = new \App\UserPlan;
+            $userPlan->user_id = $event->planPurchase->user_id;
+            $userPlan->plan_id = $event->planPurchase->plan_id;
+            $userPlan->start_date = $fromDate;
+            $userPlan->end_date = $toDate->addDays($event->planPurchase->plan->days);
+            $userPlan->plan_purchase_id = $event->planPurchase->id;
+            $userPlan->save();
+        }
+        if($userPlan){
+            $pdf = PDF::loadView('PDF.teacherInvoice', array(
+                "userPlan" => $userPlan,
+            ));
+            $pdf->save(public_path("assets/invoices/{$userPlan->id}.pdf"));
 
-            if($event->user->currentUserPlan ){
-                $fromDate = \Carbon\Carbon::parse($event->user->currentUserPlan->end_date);
-            }else{
-                $fromDate = \Carbon\Carbon::now();
+            $toEMail = $userPlan->user->email;
+            if(env('APP_ENV') == 'local'){
+                $toEMail = env('DEVELOPER_MAIL');
             }
 
+            try{
+                Mail::to($toEMail)->send(new InvoiceMail($userPlan));
+            }catch (\Swift_TransportException $e) {
+                //  echo 'Caught exception: ',  $e->getMessage(), "\n";
+            }
 
-
-            if($event->plan){
-
-                $discount = 0;
-                if($event->coupon && $event->coupon->id){
-                    switch($event->coupon->type){
-                        case '%':
-                            $discount = ($event->plan->price * ($event->coupon->value / 100));
-                        break;
-                        default:
-                            $discount = $event->coupon->value;
-                        break;
-                    }
-
-                    $discount = ($discount > $event->plan->price)  ? $event->plan->price : $discount;
-                }
-
-                $total = $event->plan->price - $discount;
-                // UserPlan
-                $planPurchase = new \App\PlanPurchase;
-                $planPurchase->user_id = $event->user->id;
-                $planPurchase->plan_id = $event->plan->id;
-                $planPurchase->amount = $total;
-                $planPurchase->discount = $discount;
-                $planPurchase->status = ($total) ? 0 : 1;
-                if($event->payment){
-                    $planPurchase->tran_no = $event->payment["tran_no"];
-                    $planPurchase->log = $event->payment["log"];
-                }
-                $planPurchase->save();
-
-                if($planPurchase->id && $planPurchase->status){
-                    $toDate = clone $fromDate;
-                    $userPlan = new \App\UserPlan;
-                    $userPlan->user_id = $planPurchase->user_id;
-                    $userPlan->plan_id = $planPurchase->plan_id;
-                    $userPlan->start_date = $fromDate;
-                    $userPlan->end_date = $toDate->addDays($event->plan->days);
-                    $userPlan->save();
-                }
-                $pdf = PDF::loadView('PDF.teacherInvoice', array(
-                    "user" => $event->user,
-                    "plan" => $event->plan,
-                    "userPlan" => $userPlan,
-                ));
-                $pdf->save(public_path("assets/invoices/{$userPlan->id}.pdf"));
-
-                $toEMail = $event->user->email;
-                if(env('APP_ENV') == 'local'){
-                    $toEMail = env('DEVELOPER_MAIL');
-                }
-
+            //mail to super user
+            $setting = \App\Setting::where("name", "invoice Copy Mail")->get()->first();
+            $toEMail = $setting->value;
+            if(env('APP_ENV') == 'local'){
+                $toEMail = env('DEVELOPER_MAIL');
+            }
+            if($toEMail){
                 try{
-                    Mail::to($toEMail)->send(new InvoiceMail($event->user, $userPlan));
+                  //  Mail::to($toEMail)->send(new InvoiceMail($userPlan));
                 }catch (\Swift_TransportException $e) {
-                  //  echo 'Caught exception: ',  $e->getMessage(), "\n";
+                    //  echo 'Caught exception: ',  $e->getMessage(), "\n";
                 }
-
-
             }
 
         }

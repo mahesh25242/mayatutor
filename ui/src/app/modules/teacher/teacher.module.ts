@@ -35,6 +35,8 @@ import { DetailsComponent } from './students/details/details.component';
 import { AddStudentComponent } from './students/add-student/add-student.component';
 import { StudentPaymentComponent } from './students/student-payment/student-payment.component';
 import { AddPaymentComponent } from './students/student-payment/add-payment/add-payment.component';
+import { MyInvoicesComponent } from './my-invoices/my-invoices.component';
+import { MyInvoicesResolver } from './my-invoices/my-invoices-resolver';
 
 
 
@@ -59,7 +61,8 @@ import { AddPaymentComponent } from './students/student-payment/add-payment/add-
     DetailsComponent,
     AddStudentComponent,
     StudentPaymentComponent,
-    AddPaymentComponent
+    AddPaymentComponent,
+    MyInvoicesComponent
   ],
   imports: [
     CommonModule,
@@ -75,7 +78,8 @@ import { AddPaymentComponent } from './students/student-payment/add-payment/add-
     CoursesResolver,
     ModulesResolver,
     ListTeachersResolver,
-    StudentsResolver
+    StudentsResolver,
+    MyInvoicesResolver
   ]
 })
 export class TeacherModule { }

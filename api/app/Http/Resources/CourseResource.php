@@ -46,7 +46,6 @@ class CourseResource extends JsonResource
             'course_tag' => $this->courseTag,
             'isCourseCompleted' => $this->isCourseCompleted,
             'news' => $this->news,
-            'user' => $this->news,
             'price' => $this->price,
             'sortorder' => $this->sortorder,
 

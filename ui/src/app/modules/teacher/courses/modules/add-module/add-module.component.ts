@@ -58,6 +58,8 @@ myInputVariable: ElementRef;
 
     formData.append('video_url', `${(this.f.video_url.value) ? this.f.video_url.value : ''}`);
     formData.append('video_type', `${(this.f.video_type.value) ? this.f.video_type.value : ''}`);
+    formData.append('file1', `${(this.f.file1.value) ? this.f.file1.value : ''}`);
+    formData.append('file2', `${(this.f.file2.value) ? this.f.file2.value : ''}`);
 
     this.courseService.createModule(this.course.id, formData).pipe(mergeMap(res=>{
       return this.courseService.listModules(this.course.id).pipe(map(modules=>{
@@ -100,6 +102,8 @@ myInputVariable: ElementRef;
       pdf_file: [null, []],
       video_url: [null, [ Validators.required]],
       video_type: ['youtube', [ Validators.required]],
+      file1: ['', [ ]],
+      file2: ['', [ ]],
     });
 
   }
@@ -111,6 +115,8 @@ myInputVariable: ElementRef;
       pdf_file: this.module?.pdf,
       pdf: this.module?.pdf,
       video_url: this.module?.video_url,
+      file1: this.module?.file1,
+      file2: this.module?.file2,
       video_type: (this.module?.video_type) ? this.module?.video_type: 'youtube'
     });
     if(this.myInputVariable && this.myInputVariable.nativeElement)

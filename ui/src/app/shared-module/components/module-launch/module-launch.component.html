@@ -1,14 +1,14 @@
 <div class="p-4 bg-white shadow-sm mt-3">
   <h6 class="mt-3 text-primary">Video</h6>
   <div class="mb-3">
-  
-    <app-player [videoSources]="video"></app-player>
+    <iframe *ngIf="!video.source" frameborder="0" scrolling="no" class="frame-adjust" [src]="video"></iframe>
+    <app-player [videoSources]="video" *ngIf="video.source"></app-player>
   </div>
   <div *ngIf="pdfSrc">
   <h6 class="mt-3 text-primary"></h6>
   <div class="pdf-container" >
     <div class="righticon"><fa-icon [icon]="faFilePdf"></fa-icon></div>
-    
+
     <!-- <pdf-viewer [src]="pdfSrc"
         [render-text]="true"
         [fit-to-page]="true"
@@ -20,4 +20,8 @@
 
   </div>
 </div>
+
+<a [href]="courseModule.file1" *ngIf="courseModule.file1" class="btn btn-primary">{{courseModule.name}} File 1</a>
+<a [href]="courseModule.file2" *ngIf="courseModule.file2" class="btn btn-primary">{{courseModule.name}} File 2</a>
+
 </div>

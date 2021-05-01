@@ -22,7 +22,7 @@ class UserPlan extends Model implements AuthenticatableContract, AuthorizableCon
      * @var array
      */
     protected $fillable = [
-        'user_id', 'plan_id', 'start_date', 'end_date'
+        'user_id', 'plan_id', 'start_date', 'end_date', 'plan_purchase_id'
     ];
 
     protected $appends = array('remaining_days');
@@ -45,7 +45,10 @@ class UserPlan extends Model implements AuthenticatableContract, AuthorizableCon
         return $this->belongsTo('App\Plan');
     }
 
-
+    public function planPurchase()
+    {
+        return $this->belongsTo('App\PlanPurchase');
+    }
 
 
 }

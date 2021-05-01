@@ -1,0 +1,11 @@
+<section class="home-banner" *ngIf="banners$ | async as banners">
+
+  <ngb-carousel >
+    <ng-template ngbSlide *ngFor="let item of banners">
+      <div class="picsum-img-wrapper">
+        <img [src]="item.file_path" alt="Random first slide">
+      </div>
+    </ng-template>
+  </ngb-carousel>
+
+</section>

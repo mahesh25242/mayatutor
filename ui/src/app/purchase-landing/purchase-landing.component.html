@@ -1,0 +1,14 @@
+<app-bread-crumbs [hide]="true"></app-bread-crumbs>
+<section class="well-bg-header" *ngIf="userPlan$ | async as userPlan else error">
+    <div class="container">
+      <h3>Hi {{ userPlan?.user?.fname }}</h3>
+
+    </div>
+    <p>Your puchase of {{ userPlan?.plan?.name}} was successfull </p>
+    <a class="download btn btn-primary" href="javascript:{}" (click)="download(userPlan)">Download</a>
+</section>
+
+
+<ng-template #error>
+  You your payment was unsuccess full
+</ng-template>

@@ -1,7 +1,7 @@
 <?php
 namespace App\Mail;
 use Illuminate\Mail\Mailable;
-use App\User;
+use App\UserPlan;
 class InvoiceMail extends Mailable
 {
     /**
@@ -9,11 +9,9 @@ class InvoiceMail extends Mailable
      *
      * @return $this
      */
-    public $user;
     public $userPlan;
-    public function __construct(User $user,  $userPlan = null)
+    public function __construct($userPlan = null)
     {
-        $this->user = $user;
         $this->userPlan = $userPlan;
     }
 
@@ -21,7 +19,7 @@ class InvoiceMail extends Mailable
 
     public function build()
     {
-        return $this->view('email/InvoiceMail', ["user" => $this->user])
+        return $this->view('email/InvoiceMail', ["userPlan" => $this->userPlan])
         ->attach(public_path("assets/invoices/{$this->userPlan->id}.pdf"));
     }
 }

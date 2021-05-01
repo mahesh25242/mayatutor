@@ -24,7 +24,7 @@ class CourseModule extends Model implements AuthenticatableContract, Authorizabl
      */
     protected $fillable = [
         'course_id', 'name', 'pdf', 'video_url',
-         'sort_order', 'status', 'video_type'
+         'sort_order', 'status', 'video_type', 'file1', 'file2'
     ];
 
     protected $appends = array('thumb_image');
@@ -34,11 +34,20 @@ class CourseModule extends Model implements AuthenticatableContract, Authorizabl
 
 
         static::created(function ($courseModule) {
-            \App\CourseApprovalRequest::create(["status" => 0, "course_id" => $courseModule->course->id]);
+            if($courseModule->course->teacherAutoApproval()->exists()){
+                \App\CourseApprovalRequest::create(["status" => 1, "course_id" => $courseModule->course->id]);
+            }else{
+                \App\CourseApprovalRequest::create(["status" => 0, "course_id" => $courseModule->course->id]);
+            }
         });
 
         static::updated(function ($courseModule) {
-            \App\CourseApprovalRequest::create(["status" => 0, "course_id" => $courseModule->course->id]);
+            if($courseModule->course->teacherAutoApproval()->exists()){
+                \App\CourseApprovalRequest::create(["status" => 1, "course_id" => $courseModule->course->id]);
+            }else{
+                \App\CourseApprovalRequest::create(["status" => 0, "course_id" => $courseModule->course->id]);
+            }
+
         });
     }
 

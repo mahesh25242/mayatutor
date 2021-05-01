@@ -1,0 +1,38 @@
+<h3 class="mb-3">
+  Settings
+  <div class="float-right">
+    <a [routerLink]="['/admin/settings']" routerLinkActive="active"  class="btn btn-primary mr-2">Settings</a>
+    <a [routerLink]="['/admin/home-page-banner']" routerLinkActive="active"  class="btn btn-primary mr-2">Home Page Banner</a>
+    <a [routerLink]="['/admin/home-page-videos']" routerLinkActive="active" class="btn btn-primary">Home page Videos</a>
+  </div>
+</h3>
+<ng-container  *ngIf="(settings$ | async ) as settings">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>
+          Sl
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Value
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of settings; let i= index;">
+          <td data-label="SL">
+            {{ i+1 }}
+          </td>
+          <td data-label="Name">
+           <a href="javascript:{}" (click)="editSetting(item)">{{ item.name }}</a>
+          </td>
+          <td data-label="Value">
+            {{ item.value }}
+          </td>
+        </tr>
+    </tbody>
+  </table>
+</ng-container>

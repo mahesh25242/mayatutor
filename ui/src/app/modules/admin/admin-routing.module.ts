@@ -12,6 +12,10 @@ import { CourseDetailComponent } from './courses/course-detail/course-detail.com
 import { CourseDetailResolver } from './courses/course-detail/course-detail-resolver';
 import { LaunchModuleComponent } from './courses/course-detail/launch-module/launch-module.component';
 import { LaunchModuleResolver } from './courses/course-detail/launch-module/launch-module.resolver';
+import { SettingsComponent } from './settings/settings.component';
+import { SettingsResolver } from './settings/settings-resolver';
+import { HomePageBannerComponent } from './settings/home-page-banner/home-page-banner.component';
+import { HomePageVideosComponent } from './settings/home-page-videos/home-page-videos.component';
 
 
 const routes: Routes = [
@@ -82,6 +86,21 @@ const routes: Routes = [
         path: 'mail',
         loadChildren: () => import('../mail/mail.module').then(m => m.MailModule),
         canActivate: [AdminAuthGuard],
+      },
+      {
+        path: 'settings',
+        component: SettingsComponent,
+        resolve:{
+          settings: SettingsResolver
+        }
+      },
+      {
+        path: 'home-page-banner',
+        component: HomePageBannerComponent,
+      },
+      {
+        path: 'home-page-videos',
+        component: HomePageVideosComponent,
       },
     ]
   },

@@ -35,6 +35,10 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
     $router->post('signUp','UsersController@signUp');
     $router->post('sentContact','ContactUsController@sentContact');
 
+    $router->get('banners','BannerController@banners');
+    $router->get('videos','HomeVideoController@videos');
+
+    $router->post('paymentSuccess[/{notification}]','PlanController@paymentSuccess');
 
     $router->group(['prefix' => 'teacher'], function () use ($router) {
         $router->get('getaTeacher/{url}','TeacherController@teacher');
@@ -72,7 +76,6 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
                 $router->post('toggleStatus','UsersController@toggleStatus');
                 $router->post('delete','UsersController@delete');
                 $router->post('toggleAutoApproval','TeacherController@toggleAutoApproval');
-                $router->get('invoices/{userId}','TeacherController@invoices');
                 $router->get('downloadInvoice/{invId}','TeacherController@downloadInvoice');
             });
 
@@ -84,7 +87,20 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
 
             });
 
+            $router->group(['prefix' => 'settings'], function () use ($router) {
+                $router->get('/','SettingsController@settings');
+                $router->post('saveSetting','SettingsController@saveSetting');
+            });
 
+            $router->group(['prefix' => 'banners'], function () use ($router) {
+                $router->post('save','BannerController@save');
+                $router->post('delete','BannerController@delete');
+            });
+
+            $router->group(['prefix' => 'videos'], function () use ($router) {
+                $router->post('save','HomeVideoController@save');
+                $router->post('delete','HomeVideoController@delete');
+            });
 
 
         });
@@ -120,6 +136,8 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
             $router->group(['prefix' => 'teacher'], function () use ($router) {
                 $router->post('changeBanner','TeacherController@changeBanner');
                 $router->post('updatePaymentQRCode','TeacherController@updatePaymentQRCode');
+                $router->get('invoices/{userId}','TeacherController@invoices');
+                $router->get('payment/{id}','PlanController@payment');
                 $router->group(['prefix' => 'course'], function () use ($router) {
 
                     $router->post('createCourse','CourseController@createCourse');

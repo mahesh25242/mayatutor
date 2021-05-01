@@ -38,6 +38,8 @@ class CourseModuleResource extends JsonResource
                 'pdf' => $this->pdf,
                 'video_type' => $this->video_type,
                 'video_url' => $this->video_url,
+                'file1' => $this->file1,
+                'file2' => $this->file2,
                 'logged_student_course' => $this->loggedStudentCourse,
                 'student_course_module_track' => $this->studentCourseModuleTrack,
                 'is_module_completed' => $this->isModuleCompleted,
