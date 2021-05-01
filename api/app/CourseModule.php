@@ -53,7 +53,7 @@ class CourseModule extends Model implements AuthenticatableContract, Authorizabl
 
 
     public function getThumbImageAttribute(){
-        $url ='';
+        $url ='assets/course-banner-default.jpg';
         switch($this->video_type){
             case 'youtube':
                 preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $this->video_url, $match);
@@ -77,6 +77,8 @@ class CourseModule extends Model implements AuthenticatableContract, Authorizabl
                 }
 
             break;
+
+
         }
         return $url;
     }
