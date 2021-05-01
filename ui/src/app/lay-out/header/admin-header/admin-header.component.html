@@ -43,6 +43,9 @@
         <li class="nav-item">
           <a [routerLink]="loggedUser?.role_url+'/settings'" class="nav-link" routerLinkActive="active" (click)="showMenu = null">Settings</a>
         </li>
+        <li class="nav-item">
+          <a [routerLink]="loggedUser?.role_url+'/purchases'" class="nav-link" routerLinkActive="active" (click)="showMenu = null">Purchases</a>
+        </li>
 
         <li class="nav-item">
           <div ngbDropdown class="d-inline-block">

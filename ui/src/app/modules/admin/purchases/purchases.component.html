@@ -1,0 +1,52 @@
+<h3 class="mb-3">All Purchases</h3>
+<app-bread-crumbs></app-bread-crumbs>
+<ng-container  *ngIf="(planPurchases$ | async ) as planPurchases">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>
+          Sl
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Date
+        </th>
+        <th>
+          User
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngIf="planPurchases?.data && planPurchases?.data.length">
+        <tr *ngFor="let item of planPurchases?.data; let i= index;">
+          <td data-label="SL">
+            {{ i+1 }}
+          </td>
+          <td data-label="Name">
+            <span *ngIf="!item.status">{{ item.plan?.name }} </span>
+            <a href="javascript:{}" (click)="download(item)" *ngIf="item.status">{{ item.plan?.name }} </a>
+          </td>
+          <td data-label="Created At">
+            <span placement="top" [ngbTooltip]="item.created_at | date:'mediumDate'">{{ item.created_at| date:'medium'}}</span>
+          </td>
+          <td data-label="User">
+            {{ item.user?.fname }} {{ item.user?.lname }}
+          </td>
+        </tr>
+      </ng-container>
+      <ng-container *ngIf="users?.data && !users?.data.length">
+        <tr>
+          <td colspan="8">
+            <div class="alert alert-warning">No result found!</div>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+  <div *ngIf="planPurchases?.data.length">
+      <ngb-pagination [collectionSize]="planPurchases?.total" [pageSize]="planPurchases?.per_page" [(page)]="planPurchases.current_page"
+      aria-label="Default pagination" (pageChange)="search($event)" [maxSize]="5" [boundaryLinks]="true"  [rotate]="true"></ngb-pagination>
+  </div>
+</ng-container>

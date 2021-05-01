@@ -28,6 +28,8 @@ import { EditSettingComponent } from './settings/edit-setting/edit-setting.compo
 import { HomePageBannerComponent } from './settings/home-page-banner/home-page-banner.component';
 import { HomePageVideosComponent } from './settings/home-page-videos/home-page-videos.component';
 import { EditHomeVideoComponent } from './settings/home-page-videos/edit-home-video/edit-home-video.component';
+import { PurchasesComponent } from './purchases/purchases.component';
+import { PurchasesResolver } from './purchases/purchases-resolver';
 
 
 @NgModule({
@@ -40,7 +42,8 @@ import { EditHomeVideoComponent } from './settings/home-page-videos/edit-home-vi
     EditSettingComponent,
     HomePageBannerComponent,
     HomePageVideosComponent,
-    EditHomeVideoComponent ],
+    EditHomeVideoComponent,
+    PurchasesComponent ],
   imports: [
     CommonModule,
     SharedModuleModule,
@@ -53,7 +56,8 @@ import { EditHomeVideoComponent } from './settings/home-page-videos/edit-home-vi
     UsersResolver,
     CourseDetailResolver,
     LaunchModuleResolver,
-    SettingsResolver
+    SettingsResolver,
+    PurchasesResolver
   ]
 })
 export class AdminModule { }

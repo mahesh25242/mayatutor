@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { User, Rating, Plan, CourseWithPagination, UserWithPagination, UserPlan } from '../interfaces';
-import { map } from 'rxjs/operators';
+import { User, Rating, Plan, CourseWithPagination, UserWithPagination, UserPlan, PlanPurchaseWithPagination } from '../interfaces';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +11,7 @@ export class TeacherService {
   private teacher$: BehaviorSubject<User> = new BehaviorSubject<User>(null);
   private teachers$: BehaviorSubject<UserWithPagination> = new BehaviorSubject<UserWithPagination>(null);
   private courses$: BehaviorSubject<CourseWithPagination> = new BehaviorSubject<CourseWithPagination>(null);
+  private planPurchases$: BehaviorSubject<PlanPurchaseWithPagination> = new BehaviorSubject<PlanPurchaseWithPagination>(null);
   constructor(private http: HttpClient) { }
 
   get courses(){
@@ -21,6 +22,9 @@ export class TeacherService {
   }
   get teachers() {
     return this.teachers$.asObservable();
+  }
+  get planPurchases(){
+    return this.planPurchases$.asObservable();
   }
 
   changeBanner(postData: any = null){
@@ -90,5 +94,9 @@ export class TeacherService {
 
   payemntSuccess(id: number = 0){
     return this.http.get<any>(`/teacher/payment/${id}`);
+  }
+
+  purchases(){
+    return this.http.get<any>(`/admin/teacher/purchases`).pipe(tap(res=>this.planPurchases$.next(res)));
   }
 }

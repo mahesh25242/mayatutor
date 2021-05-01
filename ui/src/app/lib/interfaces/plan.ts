@@ -1,3 +1,4 @@
+import { Pagination } from './pagination';
 import { User, UserPlan } from './user';
 
 export interface Plan {
@@ -22,4 +23,8 @@ export interface PlanPurchase {
   plan?: Plan,
   user?: User,
   user_plan?: UserPlan
+}
+
+export interface PlanPurchaseWithPagination extends Pagination {
+  data?: PlanPurchase[]
 }

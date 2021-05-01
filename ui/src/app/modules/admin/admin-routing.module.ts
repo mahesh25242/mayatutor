@@ -16,6 +16,8 @@ import { SettingsComponent } from './settings/settings.component';
 import { SettingsResolver } from './settings/settings-resolver';
 import { HomePageBannerComponent } from './settings/home-page-banner/home-page-banner.component';
 import { HomePageVideosComponent } from './settings/home-page-videos/home-page-videos.component';
+import { PurchasesComponent } from './purchases/purchases.component';
+import { PurchasesResolver } from './purchases/purchases-resolver';
 
 
 const routes: Routes = [
@@ -101,6 +103,13 @@ const routes: Routes = [
       {
         path: 'home-page-videos',
         component: HomePageVideosComponent,
+      },
+      {
+        path: 'purchases',
+        component: PurchasesComponent,
+        resolve:{
+          purchases: PurchasesResolver
+        }
       },
     ]
   },

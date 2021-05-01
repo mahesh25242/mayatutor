@@ -175,8 +175,8 @@ class UsersController extends Controller
     public function signOut(Request $request){
         $request->user()->token()->revoke();
 
-    // Revoke all of the token's refresh tokens
-    // => Set public.oauth_refresh_tokens.revoked to TRUE (t)
+        // Revoke all of the token's refresh tokens
+        // => Set public.oauth_refresh_tokens.revoked to TRUE (t)
         $refreshTokenRepository = app('Laravel\Passport\RefreshTokenRepository');
         $refreshTokenRepository->revokeRefreshTokensByAccessTokenId($request->user()->token()->id);
 

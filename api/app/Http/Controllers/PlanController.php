@@ -224,4 +224,11 @@ class PlanController extends Controller
             ], 404);
         }
     }
+
+    public function purchases(Request $request){
+        $perPage = 50;
+        $planPurchase = \App\PlanPurchase::with(["user", "plan", "userPlan"]);
+
+        return response($planPurchase->where("status", 1)->latest()->paginate($perPage));
+    }
 }

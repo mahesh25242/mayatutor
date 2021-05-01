@@ -77,6 +77,7 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
                 $router->post('delete','UsersController@delete');
                 $router->post('toggleAutoApproval','TeacherController@toggleAutoApproval');
                 $router->get('downloadInvoice/{invId}','TeacherController@downloadInvoice');
+                $router->get('purchases','PlanController@purchases');
             });
 
             $router->group(['prefix' => 'student'], function () use ($router) {
@@ -138,6 +139,7 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
                 $router->post('updatePaymentQRCode','TeacherController@updatePaymentQRCode');
                 $router->get('invoices/{userId}','TeacherController@invoices');
                 $router->get('payment/{id}','PlanController@payment');
+
                 $router->group(['prefix' => 'course'], function () use ($router) {
 
                     $router->post('createCourse','CourseController@createCourse');
