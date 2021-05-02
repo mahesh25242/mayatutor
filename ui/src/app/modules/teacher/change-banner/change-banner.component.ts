@@ -31,7 +31,7 @@ export class ChangeBannerComponent implements OnInit {
   ngOnInit(): void {
 
 
-    if(!(this.teacher instanceof Observable))
+    if(this.teacher && !(this.teacher instanceof Observable)){
       this.user$ = of(this.teacher).pipe(mergeMap(res=>{
         return this.userService.getloggedUser.pipe(map(usr=>{
           if(usr?.role_url == 'admin'){
@@ -40,22 +40,24 @@ export class ChangeBannerComponent implements OnInit {
           return res;
         }))
       }));
-    else if(this.teacher instanceof Observable)
+    }else if(this.teacher && this.teacher instanceof Observable){
       this.user$ = this.teacher.pipe(mergeMap(res=>{
         return this.userService.getloggedUser.pipe(map(usr=>{
-          if(usr?.role_url == 'admin'){
+          if(['admin', 'teacher'].includes(usr?.role_url)){
             this.isChangeable = true;
           }
           return res;
         }))
       }));
-    else
+    }else{
+
       this.user$ = this.userService.getloggedUser.pipe(map(res=>{
         if(res?.role_url == 'teacher'){
           this.isChangeable = true;
         }
         return res;
       }));
+    }
   }
 
   changeBanner(files: FileList, user:User = null){

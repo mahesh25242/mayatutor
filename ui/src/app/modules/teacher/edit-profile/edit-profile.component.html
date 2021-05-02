@@ -1,5 +1,6 @@
 
-<app-change-banner  [teacher]="loggedUser$"></app-change-banner>
+<app-change-banner  [teacher]="loggedUser$" *ngIf="!isSelf"></app-change-banner>
+<app-change-banner *ngIf="isSelf"></app-change-banner>
 <section class="blueContainer mb-5 p-4">
   <div class="container">
     <app-custom-url [user]="loggedUser$"></app-custom-url>

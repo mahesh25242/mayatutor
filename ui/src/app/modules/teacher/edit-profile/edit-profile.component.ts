@@ -23,7 +23,7 @@ export class EditProfileComponent implements OnInit, OnDestroy {
   states$:Observable<State[]>;
   cities$:Observable<City[]>;
   faYoutube = faYoutube;
-
+  isSelf: boolean = true;
 
   countrySubscription: Subscription;
   stateSubscription: Subscription;
@@ -102,6 +102,7 @@ export class EditProfileComponent implements OnInit, OnDestroy {
 
       if(res?.role_url == 'admin')
         return this.route.queryParams.pipe(mergeMap(qp=>{
+          this.isSelf = false;
           return this.userService.getUser(qp?.id, `admin/${qp?.type}`);
         }));
       else
