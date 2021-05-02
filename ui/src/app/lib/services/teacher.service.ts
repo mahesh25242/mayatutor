@@ -60,8 +60,23 @@ export class TeacherService {
     }));
   }
 
-  searchTeachers(q: string=null, page: number = 1){
-    return this.http.get<UserWithPagination>(`/teacher/search${(q) ? `/${q}` : ``}${(page) ? `?page=${page}` : ``}`).pipe(map(res=>{
+  searchTeachers(q: string=null, page: number = 1, place: string ='', phone: string = ''){
+    let url =  '';
+    let qparm = null;
+    if(q){
+      url += `/${q}`;
+    }
+    if(page){
+      qparm = `${(qparm) ? `${qparm}&` : `?`}page=${page}`;
+    }
+    if(place){
+      qparm = `${(qparm) ? `${qparm}&` : `?`}place=${place}`;
+    }
+    if(phone){
+      qparm = `${(qparm) ? `${qparm}&` : `?`}phone=${phone}`;
+    }
+
+    return this.http.get<UserWithPagination>(`/teacher/search${url}${qparm}`).pipe(map(res=>{
         this.teachers$.next(res);
         return res;
     }));

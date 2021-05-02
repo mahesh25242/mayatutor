@@ -10,17 +10,17 @@ class SearchNotificationMail extends Mailable
      * @return $this
      */
     public $user;
-    public $siteAddress;
-    public function __construct(User $user, $siteAddress= null)
+    public $details;
+    public function __construct(User $user, $details= null)
     {
         $this->user = $user;
-        $this->siteAddress = $siteAddress;
+        $this->details = $details;
     }
 
 
 
     public function build()
     {
-        return $this->view('email/activationMail', ["user" => $this->user, "siteAddress" => $this->siteAddress]);
+        return $this->view('email/sendSearchNotification', ["user" => $this->user, "details" => $this->details]);
     }
 }

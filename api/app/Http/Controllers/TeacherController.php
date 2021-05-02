@@ -13,11 +13,12 @@ use Illuminate\Support\Facades\Storage;
 use App\Mail\ReportAbuseMail;
 use App\Http\Resources\UserCollection;
 use Mail;
+use Carbon\Carbon;
 
 class TeacherController extends Controller
 {
 
-    public function search($q=''){
+    public function search($q='', Request $request){
         $perPage = 20;
         $user = \App\User::withCount("teacherStudent as student_count")->with(["rating", "teacherInfo", "subject", "city"])->whereHas("userRole", function ($qry){
             $qry->where("role_id", 2);
@@ -29,7 +30,19 @@ class TeacherController extends Controller
         }
 
 
+        $details["q"] = $q;
+        $details["place"] = $request->input("place",'');
+        $details["phone"] = $request->input("phone",'');
+
+        $emailJob = (new \App\Jobs\SendSearchEmailJob($details))->delay(Carbon::now()->addSeconds(2));
+        dispatch($emailJob);
+
         $paginator = $user->paginate($perPage);
+
+
+
+
+
         //$paginator->setCollection($paginator->getCollection()->makeHidden(['email', 'phone']));
         return response(new UserCollection($paginator));
     }

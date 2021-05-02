@@ -9,6 +9,12 @@ export class ListTeachersResolver implements Resolve<any> {
     private teacherService: TeacherService) { }
 
   resolve(route: ActivatedRouteSnapshot): Observable<any> {
-    return this.teacherService.searchTeachers(route.params.q);
+
+    console.log(route.params[0])
+
+    const place = route.params[0] ?? '';
+    const phone = route.params[1] ?? '';
+
+    return this.teacherService.searchTeachers(route.params.q, 1, place, phone);
   }
 }
