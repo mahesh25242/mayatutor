@@ -117,7 +117,8 @@ class PlanController extends Controller
                             'customerName' => $planPurchase->user->fname,
                             'customerPhone' => $planPurchase->user->phone,
                             'returnUrl' =>  $returnUrl,
-                            'notifyUrl' =>  $returnUrl."/notification");
+                            'notifyUrl' =>  $returnUrl."/notification"
+                        );
                 $client = new \GuzzleHttp\Client();
                 $response = $client->request('POST', "{$url}api/v1/order/create", [
                     'form_params' => $gateWayPost
@@ -201,10 +202,23 @@ class PlanController extends Controller
                     event(new PlanPurchaseEvent($planPurchase));
                     $redirectUrl = env('PAYMENT_SUCCESS_REDIRECTION_URL')."success/{$orderId}";
                 }
-
-                return redirect($redirectUrl);
+                if(!$notification){
+                    return redirect($redirectUrl);
+                }else{
+                    return response([
+                        "success" => true,
+                        "message" => 'Success'
+                    ]);
+                }
             }else {
-                return redirect($redirectUrl);
+                if(!$notification){
+                    return redirect($redirectUrl);
+                }else{
+                    return response([
+                        "success" => false,
+                        "message" => 'Signature verification faild'
+                    ]);
+                }
             }
         }else{
             return response([
