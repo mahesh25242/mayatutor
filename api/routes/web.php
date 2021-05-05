@@ -45,7 +45,6 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
         $router->get('topRatedTeacher','TeacherController@topRatedTeacher');
         $router->get('plans','PlanController@plans');
         $router->get('plan/{id}','PlanController@plan');
-        $router->post('plan/{id}/purchase','PlanController@planPurchase');
         $router->get('search[/{q}]','TeacherController@search');
         $router->group(['prefix' => 'teacherCourses'], function () use ($router) {
             $router->post('/','CourseController@listTeacherCourses');
@@ -139,7 +138,7 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
                 $router->post('updatePaymentQRCode','TeacherController@updatePaymentQRCode');
                 $router->get('invoices/{userId}','TeacherController@invoices');
                 $router->get('payment/{id}','PlanController@payment');
-
+                $router->post('plan/{id}/purchase','PlanController@planPurchase');
                 $router->group(['prefix' => 'course'], function () use ($router) {
 
                     $router->post('createCourse','CourseController@createCourse');

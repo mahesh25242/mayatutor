@@ -120,34 +120,39 @@ class PlanController extends Controller
                             'notifyUrl' =>  $returnUrl."/notification"
                         );
                 $client = new \GuzzleHttp\Client();
-                $response = $client->request('POST', "{$url}api/v1/order/create", [
-                    'form_params' => $gateWayPost
-                ]);
+                try{
+                    $response = $client->request('POST', "{$url}api/v1/order/create", [
+                        'form_params' => $gateWayPost
+                    ]);
 
-                $statusCode = $response->getStatusCode();
-                $content = $response->getBody()->getContents();
-                $resp  =json_decode($content );
+                    $statusCode = $response->getStatusCode();
+                    $content = $response->getBody()->getContents();
+                    $resp  =json_decode($content );
 
-                $gateWayPost["res"] = $resp;
-                $planPurchase->gateway_request = json_encode($gateWayPost);
-                $planPurchase->save();
+                    $gateWayPost["res"] = $resp;
+                    $planPurchase->gateway_request = json_encode($gateWayPost);
+                    $planPurchase->save();
 
-                switch($statusCode){
-                    case 200:
-                        return response([
-                            "success" => true,
-                            "message" => "success",
-                            "paymentLink" => $resp->paymentLink
-                        ]);
-                    break;
-                    default:
+                    switch($statusCode){
+                        case 200:
+                            return response([
+                                "success" => true,
+                                "message" => "success",
+                                "paymentLink" => $resp->paymentLink
+                            ]);
+                        break;
+                        default:
 
-                        return response([
-                            "success" => false,
-                            "message" => $content
-                        ], 422);
-                    break;
+                            return response([
+                                "success" => false,
+                                "message" => $content
+                            ], 422);
+                        break;
+                    }
+                } catch (Guzzle\Http\Exception\BadResponseException $e) {
+                    echo 'Uh oh! ' . $e->getMessage();
                 }
+
 
 
 
