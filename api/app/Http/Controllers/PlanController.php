@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Events\PlanPurchaseEvent;
 use App\Http\Resources\PlanPurchaseResource;
+use DB;
 
 class PlanController extends Controller
 {
@@ -105,11 +106,11 @@ class PlanController extends Controller
                     $url = 'https://test.cashfree.com/';
                 }
 
-                $returnUrl = $request->header("From-Domain")."/api/public/v1/paymentSuccess";
+                $returnUrl = "https://api.mayatutors.com/public/v1/paymentSuccess";
 
                 $gateWayPost = array('appId' => $appId,
                             'secretKey' => $appSecreat,
-                            'orderId' => $planPurchase->id,
+                            'orderId' => "MT_".$planPurchase->id,
                             'orderAmount' => $total,
                             'orderCurrency' => 'INR',
                             'orderNote' => sprintf("%s purchse of %s ( Email: %s, Phone: %s )", $plan->name, $planPurchase->user->fname, $planPurchase->user->email, $planPurchase->user->phone),
@@ -119,6 +120,8 @@ class PlanController extends Controller
                             'returnUrl' =>  $returnUrl,
                             'notifyUrl' =>  $returnUrl."/notification"
                         );
+
+
                 $client = new \GuzzleHttp\Client();
                 try{
                     $response = $client->request('POST', "{$url}api/v1/order/create", [
@@ -185,14 +188,15 @@ class PlanController extends Controller
         $txMsg = $request->input("txMsg", '');
         $txTime = $request->input("txTime", '');
         $signature = $request->input("signature", '');
-        $orderId = ($orderId && is_numeric($orderId)) ? $orderId : 0;
+        //$orderId = ($orderId && is_numeric($orderId)) ? $orderId : 0;
 
         $data = $orderId.$orderAmount.$referenceId.$txStatus.$paymentMode.$txMsg.$txTime;
         $hash_hmac = hash_hmac('sha256', $data, $appSecreat, true) ;
         $computedSignature = base64_encode($hash_hmac);
         $redirectUrl = env('PAYMENT_SUCCESS_REDIRECTION_URL')."failer";
+        //md5("mks".$planPurchase->id)
+        $planPurchase = \App\PlanPurchase::where(DB::raw('CONCAT("MT_",id)') , $orderId)->get()->first();
 
-        $planPurchase = \App\PlanPurchase::find($orderId);
         if($planPurchase){
             $planPurchase->gateway_response = json_encode($request->all());
             $planPurchase->save();
@@ -205,8 +209,8 @@ class PlanController extends Controller
                     $planPurchase->tran_no = $referenceId;
                     $planPurchase->save();
                     event(new PlanPurchaseEvent($planPurchase));
-                    $redirectUrl = env('PAYMENT_SUCCESS_REDIRECTION_URL')."success/{$orderId}";
                 }
+                $redirectUrl = env('PAYMENT_SUCCESS_REDIRECTION_URL')."success/{$orderId}";
                 if(!$notification){
                     return redirect($redirectUrl);
                 }else{
@@ -233,7 +237,7 @@ class PlanController extends Controller
         }
     }
     public function payment($id){
-        $planPurchase = \App\PlanPurchase::with(["user", "plan", "userPlan"])->where("id", $id)->where("user_id", Auth::id())->get()->first();
+        $planPurchase = \App\PlanPurchase::with(["user", "plan", "userPlan"])->where(DB::raw('CONCAT("MT_",id)') , $id)->where("user_id", Auth::id())->get()->first();
         if($planPurchase){
             return new PlanPurchaseResource($planPurchase);
         }else{
