@@ -2,3 +2,10 @@
     left:inherit;
     right: 0;
 }
+.navbar-brand {
+    background-image: url(../../../assets/maya-logo.svg);
+    background-repeat: no-repeat;
+    background-size: 49px;
+    background-position: right center;
+    padding-right: 50px;
+}

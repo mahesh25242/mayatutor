@@ -4,10 +4,14 @@
     min-height: 250px;
     text-align: center;
 }
+.bg-gray {
+    background: #eee; 
+}
 .search-container {
     text-align:center;
-    background-color:$primaryColor;
-    color:#fff;
+    background-color: #7f53ac;
+    background-image: linear-gradient(315deg, #7f53ac 0%, #647dee 74%); color:#fff;
+    padding:2% 0;
     .input-group-text {
         padding: 0.165rem 0.3rem;
     }

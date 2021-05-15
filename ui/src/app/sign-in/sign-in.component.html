@@ -1,23 +1,36 @@
 <form class="form-signin" [formGroup]="signInFrm"  (ngSubmit)="signIn()">
-  <app-modal>
-    <div></div>
-    <div  body class="border-0">
+  <app-modal class="p-0">
+   
+    <div  body class="border-0 p-0">
       <div class="row">
-        <div class="col-lg-6 col-md-6 p-5 visible-web">
-          <a href="javascript:{}" (click)="signInWithFB()" class="btn btn-primary d-block mb-3 animate__animated animate__flipInX">
-          Login with Facebook <fa-icon class="float-right" [icon]="faFacebook"></fa-icon></a>
-          <a href="javascript:{}" (click)="signInWithGoogle()" class="btn btn-primary d-block animate__animated animate__flipInX">Login with Google <fa-icon class="float-right" [icon]="faGoogle"></fa-icon></a>
-<hr class="mt-5"/>
-        <span class="or-divide">OR</span>
+        <div class="col-lg-6 col-md-6 pl-5 pb-5 pr-5 visible-web">
+          <h5 class="mb-5 text-center">NEW VISITOR REGISTER</h5>
+          <div class="card shadow-sm mt-5">
+            <i class="icon-reg">
+              <fa-icon [icon]="faUserGraduate"></fa-icon>              
+            </i>
+            <div class="card-body mb-3 text-center">
+              <h5 class="text-uppercase">Are you a Students ?</h5>
+              <a (click)="modal.close()" routerLink="student/register" class="btn btn-primary col-6 mt-3">Register</a>
+              </div>
+
+          </div>
+          <div class="card shadow-sm mt-5">
+            <i class="icon-reg">              
+              <fa-icon [icon]="faUser"></fa-icon>
+            </i>
+            <div class="card-body mb-3 text-center">
+              <h5 class="text-uppercase">Are you a Teacher/Tutor ?</h5>
+              <a (click)="modal.close()" routerLink="teacher/register" class="btn btn-primary col-6 mt-3">Register</a>
+              </div>
+
+          </div>
           <!-- <a  (click)="signInWithPhone()">sent otp</a> -->
           <!-- <a  (click)="refreshToken()" href="j avascript:{}">refresh token</a> -->
-       <div class="grid-reg-btn">
-         <a (click)="modal.close()" routerLink="student/register" class="btn btn-sm btn-outline-primary">Students Register</a>
-         <a (click)="modal.close()" routerLink="teacher/register" class="btn btn-sm btn-outline-primary">Teacher/Tutor Register</a>
+      
         </div>
-        </div>
-        <div *ngIf="!isForgot" class="col-lg-6 col-md-6 p-5 border-left animate__animated " [ngClass]="{'animate__shakeX' : invalidlogin, 'animate__flipInY': isForgot !== null}">
-          <h5 class="mb-3">MEMBER LOGIN</h5>
+        <div *ngIf="!isForgot" class="col-lg-6 col-md-6 pl-5 pb-5 pr-5 border-left animate__animated " [ngClass]="{'animate__shakeX' : invalidlogin, 'animate__flipInY': isForgot !== null}">
+          <h5 class="mb-5 text-center">MEMBER LOGIN</h5>
           <div id="recaptcha-container"></div>
           <div class="text-danger" *ngIf="invalidlogin">Invalid login credentials</div>
           <div class="form-group">
@@ -53,26 +66,46 @@
             </div>
           </div>
 
-          <div>
+          <div class="mb-5">
             <button type="button" class="btn btn-outline-secondary mr-3 d-none" (click)="modal.dismiss('cancel click')">Cancel</button>
             <button type="submit" class="btn btn-primary btn-block mt-4"  [disabled]="signInFrm.invalid">
                 LOGIN
             </button>
             <a href="javascript:{}" class="d-block text-center mt-4" (click)="showForgotPass()">Forgot Password?</a>
           </div>
-        </div>
- <div class="col-lg-6 col-md-6 p-5 visible-mobile">
           <a href="javascript:{}" (click)="signInWithFB()" class="btn btn-primary d-block mb-3 animate__animated animate__flipInX">
-          Login with Facebook <fa-icon class="float-right" [icon]="faFacebook"></fa-icon></a>
-          <a href="javascript:{}" (click)="signInWithGoogle()" class="btn btn-primary d-block animate__animated animate__flipInX">Login with Google <fa-icon class="float-right" [icon]="faGoogle"></fa-icon></a>
-        <hr class="mt-5"/>
+            Login with Facebook <fa-icon class="float-right" [icon]="faFacebook"></fa-icon></a>
+            <a href="javascript:{}" (click)="signInWithGoogle()" class="btn btn-primary d-block animate__animated animate__flipInX">Login with Google <fa-icon class="float-right" [icon]="faGoogle"></fa-icon></a>
+
+        </div>
+ <div class="col-lg-6 col-md-6 p-5 visible-mobile">          
+        <hr class="mt-3"/>
         <span class="or-divide">OR</span>
+
+        <h5 class="mb-5 text-center">NEW VISITOR REGISTER</h5>
+          <div class="card shadow-sm mt-5">
+            <i class="icon-reg">
+              <fa-icon [icon]="faUserGraduate"></fa-icon>              
+            </i>
+            <div class="card-body mb-3 text-center">
+              <h5 class="text-uppercase">Are you a Students ?</h5>
+              <a (click)="modal.close()" routerLink="student/register" class="btn btn-primary col-6 mt-3">Register</a>
+              </div>
+
+          </div>
+          <div class="card shadow-sm mt-5">
+            <i class="icon-reg">              
+              <fa-icon [icon]="faUser"></fa-icon>
+            </i>
+            <div class="card-body mb-3 text-center">
+              <h5 class="text-uppercase">Are you a Teacher/Tutor ?</h5>
+              <a (click)="modal.close()" routerLink="teacher/register" class="btn btn-primary col-6 mt-3">Register</a>
+              </div>
+
+          </div>
           <!-- <a  (click)="signInWithPhone()">sent otp</a> -->
           <!-- <a  (click)="refreshToken()" href="j avascript:{}">refresh token</a> -->
-        <div class="grid-reg-btn">
-          <a routerLink="student/register" (click)="modal.close()" class="btn btn-sm btn-outline-primary">Students Register</a>
-          <a (click)="modal.close()" routerLink="teacher/register" class="btn btn-sm btn-outline-primary">Teacher/Tutor Register</a>
-        </div>
+       
         </div>
 
         <div *ngIf="isForgot" class="col-6 border-left animate__animated animate__flipInY">

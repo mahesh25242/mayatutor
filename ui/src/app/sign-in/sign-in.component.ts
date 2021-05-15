@@ -9,6 +9,7 @@ import Notiflix from "notiflix";
 import { mergeMap, map, take, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import {faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
+import {faUserGraduate,faUser } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-sign-in',
@@ -22,6 +23,8 @@ export class SignInComponent implements OnInit, OnDestroy {
   faFacebook = faFacebook;
   isForgot:boolean = null;
   faGoogle = faGoogle;
+  faUserGraduate = faUserGraduate;
+  faUser = faUser;
   constructor(private formBuilder: FormBuilder,
     public modal: NgbActiveModal,
     private userService: UserService,
