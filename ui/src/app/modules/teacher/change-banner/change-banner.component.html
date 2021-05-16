@@ -1,8 +1,11 @@
-<section  *ngIf="(user$ | async) as user" class="banner"
-[style.background-image]="'url(' + ((user.teacher_banner?.img) ? user.teacher_banner?.img : 'assets/banner-default.jpg') + ')'">
+<!--<section  *ngIf="(user$ | async) as user" class="banner" [style.background-image]="'url(' + ((user.teacher_banner?.img) ? user.teacher_banner?.img : 'assets/banner-default.jpg') + ')'">-->
+  <section  *ngIf="(user$ | async) as user" class="banner" >
+  <img [src]="((user.teacher_banner?.img) ? user.teacher_banner?.img : 'assets/banner-default.jpg')" />
 
   <button type="button" (click)="fileInput.click()" class="btn btn-primary mt-5 float-right" *ngIf="isChangeable">
     <span>Change Banner</span>
     <input #fileInput type="file" (change)="changeBanner($event.target.files, user)" accept="image/*" style="display:none;" />
   </button>
+  <a *ngIf="isChangeable" target="_blank" download="../../../../assets/banner-default.jpg" class="d-block mb-4" class="downloadimg" href="../../../../assets/banner-default.jpg">Download sample Image</a>
 </section>
+  

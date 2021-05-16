@@ -11,6 +11,7 @@
           <span>Change Photo</span>
           <input #fileInput type="file" (change)="onFileInput($event.target.files)" accept="image/*" style="display:none;" />
         </button>
+        <a target="_blank" download="../../../../assets/profile-default.jpg" class="d-block mb-4" href="../../../../assets/profile-default.jpg">Download sample Image</a>
         <p class="mb-1">Created At: {{ loggedUser.created_at |  date:'dd/MM/yy'}}</p>
         <p>Last Login: {{ loggedUser.last_login.created_at  |  date:'dd/MM/yy'}}</p>
       </div>

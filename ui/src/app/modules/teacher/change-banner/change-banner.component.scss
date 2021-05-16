@@ -1,12 +1,15 @@
 
-
+.downloadimg{
+  position: absolute;
+    bottom:83px;
+    right: 37px;
+}
 @media only screen and (max-width:780px) {
   .banner{
-    min-height: 110px;
-    position: relative;    
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+    position: relative;
+    img {
+      width: 100%;
+    }    
     .btn-primary {
       position: absolute;
       bottom:30px;
@@ -18,13 +21,10 @@
 
 @media only screen and (min-width:780px) {
   .banner{
-    min-height:250px;
-    position:relative;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    
+    position: relative;
+    img {
+      width: 100%;
+    }    
     .btn-primary {
       position: absolute;
       bottom:30px;

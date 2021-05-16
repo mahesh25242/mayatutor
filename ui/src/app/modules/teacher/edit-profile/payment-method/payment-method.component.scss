@@ -2,3 +2,14 @@
     max-width: 110px;
     min-width: 110px;
 }
+.payment-qr-code 
+{
+    display: flex;
+    justify-content: center;
+    column-gap: 15px;
+
+    .btn {
+        white-space: nowrap;
+    }
+
+}

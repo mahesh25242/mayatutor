@@ -20,10 +20,11 @@
     <figure class="avathar-image" [style.background-image]="'url('+loggedUser.avatar+')'">
 
   </figure>
-    <button type="button" (click)="fileInput.click()" class="btn btn-primary avatar-up-btn mb-4">
+    <button type="button" (click)="fileInput.click()" class="btn btn-primary avatar-up-btn mb-2">
       <span>Change Photo </span>
       <input #fileInput type="file" (change)="onFileInput($event.target.files, loggedUser)" accept="image/*" style="display:none;" />
     </button>
+    <a target="_blank" download="../../../../assets/profile-default.jpg" class="d-block mb-4" href="../../../../assets/profile-default.jpg">Download sample Image</a>
     <p>Created At: {{ loggedUser.created_at |  date:'dd/MM/yy'}}</p>
     <p> Last Login: {{ loggedUser?.last_login?.created_at  |  date:'dd/MM/yy'}}</p>
   </div>
@@ -48,9 +49,10 @@
       {{f.lname.errors.error}}
     </div>
   </div>
+  
   <div class="form-group col-md-6 col-lg-6">
     <label for="phone">Whatsapp / Phone Number</label>
-    +{{loggedUser.country.phonecode}}
+    +{{loggedUser.country.phonecode}} ( Enter without '0')
     <input type="text" class="form-control" id="phone"
     [ngClass]="{'is-invalid': (f.phone.errors && f.phone.errors.error)}"
     placeholder="Whatsapp / Phone Number"
@@ -66,6 +68,11 @@
     placeholder="Email Id"
     formControlName="email">
     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+  <div class="col-md-12 col-lg-12">
+    <div class="alert alert-warning p-2">
+      <p class="mb-0"><fa-icon class="mr-2" [icon]="faExclamationTriangle"></fa-icon> This (Address) area will be publicly visible, leave this area if you are not interested in public disclose.  </p>
+    </div>
   </div>
   <div class="form-group col-md-6 col-lg-6">
     <label for="address">Address</label>

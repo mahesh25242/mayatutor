@@ -68,11 +68,11 @@
           <div class="d-flex">
         <div class="flex-1 pr-2" *ngIf="user?.teacher_payment_info?.qr_code1">
           <img class="img-fluid" [src]="user?.teacher_payment_info?.qr_code1" />
-          <h5 class="text-center mt-3">Paytm</h5>
+          <h6 class="text-center mt-3">Other Payment Wallets</h6>
         </div>
         <div class="flex-1 pl-2" *ngIf="user?.teacher_payment_info?.qr_code2">
           <img class="img-fluid" [src]="user?.teacher_payment_info?.qr_code2" />
-          <h5 class="text-center mt-3">G-Pay</h5>
+          <h6 class="text-center mt-3">G-Pay</h6>
         </div>
       </div>
       </div>
@@ -80,7 +80,7 @@
   </div>
     <div *ngIf="isDashBoard">
       <a href="javascript:{}" routerLink="edit-profile" class="btn btn-outline-primary btn-sm float-right mt-1"><fa-icon [icon]="faEdit" ></fa-icon> Edit</a>
-      <a  routerLink="edit-profile" routerLink="my-invoices" class="btn btn-outline-primary btn-sm float-right mt-1"> My Invoices</a>
+      <a  routerLink="edit-profile" routerLink="my-invoices" class="btn btn-primary btn-sm float-right mt-1 mr-3"> My Invoices</a>
     </div>
 </div>
 </div>
@@ -106,7 +106,7 @@
         <ng-container *ngIf="!isDashBoard && user.current_user_plan">
 
           <app-login-link *ngIf="!user.email">
-            <button class="btn btn-sm btn-primary"
+            <button class="btn btn-sm mob-btn btn-primary"
             placement="top"
             ngbTooltip="Only logged user can contact teacher">
               Message
@@ -114,14 +114,12 @@
             </button>
           </app-login-link>
 
-          <app-send-message-to-teacher
-          class="teacher-message-btn  btn-sm mb-2"
-          *ngIf="user.email" [user]="user">
+          <app-send-message-to-teacher class="teacher-message-btn  btn-sm mb-2" *ngIf="user.email" [user]="user">
             Message
           </app-send-message-to-teacher>
 
           <app-login-link *ngIf="!user.phone">
-            <button class="btn btn-sm btn-primary ml-2"
+            <button class="btn btn-sm mob-btn btn-primary ml-2"
             placement="top"
             ngbTooltip="Only logged user can contact teacher">
             <fa-icon [icon]="faWhatsapp" ></fa-icon> Whats app
@@ -130,7 +128,7 @@
           </app-login-link>
 
           <app-login-link *ngIf="!user.phone">
-            <button class="btn btn-sm btn-primary ml-2"
+            <button class="btn btn-sm mob-btn btn-primary ml-2"
             placement="top"
             ngbTooltip="Only logged user can contact teacher">
               Payment
@@ -143,8 +141,8 @@
 
 
         <ng-container *ngIf="user.phone">
-          <a class="d-none btn btn-sm btn-primary" target="_blank" [href]="'https://web.whatsapp.com/send?phone='+user.phone"> <fa-icon [icon]="faWhatsapp" ></fa-icon> Whats app</a>
-          <a class="btn btn-sm btn-primary" target="_blank" [href]="'https://api.whatsapp.com/send?phone='+user.phone"> <fa-icon [icon]="faWhatsapp" ></fa-icon> Whats app</a>
+          <a class="d-none btn mob-btn btn-sm btn-primary" target="_blank" [href]="'https://web.whatsapp.com/send?phone='+user.phone"> <fa-icon [icon]="faWhatsapp" ></fa-icon> Whats app</a>
+          <a class="btn btn-sm mob-btn btn-primary" target="_blank" [href]="'https://api.whatsapp.com/send?phone='+user.phone"> <fa-icon [icon]="faWhatsapp" ></fa-icon> Whats app</a>
         </ng-container>
       </ng-container>
       </div>

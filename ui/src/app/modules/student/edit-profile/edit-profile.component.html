@@ -13,6 +13,7 @@
         <span>Change Photo</span>
         <input #fileInput type="file" (change)="onFileInput($event.target.files)" accept="image/*" style="display:none;" />
       </button>
+      <a target="_blank" download="../../../../assets/profile-default.jpg" class="d-block mb-4" href="../../../../assets/profile-default.jpg">Download sample Image</a>
       <p>Created At: {{ loggedUser.created_at |  date:'dd/MM/yy'}}</p>
       <p>Last Login: {{ loggedUser.last_login.created_at  |  date:'dd/MM/yy'}}</p>
     </div>
@@ -39,7 +40,7 @@
         </div>
         <div class="form-group col-md-6 col-lg-6">
           <label for="phone">Whatsapp / Phone Number</label>
-          +{{loggedUser.country.phonecode}}
+          +{{loggedUser.country.phonecode}} (Enter without "0")
           <input type="text" class="form-control" id="phone"
           [ngClass]="{'is-invalid': (f.phone.errors && f.phone.errors.error)}"
           placeholder="Whatsapp / Phone Number"

@@ -4,7 +4,24 @@
     background-color: #e7eff9;
 background-image: linear-gradient(315deg, #e7eff9 0%, #cfd6e6 74%);
 }
+.font25 { font-size: 25px;}
 
+.herobg {
+    background-image: url(../../../assets/training.png);
+    background-repeat: no-repeat;
+    background-position: bottom right -126px;
+    background-size: 68%;
+
+}
+.herobg2 {
+    background-image: url(../../../assets/robotic.png);
+    background-repeat: no-repeat;    
+    background-position: bottom right -171px;
+    background-size: 71%;
+}
+.flext-column {
+    flex-direction: column;
+}
 
 @media only screen and (max-width: 1200px) {
     .cat-flex-box {
@@ -13,6 +30,8 @@ background-image: linear-gradient(315deg, #e7eff9 0%, #cfd6e6 74%);
         flex-direction: column;
         .card {
             flex:1;
+            h6 {color: #ffffff;}
+            color: #ffffff;
             h1 {
                 color:$primaryColor;
             }
@@ -26,10 +45,16 @@ background-image: linear-gradient(315deg, #e7eff9 0%, #cfd6e6 74%);
 
   @media only screen and (min-width: 1200px) {
     .cat-flex-box {
-        display: flex;   
-        column-gap: 30px;
+        display: flex;  
+        flex-direction: column; 
+        row-gap: 30px;
         .card {
-            flex:1;
+           width: 50%;
+           &.wid-100 {
+               width:64%;
+           }
+           h6 {color: #ffffff;}
+           color: #ffffff;
             h1 {
                 color:$primaryColor;
             }

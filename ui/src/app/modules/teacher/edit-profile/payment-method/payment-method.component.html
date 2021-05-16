@@ -1,4 +1,8 @@
 <div [formGroup]="paymentFormGroup">
+  
+  <div class="alert alert-warning p-2">
+    <p class="mb-0"><fa-icon class="mr-2" [icon]="faExclamationTriangle"></fa-icon>This (Payment Details) area will be publicly visible, leave this area if you are not interested in public disclose.  </p>
+  </div>
   <h3 class="mb-3">Payment Method</h3>
   <div class="row">
     <div class="col-md-8 col-lg-8"> 
@@ -43,16 +47,16 @@
 </div>
 </div>
   <div class="col-md-4 col-lg-4">
-    <div class="row">
-      <div class="col-6">
-    <img [src]="f.qr_code1.value" class="avatar-img img-thumbnail d-block" *ngIf="f.qr_code1.value" />
+    <div class="payment-qr-code">
+      <div class="text-center">
+    <img [src]="f.qr_code1.value" class="avatar-img img-thumbnail" *ngIf="f.qr_code1.value" />
     <button type="button" (click)="paytmQr.click()" class="btn btn-sm btn-primary mt-2 qr_code1-up-btn">
-      <span>PayTM QR Code</span>
+      <span>Other Payment Wallets</span>
       <input #paytmQr type="file" (change)="onFileInput($event.target.files, f.qr_code1, 'qr_code1')" accept="image/*" style="display:none;" />
     </button>
   </div>
-  <div class="col-6">
-    <img [src]="f.qr_code2.value" class="avatar-img img-thumbnail d-block" *ngIf="f.qr_code2.value" />
+  <div class="text-center">
+    <img [src]="f.qr_code2.value" class="avatar-img img-thumbnail" *ngIf="f.qr_code2.value" />
     <button type="button" (click)="gpayQr.click()" class="btn mt-2 btn-sm btn-primary qr_code2-up-btn">
       <span>G-PAY QR Code</span>
       <input #gpayQr type="file" (change)="onFileInput($event.target.files, f.qr_code2, 'qr_code2')" accept="image/*" style="display:none;" />

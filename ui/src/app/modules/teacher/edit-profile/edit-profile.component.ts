@@ -8,6 +8,7 @@ import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { map, mergeMap } from 'rxjs/operators';
 import Notiflix from "notiflix";
 import { BreadCrumbsService } from 'src/app/shared-module/components/bread-crumbs/bread-crumbs.component';
+import { faExclamationTriangle} from '@fortawesome/free-solid-svg-icons'
 import { ActivatedRoute } from '@angular/router';
 
 
@@ -24,7 +25,7 @@ export class EditProfileComponent implements OnInit, OnDestroy {
   cities$:Observable<City[]>;
   faYoutube = faYoutube;
   isSelf: boolean = true;
-
+  faExclamationTriangle=faExclamationTriangle;
   countrySubscription: Subscription;
   stateSubscription: Subscription;
   changePassCheckSubScr: Subscription;

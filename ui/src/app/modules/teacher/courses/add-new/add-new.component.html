@@ -25,7 +25,7 @@
               bindLabel="tag_name"
               id="tag_name"
               [ngClass]="{'is-invalid': ( f.tag_name.errors && f.country_id.errors.error)}"
-              placeholder="select Country"
+              placeholder="'Course Name', 'Tutor Name', 'Tutor Place', 'Mobile Number', etc"
               formControlName="tag_name"
               [addTag]="true"
               [hideSelected]="true"
@@ -64,6 +64,7 @@
             <div *ngIf="f.image.errors && f.image.errors.error" class="invalid-feedback">
               {{f.image.errors.error}}
             </div>
+            <a target="_blank" download="../../../../../assets/course-banner-default.jpg" href="../../../../../assets/course-banner-default.jpg">Download sample Image</a>
         </div>
         </div>
 

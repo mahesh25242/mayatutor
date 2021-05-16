@@ -3,6 +3,7 @@ import { FormGroup, ControlContainer } from '@angular/forms';
 import { TeacherService, UserService } from 'src/app/lib/services';
 import Notiflix from "notiflix";
 import { mergeMap } from 'rxjs/operators';
+import { faExclamationTriangle} from '@fortawesome/free-solid-svg-icons'
 
 @Component({
   //selector: 'app-payment-method',
@@ -13,7 +14,7 @@ import { mergeMap } from 'rxjs/operators';
 export class PaymentMethodComponent implements OnInit {
 
   paymentFormGroup: FormGroup;
-
+  faExclamationTriangle=faExclamationTriangle;
 
   constructor(private controlContainer: ControlContainer,
     private teacherService : TeacherService,

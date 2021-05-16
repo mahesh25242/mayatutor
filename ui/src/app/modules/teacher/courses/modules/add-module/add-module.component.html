@@ -1,7 +1,7 @@
 
 <form [formGroup]="addModuleFrm" (ngSubmit)="addModule()">
 <div class="row">
-  <div class="form-group col-md-6 col-lg-6">
+  <div class="form-group col-md-5 col-lg-5">
     <label for="name">Module Name </label>
     <input type="text" class="form-control" id="name" aria-describedby="moduleNameHelp"
     placeholder="Module Name" formControlName="name"
@@ -11,7 +11,6 @@
     </div>
     <small id="moduleNameHelp" class="form-text text-muted">make sure spelling correct</small>
   </div>
-
   <div class="form-group col-md-6 col-lg-6">
     <label class="d-block" for="pdf">External PDF Link</label>
       <input type="text" id="pdf" placeholder="External PDF Link" formControlName="pdf"
@@ -21,14 +20,14 @@
       [ngClass]="{'is-invalid': (f.pdf.errors && f.pdf.errors.error) }"> -->
       <div *ngIf="f.pdf.errors && f.pdf.errors.error" class="invalid-feedback">
         {{f.pdf.errors.error}}
-      </div>
-      <p class="demo-url">Demo video
-        <app-help-video url="https://www.youtube.com/watch?v=nVvN_Vz5TgU" title="How to add course"></app-help-video>
-      </p>
+      </div>     
       <a [href]="f.pdf.value" target="_blank" *ngIf="f.pdf.value">PDF</a>
   </div>
+  <div class="col-md-1 col-lg-1"> <p class="demo-url">Demo video
+    <app-help-video url="https://www.youtube.com/watch?v=nVvN_Vz5TgU" title="How to add course"></app-help-video>
+  </p></div>
 
-  <div class="form-group col-md-6 col-lg-6">
+  <div class="form-group col-md-5 col-lg-5">
     <label for="pdf">Video From</label>
     <select class="form-control" formControlName="video_type">
       <option value="youtube">Youtube</option>
@@ -46,16 +45,18 @@
 
     <div class="input-group-append" *ngIf="f.video_type.value != 'drive'"><a href="javascript:{}" class="btn btn-primary ml-3" *ngIf="f.video_url.value" (click)="previewVideo()">Preview</a></div>
   </div>
-  <p class="demo-url">Demo video
-    <app-help-video url="https://www.youtube.com/watch?v=nVvN_Vz5TgU" title="How to add course"></app-help-video>
-  </p>
+  
     <div *ngIf="f.video_url.errors && f.video_url.errors.error" class="invalid-feedback">
       {{f.video_url.errors.error}}
     </div>
     <small id="videoLinkHelp" class="form-text text-muted">put youtube / vimeo link</small>
   </div>
-
-  <div class="form-group col-md-6 col-lg-6">
+  <div class="col-md-1 col-lg-1">
+    <p class="demo-url">Demo video
+      <app-help-video url="https://www.youtube.com/watch?v=nVvN_Vz5TgU" title="How to add course"></app-help-video>
+    </p>
+  </div>
+  <div class="form-group col-md-5 col-lg-5">
     <label for="file1">External File 1 </label>
     <input type="text" class="form-control" id="file1" aria-describedby="moduleNameHelp"
     placeholder="External File 1" formControlName="file1"
@@ -63,8 +64,8 @@
     <div *ngIf="f.file1.errors && f.file1.errors.error" class="invalid-feedback">
       {{f.file1.errors.error}}
     </div>
+  <small class="form-text text-muted">Attach Google drive link ( Excel, Word, PDF for downolad )</small>
   </div>
-
   <div class="form-group col-md-6 col-lg-6">
     <label class="d-block" for="file2">External File 2</label>
       <input type="text" id="file2" placeholder="External File 2" formControlName="file2"
@@ -72,9 +73,12 @@
       <div *ngIf="f.file2.errors && f.file2.errors.error" class="invalid-feedback">
         {{f.file2.errors.error}}
       </div>
-      <p class="demo-url">Demo video
-        <app-help-video url="https://www.youtube.com/watch?v=nVvN_Vz5TgU" title="How to add course"></app-help-video>
-      </p>
+      <small class="form-text text-muted">Attach Google drive link ( Excel, Word, PDF for downolad )</small>    
+  </div>
+  <div class="col-md-1 col-lg-1">
+    <p class="demo-url">Demo video
+      <app-help-video url="https://www.youtube.com/watch?v=nVvN_Vz5TgU" title="How to add course"></app-help-video>
+    </p>
   </div>
 
 </div>

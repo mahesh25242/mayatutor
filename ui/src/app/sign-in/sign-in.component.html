@@ -3,7 +3,7 @@
    
     <div  body class="border-0 p-0">
       <div class="row">
-        <div class="col-lg-6 col-md-6 pl-5 pb-5 pr-5 visible-web">
+        <div class="col-lg-6 col-md-6 pl-4 pb-5 pr-4 visible-web">
           <h5 class="mb-5 text-center">NEW VISITOR REGISTER</h5>
           <div class="card shadow-sm mt-5">
             <i class="icon-reg">
@@ -29,7 +29,7 @@
           <!-- <a  (click)="refreshToken()" href="j avascript:{}">refresh token</a> -->
       
         </div>
-        <div *ngIf="!isForgot" class="col-lg-6 col-md-6 pl-5 pb-5 pr-5 border-left animate__animated " [ngClass]="{'animate__shakeX' : invalidlogin, 'animate__flipInY': isForgot !== null}">
+        <div *ngIf="!isForgot" class="col-lg-6 col-md-6 pl-4 pb-5 pr-4 border-left animate__animated " [ngClass]="{'animate__shakeX' : invalidlogin, 'animate__flipInY': isForgot !== null}">
           <h5 class="mb-5 text-center">MEMBER LOGIN</h5>
           <div id="recaptcha-container"></div>
           <div class="text-danger" *ngIf="invalidlogin">Invalid login credentials</div>
