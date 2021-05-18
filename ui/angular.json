@@ -24,7 +24,8 @@
               "@firebase/auth",
               "notiflix",
               "lodash",
-              "ng2-pdf-viewer"
+              "ng2-pdf-viewer",
+              "file-saver"
             ],
             "outputPath": "dist/mayaTutor",
             "index": "src/index.html",
