@@ -1,9 +1,46 @@
-<div *ngIf="(plan$ | async) as plan">
-  plan Name: {{plan.name}}
-  <app-apply-coupon *ngIf="plan.price" (setCoupon)="setCoupon($event)"></app-apply-coupon>
 
+<section class="well-bg-header">
+  <div class="container">
+    <h3 >MAKE THE PAYMENT</h3>
+  </div>
 
-  Price ₹ {{ plan.price }}
+</section>
+<section class="min-heightwrap">
+  <div class="container">
 
-  <button class="btn btn-primary" (click)="goToPurchase(plan)">Continue</button>
+    <div class="d-flex payment-wrap bg-white shadow-sm"  *ngIf="(plan$ | async) as plan">
+      <div class="flex-1 border-right p-5 text-center align-items-center mob-hide">
+<img src="../../../../assets/payment.png" />
+<h6 class="text-uppercase mt-3">Secure Payment</h6>
+
+      </div>
+      <div class="flex-2">
+<div class="blue-royal">
+
+  <div class="row m-0">
+    <div class="col-lg-6 col-md-6 text-white p-4">
+      <label class="text-uppercase">plan Name</label>
+      <h3>{{plan.name}}</h3>
+    </div>
+    <div class="col-lg-6 col-md-6 text-white p-4">
+      <label class="text-uppercase">Price</label>
+      <h1>₹ {{ plan.price }}</h1>
+    </div>
+  </div>  
 </div>
+<div class="p-5">
+  <app-apply-coupon *ngIf="plan.price" (setCoupon)="setCoupon($event)"></app-apply-coupon>
+  <hr/>
+  <div class="d-flex">
+  <button class="btn btn-primary mt-4 ml-auto" (click)="goToPurchase(plan)">Continue <fa-icon class="ml-3" [icon]="faLongArrowAltRight"></fa-icon></button>
+</div>
+</div>
+      </div>
+    </div>
+
+    
+
+  </div>
+
+</section>
+

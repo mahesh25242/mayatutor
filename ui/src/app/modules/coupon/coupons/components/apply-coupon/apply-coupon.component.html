@@ -1,11 +1,13 @@
-  <form [formGroup]="couponFrm" (ngSubmit)="validateCoupon()" class="form-inline" *ngIf="!coupon">
-
-    <div class="form-group mb-2">
+  <form [formGroup]="couponFrm" (ngSubmit)="validateCoupon()"  *ngIf="!coupon">
+<label class="d-block mb-3">Dou you have a coupon code?</label>
+<div class="form-inline">
+    <div class="form-group ">
       <label for="code" class="sr-only">Coupon Code</label>
       <input type="text" placeholder="Code" class="form-control" id="code"
        aria-describedby="emailHelp" formControlName="code" >
     </div>
 
-    <button type="submit" class="btn btn-primary mb-2">Submit</button>
+    <button type="submit" class="btn btn-primary ml-3">Submit</button>
+  </div>
   </form>
   <div *ngIf="coupon" class="text-success">{{coupon.code}} is applied with {{coupon.value}} {{coupon.type}}</div>

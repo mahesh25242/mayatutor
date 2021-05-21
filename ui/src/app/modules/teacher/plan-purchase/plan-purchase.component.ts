@@ -8,6 +8,7 @@ import { BreadCrumbsService } from 'src/app/shared-module/components/bread-crumb
 import { Plan } from '../../../lib/interfaces';
 import { Coupon } from '../../coupon/interfaces';
 import Notiflix from "notiflix";
+import { faLongArrowAltRight} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-plan-purchase',
@@ -16,6 +17,7 @@ import Notiflix from "notiflix";
 })
 export class PlanPurchaseComponent implements OnInit {
   plan$ : Observable<Plan>;
+  faLongArrowAltRight = faLongArrowAltRight;
   private coupon$: BehaviorSubject<Coupon> = new BehaviorSubject<Coupon>(null);
 
   constructor(private teacherService : TeacherService,
