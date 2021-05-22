@@ -29,7 +29,7 @@
   <div class="col-lg-8 pt-5">
     <h5 class="text-center">Payment for tutors only</h5>
     <div class="row col-lg-10 pt-5 m-auto">
-      
+
       <!-- Free Tier -->
       <div class="" [ngClass]="{'col-lg-5 mb-5': !plan.price, 'col-lg-7 mb-7': plan.price}" *ngFor="let plan of plans">
         <div class="card over-flow-hidden">
@@ -39,15 +39,24 @@
 
           <div class="card-body">
 
-            <h2 class="card-price text-center"><span class="period">INR / USD</span> {{plan.price}}<span class="period">/Month</span></h2>
+            <h2 class="card-price text-center"><span class="period">INR / USD</span> ₹ {{plan.price}}<span class="period">/Month</span></h2>
             <hr>
             <ul class="fa-ul" *ngIf="plan.features && plan.features.length">
               <li *ngFor="let feature of plan.features"><span class="fa-li"><fa-icon class="fa-icon-you" [icon]="faCheck"></fa-icon></span>{{feature}}</li>
             </ul>
-              <a [routerLink]="plan.id" class="btn btn-block text-uppercase"
-               [ngClass]="{'btn-primary': plan.price, 'btn-warning': !plan.price}">
-              {{ plan.price > 0 ? 'Buy' : 'GET IT FREE'}}
-              </a>
+              <ng-container *ngIf="loggedUser$ | async as loggedUser else toRegister">
+                <a [routerLink]="plan.id" *ngIf="loggedUser?.role_url == 'teacher' && !plan.basic" class="btn btn-block text-uppercase"
+                  [ngClass]="{'btn-primary': plan.price, 'btn-warning': !plan.price}">
+                {{ plan.price > 0 ? 'Buy' : 'GET IT FREE'}}
+                </a>
+              </ng-container>
+              <ng-template #toRegister>
+                <a [routerLink]="['/teacher/register']" class="btn btn-block text-uppercase"
+                  [ngClass]="{'btn-primary': plan.price, 'btn-warning': !plan.price}">
+                {{ plan.price > 0 ? 'Buy' : 'GET IT FREE'}}
+                </a>
+              </ng-template>
+
           </div>
         </div>
       </div>

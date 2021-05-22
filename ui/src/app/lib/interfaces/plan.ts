@@ -7,7 +7,12 @@ export interface Plan {
   description?: string,
   features?: any,
   price?: number,
-  my_user_plan?: UserPlan
+  my_user_plan?: UserPlan,
+  gst?: {
+    name?: string,
+    value?: string,
+    id?: number
+  }
 }
 
 export interface PlanPurchase {

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { Observable } from 'rxjs';
-import { TeacherService } from 'src/app/lib/services';
+import { TeacherService, UserService } from 'src/app/lib/services';
 import { BreadCrumbsService } from 'src/app/shared-module/components/bread-crumbs/bread-crumbs.component';
-import { Plan } from '../../../lib/interfaces';
+import { Plan, User } from '../../../lib/interfaces';
 @Component({
   selector: 'app-plans',
   templateUrl: './plans.component.html',
@@ -12,6 +12,7 @@ import { Plan } from '../../../lib/interfaces';
 export class PlansComponent implements OnInit {
   faCheck = faCheck;
   plans$ : Observable<Plan[]>;
+  loggedUser$: Observable<User>;
 
   video = {
     source : [
@@ -22,9 +23,11 @@ export class PlansComponent implements OnInit {
     ]
   };
   constructor(private teacherService : TeacherService,
-    private breadCrumbsService: BreadCrumbsService) { }
+    private breadCrumbsService: BreadCrumbsService,
+    private userService: UserService) { }
 
   ngOnInit(): void {
+    this.loggedUser$ = this.userService.getloggedUser;
     this.breadCrumbsService.bcs$.next([
       {
         url: '/',
@@ -36,6 +39,7 @@ export class PlansComponent implements OnInit {
     ]);
 
     this.plans$ = this.teacherService.plans();
+
   }
 
 }

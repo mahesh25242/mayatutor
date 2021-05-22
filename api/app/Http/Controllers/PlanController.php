@@ -18,7 +18,10 @@ class PlanController extends Controller
 
 
     public function plan($id){
+
         $plan = \App\Plan::with(["myUserPlan"])->find($id);
+        $plan->gst = \App\Setting::where("name", "GST")->get()->first();
+        $plan->gstPrice = $plan->price + ((double) $plan->price * ( (double) $plan->gst->value / 100));
         return response($plan);
     }
 
@@ -30,11 +33,11 @@ class PlanController extends Controller
         if($coupon){
             $coupon = \App\Coupon::withCount("couponTrack")
             ->where(function ($query) {
-                $query->whereNull("start_date")->orWhereDate('start_date', '>=',  \Carbon\Carbon::now());
+                $query->whereNull("start_date")->orWhereDate('start_date', '<=',  \Carbon\Carbon::now());
             })
             ->where(function ($query) {
                 $query->whereNull("end_date")
-                ->orWhereDate('end_date', '<=',  \Carbon\Carbon::now());
+                ->orWhereDate('end_date', '>=',  \Carbon\Carbon::now());
             })->where("id", $coupon)
             ->where("status", 1)
             ->havingRaw('coupon_track_count < no_use')->get()->first();

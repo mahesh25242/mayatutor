@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Validator;
-
+use App\Http\Resources\CouponResurce;
 
 class CouponsController extends Controller
 {
@@ -132,15 +132,15 @@ class CouponsController extends Controller
         ->where("status", 1)
         ->withCount("couponTrack")
         ->where(function ($query) {
-            $query->whereNull("start_date")->orWhereDate('start_date', '>=',  \Carbon\Carbon::now());
+            $query->whereNull("start_date")->orWhereDate('start_date', '<=',  \Carbon\Carbon::now());
         })
         ->where(function ($query) {
             $query->whereNull("end_date")
-            ->orWhereDate('end_date', '<=',  \Carbon\Carbon::now());
+            ->orWhereDate('end_date', '>=',  \Carbon\Carbon::now());
         })
         ->havingRaw('coupon_track_count < no_use')->get()->first();
         if($coupon && $coupon->count()){
-            return response($coupon);
+            return response(new CouponResurce($coupon));
         }else{
             return response(['message' => 'Invalid Coupon', 'status' => false], 422);
         }
