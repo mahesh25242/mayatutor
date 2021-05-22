@@ -1,6 +1,7 @@
 <h3 class="mb-3">All Purchases</h3>
 <app-bread-crumbs></app-bread-crumbs>
 <ng-container  *ngIf="(planPurchases$ | async ) as planPurchases">
+  <div class="table-responsive">
   <table class="table table-striped">
     <thead>
       <tr>
@@ -49,4 +50,5 @@
       <ngb-pagination [collectionSize]="planPurchases?.total" [pageSize]="planPurchases?.per_page" [(page)]="planPurchases.current_page"
       aria-label="Default pagination" (pageChange)="search($event)" [maxSize]="5" [boundaryLinks]="true"  [rotate]="true"></ngb-pagination>
   </div>
+</div>
 </ng-container>

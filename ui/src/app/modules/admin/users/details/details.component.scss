@@ -1,7 +1,29 @@
 .table-row {
     display: grid;
+    grid-template-columns:1fr 1fr 1fr 1fr;
+    column-gap: 15px;
+    padding:10px 0;
+}
+
+.table-row-3 {
+    display: grid;
     grid-template-columns:1fr 1fr 1fr;
     column-gap: 15px;
     padding:10px 0;
 }
 .w-100 {width: 100%;}
+
+@media only screen and (min-width: 768px) {
+    .custom-d-flex {
+        display:flex;
+    }
+  }
+
+@media only screen and (max-width: 768px) {
+    .custom-d-flex {
+        display:block;
+    }
+    .mb-5px {
+        margin-bottom: 30px;
+    }
+  }

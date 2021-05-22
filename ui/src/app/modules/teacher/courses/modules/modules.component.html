@@ -4,87 +4,87 @@
 
 <app-add-module [course]="course$ | async" [module]="courseModule" (resetEdit)="editModule($event)"></app-add-module>
 
-
-
-
-<table class="table table-striped table-bordered mt-4">
-  <thead>
-    <tr>
-      <th width="80">
-        Order
-      </th>
-      <th>
-        Module Name
-      </th>
-      <th width="80">
-        PDF
-      </th>
-      <th width="80">
-        Videos
-      </th>
-      <th width="100">
-        Options
-      </th>
-    </tr>
-  </thead>
-  <tbody *ngIf="(courseModules$ | async) as courseModules" cdkDropList (cdkDropListDropped)="drop($event, courseModules)"
-  [cdkDropListData]="courseModules"  [cdkDropListDisabled]="(courseModules.length<2)">
-    <ng-container *ngIf="courseModules">
-      <tr *ngFor="let courseModule of courseModules; let i=index;" (cdkDragStarted)="dragStarted($event, courseModule)"
-      (cdkDragEnded)="dragEnded($event)"
-      cdkDragLockAxis="y" cdkDrag
-      [cdkDragData]="courseModule"
-      [cdkDragDisabled]="isDragging && isDragging !== courseModule.id"
-      >
-        <td data-label="Order">
-          <img class="drag-icon dragable" src="assets/drag-icon.svg" *ngIf="!isDragging || isDragging === courseModule.id">
-          {{ setSortOrder(courseModule, i) }}
-        </td>
-        <td data-label="Module Name">
-          {{ courseModule.name}}
-        </td>
-        <td data-label="PDF" align="center">
-          <a [href]="courseModule.pdf" *ngIf="courseModule.pdf" target="_blank">
-            <fa-icon class="fa-icon-25" [icon]="faFilePdf"></fa-icon>
-          </a>
-        </td>
-        <td data-label="Video" align="center">
-          <a href="javascript:{}" *ngIf="courseModule.video_url" (click)="playVideo(courseModule)">
-            <fa-icon class="fa-icon-25" [icon]="faPlay"></fa-icon>
-          </a>
-        </td>
-        <td data-label="Option">
-          <ng-container *ngIf="isDragging && isDragging === courseModule.id">
-            <a href="javascript:{}" class="btn btn-outline-warning btn-sm"
-              placement="top" ngbTooltip="clik here to cancel the move" (click)="resetDrag()">
-              <fa-icon [icon]="faWindowClose"></fa-icon>
+<div class="table-responsive">
+  <table class="table table-striped table-bordered mt-4">
+    <thead>
+      <tr>
+        <th width="80">
+          Order
+        </th>
+        <th>
+          Module Name
+        </th>
+        <th width="80">
+          PDF
+        </th>
+        <th width="80">
+          Videos
+        </th>
+        <th width="100">
+          Options
+        </th>
+      </tr>
+    </thead>
+    <tbody *ngIf="(courseModules$ | async) as courseModules" cdkDropList (cdkDropListDropped)="drop($event, courseModules)"
+    [cdkDropListData]="courseModules"  [cdkDropListDisabled]="(courseModules.length<2)">
+      <ng-container *ngIf="courseModules">
+        <tr *ngFor="let courseModule of courseModules; let i=index;" (cdkDragStarted)="dragStarted($event, courseModule)"
+        (cdkDragEnded)="dragEnded($event)"
+        cdkDragLockAxis="y" cdkDrag
+        [cdkDragData]="courseModule"
+        [cdkDragDisabled]="isDragging && isDragging !== courseModule.id"
+        >
+          <td data-label="Order">
+            <img class="drag-icon dragable" src="assets/drag-icon.svg" *ngIf="!isDragging || isDragging === courseModule.id">
+            {{ setSortOrder(courseModule, i) }}
+          </td>
+          <td data-label="Module Name">
+            {{ courseModule.name}}
+          </td>
+          <td data-label="PDF" align="center">
+            <a [href]="courseModule.pdf" *ngIf="courseModule.pdf" target="_blank">
+              <fa-icon class="fa-icon-25" [icon]="faFilePdf"></fa-icon>
             </a>
-            <a href="javascript:{}" class="btn btn-outline-primary btn-sm ml-1"
-              placement="top" ngbTooltip="clik here to fix it" (click)="saveSortOrder(courseModules)">
-              <fa-icon [icon]="faCheck"></fa-icon>
+          </td>
+          <td data-label="Video" align="center">
+            <a href="javascript:{}" *ngIf="courseModule.video_url" (click)="playVideo(courseModule)">
+              <fa-icon class="fa-icon-25" [icon]="faPlay"></fa-icon>
             </a>
-          </ng-container>
-          <ng-container *ngIf="!isDragging || isDragging !== courseModule.id">
-            <a href="javascript:{}" class="btn btn-primary btn-sm"
-           placement="top" ngbTooltip="click here for edit this module" (click)="editModule(courseModule)">
-            <fa-icon [icon]="faEdit"></fa-icon>
-          </a>
-          <span  [ngClass]="'del-'+courseModule.id">
-            <a href="javascript:{}" class="btn btn-danger btn-sm ml-1"
-            (click)="deleteCourseModule(courseModule)"
-            placement="top" ngbTooltip="click here for delete this module">
-              <fa-icon [icon]="faTrash"></fa-icon>
+          </td>
+          <td data-label="Option">
+            <ng-container *ngIf="isDragging && isDragging === courseModule.id">
+              <a href="javascript:{}" class="btn btn-outline-warning btn-sm"
+                placement="top" ngbTooltip="clik here to cancel the move" (click)="resetDrag()">
+                <fa-icon [icon]="faWindowClose"></fa-icon>
+              </a>
+              <a href="javascript:{}" class="btn btn-outline-primary btn-sm ml-1"
+                placement="top" ngbTooltip="clik here to fix it" (click)="saveSortOrder(courseModules)">
+                <fa-icon [icon]="faCheck"></fa-icon>
+              </a>
+            </ng-container>
+            <ng-container *ngIf="!isDragging || isDragging !== courseModule.id">
+              <a href="javascript:{}" class="btn btn-primary btn-sm"
+             placement="top" ngbTooltip="click here for edit this module" (click)="editModule(courseModule)">
+              <fa-icon [icon]="faEdit"></fa-icon>
             </a>
-          </span>
-          </ng-container>
+            <span  [ngClass]="'del-'+courseModule.id">
+              <a href="javascript:{}" class="btn btn-danger btn-sm ml-1"
+              (click)="deleteCourseModule(courseModule)"
+              placement="top" ngbTooltip="click here for delete this module">
+                <fa-icon [icon]="faTrash"></fa-icon>
+              </a>
+            </span>
+            </ng-container>
+          </td>
+        </tr>
+      </ng-container>
+      <tr *ngIf="!courseModules || !courseModules.length">
+        <td colspan="5">
+          <div class="alert alert-warning">No module found</div>
         </td>
       </tr>
-    </ng-container>
-    <tr *ngIf="!courseModules || !courseModules.length">
-      <td colspan="5">
-        <div class="alert alert-warning">No module found</div>
-      </td>
-    </tr>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+  
+</div>
 </div>

@@ -6,7 +6,7 @@
   <button type="submit" class="btn btn-primary ">Search</button>
   <button type="button" class="btn btn-outline-secondary ml-2" (click)="resetSearch()">Clear</button>
 </form>
-
+<div class="table-responsive">
 <table class="table table-striped table-bordered">
   <thead>
     <tr>
@@ -53,12 +53,12 @@
         </td>
       </tr>
     </ng-container>
-  </tbody>
-  <ng-container *ngIf="courses$ | async as courses">
-    <div *ngIf="courses?.data.length">
-      <ngb-pagination [collectionSize]="courses?.total" [pageSize]="courses?.per_page" [(page)]="courses.current_page"
-      aria-label="Default pagination" (pageChange)="search($event)" [maxSize]="5" [boundaryLinks]="true"  [rotate]="true"></ngb-pagination>
-    </div>
-  </ng-container>
+  </tbody> 
 </table>
-
+<ng-container *ngIf="courses$ | async as courses">
+  <div *ngIf="courses?.data.length">
+    <ngb-pagination [collectionSize]="courses?.total" [pageSize]="courses?.per_page" [(page)]="courses.current_page"
+    aria-label="Default pagination" (pageChange)="search($event)" [maxSize]="5" [boundaryLinks]="true"  [rotate]="true"></ngb-pagination>
+  </div>
+</ng-container>
+</div>

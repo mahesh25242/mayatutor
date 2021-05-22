@@ -7,6 +7,7 @@
   </div>
 </h3>
 <ng-container  *ngIf="(settings$ | async ) as settings">
+  <div class="table-responsive">
   <table class="table table-striped">
     <thead>
       <tr>
@@ -35,4 +36,5 @@
         </tr>
     </tbody>
   </table>
+  </div>
 </ng-container>

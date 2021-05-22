@@ -5,26 +5,42 @@
   <div  body>
     <div *ngIf="user$ | async as usr">
 <div class="row">
-  <div class="col-lg-3 col-md-3"><img [src]="usr.avatar" /></div>
+  <div class="col-lg-3 col-md-3"><img [src]="usr.avatar" class="img-fluid mb-4" /></div>
   <div class="col-lg-9 col-md-9">
 <h6 class="text-uppercase">
   {{ (user.role_url == 'teacher' && '(Teacher)') || (user.role_url == 'student' && '(Student)') }} - {{ user.fname}} {{ user.lname}}
 </h6>
 <p>{{usr.address}} {{ user.city?.name }} - {{ user.pin }}</p>
 <div class="table-row">
-  <div class="d-flex pt-1"><ng-container *ngIf="user.role_url == 'teacher'">
-    <h6>Courses:<span class="text-primary"> {{ usr.course_count }}</span></h6>  <h6 class="ml-3"> Plan: <span class="text-primary">Trial</span></h6>
-  </ng-container></div>
-
-<div> <a [href]="'tel://'+usr.phone" class="btn btn-primary btn-sm btn-block">Call</a></div>
-<div><a class=" btn btn-primary btn-sm btn-block" target="_blank" [href]="'https://web.whatsapp.com/send?phone='+usr.phone">Message</a>
-  <a class=" btn btn-primary d-none btn-block" target="_blank" [href]="'https://api.whatsapp.com/send?phone='+usr.phone">Message</a></div>
+  <ng-container *ngIf="user.role_url == 'teacher'">
+<div>  
+    <h6>Courses:<span class="text-primary"> {{ usr.course_count }}</span></h6> 
+</div>
+<div>
+  <h6 class="ml-3"> Plan: <span class="text-primary">Trial</span></h6> 
+</div>
+</ng-container>
+<div><a [href]="'tel://'+usr.phone" class="btn btn-primary btn-sm btn-block">Call</a></div>
+<div>
+  <a class=" btn btn-primary btn-sm btn-block" target="_blank" [href]="'https://web.whatsapp.com/send?phone='+usr.phone">Message</a>
+  <a class=" btn btn-primary d-none btn-block" target="_blank" [href]="'https://api.whatsapp.com/send?phone='+usr.phone">Message</a>
 </div>
 
-<div class="table-row">
-  <div ><b class="d-block ">Contact Number:</b><p>{{ usr.phone}}</p></div>
-  <div class="border-right border-left pr-3 pl-3"><b class="d-block">Email:</b><p>{{ usr.email}}</p></div>  
-  <div><b class="d-block">Status:</b><p>ACTIVE</p></div>  
+</div>
+
+<div class="table-row-3">
+  <div>
+    <p class="mb-2">Contact Number:</p>
+    <b class="d-block ">{{ usr.phone}}</b>   
+  </div>  
+  <div class="border-right border-left pr-3 pl-3">
+    <p class="mb-2">Email:</p>
+    <b class="d-block">{{ usr.email}}</b>    
+  </div>    
+  <div>
+    <p class="mb-2">Status:</p>
+    <b class="d-block">ACTIVE</b>  
+  </div>  
 </div>
 
 
@@ -35,16 +51,16 @@
         <ng-container *ngIf="user.role_url == 'teacher'">
           
 
-          <div class="row border-top border-bottom">
-            <div class="col-md-4 pt-3 pb-3">
+          <div class="table-row-3 border-top border-bottom">
+            <div>
               <b class="mb-2 d-block">Subject / Syllabus</b>
               <h6 *ngFor="let subject of usr.subject; let last = last">{{ subject.name }} <i *ngIf="!last">, </i> </h6>
             </div>
-            <div class="col-md-4 border-right border-left pt-4">
+            <div class="border-right border-left pl-3 pr-3">
               <b class="mb-2 d-block">Experiance</b>
               <h6 [innerHTML]="usr.teacher_info?.experiance"></h6>
             </div>
-            <div class="col-md-4 pt-4">
+            <div>
               <b class="mb-2 d-block">Education</b>
               <h6 [innerHTML]="usr.teacher_info?.education?.name"></h6>
             </div>
@@ -54,8 +70,8 @@
 
     </div>
   </div>
-  <div  footer class="w-100 d-flex">
-    <div class="custom-control custom-checkbox mr-auto auto-approval" *ngIf="user.role_url == 'teacher'">
+  <div  footer class="w-100 custom-d-flex">
+    <div class="custom-control custom-checkbox mr-auto auto-approval mb-5px" *ngIf="user.role_url == 'teacher'">
       <input type="checkbox" class="custom-control-input" id="customControlAutosizing" (change)="toggleAutoApproval()" [checked]="user.teacher_auto_approval_count">
       <label class="custom-control-label pt-1" for="customControlAutosizing">Auto Approval enable for this user</label>
     </div>

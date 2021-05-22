@@ -1,7 +1,112 @@
-<div class="card" >
-  <div class="card-body">
-      Admin dashboard
-      <a href="javascript:{}" routerLink="edit-profile" class="btn btn-outline-primary"><fa-icon [icon]="faEdit" ></fa-icon> Edit</a>
+
+
+<div class="row">
+  <div class="col-lg-8 col-sm-8">
+    <div class="row">
+      <div class="col-lg-6 col-sm-6 mb-3">
+          <div class="card card-stats">
+              <div class="card-body ">
+                  <div class="row">
+                      <div class="col-5 text-center">
+                         <fa-icon [icon]="faUsers" class="f24 text-success"></fa-icon>
+                      </div>
+                      <div class="col-7">
+                          <div class="numbers">
+                              <h6 class="card-category">Total Teachers Registerd</h6>
+                              <h1 class="card-title">50</h1>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="card-footer d-flex">
+                <button class="btn btn-outline-primary ml-auto">
+                  View full details
+                </button>
+                  
+              </div>
+          </div>
+      </div>
+      <div class="col-lg-6 col-sm-6 mb-3">
+        <div class="card card-stats">
+            <div class="card-body ">
+                <div class="row">
+                    <div class="col-5 text-center">
+                       <fa-icon [icon]="faGraduationCap" class="f24 text-success"></fa-icon>
+                    </div>
+                    <div class="col-7">
+                        <div class="numbers">
+                            <h6 class="card-category">Total Students Registerd</h6>
+                            <h1 class="card-title">50</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer d-flex">
+              <button class="btn btn-outline-primary  ml-auto">
+                View full details
+              </button>
+                
+            </div>
+        </div>
     </div>
+    <div class="col-lg-6 col-sm-6 mb-3">
+      <div class="card card-stats">
+          <div class="card-body ">
+              <div class="row">
+                  <div class="col-5 text-center">
+                     <fa-icon [icon]="faFile" class="f24 text-success"></fa-icon>
+                  </div>
+                  <div class="col-7">
+                      <div class="numbers">
+                          <h6 class="card-category">Total Courses</h6>
+                          <h1 class="card-title">50</h1>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="card-footer d-flex">
+            <button class="btn btn-outline-primary ml-auto">
+              View full details
+            </button>
+              
+          </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-sm-6 mb-3">
+      <div class="card card-stats">
+          <div class="card-body ">
+              <div class="row">
+                  <div class="col-5 text-center">
+                     <fa-icon [icon]="faComment" class="f24 text-success"></fa-icon>
+                  </div>
+                  <div class="col-7">
+                      <div class="numbers">
+                          <h6 class="card-category">Total Messages</h6>
+                          <h1 class="card-title">50</h1>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="card-footer d-flex">
+            <button class="btn btn-outline-primary ml-auto">
+              View full details
+            </button>
+              
+          </div>
+      </div>
+    </div> 
+    </div>
+  </div>
+  <div class="col-lg-4 col-sm-4">
+    <h3>Admin dashboard</h3>
+    <div class="card" >
+      <div class="card-body">         
+          <a href="javascript:{}" routerLink="edit-profile" class="btn btn-outline-primary"><fa-icon [icon]="faEdit" ></fa-icon> Edit</a>
+        </div>
+    
+    </div>
+  </div>
 
 </div>
+
+

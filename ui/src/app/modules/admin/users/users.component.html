@@ -9,6 +9,7 @@
 
 
   <ng-container  *ngIf="(users$ | async ) as users">
+    <div class="table-responsive">
     <table class="table table-striped">
       <thead>
         <tr>
@@ -86,4 +87,5 @@
         <ngb-pagination [collectionSize]="users?.total" [pageSize]="users?.per_page" [(page)]="users.current_page"
         aria-label="Default pagination" (pageChange)="search($event)" [maxSize]="5" [boundaryLinks]="true"  [rotate]="true"></ngb-pagination>
     </div>
+  </div>
   </ng-container>

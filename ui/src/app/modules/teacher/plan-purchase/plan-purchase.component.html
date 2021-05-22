@@ -8,9 +8,9 @@
 <section class="min-heightwrap">
   <div class="container">
 
-    <div class="d-flex payment-wrap bg-white shadow-sm"  *ngIf="(plan$ | async) as plan">
+    <div class="d-flex payment-wrap bg-white shadow-sm border"  *ngIf="(plan$ | async) as plan">
       <div class="flex-1 border-right p-5 text-center align-items-center mob-hide">
-<img src="./assets/payment.png" alt="sec payment img" />
+<img src="./assets/payment.png" alt="sec payment img" class="mt-5" />
 <h6 class="text-uppercase mt-3">Secure Payment</h6>
 
       </div>
@@ -18,22 +18,22 @@
 <div class="blue-royal">
 
   <div class="row m-0">
-    <div class="col-lg-6 col-md-6 text-white p-4">
+    <div class="col-lg-6 col-md-6 text-white p-4 border-bottom">
       <label class="text-uppercase">plan Name</label>
-      <h3>{{plan.name}}</h3>
+      <h5>{{plan.name}}</h5>
     </div>
-    <div class="col-lg-6 col-md-6 text-white p-4">
+    <div class="col-lg-6 col-md-6 text-white p-4 border-bottom">
       <label class="text-uppercase">Price</label>
-      <h1>₹ {{ plan.price }}</h1>
+      <h5>₹ {{ plan.price }}</h5>
     </div>
   </div>
   <div class="row m-0" *ngIf="plan.price">
     <div class="col-lg-6 col-md-6 text-white p-4">
       <label class="text-uppercase">GST</label>
-      <h3>{{plan.gst.value}}%</h3>
+      <h5>{{plan.gst.value}} %</h5>
     </div>
     <div class="col-lg-6 col-md-6 text-white p-4">
-      <label class="text-uppercase">Price</label>
+      <label class="text-uppercase">Total Amount ( {{plan.gst.value}} % GST added )</label>
       <h1>₹ {{ plan.gstPrice }}</h1>
     </div>
   </div>
@@ -47,11 +47,11 @@
   </div>
 
 </div>
-<div class="p-5">
+<div class="p-4">
   <app-apply-coupon *ngIf="plan.price" (setCoupon)="setCoupon($event)"></app-apply-coupon>
   <hr/>
   <div class="d-flex">
-  <button class="btn btn-primary mt-4 ml-auto" (click)="goToPurchase(plan)">Continue <fa-icon class="ml-3" [icon]="faLongArrowAltRight"></fa-icon></button>
+  <button class="btn btn-primary mt-4 btn-lg ml-auto" (click)="goToPurchase(plan)">Continue <fa-icon class="ml-3" [icon]="faLongArrowAltRight"></fa-icon></button>
 </div>
 </div>
       </div>
