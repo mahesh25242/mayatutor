@@ -64,6 +64,7 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
     $router->group(['middleware' => 'auth'], function () use ($router) {
 
         $router->group(['prefix' => 'admin', 'middleware' =>  'admin'], function () use ($router) {
+            $router->get('/stats','AdminController@index');
             $router->group(['prefix' => 'course'], function () use ($router) {
                 $router->post('/','CourseController@listAllCourses');
                 $router->post('approveCourse','CourseController@approveCourse');

@@ -39,4 +39,8 @@ export class GeneralService {
   deleteHomeVideo(postData: any = null){
     return this.http.post("/admin/videos/delete", postData);
   }
+
+  stat(){
+    return this.http.get("/admin/stats");
+  }
 }
