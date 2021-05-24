@@ -20,9 +20,9 @@ class TeacherOrAdminAuthenticate
 
        if (Auth::check() )
        {
-            if(Auth::user()->has("isAdmin") || Auth::user()->has("isTeacher"))
+        if(\App\User::has("isAdmin")->find(Auth::id()) || \App\User::has("isTeacher")->find(Auth::id())  )
                 return $next($request);
        }
-       return redirect()->guest('/');
+       return response('Unauthorized.', 401);
     }
 }

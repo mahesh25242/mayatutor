@@ -21,7 +21,7 @@ class UserCollection extends ResourceCollection
 
         ];
 
-        $resource = $resource->getCollection();
+        //$resource = $resource->getCollection();
 
         parent::__construct($resource);
     }
@@ -35,9 +35,10 @@ class UserCollection extends ResourceCollection
      */
     public function toArray($request)
     {
+        return $this->resource;
 
-        return array_merge([
-            'data' => $this->resource,
-        ], $this->pagination);
+        // return array_merge([
+        //     'data' => $this->resource,
+        // ], $this->pagination);
     }
 }

@@ -71,6 +71,6 @@ export class CourseService {
   }
 
   isLaunchable(courseId:number =0, moduleId:number = 0){
-    return this.http.get(`/course/${courseId}/module/${moduleId}/isLaunchable`);
+    return this.http.get(`/student/course/${courseId}/module/${moduleId}/isLaunchable`);
   }
 }

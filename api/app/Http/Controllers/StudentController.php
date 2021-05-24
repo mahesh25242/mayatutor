@@ -3,6 +3,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use DB;
+use App\Http\Resources\UserCollection;
 
 class StudentController extends Controller
 {
@@ -21,19 +23,22 @@ class StudentController extends Controller
 
     public function myStudents(Request $request){
 
+
         $perPage = 20;
         $q = $request->input("q",'');
-        $user = \App\User::whereHas("userRole", function($q){
-            $q->where("role_id", 3);
-        })->withCount(["studentCourse"])->with(["student"])->WhereRaw(" ( concat(`fname`, ' ', `lname`) like '%{$q}%'
-        OR `email` like '%{$q}%'
-        OR `phone` like '%{$q}%') ");
+
+        $user = \App\User::has("isStudent")->withCount(["studentCourse"])->with(["student" => function($qry){
+            $qry->thisTeacherStudent();
+        }])
+
+        ->WhereRaw(" ( concat(`fname`, ' ', `lname`) like '%{$q}%'  OR `email` like '%{$q}%'    OR `phone` like '%{$q}%') ");
 
         $user = $user->whereHas("student", function($qry) use($request){
             $qry->where("teacher_user_id", Auth::id());
         });
 
-        return response($user->paginate($perPage));
+       // return response($user->paginate($perPage));
+        return response(new UserCollection($user->paginate($perPage)));
 
 
     }

@@ -237,9 +237,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     //     return $query->leftJoin('teacher_students1', 'users.id', '=', 'teacher_students.teacher_user_id');
     // }
 
+
+
     public function student()
     {
-        return $this->hasOne('App\TeacherStudent');
+        return $this->hasMany('App\TeacherStudent');
     }
 
     public function teacherStudent()

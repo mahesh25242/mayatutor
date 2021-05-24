@@ -23,7 +23,8 @@ export interface Course {
   course_tag?: CourseTag[],
   latest_course_approval_request?: courseApprovalRequest,
   course_module?: CourseModule[],
-  is_course_completed: StudentCourseTrack
+  is_course_completed: StudentCourseTrack,
+  message?: string
 }
 
 
@@ -43,7 +44,8 @@ export interface CourseModule {
   file2?: string,
   logged_student_course?: StudentCourse,
   is_module_completed_count?: number,
-  is_module_completed?: StudentCourseModuleTrack
+  is_module_completed?: StudentCourseModuleTrack,
+  message?: string
 }
 
 export interface CourseWithPagination extends Pagination {

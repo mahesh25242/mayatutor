@@ -4,14 +4,14 @@
   <div align="center" class="card-body min-height">
     <h6 class="card-title" [innerHTML]="course_module.name"></h6>
     <ng-container *ngIf="(user$ | async) else login">
-      <ng-container *ngIf="course_module.id else askAssign">
+      <ng-container *ngIf="!course_module.message else askAssign">
         <a [routerLink]="'launch/'+course_module.id"  class="btn "
         [ngClass]="{'btn-warning': course_module.is_module_completed_count, 'btn-primary': !course_module.is_module_completed_count}">Continue</a>
       </ng-container>
     </ng-container>
 
     <ng-template #askAssign>
-      <div class="alert alert-info">This course is not assigned to you please contact teacher for assign this course</div>
+      <div class="alert alert-info">{{ course_module.message }}</div>
     </ng-template>
     <ng-template #login>
       <app-login-link >

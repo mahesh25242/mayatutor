@@ -29,9 +29,7 @@ class CourseModuleResource extends JsonResource
 
             //'course' => CourseResource::collection($this->whenLoaded('course')),
             $this->mergeWhen(Auth::check() &&
-            ((Auth::user()->isStudent()->exists() &&
-            Auth::user()->studentCourse()->where("course_id", $this->course_id)->exists())
-            || !Auth::user()->isStudent()->exists())
+            $this->checkMobuleAccess()
             , [
                 'id' => $this->id,
                 'thumb_image' => $this->thumb_image,
@@ -53,6 +51,38 @@ class CourseModuleResource extends JsonResource
             'updated_by' => $this->updated_by,
             'created_by' => $this->created_by,
             'deleted_by' => $this->deleted_by,
+            'message' => $this->message,
         ];
+    }
+
+    private function checkMobuleAccess(){
+        $isTrue = true;
+        if(
+            Auth::user()->isStudent()->exists() &&
+            !Auth::user()->studentCourse()->where("course_id", $this->course_id)->exists()
+        ){
+            $isTrue = false;
+            $this->message = 'course is not assigned';
+        }else if(Auth::user()->studentCourse()->where("course_id", $this->course_id)->exists()){
+            $studentCourse = Auth::user()->studentCourse()->get()->first();
+            if($studentCourse && !$studentCourse->status){
+                $this->message = 'This course is temperarly disabled to you. Please contact';
+            }else{
+                $student = Auth::user()->student()->get()->first();
+                if($student){
+                    if(!$student->status){
+                        $isTrue = false;
+                        $this->message = 'This teacher is temperraly disbald you';
+                    }
+                }else{
+                    $this->message = 'You are not the student of this teacher';
+                    $isTrue = false;
+                }
+            }
+        }
+
+
+
+        return  $isTrue;
     }
 }

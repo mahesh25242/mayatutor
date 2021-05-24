@@ -20,9 +20,9 @@ class TeacherAuthenticate
 
        if (Auth::check() )
        {
-            if(Auth::user()->has("isTeacher"))
+            if(\App\User::has("isTeacher")->find(Auth::id()))
                 return $next($request);
        }
-       return redirect()->guest('/');
+       return response('Unauthorized.', 401);
     }
 }

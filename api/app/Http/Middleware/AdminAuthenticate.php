@@ -20,9 +20,9 @@ class AdminAuthenticate
 
        if (Auth::check() )
        {
-            if(Auth::user()->has("isAdmin"))
+            if(\App\User::has("isAdmin")->find(Auth::id()))
                 return $next($request);
        }
-       return redirect()->guest('/');
+       return response('Unauthorized.', 401);
     }
 }

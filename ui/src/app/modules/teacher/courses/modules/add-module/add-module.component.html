@@ -20,7 +20,7 @@
       [ngClass]="{'is-invalid': (f.pdf.errors && f.pdf.errors.error) }"> -->
       <div *ngIf="f.pdf.errors && f.pdf.errors.error" class="invalid-feedback">
         {{f.pdf.errors.error}}
-      </div>     
+      </div>
       <a [href]="f.pdf.value" target="_blank" *ngIf="f.pdf.value">PDF</a>
   </div>
   <div class="col-md-1 col-lg-1"> <p class="demo-url">Demo video
@@ -45,7 +45,7 @@
 
     <div class="input-group-append" *ngIf="f.video_type.value != 'drive'"><a href="javascript:{}" class="btn btn-primary ml-3" *ngIf="f.video_url.value" (click)="previewVideo()">Preview</a></div>
   </div>
-  
+
     <div *ngIf="f.video_url.errors && f.video_url.errors.error" class="invalid-feedback">
       {{f.video_url.errors.error}}
     </div>
@@ -73,7 +73,7 @@
       <div *ngIf="f.file2.errors && f.file2.errors.error" class="invalid-feedback">
         {{f.file2.errors.error}}
       </div>
-      <small class="form-text text-muted">Attach Google drive link ( Excel, Word, PDF for downolad )</small>    
+      <small class="form-text text-muted">Attach Google drive link ( Excel, Word, PDF for downolad )</small>
   </div>
   <div class="col-md-1 col-lg-1">
     <p class="demo-url">Demo video
@@ -82,8 +82,10 @@
   </div>
 
 </div>
+  <a class="btn btn-primary mr-2" type="button" [routerLink]="['../../']" routerLinkActive="router-link-active" >Back</a>
  <button class="btn btn-outline-secondary" type="button" (click)="cancelEdit()" *ngIf="f.id.value">Cancel</button>
   <button class="btn btn-primary float-right" type="submit">Save</button>
+
  <div class="clearfix"></div>
 
 </form>

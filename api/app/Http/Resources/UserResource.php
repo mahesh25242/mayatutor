@@ -62,7 +62,13 @@ class UserResource extends JsonResource
             'teacher_info' => $this->whenLoaded('teacherInfo'),
             'teacher_banner' => $this->whenLoaded('teacherBanner'),
             'teacher_auto_approval_count' => $this->teacher_auto_approval_count,
-
+            $this->mergeWhen( Auth::check(),
+            [
+                'student' => (count($this->student) > 1) ? $this->student : $this->student->first(),
+                'students' => $this->student->first(),
+                'student_course_count' => $this->student_course_count,
+            ]
+            ),
             'created_at' => $this->created_at,
             'created_at_human' => $this->created_at_human,
             'updated_at' => $this->updated_at,

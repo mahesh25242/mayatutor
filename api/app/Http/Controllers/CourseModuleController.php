@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Image;
 use Illuminate\Support\Facades\Storage;
-
+use App\Http\Resources\CourseModuleResource;
 
 class CourseModuleController extends Controller
 {
@@ -125,7 +125,8 @@ class CourseModuleController extends Controller
         $module = \App\CourseModule::with(["course.user", "course.courseTag",
          "loggedStudentCourse.studentCourseTrack.studentCourseModuleTrack",
          "isModuleCompleted" ])->withCount("isModuleCompleted")->find($id);
-        return response($module);
+
+        return response(new CourseModuleResource($module));
     }
 
     public function isLaunchable($id=0, $moduleId = 0){

@@ -120,7 +120,7 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
 
                 $router->group(['prefix' => 'course'], function () use ($router) {
                     $router->post('/','StudentCourseController@studentTeacherCourse');
-                    $router->post('allMyCourses','StudentCourseController@allMyCourses');
+
                     $router->post('myCourseStatistics','StudentCourseController@myCourseStatistics');
                     $router->post('toggleStatus','StudentCourseController@toggleCourse');
                     $router->post('deleteCourse','StudentCourseController@deleteCourse');
@@ -152,7 +152,7 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
                         $router->post('createModule','CourseModuleController@createCourseModule');
                         $router->post('deleteModule','CourseModuleController@deleteCourseModule');
                         $router->post('orderCourseModule','CourseModuleController@orderCourseModule');
-                        $router->get('aModule/{id}','CourseModuleController@getAModule');
+
                     });
 
                     $router->post('/','CourseController@listTeacherCourses');
@@ -161,7 +161,7 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
 
             $router->post('resentActivationMail','UsersController@resentActivationMail');
 
-            $router->get('course/{id}/module/{moduleId}/isLaunchable','CourseModuleController@isLaunchable');
+
 
 
         });
@@ -180,11 +180,25 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
                 $router->post('launchModule','StudentCourseTrackController@launchModule');
                 $router->post('markAsFinished','StudentCourseTrackController@markAsFinished');
                 $router->post('fetchNextModule','StudentCourseTrackController@fetchNextModule');
-
+                $router->post('allMyCourses','StudentCourseController@allMyCourses');
+                $router->get('{id}/module/{moduleId}/isLaunchable','CourseModuleController@isLaunchable');
             });
             $router->post('setRating','UsersController@setRating');
         });
 
+        $router->group(['prefix' => 'teacher'], function () use ($router) {
+            $router->group(['prefix' => 'course'], function () use ($router) {
+                $router->group(['prefix' => '{courseId}/module'], function () use ($router) {
+                    $router->get('aModule/{id}','CourseModuleController@getAModule');
+
+
+
+
+                });
+
+
+            });
+        });
 
 
         $router->group(['prefix' => 'education'], function () use ($router) {
