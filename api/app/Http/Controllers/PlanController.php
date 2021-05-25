@@ -102,7 +102,7 @@ class PlanController extends Controller
                 $appId = env('CACH_FREE_GATEWAY_APP_ID', '');
                 $appSecreat = env('CACH_FREE_GATEWAY_SECRET_KEY', '');
 
-                $appEnv = env('APP_ENV', 'prod');
+                $appEnv = env('APP_ENV', 'production');
                 $url = 'https://api.cashfree.com/';
 
                 if($appEnv != "production"){

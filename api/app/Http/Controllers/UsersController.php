@@ -18,6 +18,7 @@ use App\Mail\RetrievePassword;
 use Mail;
 use Cache;
 use Barryvdh\DomPDF\Facade as PDF;
+use App\Events\PlanPurchaseEvent;
 
 class UsersController extends Controller
 {
@@ -98,18 +99,27 @@ class UsersController extends Controller
                 $UserPlan = \App\UserPlan::where("user_id", $user->id)
                 ->where("end_date", ">", new Carbon)->get()->first();
                 if(!$UserPlan){
-                        $currentTime = new Carbon;
                         $plan = \App\Plan::where("basic", 1)->get()->first();
-                        $user->userPlan()->updateOrCreate(
-                            [
-                                "plan_id" => $plan->id,
-                            ],
-                            [
-                                "plan_id" => $plan->id,
-                                "start_date" => new Carbon,
-                                "end_date" => $currentTime->add($plan->days, 'day'),
-                            ]
-                        );
+
+                        //GST
+                        $gst = \App\Setting::where("name", "GST")->get()->first();
+                        $gstPercentage = $gst->value;
+                        $gstPercentage = ($gstPercentage) ? (double) $gstPercentage : 0;
+
+                        $taxAmt = $plan->price * ($gstPercentage  / 100);
+                        $total = $plan->price + $taxAmt;
+
+                        $planPurchase = new \App\PlanPurchase;
+                        $planPurchase->user_id = $user->id;
+                        $planPurchase->plan_id = $plan->id;
+                        $planPurchase->amount = $total;
+                        $planPurchase->discount = 0;
+                        $planPurchase->status = ($total) ? 0 : 1;
+                        $planPurchase->tax = $taxAmt;
+                        $planPurchase->save();
+
+                        event(new PlanPurchaseEvent($planPurchase));
+
                 }
             break;
             default:
