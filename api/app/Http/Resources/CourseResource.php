@@ -70,11 +70,11 @@ class CourseResource extends JsonResource
             $isTrue = false;
             $this->message = 'course is not assigned';
         }else if(Auth::user()->studentCourse()->where("course_id", $this->course_id)->exists()){
-            $studentCourse = Auth::user()->studentCourse()->get()->first();
+            $studentCourse = Auth::user()->studentCourse()->where("course_id", $this->course_id)->get()->first();
             if($studentCourse && !$studentCourse->status){
                 $this->message = 'This course is temperarly disabled to you. Please contact';
             }else{
-                $student = Auth::user()->student()->get()->first();
+                $student = Auth::user()->student()->where("teacher_user_id", $this->course->user_id)->get()->first();
                 if($student){
                     if(!$student->status){
                         $isTrue = false;
