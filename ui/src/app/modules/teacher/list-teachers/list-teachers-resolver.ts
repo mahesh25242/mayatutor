@@ -10,10 +10,10 @@ export class ListTeachersResolver implements Resolve<any> {
 
   resolve(route: ActivatedRouteSnapshot): Observable<any> {
 
-    console.log(route.params[0])
 
-    const place = route.params[0] ?? '';
-    const phone = route.params[1] ?? '';
+console.log(route.params)
+    const place = (route.params[0] != 'null') ? route.params[0] : '';
+    const phone = (route.params[1] != 'null') ? route.params[1] : '';
 
     return this.teacherService.searchTeachers(route.params.q, 1, place, phone);
   }

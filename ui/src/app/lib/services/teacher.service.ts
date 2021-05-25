@@ -77,7 +77,18 @@ export class TeacherService {
     }
 
     return this.http.get<UserWithPagination>(`/teacher/search${url}${qparm}`).pipe(map(res=>{
-        this.teachers$.next(res);
+        if(page > 1){
+
+          let teachers = this.teachers$.getValue();
+          let tData = teachers.data;
+          let rData = res.data;
+          teachers = {...teachers, ...res};
+          teachers.data = [...tData, ...rData];
+          this.teachers$.next(teachers);
+        }else{
+          this.teachers$.next(res);
+        }
+
         return res;
     }));
   }
