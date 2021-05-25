@@ -70,7 +70,7 @@ export class SignInComponent implements OnInit, OnDestroy {
 
       this.modal.dismiss('cancel click')
       Notiflix.Loading.Remove();
-      if(res?.role_url == 'admin'){
+      if(res?.role_url != 'student'){
         this.router.navigate([`/${res.role_url}`]);
       }
 

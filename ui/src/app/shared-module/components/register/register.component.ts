@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CountryService, StateService, CityService, UserService } from '../../../lib/services';
 import { Observable, Subscription, from } from 'rxjs';
 import { Country, State, City} from '../../../lib/interfaces';
@@ -37,7 +37,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
     private userService: UserService,
     private reCaptchaV3Service: ReCaptchaV3Service,
     private breadCrumbsService: BreadCrumbsService,
-    private _modalService: NgbModal) { }
+    private _modalService: NgbModal,
+    private router: Router) { }
 
   get f() { return this.registerFrm.controls; }
 
@@ -131,6 +132,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
           accept_terms: null,
         });
         Notiflix.Notify.Success(`successfully registered as ${this.f.type.value}`);
+        this.router.navigate([`/`]);
       }, error=>{
 
         Notiflix.Loading.Remove();

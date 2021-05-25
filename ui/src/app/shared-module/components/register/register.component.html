@@ -57,18 +57,20 @@
         </div>
   </div>
 
+
   <div class="form-group col-md-6 col-lg-6 col-xl-6">
     <label for="phone">Mobile</label>
-    <ng-container *ngIf="f.country_id.value">
-      +{{f.country_id.value.phonecode}}
-    </ng-container>
-
-    <input type="tel" class="form-control" id="phone"
-    [ngClass]="{'is-invalid': (f.phone.errors && f.phone.errors.error)}"
-    placeholder="Phone" formControlName="phone">
-    <div *ngIf="f.phone.errors && f.phone.errors.error" class="invalid-feedback">
-      {{f.phone.errors.error}}
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="basic-addon1" *ngIf="f.country_id.value">+{{f.country_id.value.phonecode}}</span>
+      <input type="tel" class="form-control" id="phone"
+      [ngClass]="{'is-invalid': (f.phone.errors && f.phone.errors.error)}"
+      placeholder="Phone" formControlName="phone">
+      <div *ngIf="f.phone.errors && f.phone.errors.error" class="invalid-feedback">
+        {{f.phone.errors.error}}
+      </div>
     </div>
+    <small id="emailHelp" class="form-text text-muted">Enter your phone number with out your contry code</small>
+
   </div>
   <div class="form-group col-md-6 col-lg-6 col-xl-6">
     <label for="address">Address</label>
