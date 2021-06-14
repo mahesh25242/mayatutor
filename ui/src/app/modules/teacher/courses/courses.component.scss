@@ -8,6 +8,9 @@
     clear: both;
     display: flex;
 }
+.min-height {
+    min-height: calc(100vh - 389px);
+}
 
 @media only screen and (max-width:768px) {
     .mobile-flex {

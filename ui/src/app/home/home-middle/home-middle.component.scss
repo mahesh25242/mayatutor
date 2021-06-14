@@ -6,21 +6,26 @@ background-image: linear-gradient(315deg, #e7eff9 0%, #cfd6e6 74%);
 }
 .font25 { font-size: 25px;}
 
-.herobg {
-    background-image: url(../../../assets/training.png);
-    background-repeat: no-repeat;
-    background-position: bottom right -126px;
-    background-size: 68%;
 
-}
-.herobg2 {
-    background-image: url(../../../assets/robotic.png);
-    background-repeat: no-repeat;    
-    background-position: bottom right -171px;
-    background-size: 71%;
-}
 .flext-column {
     flex-direction: column;
+}
+
+@media only screen and (min-width:768px) {
+    .herobg {
+        background-image: url(../../../assets/training.png);
+        background-repeat: no-repeat;
+        background-position: bottom right -126px;
+        background-size: 68%;
+    
+    }
+    .herobg2 {
+        background-image: url(../../../assets/robotic.png);
+        background-repeat: no-repeat;    
+        background-position: bottom right -171px;
+        background-size: 71%;
+    }
+
 }
 
 @media only screen and (max-width: 1200px) {

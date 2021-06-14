@@ -20,15 +20,24 @@
 
 <section class="pricing p-0">
   <div class="row m-0">
-  <div class="col-lg-4 grayBG pt-5 pl-4 pr-4">
+  <div class="col-lg-3 grayBG pt-5 pl-4 pr-4 d-none d-lg-block">
     <h4 class="mb-4">DEMO VIDEO</h4>
     <app-player [videoSources]="video"></app-player>
-<p class="mt-5">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, </p>
-<p class="mt-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, </p>
+    <ul class="mt-4">   
+      <li>Students do not need payment.</li>
+      <li>Students can choose teachers and courses for free.</li>
+      <li>Students' fees can be paid directly to teachers.</li>
+      <li>Tutors / Institutions  outside India can make payments using PayPal.</li>
+      <li>Tutors must register or Login before making a payment.</li>  
+      <li>Please send payment queries to mailmayatutors.com.</li>
+      <li>If there is any discount offer, a coupon will appear on the banner on the home page.</li>
+      <li>Terms and conditions must be read before payment.</li>
+    </ul>
+
   </div>
-  <div class="col-lg-8 pt-5">
+  <div class="col-lg-9 pt-5">
     <h5 class="text-center">Payment for tutors only</h5>
-    <div class="row col-lg-10 pt-5 m-auto">
+    <div class="row col-lg-12 pt-5 m-auto">
 
       <!-- Free Tier -->
       <div class="" [ngClass]="{'col-lg-5 mb-5': !plan.price, 'col-lg-7 mb-7': plan.price}" *ngFor="let plan of plans">
@@ -38,8 +47,20 @@
           </div>
 
           <div class="card-body">
+<div class="row">
+  <div class="col-6 border-right">
+    <h2 class="card-price text-left"><span class="period">INR</span> ₹ {{plan.price}}<span class="period">/Month </span></h2>
+    <small >(Billed Annually, Tax Excl.)</small>
+  </div>
+  <div class="col-6 ">
+  <h2 class="card-price text-left"><span class="period">USD</span> ₹ {{plan.price}}<span class="period">/Month </span></h2>
+  <small>(Billed Annually, Tax Excl.)</small>
+</div>
 
-            <h2 class="card-price text-center"><span class="period">INR / USD</span> ₹ {{plan.price}}<span class="period">/Month</span></h2>
+</div>
+            
+           
+           
             <hr>
             <ul class="fa-ul" *ngIf="plan.features && plan.features.length">
               <li *ngFor="let feature of plan.features"><span class="fa-li"><fa-icon class="fa-icon-you" [icon]="faCheck"></fa-icon></span>{{feature}}</li>

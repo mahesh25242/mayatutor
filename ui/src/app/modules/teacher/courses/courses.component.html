@@ -1,4 +1,4 @@
-<div class="container-fluid pt-4">
+<div class="container-fluid pt-4 min-height">
   <p class="demo-url">Demo video
     <app-help-video url="https://www.youtube.com/watch?v=nVvN_Vz5TgU" title="How to add course"></app-help-video>
   </p>
@@ -6,9 +6,9 @@
 <h3 class="mb-4">Courses</h3>
 <div class="clearFix"></div>
 <app-bread-crumbs [hide]="true"></app-bread-crumbs>
-<button class="btn btn-primary float-right mb-3 mob-hide" (click)="addNew()">Add New</button>
+<button class="btn btn-primary float-right mb-3 mob-hide" (click)="addNew()">Add New Course</button>
 <form class="form-inline" [formGroup]="searchFrm" (ngSubmit)="searchCourse()">
-  <div class="mobile-flex">
+  <div class="d-flex">
   <div class="form-group mb-2">
     <input type="text" class="form-control" id="search-course" value=""
     placeholder="Search" formControlName="q">
@@ -52,7 +52,7 @@
         </td>
         <td data-label="Add Modules">
           <a [routerLink]="course.id+'/modules'" class="btn btn-primary btn-sm whitenowrap" placement="top"
-           ngbTooltip="Add or Manage modules to this course">Add Modules <span *ngIf="course.course_module_count">( {{course.course_module_count}} )</span></a>
+           ngbTooltip="Add or Manage modules to this course">Add Classes <span *ngIf="course.course_module_count">( {{course.course_module_count}} )</span></a>
         </td>
         <td data-label="Fees">
           {{course.price}}

@@ -1,0 +1,27 @@
+::ng-deep {
+    .accordion {
+    button {
+        width: 100%;
+        display: block;
+        text-align: left;
+    }&:focus,:active,:hover {
+        outline: none;
+        box-shadow: none;
+    }
+    .card {
+        margin-bottom:15px;
+    }
+}
+.accordion > .card:not(:last-of-type) {
+    border-bottom-left-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+    border-bottom: 2px solid #007bff;
+}
+.accordion > .card > .card-header {
+    margin-bottom: 0px;
+}
+
+
+
+
+}
