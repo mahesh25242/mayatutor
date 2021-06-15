@@ -34,7 +34,8 @@
     </div>
     <div class="col-lg-6 col-md-6 text-white p-4">
       <label class="text-uppercase">Total Amount ( {{plan.gst.value}} % GST added )</label>
-      <h1>₹ {{ plan.gstPrice }}</h1>
+      <div class="d-flex align-items-center"><h1 class="flex-1">₹ {{ plan.gstPrice }}</h1> <label class="flex-1">$ {{plan.usd_amount}}</label></div>
+      
     </div>
   </div>
 

@@ -11,7 +11,7 @@
     <div class="d-flex module-fix">
     <app-rating [rating]="course.user.rating" [readonly]="true"></app-rating>
     <div class="card-title ml-auto" *ngIf="course.course_module_count">
-     <label>Modules: </label> <span class="text-primary font-15"> {{ (course.course_module_count > 1) ? course.course_module_count+'' : 'only '+course.course_module_count+' module' }}</span>
+     <label>class: </label> <span class="text-primary font-15"> {{ (course.course_module_count > 1) ? course.course_module_count+'' : 'only '+course.course_module_count+' module' }}</span>
     </div>
   </div>
     <div class="d-flex align-items-center">

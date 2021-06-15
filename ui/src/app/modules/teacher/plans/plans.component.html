@@ -18,29 +18,15 @@
 
 <!-- Paraveen's code -->
 
-<section class="pricing p-0">
-  <div class="row m-0">
-  <div class="col-lg-3 grayBG pt-5 pl-4 pr-4 d-none d-lg-block">
-    <h4 class="mb-4">DEMO VIDEO</h4>
-    <app-player [videoSources]="video"></app-player>
-    <ul class="mt-4">
-      <li>Students do not need payment.</li>
-      <li>Students can choose teachers and courses for free.</li>
-      <li>Students' fees can be paid directly to teachers.</li>
-      <li>Tutors / Institutions  outside India can make payments using PayPal.</li>
-      <li>Tutors must register or Login before making a payment.</li>
-      <li>Please send payment queries to mailmayatutors.com.</li>
-      <li>If there is any discount offer, a coupon will appear on the banner on the home page.</li>
-      <li>Terms and conditions must be read before payment.</li>
-    </ul>
+<section class="pricing container-fluid">
+  
 
-  </div>
-  <div class="col-lg-9 pt-5">
-    <h5 class="text-center">Payment for tutors only</h5>
-    <div class="row col-lg-12 pt-5 m-auto">
+  
+    <h5 class="text-center mt-5">Payment for tutors only</h5>
+    <div class="row pt-5 m-0">
 
       <!-- Free Tier -->
-      <div class="" [ngClass]="{'col-lg-5 mb-5': !plan.price, 'col-lg-7 mb-7': plan.price}" *ngFor="let plan of plans">
+      <div class="col-lg-4 mb-5" *ngFor="let plan of plans">
         <div class="card over-flow-hidden">
           <div class="card-header " [ngClass]="{'warning-clr': !plan.price, 'blue-clr': plan.price}">
             <h5 class="card-title text-uppercase text-center text-white">{{plan.name}}</h5>
@@ -90,8 +76,8 @@
       <!-- Plus Tier -->
 
     </div>
-  </div>
-</div>
+  
+
 </section>
 
 
