@@ -27,6 +27,31 @@ class Plan extends Model implements AuthenticatableContract, AuthorizableContrac
          'basic', 'days'
     ];
 
+    protected $appends = array('usd_amount', "billed_text");
+
+    public function getUsdAmountAttribute()
+    {
+        return ($this->price) ? round($this->price / 73, 2) : 0;
+    }
+
+    public function getBilledTextAttribute()
+    {
+        $billedText = '';
+        switch(true){
+            case $this->days < 32:
+                $billedText = 'Monthly';
+            break;
+            case $this->days > 32 && $this->days < 186:
+                $billedText = 'Half-yearly';
+            break;
+            case $this->days > 186 && $this->days < 367:
+                $billedText = 'yearly';
+            break;
+        }
+        return  $billedText;
+    }
+
+
     public function getFeaturesAttribute($value)
     {
         return json_decode($value);

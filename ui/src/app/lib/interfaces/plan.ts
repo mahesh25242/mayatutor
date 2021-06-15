@@ -7,6 +7,8 @@ export interface Plan {
   description?: string,
   features?: any,
   price?: number,
+  usd_amount?: number,
+  billed_text?: string,
   my_user_plan?: UserPlan,
   gst?: {
     name?: string,
