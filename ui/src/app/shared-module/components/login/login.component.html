@@ -10,9 +10,10 @@
       <a class="btn btn-primary btn-custom mt-3" [routerLink]="type+'/register'" >Register Here</a>
     </div>
     <div class="card-footer">
-      <div class="d-grid" [ngClass]="{ 'grd-col-2': type ==='student', 'grd-col-3': type ==='teacher'}">
+      <div class="d-grid grd-col-3" >
         <h3 class="font-22" *ngIf="type ==='teacher'"><a routerLink="teacher/plans">SEE OUR PLANS</a></h3>
-        <p class="text-left">Already registered Please login here </p>
+        <h3 class="font-22 text-warning" *ngIf="type ==='student'">FREE</h3>
+        <p class="text-left">Already registered Please</p>
         <h3 class="font-22">
           <app-login-link>
             <a href="javascript:{}">LOGIN</a>

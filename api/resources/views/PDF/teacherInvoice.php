@@ -144,7 +144,7 @@
     ?>
         <tr>
         <td style="text-align: right"><h6 style="margin: 0; padding: 0;">GST/TAX</h6></td>
-        <td style="text-align: right"><?php echo  $userPlan->planPurchase->tax;?> ( <?php echo $percentage;?>% )</td>
+        <td style="text-align: right"> ( <?php echo $percentage;?>% ) <?php echo  $userPlan->planPurchase->tax;?></td>
         </tr>
     <?php
     }

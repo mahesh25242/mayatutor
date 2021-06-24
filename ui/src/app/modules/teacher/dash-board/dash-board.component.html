@@ -101,7 +101,8 @@
         <h5 [innerHTML]="user.teacher_info?.education?.name"></h5>
       </div>
       <div class="col-md-4">
-        <label class="d-block">Contact to Tutor</label>
+        <label class="d-none d-md-none d-lg-block">Contact to Tutor</label>
+        <h3 class="d-lg-none d-md-block">Contact to Tutor</h3>
         <div class="alert alert-warning" *ngIf="user.current_user_plan === null">Plan is expired</div>
         <ng-container *ngIf="!isDashBoard && user.current_user_plan">
 
@@ -146,6 +147,9 @@
         </ng-container>
       </ng-container>
       </div>
+    </div>
+    <div *ngIf="isDashBoard" class="alert alert-warning">
+      You have to create at least one course, else no one can't find you on the search result page. 
     </div>
 
     <ng-container *ngIf="(courses$ | async) as courses">
