@@ -190,7 +190,7 @@ INDIA.</p></td>
 
 		</td>
       <td style="text-align: center" align="center">
-		  <img src="https://mayatutors.com/assets/sign.png" width="130px">
+		  <img src="https://api.mayatutors.com/public/assets/sign.png" width="130px">
 		  <h3 style="margin: 0; padding: 0; color: #767676;">Signature</h3>
 		</td>
     </tr>
