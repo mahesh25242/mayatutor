@@ -8,17 +8,19 @@ use Illuminate\Queue\InteractsWithQueue;
 use Barryvdh\DomPDF\Facade as PDF;
 use App\Mail\InvoiceMail;
 use Mail;
+use Illuminate\Http\Request;
 
 class PlanPurchaseListener
 {
+    var $request;
     /**
      * Create the event listener.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Request $request)
     {
-        //
+        $this->request = $request;
     }
 
     /**
@@ -50,8 +52,10 @@ class PlanPurchaseListener
             $userPlan->save();
         }
         if($userPlan){
+
             $pdf = PDF::loadView('PDF.teacherInvoice', array(
                 "userPlan" => $userPlan,
+                 "request" =>$this->request
             ));
             $pdf->save(public_path("assets/invoices/{$userPlan->id}.pdf"));
 

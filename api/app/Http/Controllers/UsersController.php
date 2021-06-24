@@ -26,6 +26,11 @@ class UsersController extends Controller
 
     public function test(Request $request){
         $user = User::find(11);
+
+        return view('PDF.teacherInvoice',
+        [ "user" => $user,
+        "userPlan" => $user->currentUserPlan,
+        "plan" => $user->currentUserPlan->plan]);
         $pdf = PDF::loadView('PDF.teacherInvoice',
         [ "user" => $user,
         "userPlan" => $user->currentUserPlan,
