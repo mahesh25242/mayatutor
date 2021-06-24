@@ -76,7 +76,6 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
                 $router->post('toggleStatus','UsersController@toggleStatus');
                 $router->post('delete','UsersController@delete');
                 $router->post('toggleAutoApproval','TeacherController@toggleAutoApproval');
-                $router->get('downloadInvoice/{invId}','TeacherController@downloadInvoice');
                 $router->get('purchases','PlanController@purchases');
             });
 
@@ -133,6 +132,11 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
                 });
             });
 
+            $router->group(['prefix' => 'admin'], function () use ($router) {
+                $router->group(['prefix' => 'teacher'], function () use ($router) {
+                    $router->get('downloadInvoice/{invId}','TeacherController@downloadInvoice');
+                });
+            });
 
             $router->group(['prefix' => 'teacher'], function () use ($router) {
                 $router->post('changeBanner','TeacherController@changeBanner');
