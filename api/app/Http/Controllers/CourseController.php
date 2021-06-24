@@ -118,7 +118,7 @@ class CourseController extends Controller
 
 
         return response([
-            'message' => 'successfully updated!', 'status' => 1
+            'message' => 'Successfully updated!. This course will be active with in 24 hours.', 'status' => 1
         ]);
 
     }

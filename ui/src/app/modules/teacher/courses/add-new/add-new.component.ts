@@ -84,9 +84,9 @@ export class AddNewComponent implements OnInit {
       }))
     })).subscribe(res=>{
       if(this.f.id.value)
-        Notiflix.Notify.Success(`Successfully updated ${this.f.name.value}`);
+        Notiflix.Notify.Success(`Successfully updated ${this.f.name.value}. This course will be active with in 24 hours.`);
       else
-        Notiflix.Notify.Success(`Successfully saved ${this.f.name.value} `);
+        Notiflix.Notify.Success(`Successfully saved ${this.f.name.value}.  This course will be active with in 24 hours. `);
 
       Notiflix.Block.Remove('app-add-new');
       this.modal.close();

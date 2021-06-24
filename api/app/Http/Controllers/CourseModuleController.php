@@ -82,7 +82,7 @@ class CourseModuleController extends Controller
                $createUpdateArr
             );
             return response([
-                'message' => 'successfully saved!', 'status' => 1
+                'message' => 'successfully saved!. This course will be active with in 24 hours.', 'status' => 1
             ]);
 
         }else{
