@@ -14,6 +14,7 @@ import { CookiesPolicyComponent } from './cookies-policy/cookies-policy.componen
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
 import { PurchaseLandingComponent } from './purchase-landing/purchase-landing.component';
+import { RefundAndCancelationComponent } from './refund-and-cancelation/refund-and-cancelation.component';
 
 
 const routes: Routes = [
@@ -44,6 +45,10 @@ const routes: Routes = [
   {
     path: 'terms-and-conditions',
     component: TermsAndConditionsComponent
+  },
+  {
+    path: 'refund-and-cancellation',
+    component: RefundAndCancelationComponent
   },
   {
     path: 'set-new-password/:key',

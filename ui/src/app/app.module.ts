@@ -37,6 +37,7 @@ import { CookiesPolicyComponent } from './cookies-policy/cookies-policy.componen
 import { HomeBannerComponent } from './home/home-banner/home-banner.component';
 import { HomeMiddleComponent } from './home/home-middle/home-middle.component';
 import { PurchaseLandingComponent } from './purchase-landing/purchase-landing.component';
+import { RefundAndCancelationComponent } from './refund-and-cancelation/refund-and-cancelation.component';
 
 var config = {
   apiKey: "AIzaSyAhzEi15mQe-KY7rhbmIi8MnvL2-KcL7uw",
@@ -72,7 +73,8 @@ var config = {
     CookiesPolicyComponent,
     HomeBannerComponent,
     HomeMiddleComponent,
-    PurchaseLandingComponent
+    PurchaseLandingComponent,
+    RefundAndCancelationComponent
   ],
   imports: [
     BrowserModule,
