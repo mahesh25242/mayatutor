@@ -150,7 +150,10 @@
     }
     ?>
 	  <tr>
-      <td style="padding-top: 20px; padding-bottom: 20px"><h4 style="margin: 0; padding: 0">USD (For <?php echo $userPlan->plan->billed_text;?>): $<?php echo $userPlan->plan->usd_amount;?>  <span style="float: right;margin: 0; padding: 0">TOTAL AMOUNT <span style="color: dodgerblue;">(INR)</span></span></h4></td>
+      <td style="padding-top: 20px; padding-bottom: 20px">
+      <h4 style="margin: 0; padding: 0">USD (For <?php echo $userPlan->plan->billed_text;?>): $<?php echo $userPlan->plan->usd_amount;?>  <span style="float: right;margin: 0; padding: 0">TOTAL AMOUNT <span style="color: dodgerblue;">(INR)</span></span></h4>
+      <span style="font-size:12px">(Paypay Fees, Currency Conversion Charges Extra)</span>
+    </td>
       <td style="padding-top: 20px; padding-bottom: 20px"><h2 style="margin: 0;  padding: 0; float: right;"><?php echo ( $userPlan->planPurchase && $userPlan->planPurchase->amount) ? $userPlan->planPurchase->amount :  $userPlan->plan->price;?></h2></td>
     </tr>
   </tbody>
