@@ -66,6 +66,9 @@ class StudentCourse extends Model implements AuthenticatableContract, Authorizab
     }
 
 
-
+    public function teacherStudent()
+    {
+        return $this->belongsTo('App\TeacherStudent', 'user_id', 'user_id');
+    }
 
 }
