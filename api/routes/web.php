@@ -120,7 +120,7 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
                 $router->group(['prefix' => 'course'], function () use ($router) {
                     $router->post('/','StudentCourseController@studentTeacherCourse');
 
-                    $router->post('myCourseStatistics','StudentCourseController@myCourseStatistics');
+
                     $router->post('toggleStatus','StudentCourseController@toggleCourse');
                     $router->post('deleteCourse','StudentCourseController@deleteCourse');
 
@@ -181,6 +181,7 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
 
         $router->group(['prefix' => 'student'], function () use ($router) {
             $router->group(['prefix' => 'course'], function () use ($router) {
+                $router->post('myCourseStatistics','StudentCourseController@myCourseStatistics');
                 $router->post('launchModule','StudentCourseTrackController@launchModule');
                 $router->post('markAsFinished','StudentCourseTrackController@markAsFinished');
                 $router->post('fetchNextModule','StudentCourseTrackController@fetchNextModule');
