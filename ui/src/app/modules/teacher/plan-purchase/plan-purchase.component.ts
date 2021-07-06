@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, mergeMap, tap } from 'rxjs/operators';
 import { TeacherService } from 'src/app/lib/services';
@@ -23,7 +23,8 @@ export class PlanPurchaseComponent implements OnInit {
   constructor(private teacherService : TeacherService,
     private breadCrumbsService: BreadCrumbsService,
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder,
+    private router: Router) { }
 
 
     setCoupon(coupon){
@@ -39,7 +40,13 @@ export class PlanPurchaseComponent implements OnInit {
         });
       })).subscribe(res=>{
         Notiflix.Loading.Remove();
-        window.location.href = res?.paymentLink;
+        if(res?.paymentLink){
+          window.location.href = res?.paymentLink;
+        }else if(res?.success && res?.message){
+          Notiflix.Notify.Success(res?.message);
+          this.router.navigate([`/`]);
+        }
+
       }, err=>{
         Notiflix.Loading.Remove();
         Notiflix.Notify.Failure('unexpected error occur');
