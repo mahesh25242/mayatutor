@@ -66,8 +66,8 @@ class UsersController extends Controller
             'state_id' => ['required'],
             'city_id' => ['required'],
             'pin' => ['required'],
-            'email' => ['required', 'email'],
-            'phone' => ['required', 'unique:users', 'integer'],
+            'email' => ['required', 'email', 'unique:users,email,NULL,id,deleted_at,NULL'],
+            'phone' => ['required', 'unique:users,phone,NULL,id,deleted_at,NULL', 'integer'],
             'address' => ['string'],
             'password' => ['required', 'string','min:6',  'max:255', 'confirmed'],
             'password_confirmation' => ['required', 'string',  'max:255']
