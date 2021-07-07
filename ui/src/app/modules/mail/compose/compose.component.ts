@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MailService } from '../services/mail.service';
 import Notiflix from "notiflix";
@@ -16,6 +16,8 @@ import { UserService } from 'src/app/lib/services';
 export class ComposeComponent implements OnInit {
   @Input() reply:boolean;
   @Input() toMessage:User;
+  @Input() outSideMail: boolean;
+  @Output() public sent = new EventEmitter();
   composeFrm:FormGroup;
   users$: Observable<UserWithPagination>;
   userInput$ = new Subject<string>();
@@ -36,7 +38,15 @@ export class ComposeComponent implements OnInit {
     }
     this.mailService.send(postData).subscribe(res=>{
       Notiflix.Loading.Remove();
-      Notiflix.Notify.Success(`successfully sent message`);
+      if(this.outSideMail){
+        if(res?.m){
+          Notiflix.Report.Success('',res?.m,'OK');
+          this.sent.emit();
+        }
+      }else{
+        Notiflix.Notify.Success(`successfully sent message`);
+      }
+
       if(!this.toMessage)
         this.router.navigate(['../inbox'], {relativeTo: this.route});
     }, error=>{

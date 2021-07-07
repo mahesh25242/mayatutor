@@ -131,7 +131,13 @@ export class RegisterComponent implements OnInit, OnDestroy {
           pin: null,
           accept_terms: null,
         });
-        Notiflix.Notify.Success(`successfully registered as ${this.f.type.value}`);
+        if(res?.m){
+          Notiflix.Report.Success('',res?.m,'OK');
+        }else{
+          Notiflix.Notify.Success(`successfully registered as ${this.f.type.value}`);
+        }
+
+
         this.router.navigate([`/`]);
       }, error=>{
 

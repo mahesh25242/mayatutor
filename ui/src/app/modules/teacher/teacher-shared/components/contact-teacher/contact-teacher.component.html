@@ -2,7 +2,7 @@
   <app-modal>
     <div header>Contact to <b class="text-primary text-capitalize">{{ user.fname }} {{ user.lname}}</b></div>
     <div  body>
-        <app-compose [toMessage]="user">
+        <app-compose [toMessage]="user" [outSideMail]="true" (sent)="modal.dismiss('cancel click')">
             <span sent>Sent</span>
             <button type="button" class="btn btn-outline-secondary "
             (click)="modal.dismiss('cancel click')" cancel>Cancel</button>

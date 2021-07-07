@@ -158,7 +158,9 @@ class UsersController extends Controller
           //  echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
 
-        return response(['data' => $data, 'message' => 'Account created successfully!', 'status' => true]);
+        return response(['data' => $data, 'message' => 'Account created successfully!', 'status' => true,
+        "m"=> "Registration is successful. An activation link has been sent to your email. Click on that link & login again.
+                <br/><p>If you dont receive the email within a few minutes, please check your jubk / span folder.</p>"]);
     }
 
     public function resentActivationMail(Request $request){
@@ -587,7 +589,7 @@ class UsersController extends Controller
 
         }else{
 
-/*
+            /*
             $this->social = 1;
             $request->request->add([
                 'name' => $authUser->displayName,
@@ -615,7 +617,9 @@ class UsersController extends Controller
 
         $statusCode = $response->getStatusCode();
         return $content = $response->getBody();*/
-        return response(["error" => 1, "message" => "no user found for {$authUser->email}"] , 401);
+        return response(["error" => 1, "message" => "no user found for {$authUser->email}",
+        "m" =>  "Your account is not registered. <br/>So if you are a teacher, register as a teacher. <br/>If you are a student, register as a student"],
+         401);
         }
 
 
@@ -658,7 +662,8 @@ class UsersController extends Controller
             }
 
             return response([
-                'message' => 'successfully sent mail', 'status' => 1
+                'message' => 'successfully sent mail', 'status' => 1,
+                'm'=> '<p>An email with a link to reset your password has been sent.</p> <br/><p>If you do not receive the email within a few minutes, please check your junk / spam folder.</p>'
             ]);
         }else{
             return response(['message' => 'Validation errors', 'errors' =>  ["username" => 'user not exists'], 'status' => false], 422);

@@ -153,7 +153,8 @@ class MessagesController extends Controller
             $this->oooPushIt($message);
         }
 
-        return response([ 'message' => 'successfully sent data!', 'status' => true]);
+        return response([ 'message' => 'successfully sent data!', 'status' => true,
+    "m" => "This tutor will respond immediately."]);
     }
 
     /**

@@ -25,7 +25,7 @@ export class UserActivationComponent implements OnInit {
         return throwError(res);
       } ));
     })).pipe(tap(res=>{
-      Notiflix.Notify.Success('Successfully activated');
+      Notiflix.Notify.Success('Successfully activated. Please login again');
       this.router.navigate([`/`]);
     }))
 

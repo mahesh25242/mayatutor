@@ -43,7 +43,7 @@ export class MailService {
   }
 
   send(postData: any = null){
-    return this.http.post("/messages", postData);
+    return this.http.post<any>("/messages", postData);
   }
 
   reply(postData: any = null){

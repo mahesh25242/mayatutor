@@ -40,6 +40,7 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
     this.showForgotPass.emit();
   }
   retrievePassword(){
+
     Notiflix.Loading.Pulse(`please wait`);
     this.invalidlogin = false;
     const postData = {
@@ -47,6 +48,10 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
     };
 
     this.signInSubscription = this.userService.reterievePassword(postData).subscribe(res=>{
+      if(res?.m){
+        Notiflix.Report.Success('',res?.m,'OK');
+      }
+
 
       this.modal.dismiss('cancel click')
       Notiflix.Loading.Remove();
