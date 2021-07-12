@@ -34,6 +34,16 @@ export class SearchComponent implements OnInit, OnDestroy {
           const searchPopUp = this._modalService.open(CollectDetailComponent);
           searchPopUp.componentInstance.searchFrn = this.searchFrn;
 
+          searchPopUp.result.then((data) => {
+
+            // on close
+          }, (reason) => {
+            this.unsubscribe$.next();
+            this.unsubscribe$.complete();
+            // on dismiss
+          });
+
+
            searchPopUp.componentInstance.search.pipe(takeUntil(this.unsubscribe$)).subscribe(res=>{
             this.router.navigate([`/teacher/lookups${(this.f.q.value) ? `/${this.f.q.value}` : ``}`, [this.f.loc.value, this.f.phone.value]]);
             searchPopUp.close();

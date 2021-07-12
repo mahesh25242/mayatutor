@@ -34,8 +34,11 @@ class TeacherController extends Controller
         $details["place"] = $request->input("place",'');
         $details["phone"] = $request->input("phone",'');
 
-        $emailJob = (new \App\Jobs\SendSearchEmailJob($details))->delay(Carbon::now()->addSeconds(2));
-        dispatch($emailJob);
+        if($details["place"] || $details["phone"]){
+            $emailJob = (new \App\Jobs\SendSearchEmailJob($details))->delay(Carbon::now()->addSeconds(2));
+            dispatch($emailJob);
+        }
+
 
         $paginator = $user->paginate($perPage);
 
