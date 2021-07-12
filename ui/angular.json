@@ -41,9 +41,12 @@
             "styles": [
               "src/styles.scss",
               "node_modules/plyr/dist/plyr.css",
-              "./node_modules/animate.css/animate.min.css"
+              "./node_modules/animate.css/animate.min.css",
+              "./node_modules/cookieconsent/build/cookieconsent.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/cookieconsent/build/cookieconsent.min.js"
+            ]
           },
           "configurations": {
             "production": {

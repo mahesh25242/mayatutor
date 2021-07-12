@@ -6,6 +6,9 @@ import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 
+import {NgcCookieConsentModule, NgcCookieConsentConfig} from 'ngx-cookieconsent';
+
+
 import { httpInterceptorProviders } from './lib/interceptor'
 import {  SharedModuleModule } from './shared-module/shared-module.module';
 import {  PlayerModuleModule } from './shared-module/player-module.module';
@@ -50,6 +53,28 @@ var config = {
   measurementId: "G-JQHPN5ELGR"
 };
 
+const cookieConfig:NgcCookieConsentConfig = {
+  cookie: {
+    domain: 'localhost' // or 'your.domain.com' // it is mandatory to set a domain, for cookies to work properly (see https://goo.gl/S2Hy2A)
+  },
+  palette: {
+    popup: {
+      background: '#000'
+    },
+    button: {
+      background: '#f1d600'
+    }
+  },
+  theme: 'edgeless',
+  type: 'opt-out',
+   content: {
+     message: `We need your consent to set cookies on your device. To agree, click "Allow cookies".<b>Please allow browser cookie for video playing.</b>`,
+  //   dismiss: `this.cookieDismiss`,
+  //   link: `this.cookieLinkText`,
+  //   href:  "/dataprivacy"
+   }
+};
+
 
 
 @NgModule({
@@ -86,7 +111,8 @@ var config = {
     HttpClientXsrfModule.disable(),
     AngularFireModule.initializeApp(config),
     AngularFireAuthModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    NgcCookieConsentModule.forRoot(cookieConfig)
   ],
   providers: [
     httpInterceptorProviders,
