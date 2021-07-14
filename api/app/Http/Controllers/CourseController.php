@@ -17,7 +17,8 @@ class CourseController extends Controller
 
     public function listTeacherCourses(Request $request){
         $perPage = 20;
-        $courses = \App\Course::withCount(["courseModule"])->with(["user.rating", "courseTag", "latestCourseApprovalRequest"]);
+        $courses = \App\Course::withCount(["courseModule"])->with(
+            ["user.rating", "courseTag", "user.currentUserPlan", "latestCourseApprovalRequest"]);
         if($request->input("url", null)){
             $courses = $courses->whereHas("user", function($q) use($request) {
                 $q->where("url", $request->input("url",null));

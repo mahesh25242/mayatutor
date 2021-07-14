@@ -54,6 +54,7 @@ var config = {
 };
 
 const cookieConfig:NgcCookieConsentConfig = {
+
   cookie: {
     domain: 'localhost' // or 'your.domain.com' // it is mandatory to set a domain, for cookies to work properly (see https://goo.gl/S2Hy2A)
   },
@@ -65,13 +66,14 @@ const cookieConfig:NgcCookieConsentConfig = {
       background: '#f1d600'
     }
   },
+  position:'bottom-left',
   theme: 'edgeless',
   type: 'opt-out',
    content: {
      message: `We need your consent to set cookies on your device. To agree, click "Allow cookies".<b>Please allow browser cookie for video playing.</b>`,
   //   dismiss: `this.cookieDismiss`,
   //   link: `this.cookieLinkText`,
-  //   href:  "/dataprivacy"
+     href:  "/cookies-policy"
    }
 };
 

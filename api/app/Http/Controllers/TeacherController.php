@@ -53,7 +53,9 @@ class TeacherController extends Controller
     public function teacher($url =''){
         $user = \App\User::withCount("teacherStudent as student_count")
         ->with(["rating", "teacherInfo", "subject", "city", "country", "state",
-         "teacherBanner","teacherPaymentInfo", "currentUserPlan"])->whereHas("userRole", function ($qry){
+         "teacherBanner","teacherPaymentInfo",
+         "currentUserPlan"
+         ])->whereHas("userRole", function ($qry){
             $qry->where("role_id", 2);
         })->where("url", $url)->get()->first();
 
