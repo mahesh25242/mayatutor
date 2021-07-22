@@ -21,7 +21,7 @@ class UserLogin extends Model implements AuthenticatableContract, AuthorizableCo
      * @var array
      */
     protected $fillable = [
-         'user_id', 'name'
+         'user_id', 'name', 'ip'
     ];
 
     protected $appends = array('created_at_human');

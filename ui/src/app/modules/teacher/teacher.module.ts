@@ -37,7 +37,7 @@ import { StudentPaymentComponent } from './students/student-payment/student-paym
 import { AddPaymentComponent } from './students/student-payment/add-payment/add-payment.component';
 import { MyInvoicesComponent } from './my-invoices/my-invoices.component';
 import { MyInvoicesResolver } from './my-invoices/my-invoices-resolver';
-
+import { StudentAttendanceComponent } from './students/details/student-attendance/student-attendance.component';
 
 
 @NgModule({
@@ -62,7 +62,8 @@ import { MyInvoicesResolver } from './my-invoices/my-invoices-resolver';
     AddStudentComponent,
     StudentPaymentComponent,
     AddPaymentComponent,
-    MyInvoicesComponent
+    MyInvoicesComponent,
+    StudentAttendanceComponent
   ],
   imports: [
     CommonModule,

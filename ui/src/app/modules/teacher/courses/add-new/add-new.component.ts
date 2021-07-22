@@ -32,6 +32,7 @@ export class AddNewComponent implements OnInit {
       demo_video_url: [null, [ Validators.required]],
       image: [null, [ Validators.required]],
       description: [null, [ Validators.required]],
+      meeting_url: [null, [ ]],
       live_class: [null, [ Validators.required]],
       live_class_url: [null, [ Validators.required]],
       news: [null, [ Validators.required]],
@@ -46,6 +47,7 @@ export class AddNewComponent implements OnInit {
         demo_video_url: this.course.demo_video_url,
         image: this.course.image,
         description: this.course.description,
+        meeting_url: this.course.meeting_url,
         live_class: this.course.live_class,
         live_class_url: this.course.live_class_url,
         news: this.course.news,
@@ -67,6 +69,7 @@ export class AddNewComponent implements OnInit {
     if(this.f.image.value)
       formData.append('image', this.f.image.value);
     formData.append('description', `${ (this.f.description.value) ? this.f.description.value : '' }`);
+    formData.append('meeting_url', `${ (this.f.meeting_url.value) ? this.f.meeting_url.value : '' }`);
     formData.append('live_class', `${ (this.f.live_class.value) ? 1 : 0 }`);
     formData.append('live_class_url', `${ (this.f.live_class_url.value) ? this.f.live_class_url.value : '' }`);
     formData.append('news', `${ (this.f.news.value) ? this.f.news.value : '' }`);

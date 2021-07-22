@@ -107,13 +107,16 @@ class PlanController extends Controller
 
                 if($appEnv != "production"){
                     $url = 'https://test.cashfree.com/';
+                    $returnUrl = "http://localhost/mayatutor/api/public/v1/paymentSuccess";
+                }else{
+                    $returnUrl = "https://api.mayatutors.com/public/v1/paymentSuccess";
                 }
 
-                $returnUrl = "https://api.mayatutors.com/public/v1/paymentSuccess";
+
 
                 $gateWayPost = array('appId' => $appId,
                             'secretKey' => $appSecreat,
-                            'orderId' => "MT_".$planPurchase->id,
+                            'orderId' => "MT_".$planPurchase->id.'_'.env('APP_ENV', 'production'),
                             'orderAmount' => $total,
                             'orderCurrency' => 'INR',
                             'orderNote' => sprintf("%s purchse of %s ( Email: %s, Phone: %s )", $plan->name, $planPurchase->user->fname, $planPurchase->user->email, $planPurchase->user->phone),
@@ -198,7 +201,8 @@ class PlanController extends Controller
         $computedSignature = base64_encode($hash_hmac);
         $redirectUrl = env('PAYMENT_SUCCESS_REDIRECTION_URL')."failer";
         //md5("mks".$planPurchase->id)
-        $planPurchase = \App\PlanPurchase::where(DB::raw('CONCAT("MT_",id)') , $orderId)->get()->first();
+        $purTail = '_'.env('APP_ENV', 'production');
+        $planPurchase = \App\PlanPurchase::where(DB::raw('CONCAT("MT_",id, "'.$purTail.'")') , $orderId)->get()->first();
 
         if($planPurchase){
             $planPurchase->gateway_response = json_encode($request->all());

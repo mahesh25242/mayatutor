@@ -6,7 +6,7 @@
 
     <div class="row">
       <div class="col-md-4 col-lg-4">
-        <div class="avathar" [style.background-image]="'url('+user.avatar+')'"> </div> 
+        <div class="avathar" [style.background-image]="'url('+user.avatar+')'"> </div>
       </div>
       <div class="col-md-5 col-lg-5">
         <h6>{{ user.fname}} {{ user.lname}}</h6>
@@ -28,45 +28,63 @@
 </div>
     </div>
 
-        <table class="table mt-3">
-          <thead>
-            <tr>
-              <th>
-                Course
-              </th>
-              <th>
-                Assigned
-              </th>
-              <th width="80">
-                Status
-              </th>
-              <th width="80">
-                Delete
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <ng-container *ngIf="(studentCourses$ | async) as studentCourses">
-              <tr *ngFor="let studentCourse of studentCourses">
-                <td>
-                 <span [ngClass]="{'text-warning' : studentCourse.course.latest_course_approval_request.status != 1}" placement="top" [ngbTooltip]="(studentCourse.course.latest_course_approval_request.status != 1) ? ' Course is in '+studentCourse.course.latest_course_approval_request.status_text+' status  student can\'t launch this course': '' ">{{ studentCourse.course.name}}</span>
-                </td>
-                <td>
-                  {{ studentCourse.created_at | date :'medium'}}
-                </td>
-                <td>
-                  <a href="javascript:{}" placement="top" [ngbTooltip]="(!studentCourse.status) ? ' Course is in in-active status  so student can\'t launch this course': '' " (click)="toggleCourseStatus(studentCourse)"  [ngClass]="{'text-warning': !studentCourse.status}">{{ studentCourse.status_text }}</a>
-                </td>
-                <td>
-                  <a href="javascript:{}" (click)="deleteStudentCourse(studentCourse)">Delete</a>
-                </td>
+    <ul ngbNav #nav="ngbNav"  class="nav-tabs">
+      <li [ngbNavItem]="1">
+        <a ngbNavLink>Courses</a>
+        <ng-template ngbNavContent>
+          <table class="table mt-3">
+            <thead>
+              <tr>
+                <th>
+                  Course
+                </th>
+                <th>
+                  Assigned
+                </th>
+                <th width="80">
+                  Status
+                </th>
+                <th width="80">
+                  Delete
+                </th>
               </tr>
-              <tr *ngIf="!studentCourses || !studentCourses.length">
-                <td colspan="4">No course found</td>
-              </tr>
-            </ng-container>
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              <ng-container *ngIf="(studentCourses$ | async) as studentCourses">
+                <tr *ngFor="let studentCourse of studentCourses">
+                  <td>
+                   <span [ngClass]="{'text-warning' : studentCourse.course.latest_course_approval_request.status != 1}" placement="top" [ngbTooltip]="(studentCourse.course.latest_course_approval_request.status != 1) ? ' Course is in '+studentCourse.course.latest_course_approval_request.status_text+' status  student can\'t launch this course': '' ">{{ studentCourse.course.name}}</span>
+                  </td>
+                  <td>
+                    {{ studentCourse.created_at | date :'medium'}}
+                  </td>
+                  <td>
+                    <a href="javascript:{}" placement="top" [ngbTooltip]="(!studentCourse.status) ? ' Course is in in-active status  so student can\'t launch this course': '' " (click)="toggleCourseStatus(studentCourse)"  [ngClass]="{'text-warning': !studentCourse.status}">{{ studentCourse.status_text }}</a>
+                  </td>
+                  <td>
+                    <a href="javascript:{}" (click)="deleteStudentCourse(studentCourse)">Delete</a>
+                  </td>
+                </tr>
+                <tr *ngIf="!studentCourses || !studentCourses.length">
+                  <td colspan="4">No course found</td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]="2">
+        <a ngbNavLink>Attendance Log</a>
+        <ng-template ngbNavContent>
+         <app-student-attendance [user]="user"></app-student-attendance>
+        </ng-template>
+      </li>
+
+    </ul>
+
+    <div [ngbNavOutlet]="nav" class="mt-2"></div>
+
+
 
   </div>
   <div  footer class="w-100">

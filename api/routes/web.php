@@ -107,6 +107,8 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
 
 
         $router->group(['middleware' =>  'teacherOrAdmin'], function () use ($router) {
+            $router->get('getLoginLogs/{userId}','UsersController@getLoginLogs');
+
             $router->group(['prefix' => 'student'], function () use ($router) {
                 $router->get('fetchAll','StudentController@myStudents');
                 $router->get('fetchAllStudent','UsersController@fetchAllStudent');
@@ -135,6 +137,7 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
             $router->group(['prefix' => 'admin'], function () use ($router) {
                 $router->group(['prefix' => 'teacher'], function () use ($router) {
                     $router->get('downloadInvoice/{invId}','TeacherController@downloadInvoice');
+                    $router->post('deletePurchase/{invId}','TeacherController@deletePurchase');
                 });
             });
 
@@ -176,6 +179,7 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
         $router->post('setUserLogin','UsersController@setUserLogin');
         $router->get('signOut','UsersController@signOut');
         $router->post('updateProfile','UsersController@updateProfile');
+
 
 
 

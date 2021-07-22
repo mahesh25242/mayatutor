@@ -38,9 +38,7 @@
         <th width="100">
           Date
         </th>
-        <th width="80">
-          Details
-        </th>
+
         <th width="80">
           Delete
         </th>
@@ -53,8 +51,8 @@
             {{ i+1 }}
           </td>
           <td data-label="Name">
-            {{ item.fname }} {{ item.lname }}
-            {{ (item.is_online) ? 'Online': 'Offline' }}
+            <fa-icon placement="top" ngbTooltip="Online" [icon]="faDotCircle" class="text-success" *ngIf="item.is_online"></fa-icon>
+            &nbsp; <a href="javascript:{}" (click)="details(item)">{{ item.fname }} {{ item.lname }}</a>
           </td>
           <td data-label="Course Name">
             {{ item.student_course_count  }}
@@ -75,9 +73,6 @@
           </td>
           <td data-label="Date">
             <span placement="top" [ngbTooltip]="item.student.created_at | date:'mediumDate'">{{ item.student.created_at_human}}</span>
-          </td>
-          <td data-label="Details">
-            <a href="javascript:{}" (click)="details(item)">Details</a>
           </td>
           <td data-label="Delete">
             <a href="javascript:{}" (click)="deleteUser(item.student)"

@@ -1,0 +1,55 @@
+<ng-container  *ngIf="(logs$ | async ) as logs">
+  <div class="table-responsive">
+  <div *ngIf="logs?.data.length" class="text-center">
+      <ngb-pagination [collectionSize]="logs?.total" [pageSize]="logs?.per_page" [(page)]="logs.current_page"
+      aria-label="Default pagination" (pageChange)="paginate($event)" [maxSize]="5" [boundaryLinks]="true"  [rotate]="true"></ngb-pagination>
+  </div>
+  <table class="table table-striped table-bordered mt-3 attendance-tbl">
+    <thead>
+      <tr>
+        <th width="50">
+          Sl
+        </th>
+        <th>
+          Ip
+        </th>
+        <th>
+          Date
+        </th>
+        <th>
+          Last Access
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngIf="logs?.data && logs?.data.length">
+        <tr *ngFor="let item of logs?.data; let i= index;">
+          <td data-label="SL">
+            {{ i+1 }}
+          </td>
+          <td data-label="Ip">
+            {{ item.ip  }}
+          </td>
+          <td data-label="Date">
+            {{ item.created_at | date:'medium' }}
+          </td>
+          <td data-label="Last Access">
+            {{ item.updated_at | date:'medium'  }}
+          </td>
+        </tr>
+      </ng-container>
+      <ng-container *ngIf="logs?.data && !logs?.data.length">
+        <tr>
+          <td colspan="10">
+            <div class="alert alert-warning">No record found</div>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="logs?.data.length" class="text-center">
+  <ngb-pagination [collectionSize]="logs?.total" [pageSize]="logs?.per_page" [(page)]="logs.current_page"
+  aria-label="Default pagination" (pageChange)="paginate($event)" [maxSize]="5" [boundaryLinks]="true"  [rotate]="true"></ngb-pagination>
+</div>
+</ng-container>

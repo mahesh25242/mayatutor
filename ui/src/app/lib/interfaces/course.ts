@@ -24,7 +24,8 @@ export interface Course {
   latest_course_approval_request?: courseApprovalRequest,
   course_module?: CourseModule[],
   is_course_completed: StudentCourseTrack,
-  message?: string
+  message?: string,
+  meeting_url?: string
 }
 
 

@@ -118,6 +118,10 @@ export class TeacherService {
     return this.http.get(`/admin/teacher/downloadInvoice/${invId}`, { headers: headers, responseType: 'blob' });
   }
 
+  deletePurchase(invId:number = 0){
+    return this.http.post<any>(`/admin/teacher/deletePurchase/${invId}`, null);
+  }
+
   payemntSuccess(id: number = 0){
     return this.http.get<any>(`/teacher/payment/${id}`);
   }

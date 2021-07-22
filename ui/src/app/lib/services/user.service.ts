@@ -214,5 +214,9 @@ export class UserService {
     return this.http.post<any>(`/resentActivationMail`, postData);
   }
 
+  getLoginLogs(userId: number = 0, page:number=0){
+    return this.http.get<any>(`/getLoginLogs/${userId}${(page) ? `?page=${page}` : ``}`);
+  }
+
 
 }

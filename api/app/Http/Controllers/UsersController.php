@@ -214,10 +214,21 @@ class UsersController extends Controller
         }
 
 
-        $userLogin = new \App\UserLogin;
-        $userLogin->user_id = Auth::id();
-        $userLogin->name = $request->input("action");
-        $userLogin->save();
+        $userLogin = \App\UserLogin::where("name", $request->input("action"))
+        ->where("ip", $request->ip())
+        ->where("user_id", Auth::id())
+        ->whereDate("created_at", \Carbon\Carbon::today())->get()->first();
+
+        if(!$userLogin){
+            $userLogin = new \App\UserLogin;
+            $userLogin->user_id = Auth::id();
+            $userLogin->name = $request->input("action");
+            $userLogin->ip = $request->ip();
+            $userLogin->save();
+        }else{
+            $userLogin->touch();
+        }
+
 
 
 
@@ -777,5 +788,11 @@ class UsersController extends Controller
 
         $rating->MyratingTran;
         return response($rating);
+    }
+
+    public function getLoginLogs(Request $request, $userId = 0){
+        $perPage = 20;
+        $userLogin = \App\UserLogin::where("user_id", $userId)->latest()->paginate($perPage);
+        return response($userLogin);
     }
 }

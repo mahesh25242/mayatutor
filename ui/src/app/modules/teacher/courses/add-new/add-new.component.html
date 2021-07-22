@@ -18,7 +18,7 @@
         </div>
 
         <div class="row">
-         
+
         <div class="form-group col-md-6 col-lg-6">
           <label for="tag_name">Tag</label>
           <ng-select [items]="tags"
@@ -80,6 +80,16 @@
         </div>
 
         <div class="form-group">
+          <label for="meeting_url">Meeting URL</label>
+          <textarea type="text" class="form-control" id="meeting_url" placeholder="Meeting URL"
+          formControlName="meeting_url" [ngClass]="{'is-invalid': (f.meeting_url.errors && f.meeting_url.errors.error) }"></textarea>
+          <div *ngIf="f.meeting_url.errors && f.meeting_url.errors.error" class="invalid-feedback">
+            {{f.meeting_url.errors.error}}
+          </div>
+
+        </div>
+
+        <div class="form-group">
           <div class="custom-control custom-checkbox">
             <input type="checkbox" class="custom-control-input" id="live_class"
             formControlName="live_class"
@@ -108,9 +118,9 @@
           <div *ngIf="f.news.errors && f.news.errors.error" class="invalid-feedback">
             {{f.news.errors.error}}
           </div>
-        
+
         <div class="alert alert-danger mt-3"> After saving, add classes. This course will be active within 24 hourse.</div>
-        
+
         </div>
 
 

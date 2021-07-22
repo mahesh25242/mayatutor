@@ -26,12 +26,14 @@ class CourseResource extends JsonResource
             'description' => $this->description,
             'image' => $this->image,
             'latest_course_approval_request' => $this->latestCourseApprovalRequest,
-            'live_class' => $this->live_class,
+
             'name' => $this->name,
 
             $this->mergeWhen(Auth::check() &&
             $this->checkCourseAccess()
             , [
+                'meeting_url' => $this->meeting_url,
+                'live_class' => $this->live_class,
                 'live_class_url' => $this->live_class_url,
             ]),
             $this->mergeWhen(
@@ -58,23 +60,25 @@ class CourseResource extends JsonResource
             'created_by' => $this->created_by,
             'deleted_by' => $this->deleted_by,
             'message' => $this->message,
+            'debug' => $this->debug,
         ];
     }
 
     private function checkCourseAccess(){
         $isTrue = true;
+        $this->debug = Auth::user()->isStudent()->exists();
         if(
             Auth::user()->isStudent()->exists() &&
-            !Auth::user()->studentCourse()->where("course_id", $this->course_id)->exists()
+            !Auth::user()->studentCourse()->where("course_id", $this->id)->exists()
         ){
             $isTrue = false;
             $this->message = 'course is not assigned';
-        }else if(Auth::user()->studentCourse()->where("course_id", $this->course_id)->exists()){
-            $studentCourse = Auth::user()->studentCourse()->where("course_id", $this->course_id)->get()->first();
+        }else if(Auth::user()->studentCourse()->where("course_id", $this->id)->exists()){
+            $studentCourse = Auth::user()->studentCourse()->where("course_id", $this->id)->get()->first();
             if($studentCourse && !$studentCourse->status){
                 $this->message = 'This course is temperarly disabled to you. Please contact';
             }else{
-                $student = Auth::user()->student()->where("teacher_user_id", $this->course->user_id)->get()->first();
+                $student = Auth::user()->student()->where("teacher_user_id", $this->user_id)->get()->first();
                 if($student){
                     if(!$student->status){
                         $isTrue = false;

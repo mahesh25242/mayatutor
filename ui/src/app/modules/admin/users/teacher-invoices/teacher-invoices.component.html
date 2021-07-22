@@ -18,6 +18,9 @@
          <th>
           Plan
          </th>
+         <th>
+           Delete
+         </th>
        </tr>
      </thead>
      <tbody>
@@ -34,6 +37,9 @@
             </td>
             <td>
               {{userPlan.plan.name}}
+            </td>
+            <td>
+              <a href="javascript:{}" [ngClass]="'delete-user-inv-'+userPlan.id" (click)="deletePurchase(userPlan)">Delete</a>
             </td>
           </tr>
        </ng-container>

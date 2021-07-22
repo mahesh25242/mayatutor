@@ -63,7 +63,7 @@ const cookieConfig:NgcCookieConsentConfig = {
       background: '#000'
     },
     button: {
-      background: '#f1d600'
+      background: '#007bff'
     }
   },
   position:'bottom-left',

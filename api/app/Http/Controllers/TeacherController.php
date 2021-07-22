@@ -14,6 +14,7 @@ use App\Mail\ReportAbuseMail;
 use App\Http\Resources\UserCollection;
 use Mail;
 use Carbon\Carbon;
+use App\Events\DeletePlanPurchaseEvent;
 
 class TeacherController extends Controller
 {
@@ -293,6 +294,18 @@ class TeacherController extends Controller
         return response([
             'message' => '404', 'status' => 0
         ], 404);
+    }
+
+    public function deletePurchase($invId = 0){
+        $userPlan = \App\UserPlan::find($invId);
+
+        event(new DeletePlanPurchaseEvent($userPlan));
+
+        $userPlan->delete();
+
+        return response([
+            'message' => 'Successfully deleted', 'status' => 1
+        ]);
     }
 }
 

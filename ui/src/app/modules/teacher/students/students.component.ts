@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faDotCircle } from '@fortawesome/free-solid-svg-icons';
 import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, Subscription } from 'rxjs';
@@ -21,6 +21,7 @@ import { StudentPaymentComponent } from './student-payment/student-payment.compo
 export class StudentsComponent implements OnInit, OnDestroy {
   faTrash = faTrash;
   faYoutube = faYoutube;
+  faDotCircle = faDotCircle;
   searchFrm: FormGroup;
   users$: Observable<UserWithPagination>;
 
@@ -89,6 +90,10 @@ export class StudentsComponent implements OnInit, OnDestroy {
     })).subscribe(res=>{
       activeModal.close();
     });
+  }
+  attendance(user:User=null){
+    const activeModal = this._modalService.open(DetailsComponent,{ size: 'lg'});
+    activeModal.componentInstance.user = user;
   }
 
   payments(user:User=null){

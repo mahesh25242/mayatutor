@@ -15,7 +15,8 @@ export interface UserLogin {
   name?: string,
   created_at?: string,
   updated_at?: string,
-  created_at_human?: string
+  created_at_human?: string,
+  ip?: string
 }
 
 export interface UserPlan {
@@ -76,4 +77,8 @@ export interface User {
 }
 export interface UserWithPagination extends Pagination {
   data?: User[]
+}
+
+export interface UserLoginWithPagination extends Pagination {
+  data?: UserLogin[]
 }

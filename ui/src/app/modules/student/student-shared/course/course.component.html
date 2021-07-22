@@ -1,5 +1,6 @@
 <div class="container pt-3">
   <app-bread-crumbs></app-bread-crumbs>
+
 <app-teacher-info-block [teacher]="course.user">
   <span *ngIf="course" course_price>
     Fees: {{ course.price }}
@@ -25,6 +26,10 @@
     <h6 class="card-title">NEWS / NOTICE BOARD</h6>
     <p [innerHTML]="course.news"></p>
   </div>
+</div>
+
+<div *ngIf="course.meeting_url">
+  <a [href]="course.meeting_url" target="_blank"  class="btn btn-primary">Click Here to join Meeting</a>
 </div>
 
 <div *ngIf="!course?.latest_course_approval_request?.status" class="alert alert-warning">Course is under approval</div>

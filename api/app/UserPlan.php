@@ -27,6 +27,18 @@ class UserPlan extends Model implements AuthenticatableContract, AuthorizableCon
 
     protected $appends = array('remaining_days');
 
+
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($userPlan) { // before delete() method call this
+             $userPlan->planPurchase()->delete();
+        });
+
+
+    }
+
+
     public function getRemainingDaysAttribute()
     {
         $date = Carbon::parse($this->end_date);
