@@ -87,74 +87,81 @@
 </div>
 
 <div class="container">
-    <div class="row m-0 pt-3 bg-white shadow-sm mt-3 pb-3 mb-5">
-      <div class="col-md-3">
-        <label>Subject / Syllabus</label>
-        <h5 *ngFor="let subject of user.subject; let last = last">{{ subject.name }} <i *ngIf="!last">, </i> </h5>
-      </div>
-      <div class="col-md-2">
-        <label>Experiance</label>
-        <h5 [innerHTML]="user.teacher_info?.experiance"></h5>
-      </div>
-      <div class="col-md-3">
-        <label>Education</label>
-        <h5 [innerHTML]="user.teacher_info?.education?.name"></h5>
-      </div>
-      <div class="col-md-4">
-        <label class="d-none d-md-none d-lg-block">Contact to Tutor</label>
-        <h3 class="d-lg-none d-md-block">Contact to Tutor</h3>
-        <div class="alert alert-warning" *ngIf="user.current_user_plan === null">Plan is expired</div>
-        <ng-container *ngIf="!isDashBoard && user.current_user_plan">
 
-          <app-login-link *ngIf="!user.email">
-            <button class="btn btn-sm mob-btn btn-primary"
-            placement="top"
-            ngbTooltip="Only logged user can contact teacher">
+    <div class="m-0 pt-3 bg-white shadow-sm mt-3 pb-3 pl-3 pr-3 mb-5">
+      <div class="alert alert-warning col" *ngIf="user.current_user_plan === null">Plan is expired</div>
+      <div class="row">
+        <div [ngClass]="{'col-md-4': isDashBoard, 'col-md-3':!isDashBoard}" *ngIf="user.subject && user.subject.length">
+          <label>Subject / Syllabus</label>
+          <h5 *ngFor="let subject of user.subject; let last = last">{{ subject.name }} <i *ngIf="!last">, </i> </h5>
+        </div>
+        <div [ngClass]="{'col-md-4': isDashBoard, 'col-md-2':!isDashBoard}" *ngIf="user.teacher_info?.experiance">
+          <label>Experiance</label>
+          <h5 [innerHTML]="user.teacher_info?.experiance"></h5>
+        </div>
+        <div [ngClass]="{'col-md-4': isDashBoard, 'col-md-3':!isDashBoard}" *ngIf="user.teacher_info?.education?.name">
+          <label>Education</label>
+          <h5 [innerHTML]="user.teacher_info?.education?.name"></h5>
+        </div>
+        <div class="col-md-4" *ngIf="!isDashBoard && user.current_user_plan">
+          <label class="d-none d-md-none d-lg-block">Contact to Tutor</label>
+          <h3 class="d-lg-none d-md-block">Contact to Tutor</h3>
+
+
+
+            <app-login-link *ngIf="!user.email">
+              <button class="btn btn-sm mob-btn btn-primary"
+              placement="top"
+              ngbTooltip="Only logged user can contact teacher">
+                Message
+                <fa-icon [icon]="faLock" *ngIf="!user.email && !user.phone"></fa-icon>
+              </button>
+            </app-login-link>
+
+            <app-send-message-to-teacher class="teacher-message-btn  btn-sm mb-2" *ngIf="user.email" [user]="user">
               Message
-              <fa-icon [icon]="faLock" *ngIf="!user.email && !user.phone"></fa-icon>
-            </button>
-          </app-login-link>
+            </app-send-message-to-teacher>
 
-          <app-send-message-to-teacher class="teacher-message-btn  btn-sm mb-2" *ngIf="user.email" [user]="user">
-            Message
-          </app-send-message-to-teacher>
+            <app-login-link *ngIf="!user.phone">
+              <button class="btn btn-sm mob-btn btn-primary ml-2"
+              placement="top"
+              ngbTooltip="Only logged user can contact teacher">
+              <fa-icon [icon]="faWhatsapp" ></fa-icon> Whats app
+                <fa-icon [icon]="faLock" *ngIf="!user.email && !user.phone"></fa-icon>
+              </button>
+            </app-login-link>
 
-          <app-login-link *ngIf="!user.phone">
-            <button class="btn btn-sm mob-btn btn-primary ml-2"
-            placement="top"
-            ngbTooltip="Only logged user can contact teacher">
-            <fa-icon [icon]="faWhatsapp" ></fa-icon> Whats app
-              <fa-icon [icon]="faLock" *ngIf="!user.email && !user.phone"></fa-icon>
-            </button>
-          </app-login-link>
-
-          <app-login-link *ngIf="!user.phone">
-            <button class="btn btn-sm mob-btn btn-primary ml-2"
-            placement="top"
-            ngbTooltip="Only logged user can contact teacher">
-              Payment
-              <fa-icon [icon]="faLock" *ngIf="!user.email && !user.phone"></fa-icon>
-            </button>
-          </app-login-link>
+            <app-login-link *ngIf="!user.phone">
+              <button class="btn btn-sm mob-btn btn-primary ml-2"
+              placement="top"
+              ngbTooltip="Only logged user can contact teacher">
+                Payment
+                <fa-icon [icon]="faLock" *ngIf="!user.email && !user.phone"></fa-icon>
+              </button>
+            </app-login-link>
 
 
 
 
 
-        <ng-container *ngIf="user.phone">
-          <a class="d-none btn mob-btn btn-sm btn-primary" target="_blank" [href]="'https://web.whatsapp.com/send?phone='+user.phone"> <fa-icon [icon]="faWhatsapp" ></fa-icon> Whats app</a>
-          <a class="btn btn-sm mob-btn btn-primary" target="_blank" [href]="'https://api.whatsapp.com/send?phone='+user.phone"> <fa-icon [icon]="faWhatsapp" ></fa-icon> Whats app</a>
-        </ng-container>
+          <ng-container *ngIf="user.phone">
+            <a class="d-none btn mob-btn btn-sm btn-primary" target="_blank" [href]="'https://web.whatsapp.com/send?phone='+user.phone"> <fa-icon [icon]="faWhatsapp" ></fa-icon> Whats app</a>
+            <a class="btn btn-sm mob-btn btn-primary" target="_blank" [href]="'https://api.whatsapp.com/send?phone='+user.phone"> <fa-icon [icon]="faWhatsapp" ></fa-icon> Whats app</a>
+          </ng-container>
 
-        <p class="mt-4">If you have any complaint regarding video, content, contact details, etc. against this User please <app-teacher-report-abuse [user]="user"></app-teacher-report-abuse> to us.</p>
-      </ng-container>
+          <p class="mt-4">If you have any complaint regarding video, content, contact details, etc. against this User please <app-teacher-report-abuse [user]="user"></app-teacher-report-abuse> to us.</p>
+      </div>
+
       </div>
     </div>
-    <div *ngIf="isDashBoard" class="alert alert-warning">
-      You have to create at least one course, else no one can't find you on the search result page.
-    </div>
+    <ng-template #nocourse>
+      <div *ngIf="isDashBoard" class="alert alert-warning">
+        You have to create at least one course, else no one can't find you on the search result page.
+      </div>
+    </ng-template>
 
-    <ng-container *ngIf="(courses$ | async) as courses">
+
+    <ng-container *ngIf="(courses$ | async) as courses; else nocourse ">
       <ngb-tabset type="pills" *ngIf="courses && courses?.data.length">
         <ngb-tab>
           <ng-template ngbTabTitle>All Courses</ng-template>

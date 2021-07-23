@@ -25,6 +25,8 @@ import { ModulesResolver } from './courses/modules/modules-resolver';
 import { AddModuleComponent } from './courses/modules/add-module/add-module.component';
 import { VideoPreviewComponent } from './courses/modules/add-module/video-preview/video-preview.component';
 import { PlansComponent } from './plans/plans.component';
+import { PlansResolver } from './plans/plans-resolver';
+
 import { PlanPurchaseComponent } from './plan-purchase/plan-purchase.component';
 import { ListTeachersComponent } from './list-teachers/list-teachers.component';
 import {ListTeachersResolver} from './list-teachers/list-teachers-resolver';
@@ -80,7 +82,8 @@ import { StudentAttendanceComponent } from './students/details/student-attendanc
     ModulesResolver,
     ListTeachersResolver,
     StudentsResolver,
-    MyInvoicesResolver
+    MyInvoicesResolver,
+    PlansResolver
   ]
 })
 export class TeacherModule { }

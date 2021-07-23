@@ -59,14 +59,12 @@ class CourseResource extends JsonResource
             'updated_by' => $this->updated_by,
             'created_by' => $this->created_by,
             'deleted_by' => $this->deleted_by,
-            'message' => $this->message,
-            'debug' => $this->debug,
+            'message' => $this->message
         ];
     }
 
     private function checkCourseAccess(){
         $isTrue = true;
-        $this->debug = Auth::user()->isStudent()->exists();
         if(
             Auth::user()->isStudent()->exists() &&
             !Auth::user()->studentCourse()->where("course_id", $this->id)->exists()

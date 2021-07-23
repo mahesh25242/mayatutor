@@ -244,7 +244,8 @@ class PlanController extends Controller
         }
     }
     public function payment($id){
-        $planPurchase = \App\PlanPurchase::with(["user", "plan", "userPlan"])->where(DB::raw('CONCAT("MT_",id)') , $id)->where("user_id", Auth::id())->get()->first();
+        $purTail = '_'.env('APP_ENV', 'production');
+        $planPurchase = \App\PlanPurchase::with(["user", "plan", "userPlan"])->where(DB::raw('CONCAT("MT_",id, "'.$purTail.'")') , $id)->where("user_id", Auth::id())->get()->first();
         if($planPurchase){
             return new PlanPurchaseResource($planPurchase);
         }else{

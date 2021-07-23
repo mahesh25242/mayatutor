@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { Observable } from 'rxjs';
 import { TeacherService, UserService } from 'src/app/lib/services';
@@ -11,20 +12,15 @@ import { Plan, User } from '../../../lib/interfaces';
 })
 export class PlansComponent implements OnInit {
   faCheck = faCheck;
-  plans$ : Observable<Plan[]>;
+  plans : Plan[];
   loggedUser$: Observable<User>;
 
-  video = {
-    source : [
-      {
-        src: `https://www.youtube.com/watch?v=IyR_uYsRdPs&modestbranding=1&showinfo=0&rel=0`,
-        provider: 'youtube',
-      },
-    ]
-  };
+
   constructor(private teacherService : TeacherService,
     private breadCrumbsService: BreadCrumbsService,
-    private userService: UserService) { }
+    private userService: UserService,
+    private route: ActivatedRoute
+) { }
 
   ngOnInit(): void {
     this.loggedUser$ = this.userService.getloggedUser;
@@ -38,7 +34,7 @@ export class PlansComponent implements OnInit {
       }
     ]);
 
-    this.plans$ = this.teacherService.plans();
+    this.plans = this.route.snapshot.data?.plans;
 
   }
 

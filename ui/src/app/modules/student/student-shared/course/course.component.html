@@ -6,9 +6,8 @@
     Fees: {{ course.price }}
   </span>
 
-  <div live_class class="bg-dark p-4 shadow liveclass" *ngIf="course && course.live_class && course.live_class_url">
+  <div live_class class="bg-dark p-4 shadow liveclass" *ngIf="course && course.live_class && course.live_class_url && course.user.is_able">
     <h5 class="bg-primary p-3 text-white mb-0">Live Class</h5>
-    <div *ngIf="!course.user.is_able" class="alert alert-warning">Sorry teacher plan was expired</div>
     <ng-container *ngIf="course.user.is_able">
       <app-player [videoSources]="video"></app-player>
     </ng-container>
@@ -28,7 +27,7 @@
   </div>
 </div>
 
-<div *ngIf="course.meeting_url">
+<div *ngIf="course.meeting_url && course.user.is_able">
   <a [href]="course.meeting_url" target="_blank"  class="btn btn-primary">Click Here to join Meeting</a>
 </div>
 
