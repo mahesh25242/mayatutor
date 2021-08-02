@@ -16,6 +16,7 @@
                 <h5> {{ teacher.fname }} {{ teacher.lname}}</h5>
                 <app-rating [rating]="teacher.rating" [teacherId]="teacher.id"></app-rating>               
                 <h3 class="price-list mt-5 d-block"><ng-content select="[course_price]"></ng-content></h3>
+                <a class="btn btn-primary" href="">Tutor's Home Page</a>
 
                 <!-- [readonly]="teacher.rating.myrating_tran" -->
                 

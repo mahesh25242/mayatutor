@@ -10,7 +10,7 @@
 
 <app-bread-crumbs [hide]="true"></app-bread-crumbs>
 <div class="container position-relative">
-  <p class="demo-url">Demo video <a href="#"><fa-icon class="fa-icon-you" [icon]="faYoutube"></fa-icon> </a> </p>
+  <p class="demo-url">Demo video <app-help-video url="https://www.youtube.com/watch?v=V3pcsWvhrXY" title="How to add course"></app-help-video> </p>
   <form [formGroup]="editProfileFrm" *ngIf="(loggedUser$ | async) as loggedUser" (ngSubmit)="updateProfile()">
     <!-- common profile secion -->
 

@@ -1,5 +1,5 @@
 <div class="container pt-3">
-  <p class="demo-url">Demo video <a href="#"><fa-icon class="fa-icon-you" [icon]="faYoutube"></fa-icon> </a> </p>
+  <p class="demo-url">Demo video <app-help-video url="https://www.youtube.com/watch?v=XCXPjYK_iis" title="How to add course"></app-help-video> </p>
   <div class="clearFix"></div>
   <app-bread-crumbs [hide]="true"></app-bread-crumbs>
   <form [formGroup]="editProfileFrm" *ngIf="(loggedUser$ | async) as loggedUser" (ngSubmit)="updateProfile()">

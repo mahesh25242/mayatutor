@@ -1,10 +1,10 @@
 <form [formGroup]="addStudenttFrm" (ngSubmit)="addStudent()">
   <div class="row">
   <div class="form-group col-md-5 col-lg-5">
-    <label for="phone">Mobile / Email</label>
+    <label for="phone">Search Student mail Id/ Mobile Number</label>
     <ng-select [items]="students$ | async"
            bindLabel="email"
-           placeholder="Mobile / Email"
+           placeholder="Search Student mail Id/ Mobile Number"
            [addTag]="false"
            [multiple]="true"
            [hideSelected]="true"

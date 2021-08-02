@@ -64,12 +64,12 @@
       <span class="input-group-text" id="basic-addon1" *ngIf="f.country_id.value">+{{f.country_id.value.phonecode}}</span>
       <input type="tel" class="form-control" id="phone"
       [ngClass]="{'is-invalid': (f.phone.errors && f.phone.errors.error)}"
-      placeholder="Example: if your mobile is 0091123456 enter 91123456" formControlName="phone">
+      placeholder="Example: if your mobile is +91, 123456 enter only 123456" formControlName="phone">
       <div *ngIf="f.phone.errors && f.phone.errors.error" class="invalid-feedback">
         {{f.phone.errors.error}}
       </div>
     </div>
-    <small id="emailHelp" class="form-text text-muted">Enter your phone number with out your contry code</small>
+    <small id="emailHelp" class="form-text text-muted">Enter, without zero and country code before your whatsapp/ mobile number</small>
 
   </div>
   <div class="form-group col-md-6 col-lg-6 col-xl-6">
@@ -142,10 +142,10 @@
     <div class="custom-control custom-checkbox">
       <input type="checkbox" class="custom-control-input" id="accept-terms" formControlName="accept_terms">
       <label class="custom-control-label" for="accept-terms">
-        Accept Terms
+        Accept Terms <a href="javascript:{}" (click)="viewTerms()">Click Here to read terms</a>
       </label>
     </div>
-    <a href="javascript:{}" (click)="viewTerms()">Click Here to read terms</a>
+    
   </div>
 
   <div class="col-12 text-right border-top pt-3 mt-3"> <div id="recaptcha-container"></div>

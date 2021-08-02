@@ -4,7 +4,7 @@
 <app-teacher-info-block [teacher]="course.user">
   <span *ngIf="course" course_price>
     Fees: {{ course.price }}
-  </span>
+  </span>  
 
   <div live_class class="bg-dark p-4 shadow liveclass" *ngIf="course && course.live_class && course.live_class_url && course.user.is_able">
     <h5 class="bg-primary p-3 text-white mb-0">Live Class</h5>
@@ -23,14 +23,14 @@
 <div class="card mt-5 mb-4 alert alert-success">
   <div class="card-body">
     <h6 class="card-title">NEWS / NOTICE BOARD</h6>
-    <p [innerHTML]="course.news"></p>
+    <h3 [innerHTML]="course.news"></h3>
   </div>
 </div>
 
-<div *ngIf="course.meeting_url && course.user.is_able">
-  <a [href]="course.meeting_url" target="_blank"  class="btn btn-primary">Click Here to join Meeting</a>
+<div class="d-flex mb-4" *ngIf="course.meeting_url && course.user.is_able">
+  <a [href]="course.meeting_url" target="_blank"  class="btn btn-lg btn-danger m-auto">Click Here to join Meeting</a>
 </div>
-
+<hr class="mb-5">
 <div *ngIf="!course?.latest_course_approval_request?.status" class="alert alert-warning">Course is under approval</div>
 <ng-container *ngIf="course.course_module && course.course_module.length">
 

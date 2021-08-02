@@ -93,7 +93,7 @@
       <div class="row">
         <div [ngClass]="{'col-md-4': isDashBoard, 'col-md-3':!isDashBoard}" *ngIf="user.subject && user.subject.length">
           <label>Subject / Syllabus</label>
-          <h5 *ngFor="let subject of user.subject; let last = last">{{ subject.name }} <i *ngIf="!last">, </i> </h5>
+          <p *ngFor="let subject of user.subject; let last = last">{{ subject.name }} <i *ngIf="!last">, </i> </p>
         </div>
         <div [ngClass]="{'col-md-4': isDashBoard, 'col-md-2':!isDashBoard}" *ngIf="user.teacher_info?.experiance">
           <label>Experiance</label>
@@ -149,7 +149,7 @@
             <a class="btn btn-sm mob-btn btn-primary" target="_blank" [href]="'https://api.whatsapp.com/send?phone='+user.phone"> <fa-icon [icon]="faWhatsapp" ></fa-icon> Whats app</a>
           </ng-container>
 
-          <p class="mt-4">If you have any complaint regarding video, content, contact details, etc. against this User please <app-teacher-report-abuse [user]="user"></app-teacher-report-abuse> to us.</p>
+         
       </div>
 
       </div>
@@ -159,7 +159,7 @@
         You have to create at least one course, else no one can't find you on the search result page.
       </div>
     </ng-template>
-
+    <p class="mt-4">If you have any complaint regarding video, content, contact details, etc. against this User please <app-teacher-report-abuse [user]="user"></app-teacher-report-abuse> to us.</p>
 
     <ng-container *ngIf="(courses$ | async) as courses; else nocourse ">
       <ngb-tabset type="pills" *ngIf="courses && courses?.data.length">

@@ -16,3 +16,15 @@
     padding: 10px 21px;    
     color: red;
   z-index: 1000;}
+
+  .masking-logo {
+    background-image: url(../../../../assets/maya-logo.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 70px;
+    height: 70px;
+    background-size: 70px;
+    position: absolute;
+    background-color: #fff;
+    right: 0;
+  }

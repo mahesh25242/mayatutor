@@ -117,7 +117,7 @@
 </tr>
 <tr>
       <td style="padding-top:20px; padding-bottom:30px;">
-		  <h3>Invoive Details:</h3>
+		  <h3>Invoice Details:</h3>
 
 
 		  <table width="100%" border="0" style="border-bottom-width: 3px" class="border" cellspacing="0" cellpadding="0">
@@ -152,7 +152,7 @@
 	  <tr>
       <td style="padding-top: 20px; padding-bottom: 20px">
       <h4 style="margin: 0; padding: 0">USD (For <?php echo $userPlan->plan->billed_text;?>): $<?php echo $userPlan->plan->usd_amount;?>  <span style="float: right;margin: 0; padding: 0">TOTAL AMOUNT <span style="color: dodgerblue;">(INR)</span></span></h4>
-      <span style="font-size:12px">(Paypay Fees, Currency Conversion Charges Extra)</span>
+      <span style="font-size:12px">(Paypal Fees, Currency Conversion Charges Extra)</span>
     </td>
       <td style="padding-top: 20px; padding-bottom: 20px"><h2 style="margin: 0;  padding: 0; float: right;"><?php echo ( $userPlan->planPurchase && $userPlan->planPurchase->amount) ? $userPlan->planPurchase->amount :  $userPlan->plan->price;?></h2></td>
     </tr>
@@ -207,8 +207,8 @@ INDIA.</p></td>
 	</td>
 </tr>
 <tr>
-<td style="border-bottom: 1px solid #767676; padding-top: 50px; padding-bottom: 10px">
-	<p style="color: #767676; margin-bottom:0px; padding: 0; font-size:12px;">Must read and download terms & condition on <span style="font-weight:bold;">https://mayatutors.com/privacy-policy</span>.</p>
+<td style="border-bottom: 1px solid #767676; padding-top:10px; padding-bottom: 10px">
+	<p style="color: #767676; margin-bottom:0px; padding: 0; font-size:12px;">Must read and download terms & condition on <span style="font-weight:bold;">https://mayatutors.com/privacy-policy, https://mayatutors.com/terms-and-conditions</span>.</p>
 	</td>
 </tr>
 <tr>
