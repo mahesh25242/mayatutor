@@ -4,6 +4,7 @@ import { User } from 'src/app/lib/interfaces';
 import { UserService } from 'src/app/lib/services';
 import {faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import {  faLock } from '@fortawesome/free-solid-svg-icons';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-teacher-info-block',
@@ -17,9 +18,12 @@ export class TeacherInfoBlockComponent implements OnInit {
   faLock = faLock;
   currentRate: number =0;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+    private router: Router) { }
 
-
+  tutorHome(){
+    this.router.navigate([`/${this.teacher.url}`])
+  }
   ngOnInit(): void {
 
     this.user$ = this.userService.getloggedUser
