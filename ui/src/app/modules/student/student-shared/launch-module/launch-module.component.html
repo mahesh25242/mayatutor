@@ -11,12 +11,10 @@
 <hr>
 
 
-<div class="d-flex pt-3">
-
-
-  <button class="btn btn-outline-secondary" appBackButton>Go Back</button>
-<button class="btn btn-primary ml-auto" (click)="markAsFinished()" *ngIf="module.course.user.is_able && !module.is_module_completed_count && module?.logged_student_course?.id">Finished</button>
-<span class="text-success" *ngIf="module.is_module_completed_count">Completed</span>
-</div>
+  <div class="d-flex pt-3">
+    <button class="btn btn-outline-secondary" appBackButton>Go Back</button>
+    <button class="btn btn-primary ml-auto" (click)="markAsFinished()" *ngIf="module.course.user.is_able && !module.is_module_completed_count && module?.logged_student_course?.id">Finished</button>
+    <span class="text-success" *ngIf="module.is_module_completed_count">Completed</span>
+  </div>
 
 </div>
