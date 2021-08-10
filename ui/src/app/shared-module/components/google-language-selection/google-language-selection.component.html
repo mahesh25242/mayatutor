@@ -1,0 +1,12 @@
+
+  <form [formGroup]="languageFrm">
+
+      <ng-select [items]="(languages$ | async)"
+      bindLabel="name"
+      id="country_id"
+      bindValue="language"
+      placeholder="select Language"
+      formControlName="language" (change)="setLanguage()">
+      </ng-select>
+    </form>
+

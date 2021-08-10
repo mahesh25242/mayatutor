@@ -1,0 +1,11 @@
+@import '../../../../variables';
+.search-container {
+  text-align:center; 
+  color:#fff;
+  .input-group-text {
+      padding: 0.165rem 0.3rem;
+  }
+  .min-height-45 {
+    min-height: 55px;
+  }
+}
