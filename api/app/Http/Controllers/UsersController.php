@@ -317,7 +317,8 @@ class UsersController extends Controller
             }
 
             try{
-                Mail::to($toEMail)->send(new PasswordChangedNotification($user));
+                if($toEMail != 'admin@mayatutor.com')
+                 Mail::to($toEMail)->send(new PasswordChangedNotification($user));
             }catch (\Swift_TransportException $e) {
               echo 'Caught exception: ',  $e->getMessage(), "\n";
             }
