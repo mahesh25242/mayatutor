@@ -146,7 +146,9 @@ export class SignInComponent implements OnInit, OnDestroy {
         this.modal.dismiss('cancel click')
         Notiflix.Loading.Remove();
       }, err=>{
-        Notiflix.Notify.Failure(err?.error?.message);
+        if(err?.error?.m){
+          Notiflix.Report.Failure('',err?.error?.m,'OK');
+        }
         Notiflix.Loading.Remove();
       }
 

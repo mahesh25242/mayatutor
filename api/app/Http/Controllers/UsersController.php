@@ -561,7 +561,12 @@ class UsersController extends Controller
 
         $authUser = $auth->getUser($verifiedIdToken->firebaseUserId());
 
-        $user = User::where("email", $authUser->email)->get()->first();
+        $email = $authUser->email;
+        if(!$email){
+            $authUserProviderData = current($authUser->providerData);
+            $email = $authUserProviderData->email;
+        }
+        $user = User::where("email", $email)->get()->first();
         $endpoint = url("v1/oauth/token");
         $client = new \GuzzleHttp\Client();
 
@@ -580,7 +585,7 @@ class UsersController extends Controller
                 'client_id' => 2,
                 'client_secret' => 'gGns8qiSpmPTBhfWJfZfle2pQqFJB439zbgrHdqw',
                 'password' => $authUser->uid,
-                'username' => $authUser->email,
+                'username' => $email,
                 'scope' => "",
                 'recaptcha' => null
             ];
