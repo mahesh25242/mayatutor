@@ -4,39 +4,35 @@
       <h3>About Us</h3>
     </div>
   </section>
-  <section class="container">
+  <section class="container" *ngIf="data$ | async as data">
+    <app-google-language-selection></app-google-language-selection>
+
     <div class="row">
-      <div class="col-lg-6 col-md-6">        
-        <p>http//mayatutors.com is a web portal intended for educational purposes only.
-          The aim of this web portal is to provide a digital platform for teachers who wish to take tuition classes for different subjects online. Through this platform, teachers can conduct live classes as well as robotic classes which use recorded videos.
-          
-          </p>
-          <p>Mayatutors.com accepts fees only to help teachers take tuition by displaying video, PDF, Excel, Word and live classes. Students can use this portal for free in order to find teachers, attend their classes after paying fees directly to the teachers.</p>
-      <p>As there are many teachers in this portal, students will have the opportunity to choose the best teacher. Teachers have the opportunity to display their videos, PDFs and conduct LIVE classes for a minimal fee. However, the service in mayatutors.com for students is free.</p>
-        </div>
+      <div class="col-lg-6 col-md-6" [innerHTML]="data.first">
+
+      </div>
       <div class="col-lg-6 col-md-6">
         <img src="../../assets/online-tutorials.jpg" class="w-100 img-fluid">
       </div>
     </div>
-    <h3 class="text-center text-uppercase text-primary mt-5 border-bottom mb-4 pb-4">About mayatutors.com</h3>
+    <h3 class="text-center text-uppercase text-primary mt-5 border-bottom mb-4 pb-4">
+      {{data.abt_text}}
+    </h3>
     <div class="row">
       <div class="col-lg-12 col-md-12">
         <img src="../../assets/aboutus.jpg" class="w-100 img-fluid">
       </div>
-      <div class="col-lg-12 col-md-12">
-        <p>Over the past nine years, (since 2013) Maya have been successful in making teacher's work easier and giving opportunities to students to study independently. When the whole world was suddenly struck by the covid pandemic, we managed to successfully run one year's full courses in "ROBOTIC" method without teachers. In fact it was a "face to face" virtual class. in which no matter how many students come to class at the same time, there will be a teacher in front of them on various subjects.</p>
-<p>When this method of study is successful, we modified this website with the intention that ordinary tution teachers also should get this facility especially in this time of covid pandemic. In this age where education is falling into the hands of monopolies, talented teachers will have to build their own websites at huge cost to avoid losing their jobs. This web portal is for such teachers to use as  their own website.</p>
-  <p>So, whatever your knowledge, you can use this portal to impart that knowledge to all students. </p>
-  <p>Maya is legally and officially known as the MAYA TAX ACCOUNTING TRAINING CENTER.</p>
+      <div class="col-lg-12 col-md-12"  [innerHTML]="data.second">
+
       </div>
       </div>
 
-    
-    
-  
-  
+
+
+
+
   <div class="card mb-3 mt-5">
-    <div class="card-header text-primary text-uppercase">Registered Office  Address</div>
+    <div class="card-header text-primary text-uppercase">{{data.reg_office_addr}}</div>
     <div class="card-body">
         <p>MAYA TAX ACCOUNTING TRAINING CENTER.<br>
           PMC 17/664,<br>
@@ -49,7 +45,7 @@
           <p>For more information Read: </p>
           <p>"TERMS AND CONDITIONS", "PRIVACY POLICY", "CONTACT US" , “COOKIE POLICY” </p>
     </div>
-    
+
 </div>
 </section>
 
