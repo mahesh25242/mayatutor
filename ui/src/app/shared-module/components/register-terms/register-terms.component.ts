@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+
 
 
 @Component({
@@ -9,31 +10,20 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class RegisterTermsComponent implements OnInit {
 
-  @Input() url:string;
-  @Input() title:string;
-  @Input() isPromo:boolean;
-  video: any = null;
-  constructor(private modalService: NgbModal,
-    public modal: NgbActiveModal) { }
+  @Output() accepted = new EventEmitter();
+  @Input() type:string;
+  active: number;
 
-  open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', size: 'lg'}).result.then((result) => {
+  constructor(public modal: NgbActiveModal) { }
 
-    }, (reason) => {
 
-    });
+  accept(){
+    this.accepted.emit(true);
+    this.modal.dismiss('cancel click');
   }
 
-
   ngOnInit(): void {
-    this.video =  {
-      source : [
-        {
-          src: `${this.url}&modestbranding=1&showinfo=0&rel=0`,
-          provider: 'youtube',
-        },
-      ]
-    };
+    this.active = (this.type == 'student') ? 1: 2;
   }
 
 }

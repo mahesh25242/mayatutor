@@ -46,6 +46,13 @@ export class RegisterComponent implements OnInit, OnDestroy {
     const activeModal = this._modalService.open(RegisterTermsComponent,{
       size:'lg'
     });
+    activeModal.componentInstance.type = this.f.type.value;
+
+    this.acceptTrmPopSubScr = activeModal.componentInstance.accepted.subscribe(res=>{
+      if(res){
+        this.f.accept_terms.setValue(true);
+      }
+    })
   }
 
   ngOnInit(): void {

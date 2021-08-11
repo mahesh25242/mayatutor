@@ -1,0 +1,25 @@
+<app-google-language-selection></app-google-language-selection>
+<div  *ngIf="data$ | async as data">
+  <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+    <li [ngbNavItem]="item.tab"  *ngFor="let item of data">
+      <a ngbNavLink>{{item.title}}</a>
+      <ng-template ngbNavContent>
+        <div class="border-left border-right border-bottom bg-white p-4">
+          <ol>
+            <li *ngFor="let point of item.points" [innerHTML]="point"></li>
+          </ol>
+          <ng-container *ngIf="item?.refund">
+            <h4 [innerHTML]="item?.refund?.title"></h4>
+            <ol>
+              <li *ngFor="let point of item?.refund?.points" [innerHTML]="point"></li>
+            </ol>
+          </ng-container>
+        </div>
+      </ng-template>
+    </li>
+  </ul>
+
+  <div [ngbNavOutlet]="nav" class="mt-2"></div>
+
+
+</div>
