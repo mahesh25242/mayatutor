@@ -40,7 +40,9 @@ export class HowItWorksComponent implements OnInit {
           };
           return this.googleTransulateService.googleTransulate(googleObj).pipe(map((trans:any)=>{
             let data = [];
+
             chunk(trans.data.translations, 2).map((res:any)=>{
+
               data =[...data, {q: res[0].translatedText, ans: res[1].translatedText}]
             })
             return data

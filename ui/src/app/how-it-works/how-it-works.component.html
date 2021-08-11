@@ -4,15 +4,15 @@
       <h3>How it works</h3>
     </div>
   </section>
-  <section class="container">
+  <section class="container" >
     <app-google-language-selection></app-google-language-selection>
-    <ngb-accordion #acc="ngbAccordion" activeIds="config-panel-one" [closeOthers]="true" >
+    <ngb-accordion #acc="ngbAccordion" activeIds="config-panel-one" [closeOthers]="true" dir="auto">
 
       <ng-container *ngIf="data$ | async as data">
         <ng-container *ngFor="let item of data; let idx = index;">
-          <ngb-panel [title]="(idx+1)+'. ' + item.q">
+          <ngb-panel [title]="(idx+1)+'. ' + item.q" >
             <ng-template ngbPanelContent>
-             <b class="text-dark">Ans:</b>  <span [innerHTML]="item.ans"></span>
+              <span [innerHTML]="item.ans"></span>
             </ng-template>
           </ngb-panel>
         </ng-container>

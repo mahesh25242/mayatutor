@@ -1,5 +1,6 @@
 <app-google-language-selection></app-google-language-selection>
-<div  *ngIf="data$ | async as data">
+<div  *ngIf="data$ | async as data" dir="auto">
+
   <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
     <li [ngbNavItem]="item.tab"  *ngFor="let item of data">
       <a ngbNavLink>{{item.title}}</a>
