@@ -64,7 +64,7 @@
       <span class="input-group-text" id="basic-addon1" *ngIf="f.country_id.value">+{{f.country_id.value.phonecode}}</span>
       <input type="tel" class="form-control" id="phone"
       [ngClass]="{'is-invalid': (f.phone.errors && f.phone.errors.error)}"
-      placeholder="Example: if your mobile is +91, 123456 enter only 123456" formControlName="phone">
+      placeholder="Enter without ISD code & Zero" formControlName="phone">
       <div *ngIf="f.phone.errors && f.phone.errors.error" class="invalid-feedback">
         {{f.phone.errors.error}}
       </div>

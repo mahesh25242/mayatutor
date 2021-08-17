@@ -81,7 +81,7 @@
 
         <div class="form-group">
           <label for="meeting_url">Meeting URL</label>
-          <textarea type="text" class="form-control" id="meeting_url" placeholder="Meeting URL"
+          <textarea type="text" class="form-control" id="meeting_url" placeholder="Meeting URL (Zoom, Google Meet, Microsoft Teams Meetings, Webex Meetings) etc. Any Live app Link"
           formControlName="meeting_url" [ngClass]="{'is-invalid': (f.meeting_url.errors && f.meeting_url.errors.error) }"></textarea>
           <div *ngIf="f.meeting_url.errors && f.meeting_url.errors.error" class="invalid-feedback">
             {{f.meeting_url.errors.error}}
@@ -97,7 +97,7 @@
             [ngClass]="{'is-invalid': (f.live_class.errors && f.live_class.errors.error) }">
             <label class="custom-control-label" for="live_class">Check this if you host live video</label>
           </div>
-          <p class="ml-auto ">Live demo video <app-help-video url="https://www.youtube.com/watch?v=3LK0kKeCUbY" title="How to add course"></app-help-video> </p>
+          <p class="ml-auto ">Live demo video <app-help-video url="https://youtu.be/JRFkEmITWjs" title="How to add course"></app-help-video> </p>
         </div>
           <div *ngIf="f.live_class.errors && f.live_class.errors.error" class="invalid-feedback">
             {{f.live_class.errors.error}}
@@ -106,7 +106,7 @@
         <div class="form-group" *ngIf="f.live_class.value">
           <label for="live_class_url">Live Video URL</label>
           <input type="text" class="form-control" id="live_class_url"
-           placeholder="Live Video URL"
+           placeholder="Live Video URL(Youtube Live or Youtube Link)"
           formControlName="live_class_url"
           [ngClass]="{'is-invalid': (f.live_class_url.errors && f.live_class_url.errors.error) }">
           <div *ngIf="f.live_class_url.errors && f.live_class_url.errors.error" class="invalid-feedback">
@@ -115,7 +115,7 @@
         </div>
 
         <div class="form-group">
-          <label for="news">Live Video News Update</label>
+          <label for="news">Live Video News Update for Notice Board</label>
           <textarea type="text" class="form-control" id="news" placeholder="Live Video News Update"
           formControlName="news" [ngClass]="{'is-invalid': (f.news.errors && f.news.errors.error) }"></textarea>
           <div *ngIf="f.news.errors && f.news.errors.error" class="invalid-feedback">

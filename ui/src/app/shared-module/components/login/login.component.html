@@ -1,4 +1,7 @@
 <div class="card shadow mt-5">
+  <div class="free-demo" *ngIf="type ==='teacher'">
+    <h3>For 7 Days Free Demo</h3>
+  </div>
     <i>
       <fa-icon [icon]="faUserGraduate" *ngIf="(type ==='student')"></fa-icon>
       <fa-icon [icon]="faUser" *ngIf="(type ==='teacher')"></fa-icon>
@@ -8,6 +11,7 @@
        Are you a {{ (type ==='student' ) ? 'Student' : 'Teacher'}} ?
       </h3>
       <a class="btn btn-primary btn-custom mt-3" [routerLink]="type+'/register'" >Register Here</a>
+      
     </div>
     <div class="card-footer">
       <div class="d-grid grd-col-3" >

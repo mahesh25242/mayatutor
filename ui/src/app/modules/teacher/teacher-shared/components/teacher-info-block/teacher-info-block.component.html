@@ -39,8 +39,8 @@
                 </app-send-message-to-teacher>
 
                 <ng-container *ngIf="teacher.phone">
-                <a class="d-none btn btn-sm btn-primary" target="_blank" [href]="'https://web.whatsapp.com/send?phone='+teacher.phone"> <fa-icon [icon]="faWhatsapp" ></fa-icon> Whats app</a>
-                <a class=" btn btn-primary btn-sm" target="_blank" [href]="'https://api.whatsapp.com/send?phone='+teacher.phone"> <fa-icon [icon]="faWhatsapp" ></fa-icon> Whats app</a>
+                <a class="d-none btn btn-sm btn-primary mob-btn" target="_blank" [href]="'https://web.whatsapp.com/send?phone='+teacher.phone"> <fa-icon [icon]="faWhatsapp" ></fa-icon> Whats app</a>
+                <a class=" btn btn-primary btn-sm mob-btn" target="_blank" [href]="'https://api.whatsapp.com/send?phone='+teacher.phone"> <fa-icon [icon]="faWhatsapp" ></fa-icon> Whats app</a>
               </ng-container>
               <hr>
               <p class="mt-4">If you have any complaint regarding video, content, contact details, etc. against this User please <app-teacher-report-abuse [user]="teacher"></app-teacher-report-abuse> to us.</p>
@@ -61,7 +61,7 @@
 
         <ng-template #login>
           <app-login-link >
-            <button class="btn btn-primary ml-2"
+            <button class="btn btn-primary ml-2 mob-btn"
             placement="top"
             ngbTooltip="Only logged user can contact teacher">
               <fa-icon [icon]="faWhatsapp" ></fa-icon> Whats app

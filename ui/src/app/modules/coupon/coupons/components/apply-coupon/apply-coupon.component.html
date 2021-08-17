@@ -1,9 +1,9 @@
   <form [formGroup]="couponFrm" (ngSubmit)="validateCoupon()"  *ngIf="!coupon">
-<label class="d-block mb-3">Dou you have a coupon code?</label>
+<label class="d-block mb-3">Do you have a coupon code? Check the banne for the discount coupon</label>
 <div class="form-inline">
     <div class="form-group ">
       <label for="code" class="sr-only">Coupon Code</label>
-      <input type="text" placeholder="Code" class="form-control" id="code"
+      <input type="text" placeholder="Enter coupon code and submit" class="form-control" id="code"
        aria-describedby="emailHelp" formControlName="code" >
     </div>
 
