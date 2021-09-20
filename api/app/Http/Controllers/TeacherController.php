@@ -36,8 +36,8 @@ class TeacherController extends Controller
         $details["phone"] = $request->input("phone",'');
 
         if($details["place"] || $details["phone"]){
-            $emailJob = (new \App\Jobs\SendSearchEmailJob($details))->delay(Carbon::now()->addSeconds(2));
-            dispatch($emailJob);
+            // $emailJob = (new \App\Jobs\SendSearchEmailJob($details))->delay(Carbon::now()->addSeconds(2));
+            // dispatch($emailJob);
         }
 
 
