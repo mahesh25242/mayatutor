@@ -25,6 +25,7 @@ class UsersController extends Controller
 
 
     public function test(Request $request){
+        return response(['message' => '404'], 404);
         $user = User::find(11);
 
         return view('PDF.teacherInvoice',
