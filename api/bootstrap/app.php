@@ -76,14 +76,8 @@ $app->routeMiddleware([
 | the default version. You may register other files below as needed.
 |
 */
-$app->middleware([
-    App\Http\Middleware\CorsMiddleware::class,
-    App\Http\Middleware\XAuthorizationHeader::class,
- ]);
 
 
-$app->configure('app');
-$app->configure('auth');
 /*
 |--------------------------------------------------------------------------
 | Register Middleware
@@ -100,6 +94,7 @@ $app->configure('auth');
 // ]);
 $app->middleware([
     App\Http\Middleware\CorsMiddleware::class,
+    App\Http\Middleware\XAuthorizationHeader::class,
     App\Http\Middleware\LastUserActivity::class,
  ]);
 

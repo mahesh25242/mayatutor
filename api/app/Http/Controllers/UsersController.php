@@ -184,7 +184,7 @@ class UsersController extends Controller
         return response([ 'message' => 'Successfully sent the mail!', 'status' => true]);
     }
 
-    public function authUser(Request $request){
+    public function authUser(Request $request){        
         $user = \App\User::with(["country", "state", "city", "role", "lastLogin",
         "teacherPaymentInfo", "subject", "teacherInfo.education", "teacherBanner", "rating", "currentUserPlan.plan", "nextUserPlan.plan"])->find(Auth::id());
         return response($user);
@@ -535,75 +535,98 @@ class UsersController extends Controller
     }
 
     public function login(Request $request){
+        
+        
         //$uid =  $request->input("uid",'');
-
+        
         $idToken =  $request->input("oauthIdToken", null);
         $accessToken =  $request->input("oauthAccessToken",'');
         $providerId =  $request->input("providerId",'');
         $signInMethod =  $request->input("signInMethod",'');
-
+       
         $auth = app('firebase.auth');
         //$signInResult = $auth->getUser($uid);;
-
-        try {
+        
+        try {            
             switch($providerId){
                 case "google.com":
                     $verifiedIdToken = $auth->signInWithIdpIdToken($providerId, $idToken);
                 break;
                 default:
-                    $verifiedIdToken = $auth->signInWithIdpAccessToken($providerId, $accessToken);
+                    if($providerId && $accessToken){
+                        $verifiedIdToken = $auth->signInWithIdpAccessToken($providerId, $accessToken);
+                    }else{
+                        throw new \Exception("Invalid providerId or accessToken");
+                    }
                 break;
             }
-
+            
         } catch (InvalidToken $e) {
-            echo 'The token is invalid: '.$e->getMessage();
+            return response([
+                'message' => 'Invalid Token'.$e->getMessage(), 'status' => 0
+            ], 401);            
         } catch (\InvalidArgumentException $e) {
-            echo 'The token could not be parsed: '.$idToken.'=='.$e->getMessage();
+            return response([
+                'message' => 'The token could not be parsed'.$e->getMessage(), 'status' => 0
+            ], 401);            
+        }catch (\Exception $e) {
+            return response([
+                'message' => 'Invalid Token'.$e->getMessage(), 'status' => 0
+            ], 401);            
         }
-
+        
         $authUser = $auth->getUser($verifiedIdToken->firebaseUserId());
+        
+        if(!$authUser){
+            return response([
+                'message' => 'Invalid Token', 'status' => 0
+            ], 401);
+        }
 
         $email = $authUser->email;
         if(!$email){
             $authUserProviderData = current($authUser->providerData);
             $email = $authUserProviderData->email;
         }
+        
+        if(!$email){
+            return response([
+                'message' => 'Invalid email', 'status' => 0
+            ], 401);
+        }
         $user = User::where("email", $email)->get()->first();
-        $endpoint = url("v1/oauth/token");
-        $client = new \GuzzleHttp\Client();
+              
+        
+        
+
+
 
         if($user){
 
-
-
-
+            
             $user->fname = $authUser->displayName;
 
             $user->is_social = 1;
             $user->status = 1;
             $user->save();
-            $postArr = [
-                'grant_type' => "password",
-                'client_id' => 2,
-                'client_secret' => 'gGns8qiSpmPTBhfWJfZfle2pQqFJB439zbgrHdqw',
-                'password' => $authUser->uid,
-                'username' => $email,
-                'scope' => "",
-                'recaptcha' => null
-            ];
 
-
-
-            $response = $client->post( $endpoint, ['form_params' => $postArr,
-            'headers' => [
-                'Accept' => 'application/json'
-            ]
+            $tokenRequest = $request->create(
+                url("v1/oauth/token"),
+                'POST'
+            );
+    
+    
+            $tokenRequest->request->add([
+                "grant_type" => "password",
+                "username" => $email,
+                "password" => $authUser->uid,
+                "client_id" => 2,
+                "client_secret" => 'gGns8qiSpmPTBhfWJfZfle2pQqFJB439zbgrHdqw',
             ]);
+            // return $tokenRequest;
+            return $response= app()->handle($tokenRequest);
 
-            // url will be: http://my.domain.com/test.php?key1=5&key2=ABC;
-
-            $statusCode = $response->getStatusCode();
-            return $content = $response->getBody();
+                       
 
         }else{
 
