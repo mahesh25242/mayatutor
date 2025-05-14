@@ -1,9 +1,9 @@
 export const environment = {
   production: true,
-  siteName: 'mayatutor',
+  siteName: 'sdfsdf',
   tinyMceApi: 'n6mryrdzt1pclqabsvpbvw6mtym3kj9gpwjguof89d2sv52q',
-  baseUrl: 'https://mayatutors.com/api/public/v1',
+  baseUrl: 'https://sdfsddfsfsf.com/api/public/v1',
   recaptchaKey: '6Lfpw3AaAAAAANItvyYpnSxgK9IPE__AWJ7nAOCO',
-  lumenSecret: 'gGns8qiSpmPTBhfWJfZfle2pQqFJB439zbgrHdqw',
-  siteAddress: 'https://mayatutors.com'
+  lumenSecret: 'sdfsfdsdfsdfsdfsdfsdfsf',
+  siteAddress: 'https://sdfsfsfsfsdfsdf.com'
 };
