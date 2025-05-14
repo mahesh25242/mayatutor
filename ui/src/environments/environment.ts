@@ -4,11 +4,11 @@
 
 export const environment = {
   production: false,
-  siteName: 'mayatutor',
-  tinyMceApi: 'n6mryrdzt1pclqabsvpbvw6mtym3kj9gpwjguof89d2sv52q',
-  baseUrl: 'http://localhost/mayatutor/api/public/v1',
-  recaptchaKey: '6Lfpw3AaAAAAANItvyYpnSxgK9IPE__AWJ7nAOCO',
-  lumenSecret: 'gGns8qiSpmPTBhfWJfZfle2pQqFJB439zbgrHdqw',
+  siteName: 'sdfsdfdf',
+  tinyMceApi: 'sdfsdfsdfsdf',
+  baseUrl: 'http://sddfsdf/mayatutor/api/public/v1',
+  recaptchaKey: 'sfsddfsdf',
+  lumenSecret: 'asdfsfsdfsdf',
   siteAddress: 'http://localhost/mayatutor'
 };
 
